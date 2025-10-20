@@ -7,8 +7,9 @@
 <title>Guidelines for Security Considerations of RATS</title>
 <meta content="Muhammad Usama Sardar" name="author">
 <meta content="
-       This document provides guidelines and best practices for writing
-   technical specifications for RATS targeting the needs of implementers, researchers, and protocol
+       This document aims to provide guidelines and best practices for writing
+   security considerations for technical specifications for RATS
+   targeting the needs of implementers, researchers, and protocol
    designers. 
     " name="description">
 <meta content="xml2rfc 3.31.0" name="generator">
@@ -1061,6 +1062,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="workgroup">RATS Working Group</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
 <dd class="internet-draft">draft-rats-sardar-sec-cons-latest</dd>
+<dt class="label-updates">Updates:</dt>
+<dd class="updates">
+<a href="https://www.rfc-editor.org/rfc/rfc9334" class="eref">9334</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
 <time datetime="2025-10-20" class="published">20 October 2025</time>
@@ -1081,8 +1085,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Guidelines for Security Considerations of RATS</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document provides guidelines and best practices for writing
-   technical specifications for RATS targeting the needs of implementers, researchers, and protocol
+<p id="section-abstract-1">This document aims to provide guidelines and best practices for writing
+   security considerations for technical specifications for RATS
+   targeting the needs of implementers, researchers, and protocol
    designers.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
@@ -1151,43 +1156,52 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-examples-of-specifications-" class="internal xref">Examples of Specifications That Could Be Improved</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-rfc9334" class="internal xref">RFC9334</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.1">
-                    <p id="section-toc.1-1.3.2.1.2.1.1" class="keepWithNext"><a href="#section-3.1.1" class="auto internal xref">3.1.1</a>.  <a href="#name-unprotected-evidence" class="internal xref">Unprotected Evidence</a></p>
+            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-general-hierarchy-of-authen" class="internal xref">General Hierarchy of Authentication</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.2">
-                    <p id="section-toc.1-1.3.2.1.2.2.1"><a href="#section-3.1.2" class="auto internal xref">3.1.2</a>.  <a href="#name-missing-roles" class="internal xref">Missing Roles</a></p>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-attacks" class="internal xref">Attacks</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-examples-of-specifications-" class="internal xref">Examples of Specifications That Could Be Improved</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-rfc9334" class="internal xref">RFC9334</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.1">
+                    <p id="section-toc.1-1.5.2.1.2.1.1"><a href="#section-5.1.1" class="auto internal xref">5.1.1</a>.  <a href="#name-unprotected-evidence" class="internal xref">Unprotected Evidence</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.2">
+                    <p id="section-toc.1-1.5.2.1.2.2.1"><a href="#section-5.1.2" class="auto internal xref">5.1.2</a>.  <a href="#name-missing-roles-and-conceptua" class="internal xref">Missing Roles and Conceptual Messages</a></p>
 </li>
                 </ul>
 </li>
             </ul>
 </li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
-</li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-references" class="internal xref">References</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
-                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-examples-of-specifications-t" class="internal xref">Examples of Specifications That Are Detrimental for Security</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
-                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
+                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
+                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
 </li>
             </ul>
 </li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
 </li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
 </li>
         </ul>
 </nav>
@@ -1198,7 +1212,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">TODO Introduction<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">While <span>[<a href="#I-D.irtf-cfrg-cryptography-specification" class="cite xref">I-D.irtf-cfrg-cryptography-specification</a>]</span> provides excellent guidelines, remote attestation <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>
+has several distinguishing features which necessitate a separate document.
+One specific example of such feature is architectural complexity.<a href="#section-1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1212,39 +1228,84 @@ described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</s
 appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="examples-of-specifications-that-could-be-improved">
+<div id="general-hierarchy-of-authentication">
 <section id="section-3">
-      <h2 id="name-examples-of-specifications-">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-examples-of-specifications-" class="section-name selfRef">Examples of Specifications That Could Be Improved</a>
+      <h2 id="name-general-hierarchy-of-authen">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-general-hierarchy-of-authen" class="section-name selfRef">General Hierarchy of Authentication</a>
       </h2>
-<div id="rfc9334">
-<section id="section-3.1">
-        <h3 id="name-rfc9334">
-<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-rfc9334" class="section-name selfRef">RFC9334</a>
-        </h3>
-<div id="unprotected-evidence">
-<section id="section-3.1.1">
-          <h4 id="name-unprotected-evidence">
-<a href="#section-3.1.1" class="section-number selfRef">3.1.1. </a><a href="#name-unprotected-evidence" class="section-name selfRef">Unprotected Evidence</a>
-          </h4>
-<p id="section-3.1.1-1"><span><a href="https://rfc-editor.org/rfc/rfc9334#section-7.4" class="relref">Section 7.4</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> has:<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
-<blockquote id="section-3.1.1-2">
-            <p id="section-3.1.1-2.1">A conveyance protocol that provides authentication and integrity protection can be used to convey Evidence that is otherwise unprotected (e.g., not signed).<a href="#section-3.1.1-2.1" class="pilcrow">¶</a></p>
-</blockquote>
-<p id="section-3.1.1-3">Using a conveyance protocol that provides authentication and integrity protection, such as TLS 1.3 <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>, to convey Evidence that is otherwise unprotected (e.g., not signed) undermines all security of remote attestation. Essentially, this breaks the chain up to the trust anchor (such as hardware manufacturer) for remote attestation. Hence, remote attestation effectively provides no protection in this case and the security guarantees are limited to those of the conveyance protocol only. In order to benefit from remote attestation, Evidence <span class="bcp14">MUST</span> be protected using dedicated keys chaining back to the trust anchor for remote attestation.<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-3-1"><span>[<a href="#Gen-Approach" class="cite xref">Gen-Approach</a>]</span> proposes general hierarchy of one-way authentication, which can help precisely
+state the intended level of authentication (in decreasing order):<a href="#section-3-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3-2.1">
+          <p id="section-3-2.1.1">One-way injective agreement<a href="#section-3-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-3-2.2">
+          <p id="section-3-2.2.1">One-way non-injective agreement<a href="#section-3-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-3-2.3">
+          <p id="section-3-2.3.1">Aliveness<a href="#section-3-2.3.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-3-3">Recentness can be added to each of these levels of authentication.<a href="#section-3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="missing-roles">
-<section id="section-3.1.2">
-          <h4 id="name-missing-roles">
-<a href="#section-3.1.2" class="section-number selfRef">3.1.2. </a><a href="#name-missing-roles" class="section-name selfRef">Missing Roles</a>
+<div id="attacks">
+<section id="section-4">
+      <h2 id="name-attacks">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-attacks" class="section-name selfRef">Attacks</a>
+      </h2>
+<p id="section-4-1">Security considerations in RATS specifications need to clarify how the following attacks are avoided or mitigated:<a href="#section-4-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4-2.1">
+          <p id="section-4-2.1.1">Diversion attacks <span>[<a href="#Meeting-122-TLS-Slides" class="cite xref">Meeting-122-TLS-Slides</a>]</span><a href="#section-4-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-2.2">
+          <p id="section-4-2.2.1">Relay attacks<a href="#section-4-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-2.3">
+          <p id="section-4-2.3.1">Replay attacks<a href="#section-4-2.3.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+</section>
+</div>
+<div id="examples-of-specifications-that-could-be-improved">
+<section id="section-5">
+      <h2 id="name-examples-of-specifications-">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-examples-of-specifications-" class="section-name selfRef">Examples of Specifications That Could Be Improved</a>
+      </h2>
+<div id="rfc9334">
+<section id="section-5.1">
+        <h3 id="name-rfc9334">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-rfc9334" class="section-name selfRef">RFC9334</a>
+        </h3>
+<div id="unprotected-evidence">
+<section id="section-5.1.1">
+          <h4 id="name-unprotected-evidence">
+<a href="#section-5.1.1" class="section-number selfRef">5.1.1. </a><a href="#name-unprotected-evidence" class="section-name selfRef">Unprotected Evidence</a>
+          </h4>
+<p id="section-5.1.1-1"><span><a href="https://rfc-editor.org/rfc/rfc9334#section-7.4" class="relref">Section 7.4</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> has:<a href="#section-5.1.1-1" class="pilcrow">¶</a></p>
+<blockquote id="section-5.1.1-2">
+            <p id="section-5.1.1-2.1">A conveyance protocol that provides authentication and integrity protection can be used to convey Evidence that is otherwise unprotected (e.g., not signed).<a href="#section-5.1.1-2.1" class="pilcrow">¶</a></p>
+</blockquote>
+<p id="section-5.1.1-3">Using a conveyance protocol that provides authentication and integrity protection, such as TLS 1.3 <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>,
+to convey Evidence that is otherwise unprotected (e.g., not signed) undermines all security of remote attestation.
+Essentially, this breaks the chain up to the trust anchor (such as hardware manufacturer) for remote attestation.
+Hence, remote attestation effectively provides no protection in this case and the security guarantees are limited
+to those of the conveyance protocol only. In order to benefit from remote attestation, Evidence <span class="bcp14">MUST</span> be protected
+using dedicated keys chaining back to the trust anchor for remote attestation.<a href="#section-5.1.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="missing-roles-and-conceptual-messages">
+<section id="section-5.1.2">
+          <h4 id="name-missing-roles-and-conceptua">
+<a href="#section-5.1.2" class="section-number selfRef">5.1.2. </a><a href="#name-missing-roles-and-conceptua" class="section-name selfRef">Missing Roles and Conceptual Messages</a>
           </h4>
 <ul class="normal">
-<li class="normal" id="section-3.1.2-1.1">
-              <p id="section-3.1.2-1.1.1">Identity Supplier and its corresponding conceptual message Identity are missing need to be added to the architecture <span>[<a href="#Meeting-122-TLS-Slides" class="cite xref">Meeting-122-TLS-Slides</a>]</span>.<a href="#section-3.1.2-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.1.2-1.1">
+              <p id="section-5.1.2-1.1.1">Identity Supplier and its corresponding conceptual message Identity are missing and need to be added to the architecture <span>[<a href="#Tech-Concepts" class="cite xref">Tech-Concepts</a>]</span>.<a href="#section-5.1.2-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-3.1.2-1.2">
-              <p id="section-3.1.2-1.2.1">Attestation Challenge as conceptual message needs to be added to the architecture.<a href="#section-3.1.2-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-5.1.2-1.2">
+              <p id="section-5.1.2-1.2.1">Attestation Challenge as conceptual message needs to be added to the architecture <span>[<a href="#Tech-Concepts" class="cite xref">Tech-Concepts</a>]</span>.<a href="#section-5.1.2-1.2.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
@@ -1253,31 +1314,50 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 </div>
 </section>
 </div>
-<div id="security-considerations">
-<section id="section-4">
-      <h2 id="name-security-considerations">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+<div id="examples-of-specifications-that-are-detrimental-for-security">
+<section id="section-6">
+      <h2 id="name-examples-of-specifications-t">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-examples-of-specifications-t" class="section-name selfRef">Examples of Specifications That Are Detrimental for Security</a>
       </h2>
-<p id="section-4-1">All of this document is about security considerations.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">We believe that the following drafts are detrimental for the RATS ecosystem:<a href="#section-6-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6-2.1">
+          <p id="section-6-2.1.1">Multi-Verifiers <span>[<a href="#I-D.deshpande-rats-multi-verifier" class="cite xref">I-D.deshpande-rats-multi-verifier</a>]</span>: the design of multi-verifiers not only increase security risks
+in terms of increasing the Trusted Computing Base (TCB), but also increases the privacy risks, as potentially sensitive
+information is sent to multiple verifiers.<a href="#section-6-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-6-2.2">
+          <p id="section-6-2.2.1">Aggregator-based design <span>[<a href="#I-D.ietf-rats-coserv" class="cite xref">I-D.ietf-rats-coserv</a>]</span>: Aggregator is an explicit trust anchor and the addition of new
+trust anchor needs to have a strong justification.<a href="#section-6-2.2.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-7">
+      <h2 id="name-security-considerations">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-7-1">All of this document is about security considerations.<a href="#section-7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
-<section id="section-5">
+<section id="section-8">
       <h2 id="name-iana-considerations">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-5-1">This document has no IANA actions.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-8-1">This document has no IANA actions.<a href="#section-8-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-combined-references">
-<section id="section-6">
+<section id="section-9">
       <h2 id="name-references">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-references" class="section-name selfRef">References</a>
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
 <div id="sec-normative-references">
-<section id="section-6.1">
+<section id="section-9.1">
         <h3 id="name-normative-references">
-<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
 <dt id="RFC2119">[RFC2119]</dt>
@@ -1296,18 +1376,38 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 </section>
 </div>
 <div id="sec-informative-references">
-<section id="section-6.2">
+<section id="section-9.2">
         <h3 id="name-informative-references">
-<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
+<dt id="Gen-Approach">[Gen-Approach]</dt>
+        <dd>
+<span class="refAuthor">Sardar, M. U.</span>, <span class="refTitle">"Perspicuity of Attestation Mechanisms in Confidential Computing: General Approach"</span>, <time datetime="2025-10" class="refDate">October 2025</time>, <span>&lt;<a href="https://www.researchgate.net/publication/396593308_Perspicuity_of_Attestation_Mechanisms_in_Confidential_Computing_General_Approach">https://www.researchgate.net/publication/396593308_Perspicuity_of_Attestation_Mechanisms_in_Confidential_Computing_General_Approach</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.deshpande-rats-multi-verifier">[I-D.deshpande-rats-multi-verifier]</dt>
+        <dd>
+<span class="refAuthor">Deshpande, Y.</span>, <span class="refAuthor">jun, Z.</span>, <span class="refAuthor">Labiod, H.</span>, and <span class="refAuthor">H. Birkholz</span>, <span class="refTitle">"Remote Attestation with Multiple Verifiers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-deshpande-rats-multi-verifier-03</span>, <time datetime="2025-10-20" class="refDate">20 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-deshpande-rats-multi-verifier-03">https://datatracker.ietf.org/doc/html/draft-deshpande-rats-multi-verifier-03</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-rats-coserv">[I-D.ietf-rats-coserv]</dt>
+        <dd>
+<span class="refAuthor">Howard, P.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Kamal, S.</span>, <span class="refAuthor">Mandyam, G.</span>, and <span class="refAuthor">D. Ma</span>, <span class="refTitle">"Concise Selector for Endorsements and Reference Values"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-coserv-02</span>, <time datetime="2025-10-20" class="refDate">20 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-coserv-02">https://datatracker.ietf.org/doc/html/draft-ietf-rats-coserv-02</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.irtf-cfrg-cryptography-specification">[I-D.irtf-cfrg-cryptography-specification]</dt>
+        <dd>
+<span class="refAuthor">Sullivan, N.</span> and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"Guidelines for Writing Cryptography Specifications"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-cryptography-specification-02</span>, <time datetime="2025-07-07" class="refDate">7 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-cryptography-specification-02">https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-cryptography-specification-02</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="Meeting-122-TLS-Slides">[Meeting-122-TLS-Slides]</dt>
         <dd>
 <span class="refAuthor">Sardar, M. U.</span>, <span class="refAuthor">Moustafa, M.</span>, and <span class="refAuthor">T. Aura</span>, <span class="refTitle">"Identity Crisis in Attested TLS for Confidential Computing"</span>, <time datetime="2025-03" class="refDate">March 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/meeting/122/materials/slides-122-tls-identity-crisis-00">https://datatracker.ietf.org/meeting/122/materials/slides-122-tls-identity-crisis-00</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8446">[RFC8446]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="seriesInfo">RFC 8446</span>, <span class="seriesInfo">DOI 10.17487/RFC8446</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8446">https://www.rfc-editor.org/rfc/rfc8446</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="Tech-Concepts">[Tech-Concepts]</dt>
+      <dd>
+<span class="refAuthor">Sardar, M. U.</span>, <span class="refTitle">"Perspicuity of Attestation Mechanisms in Confidential Computing: Technical Concepts"</span>, <time datetime="2025-10" class="refDate">October 2025</time>, <span>&lt;<a href="https://www.researchgate.net/publication/396199290_Perspicuity_of_Attestation_Mechanisms_in_Confidential_Computing_Technical_Concepts">https://www.researchgate.net/publication/396199290_Perspicuity_of_Attestation_Mechanisms_in_Confidential_Computing_Technical_Concepts</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -1319,7 +1419,9 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-A-1">The author wishes to thank Ira McDonald for insightful discussion.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-1">The author wishes to thank Ira McDonald for insightful discussion.
+The author also gratefully acknowledges the authors of <span>[<a href="#I-D.irtf-cfrg-cryptography-specification" class="cite xref">I-D.irtf-cfrg-cryptography-specification</a>]</span>, which
+serves as the inspiration of this work.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
