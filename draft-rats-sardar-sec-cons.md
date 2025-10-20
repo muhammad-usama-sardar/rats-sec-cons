@@ -19,7 +19,7 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "TODO - Your title"
+title: "Guidelines for Security Considerations of RATS"
 abbrev: "TODO - Abbreviation"
 category: info
 
