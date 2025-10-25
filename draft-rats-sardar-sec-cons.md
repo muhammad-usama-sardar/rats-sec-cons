@@ -122,9 +122,9 @@ using dedicated keys chaining back to the trust anchor for remote attestation.
 
 # Examples of Specifications That Are Detrimental for Security
 
-We believe that the following drafts are detrimental for the RATS ecosystem:
+We believe that the following designs are detrimental for the RATS ecosystem:
 
-* Multi-Verifiers {{I-D.deshpande-rats-multi-verifier}}: the design of multi-verifiers not only increase security risks
+* Multi-Verifiers {{I-D.deshpande-rats-multi-verifier}}: the design of multi-verifiers not only increases security risks
 in terms of increasing the Trusted Computing Base (TCB), but also increases the privacy risks, as potentially sensitive
 information is sent to multiple verifiers.
 
