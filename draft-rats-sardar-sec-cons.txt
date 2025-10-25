@@ -4,9 +4,9 @@
 
 RATS Working Group                                          M. U. Sardar
 Internet-Draft                                                TU Dresden
-Updates: 9334 (if approved)                              20 October 2025
+Updates: 9334 (if approved)                              25 October 2025
 Intended status: Informational                                          
-Expires: 23 April 2026
+Expires: 28 April 2026
 
 
              Guidelines for Security Considerations of RATS
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 April 2026.
+   This Internet-Draft will expire on 28 April 2026.
 
 Copyright Notice
 
@@ -155,11 +155,11 @@ Table of Contents
 
 6.  Examples of Specifications That Are Detrimental for Security
 
-   We believe that the following drafts are detrimental for the RATS
+   We believe that the following designs are detrimental for the RATS
    ecosystem:
 
    *  Multi-Verifiers [I-D.deshpande-rats-multi-verifier]: the design of
-      multi-verifiers not only increase security risks in terms of
+      multi-verifiers not only increases security risks in terms of
       increasing the Trusted Computing Base (TCB), but also increases
       the privacy risks, as potentially sensitive information is sent to
       multiple verifiers.
