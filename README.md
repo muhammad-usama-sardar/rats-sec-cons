@@ -29,3 +29,10 @@ $ make
 Command line usage requires that you have the necessary software installed.  See
 [the instructions](https://github.com/martinthomson/i-d-template/blob/main/doc/SETUP.md).
 
+## Publishing Updated Version on Datatracker
+
+```sh
+$ git push origin main
+$ git tag -a draft-rats-sardar-sec-cons-01
+$ git push origin draft-rats-sardar-sec-cons-01
+```
