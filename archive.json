@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-23T01:24:00.710176+00:00",
+  "timestamp": "2025-10-26T01:36:27.344290+00:00",
   "repo": "muhammad-usama-sardar/rats-sec-cons",
   "labels": [
     {
@@ -49,6 +49,45 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOQF8zd87TlHw_",
+      "title": "Simon Frost's feedback on -00",
+      "url": "https://github.com/muhammad-usama-sardar/rats-sec-cons/issues/1",
+      "state": "OPEN",
+      "author": "muhammad-usama-sardar",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "- [Relevant draft version](https://www.ietf.org/archive/id/draft-rats-sardar-sec-cons-00.html)\n- [ML discussion link](https://mailarchive.ietf.org/arch/msg/rats/t0At1t9j2L9r5r1RrFFWQ3jFEjQ/)\n\n> **Section 4** (Attacks). \n> \n> I understand and applaud your intent here, to ensure the best security considerations, but I wonder if an alternative approach would be a draft along the lines of Threat Modelling conditions for Remote Attestation? This would highlight the scenarios behind for attacks, who the actors are and some potential mitigations. Such a draft could then be referenced, much like the architecture is, in particular contexts for multiple drafts.\n> \n> **Section 5** (Examples of Specifications that could be improved)\n> \n> I would suggest that these are perhaps better raised in context to the drafts, as issues, so the relevant authors can debate them. Putting them in a separate draft may not give full overlap with all the right people.\n> \n> **Section 65** (Examples of Specifications that are detrimental for Security)\n> \n> I disagree strongly with this section. Both Multi Verifiers and CoServ endorsement distribution address real world issues. By suggesting that there should be no attempts to provide some standards that address these challenges you encourage custom and proprietary solutions that will inevitably miss some of the security considerations (or threat modelling per my previous suggestion). It is much more important that the problems are identified and appropriate security / privacy  considerations captured to avoid any proliferation of insecure implementations.",
+      "createdAt": "2025-10-24T14:17:20Z",
+      "updatedAt": "2025-10-25T09:41:31Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "OWNER",
+          "body": "WG Discussion:\n\n- Threat Modeling as separate draft or section within this draft",
+          "createdAt": "2025-10-24T15:33:14Z",
+          "updatedAt": "2025-10-24T15:33:14Z"
+        },
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "OWNER",
+          "body": "WG discussion: \n- Contrast the two statements\n\n[My draft](https://www.ietf.org/archive/id/draft-rats-sardar-sec-cons-00.html#section-6) says:\n> increase security risks in terms of increasing the Trusted Computing Base (TCB)\n\nYogesh: [[ML link](https://mailarchive.ietf.org/arch/msg/rats/GRHVjumpTuOlRkj-qNJvWyYwgOg/)]\n> We said, the Multi Verifier increases the TCB and increases the attack surface, which everybody acknowledges.",
+          "createdAt": "2025-10-24T16:38:57Z",
+          "updatedAt": "2025-10-24T16:38:57Z"
+        },
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "OWNER",
+          "body": "[ML discussion](https://mailarchive.ietf.org/arch/msg/rats/qc_tlmAVu3AIw7nwrUcWfs0BcDA/): \n> Aggregation is a real world problem (eg. see the practice of firmware countersigning affecting reference value distribution).",
+          "createdAt": "2025-10-25T09:41:31Z",
+          "updatedAt": "2025-10-25T09:41:31Z"
+        }
+      ]
+    }
+  ],
   "pulls": []
 }
