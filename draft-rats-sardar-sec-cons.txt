@@ -17,7 +17,8 @@ Abstract
    This document aims to provide guidelines and best practices for
    writing security considerations for technical specifications for RATS
    targeting the needs of implementers, researchers, and protocol
-   designers.
+   designers.  It presents an outline of the topics future versions will
+   cover.
 
 About This Document
 
@@ -67,18 +68,24 @@ Table of Contents
    1.  Introduction
    2.  Conventions and Definitions
    3.  General Hierarchy of Authentication
-   4.  Attacks
-   5.  Examples of Specifications That Could Be Improved
-     5.1.  RFC9334
-       5.1.1.  Unprotected Evidence
-       5.1.2.  Missing Roles and Conceptual Messages
-   6.  Examples of Parts of Specifications That Are Detrimental for
+   4.  Threat Modeling
+     4.1.  System Model
+     4.2.  Actors
+     4.3.  Threat Model
+     4.4.  Typical Security Goals
+   5.  Attacks
+   6.  Potential Mitigations
+   7.  Examples of Specifications That Could Be Improved
+     7.1.  RFC9334
+       7.1.1.  Unprotected Evidence
+       7.1.2.  Missing Roles and Conceptual Messages
+   8.  Examples of Parts of Specifications That Are Detrimental for
            Security
-   7.  Security Considerations
-   8.  IANA Considerations
-   9.  References
-     9.1.  Normative References
-     9.2.  Informative References
+   9.  Security Considerations
+   10. IANA Considerations
+   11. References
+     11.1.  Normative References
+     11.2.  Informative References
    Acknowledgments
    Author's Address
 
@@ -111,7 +118,17 @@ Table of Contents
 
    Recentness can be added to each of these levels of authentication.
 
-4.  Attacks
+4.  Threat Modeling
+
+4.1.  System Model
+
+4.2.  Actors
+
+4.3.  Threat Model
+
+4.4.  Typical Security Goals
+
+5.  Attacks
 
    Security considerations in RATS specifications need to clarify how
    the following attacks are avoided or mitigated:
@@ -122,11 +139,13 @@ Table of Contents
 
    *  Replay attacks
 
-5.  Examples of Specifications That Could Be Improved
+6.  Potential Mitigations
 
-5.1.  RFC9334
+7.  Examples of Specifications That Could Be Improved
 
-5.1.1.  Unprotected Evidence
+7.1.  RFC9334
+
+7.1.1.  Unprotected Evidence
 
    Section 7.4 of [RFC9334] has:
 
@@ -145,7 +164,7 @@ Table of Contents
    remote attestation, Evidence MUST be protected using dedicated keys
    chaining back to the trust anchor for remote attestation.
 
-5.1.2.  Missing Roles and Conceptual Messages
+7.1.2.  Missing Roles and Conceptual Messages
 
    *  Identity Supplier and its corresponding conceptual message
       Identity are missing and need to be added to the architecture
@@ -154,11 +173,11 @@ Table of Contents
    *  Attestation Challenge as conceptual message needs to be added to
       the architecture [Tech-Concepts].
 
-6.  Examples of Parts of Specifications That Are Detrimental for
+8.  Examples of Parts of Specifications That Are Detrimental for
     Security
 
-   We believe that the following parts of designs are detrimental for
-   the RATS ecosystem:
+   It is the author's personal opinion that the following parts of
+   designs are detrimental for the RATS ecosystem:
 
    *  Multi-Verifiers [I-D.deshpande-rats-multi-verifier]: the design of
       multi-verifiers not only increases security risks in terms of
@@ -170,17 +189,17 @@ Table of Contents
       explicit trust anchor and the addition of new trust anchor needs
       to have a strong justification.
 
-7.  Security Considerations
+9.  Security Considerations
 
    All of this document is about security considerations.
 
-8.  IANA Considerations
+10.  IANA Considerations
 
    This document has no IANA actions.
 
-9.  References
+11.  References
 
-9.1.  Normative References
+11.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -196,7 +215,7 @@ Table of Contents
               Architecture", RFC 9334, DOI 10.17487/RFC9334, January
               2023, <https://www.rfc-editor.org/rfc/rfc9334>.
 
-9.2.  Informative References
+11.2.  Informative References
 
    [Gen-Approach]
               Sardar, M. U., "Perspicuity of Attestation Mechanisms in
