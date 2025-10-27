@@ -65,7 +65,7 @@ informative:
 This document aims to provide guidelines and best practices for writing
    security considerations for technical specifications for RATS
    targeting the needs of implementers, researchers, and protocol
-   designers.
+   designers. It presents an outline of the topics future versions will cover.
 
 
 --- middle
@@ -91,6 +91,16 @@ state the intended level of authentication (in decreasing order):
 
 Recentness can be added to each of these levels of authentication.
 
+# Threat Modeling
+
+## System Model
+
+## Actors
+
+## Threat Model
+
+## Typical Security Goals
+
 # Attacks
 
 Security considerations in RATS specifications need to clarify how the following attacks are avoided or mitigated:
@@ -98,6 +108,8 @@ Security considerations in RATS specifications need to clarify how the following
 * Diversion attacks {{Meeting-122-TLS-Slides}}
 * Relay attacks
 * Replay attacks
+
+# Potential Mitigations
 
 # Examples of Specifications That Could Be Improved
 
@@ -122,7 +134,7 @@ using dedicated keys chaining back to the trust anchor for remote attestation.
 
 # Examples of Parts of Specifications That Are Detrimental for Security
 
-We believe that the following parts of designs are detrimental for the RATS ecosystem:
+It is the author's personal opinion that the following parts of designs are detrimental for the RATS ecosystem:
 
 * Multi-Verifiers {{I-D.deshpande-rats-multi-verifier}}: the design of multi-verifiers not only increases security risks
 in terms of increasing the Trusted Computing Base (TCB), but also increases the privacy risks, as potentially sensitive
