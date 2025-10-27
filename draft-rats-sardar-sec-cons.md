@@ -120,9 +120,9 @@ using dedicated keys chaining back to the trust anchor for remote attestation.
 * Identity Supplier and its corresponding conceptual message Identity are missing and need to be added to the architecture {{Tech-Concepts}}.
 * Attestation Challenge as conceptual message needs to be added to the architecture {{Tech-Concepts}}.
 
-# Examples of Specifications That Are Detrimental for Security
+# Examples of Parts of Specifications That Are Detrimental for Security
 
-We believe that the following designs are detrimental for the RATS ecosystem:
+We believe that the following parts of designs are detrimental for the RATS ecosystem:
 
 * Multi-Verifiers {{I-D.deshpande-rats-multi-verifier}}: the design of multi-verifiers not only increases security risks
 in terms of increasing the Trusted Computing Base (TCB), but also increases the privacy risks, as potentially sensitive
