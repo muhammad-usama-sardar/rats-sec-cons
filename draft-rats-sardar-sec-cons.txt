@@ -4,9 +4,9 @@
 
 RATS Working Group                                          M. U. Sardar
 Internet-Draft                                                TU Dresden
-Updates: 9334 (if approved)                              25 October 2025
+Updates: 9334 (if approved)                              27 October 2025
 Intended status: Informational                                          
-Expires: 28 April 2026
+Expires: 30 April 2026
 
 
              Guidelines for Security Considerations of RATS
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 April 2026.
+   This Internet-Draft will expire on 30 April 2026.
 
 Copyright Notice
 
@@ -72,7 +72,8 @@ Table of Contents
      5.1.  RFC9334
        5.1.1.  Unprotected Evidence
        5.1.2.  Missing Roles and Conceptual Messages
-   6.  Examples of Specifications That Are Detrimental for Security
+   6.  Examples of Parts of Specifications That Are Detrimental for
+           Security
    7.  Security Considerations
    8.  IANA Considerations
    9.  References
@@ -153,10 +154,11 @@ Table of Contents
    *  Attestation Challenge as conceptual message needs to be added to
       the architecture [Tech-Concepts].
 
-6.  Examples of Specifications That Are Detrimental for Security
+6.  Examples of Parts of Specifications That Are Detrimental for
+    Security
 
-   We believe that the following designs are detrimental for the RATS
-   ecosystem:
+   We believe that the following parts of designs are detrimental for
+   the RATS ecosystem:
 
    *  Multi-Verifiers [I-D.deshpande-rats-multi-verifier]: the design of
       multi-verifiers not only increases security risks in terms of
