@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-26T01:36:27.344290+00:00",
+  "timestamp": "2025-10-28T01:22:55.928821+00:00",
   "repo": "muhammad-usama-sardar/rats-sec-cons",
   "labels": [
     {
@@ -87,6 +87,78 @@
           "updatedAt": "2025-10-25T09:41:31Z"
         }
       ]
+    },
+    {
+      "number": 2,
+      "id": "I_kwDOQF8zd87T3HUS",
+      "title": "Thomas Fossati's feedback on -00",
+      "url": "https://github.com/muhammad-usama-sardar/rats-sec-cons/issues/2",
+      "state": "OPEN",
+      "author": "muhammad-usama-sardar",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "- [Relevant draft version](https://www.ietf.org/archive/id/draft-rats-sardar-sec-cons-00.html)\n- [ML discussion link](https://mailarchive.ietf.org/arch/msg/rats/hJkFGOeXhZjSezYQa3MYMv-EpCk/)\n\n> Abstract\n> \n> Providing \"guidelines and best practices for writing security\n> considerations\" is a worthwhile aim.\n> Unfortunately, the document in its current form does not live up to\n> the expectations set out here.\n> \n> \u00a71\n> \n> This section is phrased as if I-D.irtf-cfg-cryptography-specification\n> is the basis on which this document builds.\n> However, when I look at the active I-Ds and RFCs [1], I cannot find a\n> single one that applies, i.e., one that describes \"cryptography\n> protocols and primitives\".\n> Either it should be made clear in which contexts\n> I-D.irtf-cfg-cryptography-specification is considered applicable to\n> RATS documents, or the section/paragraph should be rephrased to state\n> that the work you aim to do for RATS is similar to that done by\n> I-D.irtf-cfg-cryptography-specification in the context of cryptography\n> protocols and primitives, or the reference should be removed.\n> \n> [1] https://datatracker.ietf.org/wg/rats/documents/\n> \n> \u00a73\n> \n> You need to clarify which RATS documents would need to take Lowe's\n> hierarchy into account.  I certainly can't see how serialisation\n> documents such as EAT or CMW would apply.\n> \n> \u00a74\n> \n> This sounds good and is within scope. Please expand on this by (at least):\n> * adding clear descriptions of the attacks\n> * linking to existing parts of the RFC corpus\n> * providing concrete examples in the RATS context.\n> \n> \u00a75\n> \n> This looks completely out of the scope of this document.  Please take\n> these discussion points elsewhere.\n> \n> \u00a76\n> \n> Since these use cases are real and will not disappear just because we\n> choose to ignore them, perhaps a more constructive way to phrase this\n> section would be: \"When RATS roles are split across multiple entities\n> (e.g., CoSERV aggregators, multi-verifiers), the additional security\n> and privacy risks must be clearly highlighted and addressed by\n> proposing effective countermeasures.\"",
+      "createdAt": "2025-10-26T20:58:43Z",
+      "updatedAt": "2025-10-27T21:01:31Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "OWNER",
+          "body": "> some of the attacks may already have been discussed in the context of existing RFCs, such as BCP 72 and RFC 9334.\n\n> \u00a76 \"What are the security and privacy implications when a RATS role is split across multiple entities?\"",
+          "createdAt": "2025-10-27T21:01:31Z",
+          "updatedAt": "2025-10-27T21:01:31Z"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "id": "I_kwDOQF8zd87T-TK8",
+      "title": "Carl Wallace feedback on -00",
+      "url": "https://github.com/muhammad-usama-sardar/rats-sec-cons/issues/3",
+      "state": "OPEN",
+      "author": "muhammad-usama-sardar",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "- [Relevant draft version](https://www.ietf.org/archive/id/draft-rats-sardar-sec-cons-00.html)\n- [ML discussion link](https://mailarchive.ietf.org/arch/msg/rats/GT71TTuLLBJXQrzk1zi_N61rIdc/)\n\n> I agree with the reviews from Thomas and Simon. The stated goals of the I-D are worth pursuing but they don\u2019t reflect the content of the draft, which in large part is simply turning comments about several I-Ds that have not garnered traction on the mailing list into an I-D. Almost all of the content that is pertinent to the stated goals is provided in references on Research Gate. The non-stated goals that consume most of the I-D appear to be stimulating work on RFC9334bis and halting work on coserv and multi-verifier.\n> \n> Ignoring the stated goals and instead focusing on just one of the perceived issues, in section 6, bullet 2, you are (still) asserting that an aggregator-design necessarily requires a new trust anchor and seem to imply that introduction of a new trust anchor is necessarily a problem. I challenged your assertion to no response in [1] and gave a key attestation-based example of how an aggregator may be useful in [2], also to no reply. I understand that it is your opinion that these use cases need not be addressed by a standards body, but others have different opinions. It may be that work like draft-jpfiset-lamps-attestationkey-eku-01 could be expanded to help address some of your concerns re: trust.\n> \n> Procedurally, I do not understand why you have marked this as updating RFC9334. Most of what would potentially influence an update to RFC9334 is incorporated here by reference and is not written as an update at all.\n> \n> One nit, the first sentence of section 6 should begin \u201cI believe\u201d since only one author is listed.\n> \n> [1] https://mailarchive.ietf.org/arch/msg/rats/JkKLBiUwc7BSGnSciX4JT-GQKx4/\n> \n> [2] https://mailarchive.ietf.org/arch/msg/rats/SSiqWGFg5tW0fjYLNgr7M8KaMu4/\n> \n>  ",
+      "createdAt": "2025-10-27T11:28:39Z",
+      "updatedAt": "2025-10-27T11:28:39Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 4,
+      "id": "I_kwDOQF8zd87UBPyW",
+      "title": "Jun's feedback",
+      "url": "https://github.com/muhammad-usama-sardar/rats-sec-cons/issues/4",
+      "state": "OPEN",
+      "author": "muhammad-usama-sardar",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "- [Relevant draft version](https://www.ietf.org/archive/id/draft-rats-sardar-sec-cons-00.html)\n- [ML discussion link](https://mailarchive.ietf.org/arch/msg/rats/LfPzsLghscaW0UKnV8GEHSs5jfA/)\n\n> Regarding \u00a73 of draft-rats-sardar-sec-cons-00, we respectfully suggest introducing a shared definition of the relay attack and diversion attacks.  This would help ensure that everyone is speaking the same language during the discussion. RFC\u202f9334 already covers replay attacks in \u00a710; therefore we would suggest to give more focus on the part of potential vulnerability of exiting mitigation methods for the replay attack. \n> \n> Usama, could you please post a concise definition of the diversion attack on the mailing list?  The slides [2] describe the attack as requiring the theft of the private key stored in the root of trust, which seems to contradict the root\u2011of\u2011trust assumptions made in RFC\u202f9334.\n> \n> Regarding \u00a76, the multi\u2011verifier draft already contains (i) the use\u2011cases in \u00a73 of [1], (ii) the security considerations in \u00a77 of [1], and (iii) the privacy considerations in \u00a78 of [1]. We have analyzed threats and given corresponding mitigations.  We welcome any additional technical feedback so that the related discussion can be productive at IETF\u2011124.\n> \n> Please feel free to post your comments on the mailing list or open an issue on the draft\u2019s GitHub repository:\n>  https://github.com/ietf-rats/draft-deshpande-multi-verifier/issues\n\n- [ ] definition of the relay attack and diversion attacks",
+      "createdAt": "2025-10-27T14:33:50Z",
+      "updatedAt": "2025-10-27T14:33:50Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 5,
+      "id": "I_kwDOQF8zd87UBqK2",
+      "title": "Yogesh's feedback on -00",
+      "url": "https://github.com/muhammad-usama-sardar/rats-sec-cons/issues/5",
+      "state": "OPEN",
+      "author": "muhammad-usama-sardar",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "- [Relevant draft version](https://www.ietf.org/archive/id/draft-rats-sardar-sec-cons-00.html)\n- [ML discussion link](https://mailarchive.ietf.org/arch/msg/rats/ymBUmMWBRbj7erVXPAK9YOBzBIU/)\n\n> I spend some time reading the draft and have following comments on:\n> https://www.ietf.org/archive/id/draft-rats-sardar-sec-cons-00.html\n>  \n> Title is Great: This can be a very helpful document as a Guideline for Security Considerations for any\n> RATS based Attestation System\n>  \n> Section 1: I would not state an example which is of not much relevance for Security.\n> Instead, I would write Motivation as to WHY one needs a separate Security Considerations guidance for RATS..?\n>  \n> Explain Complexity, technological evolution or any other good reasons which mandate this draft..?\n>  \n> May be explain types of Attacks(at a very high level as an example) that need special focus...?\n>  \n> Section 3.  Honestly, I am confused here with this section.\n>  \n> Why bring Authentication here ..? RATS can be a protocol, to Aid in Authentication Protocols but\n> There are many Industry protocols to tackle Authentication ..?\n>  \n> Section 4:\n>  \n> This is where I would elaborate all the Attacks\n> - which are relevant to RATS based Eco-System ..?\n> - What is missing in RFC 9334, which we want to add here..?\n> - Every document, from RATS needs to provide Mitigation Strategy and if not applicable for a particular draft clearly\n> state why it is not applicable?\n>  \n>  \n> Section 5:\n>  \n> RATS cannot specify a specific Identity Protocol, there are many for example W3C DID, X.509 based Identity and many more.\n>  \n>  \n> Section 6.\n> This section does NOT connect with the Intent what you have in Abstract. Honestly, this section can be removed.\n>  \n> Perhaps you meant that these documents, bring extra security challenges, and hence the motivation for writing new Security Document.\n>  \n> Simply stating that the listed documents increase Security Risks is not helpful.\n>  \n> The real-world problems need to be solved in a standardized way, what would be helpful is to state that these two documents bring new security considerations and MUST take care\n> of all the threats elaborated in section 4. (This note can very well go in the Motivation section)\n>  \n> Hope the feedback is helpful.",
+      "createdAt": "2025-10-27T14:57:38Z",
+      "updatedAt": "2025-10-27T14:57:38Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": []
