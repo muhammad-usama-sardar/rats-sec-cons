@@ -4,9 +4,9 @@
 
 RATS Working Group                                          M. U. Sardar
 Internet-Draft                                                TU Dresden
-Updates: 9334 (if approved)                              27 October 2025
+Updates: 9334 (if approved)                              1 November 2025
 Intended status: Informational                                          
-Expires: 30 April 2026
+Expires: 5 May 2026
 
 
              Guidelines for Security Considerations of RATS
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 April 2026.
+   This Internet-Draft will expire on 5 May 2026.
 
 Copyright Notice
 
@@ -71,6 +71,8 @@ Table of Contents
    4.  Threat Modeling
      4.1.  System Model
      4.2.  Actors
+       4.2.1.  Legal perspective
+       4.2.2.  Technical perspective
      4.3.  Threat Model
      4.4.  Typical Security Goals
    5.  Attacks
@@ -124,6 +126,23 @@ Table of Contents
 
 4.2.  Actors
 
+4.2.1.  Legal perspective
+
+   *  Data subject is an identifiable natural person (as defined in
+      Article 4 (1) of GDPR [GDPR]).
+
+   *  (Data) Controller (as defined in Article 4 (7) of GDPR [GDPR])
+      manages and controls what happens with personal data of data
+      subject.
+
+   *  (Data) Processor (as defined in Article 4 (8) of GDPR [GDPR])
+      performs data processing on behalf of the data controller.
+
+4.2.2.  Technical perspective
+
+   *  Infrastucture Provider is a role which refers to the Processor in
+      GDPR.  An example of this role is a cloud service provider (CSP).
+
 4.3.  Threat Model
 
 4.4.  Typical Security Goals
@@ -133,7 +152,13 @@ Table of Contents
    Security considerations in RATS specifications need to clarify how
    the following attacks are avoided or mitigated:
 
-   *  Diversion attacks [Meeting-122-TLS-Slides]
+   *  Diversion attacks: In this attack, a network adversary -- with
+      Dolev-Yao capabilities [Dolev-Yao] and access (e.g., via
+      Foreshadow [Foreshadow]) to attestation key of any machine in the
+      world -- can redirect a connection intended for a specific
+      Infrastructure Provider to the compromised machine, potentially
+      resulting in exposure of confidential data
+      [Meeting-122-TLS-Slides].
 
    *  Relay attacks
 
@@ -217,6 +242,26 @@ Table of Contents
 
 11.2.  Informative References
 
+   [Dolev-Yao]
+              Dolev, D. and A. Yao, "On the security of public key
+              protocols", March 1983.
+
+   [Foreshadow]
+              Jo Van Bulck, Marina Minkin, Ofir Weisse, Daniel Genkin,
+              Baris Kasikci, Frank Piessens, Mark Silberstein, Thomas F
+              Wenisch, Yuval Yarom, and Raoul Strackx, "Perspicuity of
+              Attestation Mechanisms in Confidential Computing:
+              Technical Concepts", October 2025,
+              <https://foreshadowattack.eu/>.
+
+   [GDPR]     European Commission, "Regulation (EU) 2016/679 of the
+              European Parliament and of the Council of 27 April 2016 on
+              the protection of natural persons with regard to the pro-
+              cessing of personal data and on the free movement of such
+              data, and repealing Direc- tive 95/46/EC (General Data
+              Protection Regulation) (Text with EEA relevance)", May
+              2016, <https://eur-lex.europa.eu/eli/reg/2016/679/oj>.
+
    [Gen-Approach]
               Sardar, M. U., "Perspicuity of Attestation Mechanisms in
               Confidential Computing: General Approach", October 2025,
@@ -266,10 +311,10 @@ Table of Contents
 
 Acknowledgments
 
-   The author wishes to thank Ira McDonald for insightful discussion.
-   The author also gratefully acknowledges the authors of
-   [I-D.irtf-cfrg-cryptography-specification], which serves as the
-   inspiration of this work.
+   The author wishes to thank Ira McDonald and Ivan Gudymenko for
+   insightful discussions.  The author also gratefully acknowledges the
+   authors of [I-D.irtf-cfrg-cryptography-specification], which serves
+   as the inspiration of this work.
 
 Author's Address
 
