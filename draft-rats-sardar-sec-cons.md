@@ -54,6 +54,36 @@ informative:
      target: https://www.researchgate.net/publication/396593308_Perspicuity_of_Attestation_Mechanisms_in_Confidential_Computing_General_Approach
      author:
       - ins: M. U. Sardar
+  GDPR:
+     title: "Regulation (EU) 2016/679 of the European Parliament and of
+the Council of 27 April 2016 on the protection of natural persons with regard to the pro-
+cessing of personal data and on the free movement of such data, and repealing Direc-
+tive 95/46/EC (General Data Protection Regulation) (Text with EEA relevance)"
+     date: May 4, 2016,
+     target: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+     author:
+      - ins: European Commission
+  Dolev-Yao:
+     title: "On the security of public key protocols"
+     date: March 1983,
+     author:
+      - ins: D. Dolev
+      - ins: A. Yao
+  Foreshadow:
+     title: "Perspicuity of Attestation Mechanisms in Confidential Computing: Technical Concepts"
+     date: October 2025,
+     target: https://foreshadowattack.eu/
+     author:
+      - ins: Jo Van Bulck
+      - ins: Marina Minkin
+      - ins: Ofir Weisse
+      - ins: Daniel Genkin
+      - ins: Baris Kasikci
+      - ins: Frank Piessens
+      - ins: Mark Silberstein
+      - ins: Thomas F. Wenisch
+      - ins: Yuval Yarom
+      - ins: Raoul Strackx
   I-D.irtf-cfrg-cryptography-specification:
   I-D.deshpande-rats-multi-verifier:
   I-D.ietf-rats-coserv:
@@ -97,6 +127,17 @@ Recentness can be added to each of these levels of authentication.
 
 ## Actors
 
+### Legal perspective
+
+* Data subject is an identifiable natural person (as defined in Article 4 (1) of GDPR {{GDPR}}).
+* (Data) Controller (as defined in Article 4 (7) of GDPR {{GDPR}}) manages and controls what happens with personal data of data subject.
+* (Data) Processor (as defined in Article 4 (8) of GDPR {{GDPR}}) performs data processing on behalf of the data controller.
+
+
+### Technical perspective
+
+* Infrastucture Provider is a role which refers to the Processor in GDPR. An example of this role is a cloud service provider (CSP).
+
 ## Threat Model
 
 ## Typical Security Goals
@@ -105,7 +146,10 @@ Recentness can be added to each of these levels of authentication.
 
 Security considerations in RATS specifications need to clarify how the following attacks are avoided or mitigated:
 
-* Diversion attacks {{Meeting-122-TLS-Slides}}
+* Diversion attacks: In this attack, a network adversary -- with Dolev-Yao capabilities {{Dolev-Yao}} and access (e.g., via
+Foreshadow {{Foreshadow}}) to attestation key of any machine in the world -- can redirect a connection intended
+for a specific Infrastructure Provider to the compromised machine, potentially resulting in exposure of
+confidential data {{Meeting-122-TLS-Slides}}.
 * Relay attacks
 * Replay attacks
 
@@ -160,6 +204,6 @@ This document has no IANA actions.
 # Acknowledgments
 {:numbered="false"}
 
-The author wishes to thank Ira McDonald for insightful discussion.
+The author wishes to thank Ira McDonald and Ivan Gudymenko for insightful discussions.
 The author also gratefully acknowledges the authors of {{I-D.irtf-cfrg-cryptography-specification}}, which
 serves as the inspiration of this work.
