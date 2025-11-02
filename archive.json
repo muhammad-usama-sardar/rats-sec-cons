@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-30T01:28:06.761657+00:00",
+  "timestamp": "2025-11-02T01:38:15.171514+00:00",
   "repo": "muhammad-usama-sardar/rats-sec-cons",
   "labels": [
     {
@@ -146,9 +146,9 @@
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
-      "body": "- [Relevant draft version](https://www.ietf.org/archive/id/draft-rats-sardar-sec-cons-00.html)\n- [ML discussion link](https://mailarchive.ietf.org/arch/msg/rats/LfPzsLghscaW0UKnV8GEHSs5jfA/)\n\n> Regarding \u00a73 of draft-rats-sardar-sec-cons-00, we respectfully suggest introducing a shared definition of the relay attack and diversion attacks.  This would help ensure that everyone is speaking the same language during the discussion. RFC\u202f9334 already covers replay attacks in \u00a710; therefore we would suggest to give more focus on the part of potential vulnerability of exiting mitigation methods for the replay attack. \n> \n> Usama, could you please post a concise definition of the diversion attack on the mailing list?  The slides [2] describe the attack as requiring the theft of the private key stored in the root of trust, which seems to contradict the root\u2011of\u2011trust assumptions made in RFC\u202f9334.\n> \n> Regarding \u00a76, the multi\u2011verifier draft already contains (i) the use\u2011cases in \u00a73 of [1], (ii) the security considerations in \u00a77 of [1], and (iii) the privacy considerations in \u00a78 of [1]. We have analyzed threats and given corresponding mitigations.  We welcome any additional technical feedback so that the related discussion can be productive at IETF\u2011124.\n> \n> Please feel free to post your comments on the mailing list or open an issue on the draft\u2019s GitHub repository:\n>  https://github.com/ietf-rats/draft-deshpande-multi-verifier/issues\n\n- [ ] definition of the relay attack and diversion attacks",
+      "body": "- [Relevant draft version](https://www.ietf.org/archive/id/draft-rats-sardar-sec-cons-00.html)\n- [ML discussion link](https://mailarchive.ietf.org/arch/msg/rats/LfPzsLghscaW0UKnV8GEHSs5jfA/)\n\n> Regarding \u00a73 of draft-rats-sardar-sec-cons-00, we respectfully suggest introducing a shared definition of the relay attack and diversion attacks.  This would help ensure that everyone is speaking the same language during the discussion. RFC\u202f9334 already covers replay attacks in \u00a710; therefore we would suggest to give more focus on the part of potential vulnerability of exiting mitigation methods for the replay attack. \n> \n> Usama, could you please post a concise definition of the diversion attack on the mailing list?  The slides [2] describe the attack as requiring the theft of the private key stored in the root of trust, which seems to contradict the root\u2011of\u2011trust assumptions made in RFC\u202f9334.\n> \n> Regarding \u00a76, the multi\u2011verifier draft already contains (i) the use\u2011cases in \u00a73 of [1], (ii) the security considerations in \u00a77 of [1], and (iii) the privacy considerations in \u00a78 of [1]. We have analyzed threats and given corresponding mitigations.  We welcome any additional technical feedback so that the related discussion can be productive at IETF\u2011124.\n> \n> Please feel free to post your comments on the mailing list or open an issue on the draft\u2019s GitHub repository:\n>  https://github.com/ietf-rats/draft-deshpande-multi-verifier/issues\n\n- [ ] definition of the relay attack \n- [x] definition of diversion attack",
       "createdAt": "2025-10-27T14:33:50Z",
-      "updatedAt": "2025-10-27T14:33:50Z",
+      "updatedAt": "2025-11-01T01:12:54Z",
       "closedAt": null,
       "comments": []
     },
