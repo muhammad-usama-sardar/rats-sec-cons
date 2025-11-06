@@ -122,6 +122,7 @@ state the intended level of authentication (in decreasing order):
 Recentness can be added to each of these levels of authentication.
 
 # Threat Modeling
+This section describes "What can go wrong?"
 
 ## System Model
 
@@ -146,14 +147,18 @@ Recentness can be added to each of these levels of authentication.
 
 Security considerations in RATS specifications need to clarify how the following attacks are avoided or mitigated:
 
-* Diversion attacks: In this attack, a network adversary -- with Dolev-Yao capabilities {{Dolev-Yao}} and access (e.g., via
+## Replay attacks
+
+## Relay attacks
+
+## Diversion attacks
+In this attack, a network adversary -- with Dolev-Yao capabilities {{Dolev-Yao}} and access (e.g., via
 Foreshadow {{Foreshadow}}) to attestation key of any machine in the world -- can redirect a connection intended
 for a specific Infrastructure Provider to the compromised machine, potentially resulting in exposure of
 confidential data {{Meeting-122-TLS-Slides}}.
-* Relay attacks
-* Replay attacks
 
 # Potential Mitigations
+This section describes the countermeasures and their evaluation.
 
 # Examples of Specifications That Could Be Improved
 
