@@ -4,9 +4,9 @@
 
 RATS Working Group                                          M. U. Sardar
 Internet-Draft                                                TU Dresden
-Updates: 9334 (if approved)                              1 November 2025
+Updates: 9334 (if approved)                              6 November 2025
 Intended status: Informational                                          
-Expires: 5 May 2026
+Expires: 10 May 2026
 
 
              Guidelines for Security Considerations of RATS
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 May 2026.
+   This Internet-Draft will expire on 10 May 2026.
 
 Copyright Notice
 
@@ -76,6 +76,9 @@ Table of Contents
      4.3.  Threat Model
      4.4.  Typical Security Goals
    5.  Attacks
+     5.1.  Replay attacks
+     5.2.  Relay attacks
+     5.3.  Diversion attacks
    6.  Potential Mitigations
    7.  Examples of Specifications That Could Be Improved
      7.1.  RFC9334
@@ -122,6 +125,8 @@ Table of Contents
 
 4.  Threat Modeling
 
+   This section describes "What can go wrong?"
+
 4.1.  System Model
 
 4.2.  Actors
@@ -152,19 +157,22 @@ Table of Contents
    Security considerations in RATS specifications need to clarify how
    the following attacks are avoided or mitigated:
 
-   *  Diversion attacks: In this attack, a network adversary -- with
-      Dolev-Yao capabilities [Dolev-Yao] and access (e.g., via
-      Foreshadow [Foreshadow]) to attestation key of any machine in the
-      world -- can redirect a connection intended for a specific
-      Infrastructure Provider to the compromised machine, potentially
-      resulting in exposure of confidential data
-      [Meeting-122-TLS-Slides].
+5.1.  Replay attacks
 
-   *  Relay attacks
+5.2.  Relay attacks
 
-   *  Replay attacks
+5.3.  Diversion attacks
+
+   In this attack, a network adversary -- with Dolev-Yao capabilities
+   [Dolev-Yao] and access (e.g., via Foreshadow [Foreshadow]) to
+   attestation key of any machine in the world -- can redirect a
+   connection intended for a specific Infrastructure Provider to the
+   compromised machine, potentially resulting in exposure of
+   confidential data [Meeting-122-TLS-Slides].
 
 6.  Potential Mitigations
+
+   This section describes the countermeasures and their evaluation.
 
 7.  Examples of Specifications That Could Be Improved
 
