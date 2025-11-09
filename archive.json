@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-06T01:26:49.492121+00:00",
+  "timestamp": "2025-11-09T01:37:30.769425+00:00",
   "repo": "muhammad-usama-sardar/rats-sec-cons",
   "labels": [
     {
@@ -181,6 +181,22 @@
       "body": "Carl's claim:\n> \u201cThere is nothing that prevents an aggregator from possessing a certificate from a trust anchor already trusted by a verifier.\u201d \n\nI am not refuting your statement to be false. I just don't understand how it will be done in reality for confidential computing without falling into several rabbit holes, including but not limited to:\n\n1. In which infrastructure does Aggregator run? Is it the same as Verifier or different?\n2. Is the Aggregator running inside a TEE? If not, it is useless for Confidential Computing. If yes, then how is it provisioned with the certificate without having the Cloud Service Provider in TCB and how are the public attestation keys for Aggegator distributed?\n3. How is Aggregator provisioned with the keys? Who owns those keys? How is that entity trusted?",
       "createdAt": "2025-10-28T12:59:43Z",
       "updatedAt": "2025-10-29T14:57:06Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 7,
+      "id": "I_kwDOQF8zd87Wuy2S",
+      "title": "Process model for doing templates for Security Considerations",
+      "url": "https://github.com/muhammad-usama-sardar/rats-sec-cons/issues/7",
+      "state": "OPEN",
+      "author": "muhammad-usama-sardar",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Background: discussion at IETF 124: session 1\n[ML link](https://mailarchive.ietf.org/arch/msg/rats/tBlKL-SXLrfoGpnlK2S6LgOS5ME/)\n\n> The IETF ROLL WG deals with Routing Over Low-power Lossy networks.\n> RFC6550 (\"RPL\", pronounced ripple, like the Grateful Dead song) did not\n> adequately deal with the security implications of different choices in RPL.\n> Promises to the IESG were made, and some of the promised work occured in RFC7416.\n> \n> RPL has applicability to home, (multi-tenant)buildings, industrial and\n> automatic metering (AMI).  Each have different network security\n> characteristics, as well many different parameters for RPL.\n> As each one would have to answer the same set of questions, we wrote a\n> template, which can you see at:\n>   https://datatracker.ietf.org/doc/draft-ietf-roll-applicability-template/\n> \n> The results were RFC8036, RFC7733.\n> We expected another document for industrial uses, but as that grew, it became\n> the 6tisch WG.  and RFC9030 and friends resulted.\n> (We didn't expect home/building to wind up in the same document either)\n> {Zero-touch onboarding also came out as 6tisch was formed}\n> \n> You'll see that the template was not published.\n> (You'll see it got a SECDIR review, which was the result of mis-communication!)",
+      "createdAt": "2025-11-08T02:23:34Z",
+      "updatedAt": "2025-11-08T02:23:34Z",
       "closedAt": null,
       "comments": []
     }
