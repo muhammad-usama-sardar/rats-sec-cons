@@ -31,6 +31,8 @@ author:
 
 normative:
   RFC9334: rfc9334
+  RFC9781: rfc9781
+  RFC9711: rfc9711
 
 informative:
   RFC8446: rfc8446
@@ -42,6 +44,12 @@ informative:
      - ins: M. U. Sardar
      - ins: M. Moustafa
      - ins: T. Aura
+  Meeting-124-RATS-Slides:
+     title: "Guidelines for Security Considerations of RATS"
+     date: 7 November 2025,
+     target: https://datatracker.ietf.org/meeting/124/materials/slides-124-rats-sessb-guideline-for-security-consideration-of-rats-00
+     author:
+     - ins: M. U. Sardar
   Tech-Concepts:
      title: "Perspicuity of Attestation Mechanisms in Confidential Computing: Technical Concepts"
      date: October 2025,
@@ -70,7 +78,7 @@ tive 95/46/EC (General Data Protection Regulation) (Text with EEA relevance)"
       - ins: D. Dolev
       - ins: A. Yao
   Foreshadow:
-     title: "Perspicuity of Attestation Mechanisms in Confidential Computing: Technical Concepts"
+     title: "Foreshadow"
      date: October 2025,
      target: https://foreshadowattack.eu/
      author:
@@ -87,6 +95,18 @@ tive 95/46/EC (General Data Protection Regulation) (Text with EEA relevance)"
   I-D.irtf-cfrg-cryptography-specification:
   I-D.deshpande-rats-multi-verifier:
   I-D.ietf-rats-coserv:
+  Clarifications-EAT:
+     title: "Clarifications in draft-ietf-rats-eat"
+     date: 11 April 2025,
+     target: https://mailarchive.ietf.org/arch/msg/rats/4V2zZHhk5IuxwcUMNWpPBpnzpaM/
+     author:
+     - ins: M. U. Sardar
+  Sec-Cons-RATS:
+     title: "Security considerations of remote attestation (RFC9334)"
+     date: 25 November 2024,
+     target: https://mailarchive.ietf.org/arch/msg/rats/jcAv9FKbYSIVtUNQ8ggEHL8lrmM/
+     author:
+     - ins: M. U. Sardar
 
 ...
 
@@ -148,8 +168,10 @@ This section describes "What can go wrong?"
 Security considerations in RATS specifications need to clarify how the following attacks are avoided or mitigated:
 
 ## Replay attacks
+See {{Meeting-124-RATS-Slides}}.
 
 ## Relay attacks
+See {{Meeting-124-RATS-Slides}}.
 
 ## Diversion attacks
 In this attack, a network adversary -- with Dolev-Yao capabilities {{Dolev-Yao}} and access (e.g., via
@@ -158,7 +180,7 @@ for a specific Infrastructure Provider to the compromised machine, potentially r
 confidential data {{Meeting-122-TLS-Slides}}.
 
 # Potential Mitigations
-This section describes the countermeasures and their evaluation.
+This section will describe the countermeasures and their evaluation. See {{Meeting-124-RATS-Slides}}.
 
 # Examples of Specifications That Could Be Improved
 
@@ -181,16 +203,57 @@ using dedicated keys chaining back to the trust anchor for remote attestation.
 * Identity Supplier and its corresponding conceptual message Identity are missing and need to be added to the architecture {{Tech-Concepts}}.
 * Attestation Challenge as conceptual message needs to be added to the architecture {{Tech-Concepts}}.
 
-# Examples of Parts of Specifications That Are Detrimental for Security
+## RFC9781
 
-It is the author's personal opinion that the following parts of designs are detrimental for the RATS ecosystem:
+As argued above for RFC9334, security considerations in {{-rfc9781}} are essentially insufficient.
 
-* Multi-Verifiers {{I-D.deshpande-rats-multi-verifier}}: the design of multi-verifiers not only increases security risks
+## RFC9711
+
+### Inaccurate opinion
+
+{{Section 7.4 of -rfc9711}} has:
+
+{:quote}
+>  For attestation, the keys are associated with specific devices and are configured by device manufacturers.
+
+The quoted text is inaccurate and just an opinion of the editors.
+It should preferably be removed from the RFC.
+For example, in SGX, the keys are not configured by the manufacturer alone.
+The platform owner can provide a random value called OWNER_EPOCH.
+
+For technical details and proposed text, see {{Clarifications-EAT}}.
+
+### Inaccurate Privacy Considerations
+
+{{Section 8.4 of -rfc9711}} has:
+
+{:quote}
+>
+The nonce claim is based on a value usually derived remotely (outside of the entity).
+
+Attester-generated nonce does not provide any replay protection since the Attester can pre-generate an Evidence
+that might not reflect the actual system state, but a past one.
+
+See the attack trace for Attester-generated nonce at {{Sec-Cons-RATS}}.
+
+For replay protection, nonce should *always* be derived remotely (for example, by the Relying Party).
+
+# Examples of Parts of Specifications That are Detrimental for Security
+
+The author believes that the following parts of designs are detrimental for the RATS ecosystem:
+
+## Multi-Verifiers
+The design of multi-verifiers {{I-D.deshpande-rats-multi-verifier}} not only increases security risks
 in terms of increasing the Trusted Computing Base (TCB), but also increases the privacy risks, as potentially sensitive
 information is sent to multiple verifiers.
 
-* Aggregator-based design {{I-D.ietf-rats-coserv}}: Aggregator is an explicit trust anchor and the addition of new
-trust anchor needs to have a strong justification.
+Besides, the rationale presented by the authors -- appraisal policy being the intellectual property of the vendors -- breaks the
+open-source nature of RATS ecosystem. This requires blindly trusting the vendors and increases the attack surface.
+
+## Aggregator-based design
+Aggregator in {{I-D.ietf-rats-coserv}} is an explicit trust anchor and the addition of new trust anchor needs to have a strong justification.
+Having a malicious Aggregator in the design trivially breaks all the guarantees.
+It should be clarified how trust is established between Aggregator and Verifier.
 
 
 # Security Considerations
