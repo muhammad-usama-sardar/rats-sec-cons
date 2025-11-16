@@ -4,9 +4,9 @@
 
 RATS Working Group                                          M. U. Sardar
 Internet-Draft                                                TU Dresden
-Updates: 9334 (if approved)                              6 November 2025
+Updates: 9334 (if approved)                             16 November 2025
 Intended status: Informational                                          
-Expires: 10 May 2026
+Expires: 20 May 2026
 
 
              Guidelines for Security Considerations of RATS
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 May 2026.
+   This Internet-Draft will expire on 20 May 2026.
 
 Copyright Notice
 
@@ -84,8 +84,14 @@ Table of Contents
      7.1.  RFC9334
        7.1.1.  Unprotected Evidence
        7.1.2.  Missing Roles and Conceptual Messages
-   8.  Examples of Parts of Specifications That Are Detrimental for
+     7.2.  RFC9781
+     7.3.  RFC9711
+       7.3.1.  Inaccurate opinion
+       7.3.2.  Inaccurate Privacy Considerations
+   8.  Examples of Parts of Specifications That are Detrimental for
            Security
+     8.1.  Multi-Verifiers
+     8.2.  Aggregator-based design
    9.  Security Considerations
    10. IANA Considerations
    11. References
@@ -159,7 +165,11 @@ Table of Contents
 
 5.1.  Replay attacks
 
+   See [Meeting-124-RATS-Slides].
+
 5.2.  Relay attacks
+
+   See [Meeting-124-RATS-Slides].
 
 5.3.  Diversion attacks
 
@@ -172,7 +182,8 @@ Table of Contents
 
 6.  Potential Mitigations
 
-   This section describes the countermeasures and their evaluation.
+   This section will describe the countermeasures and their evaluation.
+   See [Meeting-124-RATS-Slides].
 
 7.  Examples of Specifications That Could Be Improved
 
@@ -206,21 +217,68 @@ Table of Contents
    *  Attestation Challenge as conceptual message needs to be added to
       the architecture [Tech-Concepts].
 
-8.  Examples of Parts of Specifications That Are Detrimental for
+7.2.  RFC9781
+
+   As argued above for RFC9334, security considerations in [RFC9781] are
+   essentially insufficient.
+
+7.3.  RFC9711
+
+7.3.1.  Inaccurate opinion
+
+   Section 7.4 of [RFC9711] has:
+
+   |  For attestation, the keys are associated with specific devices and
+   |  are configured by device manufacturers.
+
+   The quoted text is inaccurate and just an opinion of the editors.  It
+   should preferably be removed from the RFC.  For example, in SGX, the
+   keys are not configured by the manufacturer alone.  The platform
+   owner can provide a random value called OWNER_EPOCH.
+
+   For technical details and proposed text, see [Clarifications-EAT].
+
+7.3.2.  Inaccurate Privacy Considerations
+
+   Section 8.4 of [RFC9711] has:
+
+   |  The nonce claim is based on a value usually derived remotely
+   |  (outside of the entity).
+
+   Attester-generated nonce does not provide any replay protection since
+   the Attester can pre-generate an Evidence that might not reflect the
+   actual system state, but a past one.
+
+   See the attack trace for Attester-generated nonce at [Sec-Cons-RATS].
+
+   For replay protection, nonce should _always_ be derived remotely (for
+   example, by the Relying Party).
+
+8.  Examples of Parts of Specifications That are Detrimental for
     Security
 
-   It is the author's personal opinion that the following parts of
-   designs are detrimental for the RATS ecosystem:
+   The author believes that the following parts of designs are
+   detrimental for the RATS ecosystem:
 
-   *  Multi-Verifiers [I-D.deshpande-rats-multi-verifier]: the design of
-      multi-verifiers not only increases security risks in terms of
-      increasing the Trusted Computing Base (TCB), but also increases
-      the privacy risks, as potentially sensitive information is sent to
-      multiple verifiers.
+8.1.  Multi-Verifiers
 
-   *  Aggregator-based design [I-D.ietf-rats-coserv]: Aggregator is an
-      explicit trust anchor and the addition of new trust anchor needs
-      to have a strong justification.
+   The design of multi-verifiers [I-D.deshpande-rats-multi-verifier] not
+   only increases security risks in terms of increasing the Trusted
+   Computing Base (TCB), but also increases the privacy risks, as
+   potentially sensitive information is sent to multiple verifiers.
+
+   Besides, the rationale presented by the authors -- appraisal policy
+   being the intellectual property of the vendors -- breaks the open-
+   source nature of RATS ecosystem.  This requires blindly trusting the
+   vendors and increases the attack surface.
+
+8.2.  Aggregator-based design
+
+   Aggregator in [I-D.ietf-rats-coserv] is an explicit trust anchor and
+   the addition of new trust anchor needs to have a strong
+   justification.  Having a malicious Aggregator in the design trivially
+   breaks all the guarantees.  It should be clarified how trust is
+   established between Aggregator and Verifier.
 
 9.  Security Considerations
 
@@ -248,7 +306,23 @@ Table of Contents
               Architecture", RFC 9334, DOI 10.17487/RFC9334, January
               2023, <https://www.rfc-editor.org/rfc/rfc9334>.
 
+   [RFC9711]  Lundblade, L., Mandyam, G., O'Donoghue, J., and C.
+              Wallace, "The Entity Attestation Token (EAT)", RFC 9711,
+              DOI 10.17487/RFC9711, April 2025,
+              <https://www.rfc-editor.org/rfc/rfc9711>.
+
+   [RFC9781]  Birkholz, H., O'Donoghue, J., Cam-Winget, N., and C.
+              Bormann, "A Concise Binary Object Representation (CBOR)
+              Tag for Unprotected CBOR Web Token Claims Sets (UCCS)",
+              RFC 9781, DOI 10.17487/RFC9781, May 2025,
+              <https://www.rfc-editor.org/rfc/rfc9781>.
+
 11.2.  Informative References
+
+   [Clarifications-EAT]
+              Sardar, M. U., "Clarifications in draft-ietf-rats-eat",
+              April 2025, <https://mailarchive.ietf.org/arch/msg/
+              rats/4V2zZHhk5IuxwcUMNWpPBpnzpaM/>.
 
    [Dolev-Yao]
               Dolev, D. and A. Yao, "On the security of public key
@@ -257,10 +331,8 @@ Table of Contents
    [Foreshadow]
               Jo Van Bulck, Marina Minkin, Ofir Weisse, Daniel Genkin,
               Baris Kasikci, Frank Piessens, Mark Silberstein, Thomas F
-              Wenisch, Yuval Yarom, and Raoul Strackx, "Perspicuity of
-              Attestation Mechanisms in Confidential Computing:
-              Technical Concepts", October 2025,
-              <https://foreshadowattack.eu/>.
+              Wenisch, Yuval Yarom, and Raoul Strackx, "Foreshadow",
+              October 2025, <https://foreshadowattack.eu/>.
 
    [GDPR]     European Commission, "Regulation (EU) 2016/679 of the
               European Parliament and of the Council of 27 April 2016 on
@@ -306,9 +378,22 @@ Table of Contents
               <https://datatracker.ietf.org/meeting/122/materials/
               slides-122-tls-identity-crisis-00>.
 
+   [Meeting-124-RATS-Slides]
+              Sardar, M. U., "Guidelines for Security Considerations of
+              RATS", November 2025,
+              <https://datatracker.ietf.org/meeting/124/materials/
+              slides-124-rats-sessb-guideline-for-security-
+              consideration-of-rats-00>.
+
    [RFC8446]  Rescorla, E., "The Transport Layer Security (TLS) Protocol
               Version 1.3", RFC 8446, DOI 10.17487/RFC8446, August 2018,
               <https://www.rfc-editor.org/rfc/rfc8446>.
+
+   [Sec-Cons-RATS]
+              Sardar, M. U., "Security considerations of remote
+              attestation (RFC9334)", November 2024,
+              <https://mailarchive.ietf.org/arch/msg/rats/
+              jcAv9FKbYSIVtUNQ8ggEHL8lrmM/>.
 
    [Tech-Concepts]
               Sardar, M. U., "Perspicuity of Attestation Mechanisms in
