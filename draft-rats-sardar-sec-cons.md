@@ -33,6 +33,7 @@ normative:
   RFC9334: rfc9334
   RFC9781: rfc9781
   RFC9711: rfc9711
+  RFC9783: rfc9783
 
 informative:
   RFC8446: rfc8446
@@ -206,6 +207,14 @@ using dedicated keys chaining back to the trust anchor for remote attestation.
 ## RFC9781
 
 As argued above for RFC9334, security considerations in {{-rfc9781}} are essentially insufficient.
+
+## RFC9783
+{{-rfc9783}} uses:
+
+* 3x epoch handle (with reference to {{Section 10.2 of -rfc9334}} and
+{{Section 10.3 of -rfc9334}}) whereas RFC9334 never uses epoch handle at all!
+* 1x epoch ID with no reference and no explanation of how it is
+    different from epoch handle
 
 ## RFC9711
 
