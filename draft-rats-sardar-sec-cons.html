@@ -1218,13 +1218,16 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-rfc9781" class="internal xref">RFC9781</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
-                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-rfc9711" class="internal xref">RFC9711</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3.2.1">
-                    <p id="section-toc.1-1.7.2.3.2.1.1"><a href="#section-7.3.1" class="auto internal xref">7.3.1</a>.  <a href="#name-inaccurate-opinion" class="internal xref">Inaccurate opinion</a></p>
+                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-rfc9783" class="internal xref">RFC9783</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3.2.2">
-                    <p id="section-toc.1-1.7.2.3.2.2.1"><a href="#section-7.3.2" class="auto internal xref">7.3.2</a>.  <a href="#name-inaccurate-privacy-consider" class="internal xref">Inaccurate Privacy Considerations</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.4">
+                <p id="section-toc.1-1.7.2.4.1"><a href="#section-7.4" class="auto internal xref">7.4</a>.  <a href="#name-rfc9711" class="internal xref">RFC9711</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.4.2.1">
+                    <p id="section-toc.1-1.7.2.4.2.1.1"><a href="#section-7.4.1" class="auto internal xref">7.4.1</a>.  <a href="#name-inaccurate-opinion" class="internal xref">Inaccurate opinion</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.4.2.2">
+                    <p id="section-toc.1-1.7.2.4.2.2.1"><a href="#section-7.4.2" class="auto internal xref">7.4.2</a>.  <a href="#name-inaccurate-privacy-consider" class="internal xref">Inaccurate Privacy Considerations</a></p>
 </li>
                 </ul>
 </li>
@@ -1471,40 +1474,58 @@ using dedicated keys chaining back to the trust anchor for remote attestation.<a
 <p id="section-7.2-1">As argued above for RFC9334, security considerations in <span>[<a href="#RFC9781" class="cite xref">RFC9781</a>]</span> are essentially insufficient.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="rfc9711">
+<div id="rfc9783">
 <section id="section-7.3">
+        <h3 id="name-rfc9783">
+<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-rfc9783" class="section-name selfRef">RFC9783</a>
+        </h3>
+<p id="section-7.3-1"><span>[<a href="#RFC9783" class="cite xref">RFC9783</a>]</span> uses:<a href="#section-7.3-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-7.3-2.1">
+            <p id="section-7.3-2.1.1">3x epoch handle (with reference to <span><a href="https://rfc-editor.org/rfc/rfc9334#section-10.2" class="relref">Section 10.2</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> and
+<span><a href="https://rfc-editor.org/rfc/rfc9334#section-10.3" class="relref">Section 10.3</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>) whereas RFC9334 never uses epoch handle at all!<a href="#section-7.3-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-7.3-2.2">
+            <p id="section-7.3-2.2.1">1x epoch ID with no reference and no explanation of how it is
+  different from epoch handle<a href="#section-7.3-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="rfc9711">
+<section id="section-7.4">
         <h3 id="name-rfc9711">
-<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-rfc9711" class="section-name selfRef">RFC9711</a>
+<a href="#section-7.4" class="section-number selfRef">7.4. </a><a href="#name-rfc9711" class="section-name selfRef">RFC9711</a>
         </h3>
 <div id="inaccurate-opinion">
-<section id="section-7.3.1">
+<section id="section-7.4.1">
           <h4 id="name-inaccurate-opinion">
-<a href="#section-7.3.1" class="section-number selfRef">7.3.1. </a><a href="#name-inaccurate-opinion" class="section-name selfRef">Inaccurate opinion</a>
+<a href="#section-7.4.1" class="section-number selfRef">7.4.1. </a><a href="#name-inaccurate-opinion" class="section-name selfRef">Inaccurate opinion</a>
           </h4>
-<p id="section-7.3.1-1"><span><a href="https://rfc-editor.org/rfc/rfc9711#section-7.4" class="relref">Section 7.4</a> of [<a href="#RFC9711" class="cite xref">RFC9711</a>]</span> has:<a href="#section-7.3.1-1" class="pilcrow">¶</a></p>
-<blockquote id="section-7.3.1-2">
-            <p id="section-7.3.1-2.1">For attestation, the keys are associated with specific devices and are configured by device manufacturers.<a href="#section-7.3.1-2.1" class="pilcrow">¶</a></p>
+<p id="section-7.4.1-1"><span><a href="https://rfc-editor.org/rfc/rfc9711#section-7.4" class="relref">Section 7.4</a> of [<a href="#RFC9711" class="cite xref">RFC9711</a>]</span> has:<a href="#section-7.4.1-1" class="pilcrow">¶</a></p>
+<blockquote id="section-7.4.1-2">
+            <p id="section-7.4.1-2.1">For attestation, the keys are associated with specific devices and are configured by device manufacturers.<a href="#section-7.4.1-2.1" class="pilcrow">¶</a></p>
 </blockquote>
-<p id="section-7.3.1-3">The quoted text is inaccurate and just an opinion of the editors.
+<p id="section-7.4.1-3">The quoted text is inaccurate and just an opinion of the editors.
 It should preferably be removed from the RFC.
 For example, in SGX, the keys are not configured by the manufacturer alone.
-The platform owner can provide a random value called OWNER_EPOCH.<a href="#section-7.3.1-3" class="pilcrow">¶</a></p>
-<p id="section-7.3.1-4">For technical details and proposed text, see <span>[<a href="#Clarifications-EAT" class="cite xref">Clarifications-EAT</a>]</span>.<a href="#section-7.3.1-4" class="pilcrow">¶</a></p>
+The platform owner can provide a random value called OWNER_EPOCH.<a href="#section-7.4.1-3" class="pilcrow">¶</a></p>
+<p id="section-7.4.1-4">For technical details and proposed text, see <span>[<a href="#Clarifications-EAT" class="cite xref">Clarifications-EAT</a>]</span>.<a href="#section-7.4.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="inaccurate-privacy-considerations">
-<section id="section-7.3.2">
+<section id="section-7.4.2">
           <h4 id="name-inaccurate-privacy-consider">
-<a href="#section-7.3.2" class="section-number selfRef">7.3.2. </a><a href="#name-inaccurate-privacy-consider" class="section-name selfRef">Inaccurate Privacy Considerations</a>
+<a href="#section-7.4.2" class="section-number selfRef">7.4.2. </a><a href="#name-inaccurate-privacy-consider" class="section-name selfRef">Inaccurate Privacy Considerations</a>
           </h4>
-<p id="section-7.3.2-1"><span><a href="https://rfc-editor.org/rfc/rfc9711#section-8.4" class="relref">Section 8.4</a> of [<a href="#RFC9711" class="cite xref">RFC9711</a>]</span> has:<a href="#section-7.3.2-1" class="pilcrow">¶</a></p>
-<blockquote id="section-7.3.2-2">
-            <p id="section-7.3.2-2.1">The nonce claim is based on a value usually derived remotely (outside of the entity).<a href="#section-7.3.2-2.1" class="pilcrow">¶</a></p>
+<p id="section-7.4.2-1"><span><a href="https://rfc-editor.org/rfc/rfc9711#section-8.4" class="relref">Section 8.4</a> of [<a href="#RFC9711" class="cite xref">RFC9711</a>]</span> has:<a href="#section-7.4.2-1" class="pilcrow">¶</a></p>
+<blockquote id="section-7.4.2-2">
+            <p id="section-7.4.2-2.1">The nonce claim is based on a value usually derived remotely (outside of the entity).<a href="#section-7.4.2-2.1" class="pilcrow">¶</a></p>
 </blockquote>
-<p id="section-7.3.2-3">Attester-generated nonce does not provide any replay protection since the Attester can pre-generate an Evidence
-that might not reflect the actual system state, but a past one.<a href="#section-7.3.2-3" class="pilcrow">¶</a></p>
-<p id="section-7.3.2-4">See the attack trace for Attester-generated nonce at <span>[<a href="#Sec-Cons-RATS" class="cite xref">Sec-Cons-RATS</a>]</span>.<a href="#section-7.3.2-4" class="pilcrow">¶</a></p>
-<p id="section-7.3.2-5">For replay protection, nonce should <em>always</em> be derived remotely (for example, by the Relying Party).<a href="#section-7.3.2-5" class="pilcrow">¶</a></p>
+<p id="section-7.4.2-3">Attester-generated nonce does not provide any replay protection since the Attester can pre-generate an Evidence
+that might not reflect the actual system state, but a past one.<a href="#section-7.4.2-3" class="pilcrow">¶</a></p>
+<p id="section-7.4.2-4">See the attack trace for Attester-generated nonce at <span>[<a href="#Sec-Cons-RATS" class="cite xref">Sec-Cons-RATS</a>]</span>.<a href="#section-7.4.2-4" class="pilcrow">¶</a></p>
+<p id="section-7.4.2-5">For replay protection, nonce should <em>always</em> be derived remotely (for example, by the Relying Party).<a href="#section-7.4.2-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1585,8 +1606,12 @@ It should be clarified how trust is established between Aggregator and Verifier 
 <span class="refAuthor">Lundblade, L.</span>, <span class="refAuthor">Mandyam, G.</span>, <span class="refAuthor">O'Donoghue, J.</span>, and <span class="refAuthor">C. Wallace</span>, <span class="refTitle">"The Entity Attestation Token (EAT)"</span>, <span class="seriesInfo">RFC 9711</span>, <span class="seriesInfo">DOI 10.17487/RFC9711</span>, <time datetime="2025-04" class="refDate">April 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9711">https://www.rfc-editor.org/rfc/rfc9711</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9781">[RFC9781]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">O'Donoghue, J.</span>, <span class="refAuthor">Cam-Winget, N.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"A Concise Binary Object Representation (CBOR) Tag for Unprotected CBOR Web Token Claims Sets (UCCS)"</span>, <span class="seriesInfo">RFC 9781</span>, <span class="seriesInfo">DOI 10.17487/RFC9781</span>, <time datetime="2025-05" class="refDate">May 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9781">https://www.rfc-editor.org/rfc/rfc9781</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9783">[RFC9783]</dt>
+      <dd>
+<span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Frost, S.</span>, <span class="refAuthor">Brossard, M.</span>, <span class="refAuthor">Shaw, A.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"Arm's Platform Security Architecture (PSA) Attestation Token"</span>, <span class="seriesInfo">RFC 9783</span>, <span class="seriesInfo">DOI 10.17487/RFC9783</span>, <time datetime="2025-06" class="refDate">June 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9783">https://www.rfc-editor.org/rfc/rfc9783</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>

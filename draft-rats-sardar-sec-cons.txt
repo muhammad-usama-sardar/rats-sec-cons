@@ -85,9 +85,10 @@ Table of Contents
        7.1.1.  Unprotected Evidence
        7.1.2.  Missing Roles and Conceptual Messages
      7.2.  RFC9781
-     7.3.  RFC9711
-       7.3.1.  Inaccurate opinion
-       7.3.2.  Inaccurate Privacy Considerations
+     7.3.  RFC9783
+     7.4.  RFC9711
+       7.4.1.  Inaccurate opinion
+       7.4.2.  Inaccurate Privacy Considerations
    8.  Examples of Parts of Specifications That are Detrimental for
            Security
      8.1.  Multi-Verifiers
@@ -222,9 +223,20 @@ Table of Contents
    As argued above for RFC9334, security considerations in [RFC9781] are
    essentially insufficient.
 
-7.3.  RFC9711
+7.3.  RFC9783
 
-7.3.1.  Inaccurate opinion
+   [RFC9783] uses:
+
+   *  3x epoch handle (with reference to Section 10.2 of [RFC9334] and
+      Section 10.3 of [RFC9334]) whereas RFC9334 never uses epoch handle
+      at all!
+
+   *  1x epoch ID with no reference and no explanation of how it is
+      different from epoch handle
+
+7.4.  RFC9711
+
+7.4.1.  Inaccurate opinion
 
    Section 7.4 of [RFC9711] has:
 
@@ -238,7 +250,7 @@ Table of Contents
 
    For technical details and proposed text, see [Clarifications-EAT].
 
-7.3.2.  Inaccurate Privacy Considerations
+7.4.2.  Inaccurate Privacy Considerations
 
    Section 8.4 of [RFC9711] has:
 
@@ -317,6 +329,11 @@ Table of Contents
               Tag for Unprotected CBOR Web Token Claims Sets (UCCS)",
               RFC 9781, DOI 10.17487/RFC9781, May 2025,
               <https://www.rfc-editor.org/rfc/rfc9781>.
+
+   [RFC9783]  Tschofenig, H., Frost, S., Brossard, M., Shaw, A., and T.
+              Fossati, "Arm's Platform Security Architecture (PSA)
+              Attestation Token", RFC 9783, DOI 10.17487/RFC9783, June
+              2025, <https://www.rfc-editor.org/rfc/rfc9783>.
 
 11.2.  Informative References
 
