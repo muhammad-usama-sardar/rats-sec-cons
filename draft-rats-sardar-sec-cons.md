@@ -253,7 +253,7 @@ open-source nature of RATS ecosystem. This requires blindly trusting the vendors
 ## Aggregator-based design
 Aggregator in {{I-D.ietf-rats-coserv}} is an explicit trust anchor and the addition of new trust anchor needs to have a strong justification.
 Having a malicious Aggregator in the design trivially breaks all the guarantees.
-It should be clarified how trust is established between Aggregator and Verifier.
+It should be clarified how trust is established between Aggregator and Verifier in the context of Confidential Computing threat model.
 
 
 # Security Considerations
