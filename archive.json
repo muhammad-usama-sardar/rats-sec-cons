@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-16T01:40:08.816039+00:00",
+  "timestamp": "2025-11-18T01:26:36.833701+00:00",
   "repo": "muhammad-usama-sardar/rats-sec-cons",
   "labels": [
     {
@@ -197,6 +197,22 @@
       "body": "Background: discussion at IETF 124: session 1\n[ML link](https://mailarchive.ietf.org/arch/msg/rats/tBlKL-SXLrfoGpnlK2S6LgOS5ME/)\n\n> The IETF ROLL WG deals with Routing Over Low-power Lossy networks.\n> RFC6550 (\"RPL\", pronounced ripple, like the Grateful Dead song) did not\n> adequately deal with the security implications of different choices in RPL.\n> Promises to the IESG were made, and some of the promised work occured in RFC7416.\n> \n> RPL has applicability to home, (multi-tenant)buildings, industrial and\n> automatic metering (AMI).  Each have different network security\n> characteristics, as well many different parameters for RPL.\n> As each one would have to answer the same set of questions, we wrote a\n> template, which can you see at:\n>   https://datatracker.ietf.org/doc/draft-ietf-roll-applicability-template/\n> \n> The results were RFC8036, RFC7733.\n> We expected another document for industrial uses, but as that grew, it became\n> the 6tisch WG.  and RFC9030 and friends resulted.\n> (We didn't expect home/building to wind up in the same document either)\n> {Zero-touch onboarding also came out as 6tisch was formed}\n> \n> You'll see that the template was not published.\n> (You'll see it got a SECDIR review, which was the result of mis-communication!)",
       "createdAt": "2025-11-08T02:23:34Z",
       "updatedAt": "2025-11-08T02:23:34Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 8,
+      "id": "I_kwDOQF8zd87YjcpZ",
+      "title": "Contractual, reputational etc. for Aggregator",
+      "url": "https://github.com/muhammad-usama-sardar/rats-sec-cons/issues/8",
+      "state": "OPEN",
+      "author": "muhammad-usama-sardar",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Thread [here](https://mailarchive.ietf.org/arch/msg/rats/tWzvHz7rUChe3GpZ8WrOk_95b-A/)",
+      "createdAt": "2025-11-17T12:39:24Z",
+      "updatedAt": "2025-11-17T12:39:24Z",
       "closedAt": null,
       "comments": []
     }
