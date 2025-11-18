@@ -4,9 +4,9 @@
 
 RATS Working Group                                          M. U. Sardar
 Internet-Draft                                                TU Dresden
-Updates: 9334 (if approved)                             17 November 2025
+Updates: 9334 (if approved)                             18 November 2025
 Intended status: Informational                                          
-Expires: 21 May 2026
+Expires: 22 May 2026
 
 
              Guidelines for Security Considerations of RATS
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 May 2026.
+   This Internet-Draft will expire on 22 May 2026.
 
 Copyright Notice
 
@@ -83,7 +83,8 @@ Table of Contents
    7.  Examples of Specifications That Could Be Improved
      7.1.  RFC9334
        7.1.1.  Unprotected Evidence
-       7.1.2.  Missing Roles and Conceptual Messages
+       7.1.2.  Missing definitions
+       7.1.3.  Missing Roles and Conceptual Messages
      7.2.  RFC9781
      7.3.  RFC9783
      7.4.  RFC9711
@@ -209,7 +210,12 @@ Table of Contents
    remote attestation, Evidence MUST be protected using dedicated keys
    chaining back to the trust anchor for remote attestation.
 
-7.1.2.  Missing Roles and Conceptual Messages
+7.1.2.  Missing definitions
+
+   [RFC9334] uses the term Conceptual Messages without proper
+   definition.
+
+7.1.3.  Missing Roles and Conceptual Messages
 
    *  Identity Supplier and its corresponding conceptual message
       Identity are missing and need to be added to the architecture
@@ -292,6 +298,15 @@ Table of Contents
    breaks all the guarantees.  It should be clarified how trust is
    established between Aggregator and Verifier in the context of
    Confidential Computing threat model.
+
+   The fact that Aggregator has collective information of Reference
+   Values Provider and Endorsers makes it a special target of attack,
+   and thus a single point of failure.  It increases security risks
+   because Aggregator can be compromised independent of the Reference
+   Values Provider and Endorsers.  That is, even if Reference Values
+   Provider and Endorsers are secure, the compromise of Aggregator
+   breaks the security of the system.  Moreover, if Aggregator is not
+   running inside TEE, it is trivial to compromise the secrets.
 
 9.  Security Considerations
 
