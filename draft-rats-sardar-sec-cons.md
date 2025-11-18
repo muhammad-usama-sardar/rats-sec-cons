@@ -200,6 +200,9 @@ Hence, remote attestation effectively provides no protection in this case and th
 to those of the conveyance protocol only. In order to benefit from remote attestation, Evidence MUST be protected
 using dedicated keys chaining back to the trust anchor for remote attestation.
 
+### Missing definitions
+{{-rfc9334}} uses the term Conceptual Messages without proper definition.
+
 ### Missing Roles and Conceptual Messages
 * Identity Supplier and its corresponding conceptual message Identity are missing and need to be added to the architecture {{Tech-Concepts}}.
 * Attestation Challenge as conceptual message needs to be added to the architecture {{Tech-Concepts}}.
@@ -263,6 +266,13 @@ open-source nature of RATS ecosystem. This requires blindly trusting the vendors
 Aggregator in {{I-D.ietf-rats-coserv}} is an explicit trust anchor and the addition of new trust anchor needs to have a strong justification.
 Having a malicious Aggregator in the design trivially breaks all the guarantees.
 It should be clarified how trust is established between Aggregator and Verifier in the context of Confidential Computing threat model.
+
+The fact that Aggregator has collective information of Reference Values Provider and Endorsers
+makes it a special target of attack, and thus a single point of failure. It increases security
+risks because Aggregator can be compromised independent of the Reference Values Provider and
+Endorsers. That is, even if Reference Values Provider and Endorsers are secure, the compromise
+of Aggregator breaks the security of the system.
+Moreover, if Aggregator is not running inside TEE, it is trivial to compromise the secrets.
 
 
 # Security Considerations
