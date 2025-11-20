@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-18T01:26:36.833701+00:00",
+  "timestamp": "2025-11-20T01:25:12.515691+00:00",
   "repo": "muhammad-usama-sardar/rats-sec-cons",
   "labels": [
     {
@@ -213,6 +213,22 @@
       "body": "Thread [here](https://mailarchive.ietf.org/arch/msg/rats/tWzvHz7rUChe3GpZ8WrOk_95b-A/)",
       "createdAt": "2025-11-17T12:39:24Z",
       "updatedAt": "2025-11-17T12:39:24Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 9,
+      "id": "I_kwDOQF8zd87ZMr_u",
+      "title": "Laurence feedback on -00?",
+      "url": "https://github.com/muhammad-usama-sardar/rats-sec-cons/issues/9",
+      "state": "OPEN",
+      "author": "muhammad-usama-sardar",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "[ML link](https://mailarchive.ietf.org/arch/msg/rats/B3KnTmh-PKvUdeMo1smLX39ar5U/)\n\n> I did read draft-rats-sardar-sec-cons, but haven\u2019t kept up on this thread. I think your draft will fly much better if it has a lot more real and detailed content that explains specific problems in RATS in addition to the references to external security publications. Also, I think the one example that is given in detail about signed evidence is missing the point that attestation keys are used with the TLS protocol.\n> \n> From our conversations in Montreal, the thing that seems interesting to me, and what I don\u2019t know much about, is your formal proofs work. I can see how HPKE is a very robust protocol compared to COSE because formal methods were applied to it. Like I said, I don\u2019t know that much about formal methods, but I wonder if it could really make a big difference for attestation.",
+      "createdAt": "2025-11-19T18:39:47Z",
+      "updatedAt": "2025-11-19T18:39:47Z",
       "closedAt": null,
       "comments": []
     }
