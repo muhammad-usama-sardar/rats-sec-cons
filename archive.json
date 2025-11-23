@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-20T01:25:12.515691+00:00",
+  "timestamp": "2025-11-23T01:46:29.079936+00:00",
   "repo": "muhammad-usama-sardar/rats-sec-cons",
   "labels": [
     {
@@ -229,6 +229,22 @@
       "body": "[ML link](https://mailarchive.ietf.org/arch/msg/rats/B3KnTmh-PKvUdeMo1smLX39ar5U/)\n\n> I did read draft-rats-sardar-sec-cons, but haven\u2019t kept up on this thread. I think your draft will fly much better if it has a lot more real and detailed content that explains specific problems in RATS in addition to the references to external security publications. Also, I think the one example that is given in detail about signed evidence is missing the point that attestation keys are used with the TLS protocol.\n> \n> From our conversations in Montreal, the thing that seems interesting to me, and what I don\u2019t know much about, is your formal proofs work. I can see how HPKE is a very robust protocol compared to COSE because formal methods were applied to it. Like I said, I don\u2019t know that much about formal methods, but I wonder if it could really make a big difference for attestation.",
       "createdAt": "2025-11-19T18:39:47Z",
       "updatedAt": "2025-11-19T18:39:47Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 10,
+      "id": "I_kwDOQF8zd87ZdYAY",
+      "title": "MCR comments on editor's draft",
+      "url": "https://github.com/muhammad-usama-sardar/rats-sec-cons/issues/10",
+      "state": "OPEN",
+      "author": "muhammad-usama-sardar",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "[ML link](https://mailarchive.ietf.org/arch/msg/rats/roWj9lPqIbDrC1z-eWw8f2KGxqU/) \n[Reviewed version](https://github.com/muhammad-usama-sardar/rats-sec-cons/commit/f02440f77d5ec64a271b42a075452549853af4d8)\n\n\n\n> I'd say that it's a thing.  A document can certainly try.\n> \n> Often it has been done because Security Considerations were not always\n> required.  (Routing area)\n> Or they did not cover situations that did not exist before.\n> It could be part of some kind of document that explained some new\n> requirement that was unknown before.  And that requires new considerations.\n> \n> Having said that, Section 3 and 4 of sardar-sec-cons is okay advice, but\n> really misses many important points.\n> \n\n- [ ] Update of published RFCs\n> I don't agree with comments about section 7.4.\n> Just because we allow conveyance in other protocols does not mean that we\n> require it.    The contents of section 6 are opinion, and do not contribute\n> to the process.",
+      "createdAt": "2025-11-20T17:38:40Z",
+      "updatedAt": "2025-11-20T18:19:04Z",
       "closedAt": null,
       "comments": []
     }
