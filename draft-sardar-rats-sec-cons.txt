@@ -4,13 +4,13 @@
 
 RATS Working Group                                          M. U. Sardar
 Internet-Draft                                                TU Dresden
-Updates: 9334 (if approved)                             18 November 2025
+Updates: 9334 (if approved)                             24 November 2025
 Intended status: Informational                                          
-Expires: 22 May 2026
+Expires: 28 May 2026
 
 
              Guidelines for Security Considerations of RATS
-                   draft-rats-sardar-sec-cons-latest
+                   draft-sardar-rats-sec-cons-latest
 
 Abstract
 
@@ -25,9 +25,9 @@ About This Document
    This note is to be removed before publishing as an RFC.
 
    The latest revision of this draft can be found at https://muhammad-
-   usama-sardar.github.io/rats-sec-cons/draft-rats-sardar-sec-cons.html.
+   usama-sardar.github.io/rats-sec-cons/draft-sardar-rats-sec-cons.html.
    Status information for this document may be found at
-   https://datatracker.ietf.org/doc/draft-rats-sardar-sec-cons/.
+   https://datatracker.ietf.org/doc/draft-sardar-rats-sec-cons/.
 
    Source for this draft and an issue tracker can be found at
    https://github.com/muhammad-usama-sardar/rats-sec-cons.
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 May 2026.
+   This Internet-Draft will expire on 28 May 2026.
 
 Copyright Notice
 
@@ -109,6 +109,11 @@ Table of Contents
    features which necessitate a separate document.  One specific example
    of such feature is architectural complexity.
 
+   The draft covers three topics: * Corrections in published RATS RFCs *
+   Security concerns in current adopted/proposed for adoption drafts *
+   General security guidelines or baseline or template that other drafts
+   can simply point to (that may or may not include threat modeling)
+
 2.  Conventions and Definitions
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
@@ -130,14 +135,20 @@ Table of Contents
    *  Aliveness
 
    Recentness can be added to each of these levels of authentication.
+   Details will be added in future versions.
 
 4.  Threat Modeling
 
-   This section describes "What can go wrong?"
+   This section describes "What can go wrong?"  TODO: Details will be
+   added in future versions.
 
 4.1.  System Model
 
+   TODO: Details will be added in future versions.
+
 4.2.  Actors
+
+   TODO: Details will be added in future versions.
 
 4.2.1.  Legal perspective
 
@@ -151,14 +162,22 @@ Table of Contents
    *  (Data) Processor (as defined in Article 4 (8) of GDPR [GDPR])
       performs data processing on behalf of the data controller.
 
+   TODO: Details will be added in future versions.
+
 4.2.2.  Technical perspective
 
    *  Infrastucture Provider is a role which refers to the Processor in
       GDPR.  An example of this role is a cloud service provider (CSP).
 
+   TODO: Details will be added in future versions.
+
 4.3.  Threat Model
 
+   TODO: Details will be added in future versions.
+
 4.4.  Typical Security Goals
+
+   TODO: Details will be added in future versions.
 
 5.  Attacks
 
@@ -212,8 +231,8 @@ Table of Contents
 
 7.1.2.  Missing definitions
 
-   [RFC9334] uses the term Conceptual Messages without proper
-   definition.
+   [RFC9334] uses the term Conceptual Messages in capitalization without
+   proper definition.
 
 7.1.3.  Missing Roles and Conceptual Messages
 
