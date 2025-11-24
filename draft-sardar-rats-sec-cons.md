@@ -3,7 +3,7 @@ title: "Guidelines for Security Considerations of RATS"
 abbrev: "RATS Security Considerations"
 category: info
 
-docname: draft-rats-sardar-sec-cons-latest
+docname: draft-sardar-rats-sec-cons-latest
 updates: 9334
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
@@ -21,7 +21,7 @@ venue:
 #  mail: WG@example.com
 #  arch: https://example.com/WG
   github: "muhammad-usama-sardar/rats-sec-cons"
-  latest: "https://muhammad-usama-sardar.github.io/rats-sec-cons/draft-rats-sardar-sec-cons.html"
+  latest: "https://muhammad-usama-sardar.github.io/rats-sec-cons/draft-sardar-rats-sec-cons.html"
 
 author:
  -
@@ -127,6 +127,12 @@ While {{I-D.irtf-cfrg-cryptography-specification}} provides excellent guidelines
 has several distinguishing features which necessitate a separate document.
 One specific example of such feature is architectural complexity.
 
+The draft covers three topics:
+* Corrections in published RATS RFCs
+* Security concerns in current adopted/proposed for adoption drafts
+* General security guidelines or baseline or template that other drafts can simply point to (that may or may not include threat modeling)
+
+
 
 # Conventions and Definitions
 
@@ -141,13 +147,16 @@ state the intended level of authentication (in decreasing order):
 * Aliveness
 
 Recentness can be added to each of these levels of authentication.
+Details will be added in future versions.
 
 # Threat Modeling
-This section describes "What can go wrong?"
+This section describes "What can go wrong?" TODO: Details will be added in future versions.
 
 ## System Model
+TODO: Details will be added in future versions.
 
 ## Actors
+TODO: Details will be added in future versions.
 
 ### Legal perspective
 
@@ -155,14 +164,19 @@ This section describes "What can go wrong?"
 * (Data) Controller (as defined in Article 4 (7) of GDPR {{GDPR}}) manages and controls what happens with personal data of data subject.
 * (Data) Processor (as defined in Article 4 (8) of GDPR {{GDPR}}) performs data processing on behalf of the data controller.
 
+TODO: Details will be added in future versions.
 
 ### Technical perspective
 
 * Infrastucture Provider is a role which refers to the Processor in GDPR. An example of this role is a cloud service provider (CSP).
 
+TODO: Details will be added in future versions.
+
 ## Threat Model
+TODO: Details will be added in future versions.
 
 ## Typical Security Goals
+TODO: Details will be added in future versions.
 
 # Attacks
 
@@ -201,7 +215,7 @@ to those of the conveyance protocol only. In order to benefit from remote attest
 using dedicated keys chaining back to the trust anchor for remote attestation.
 
 ### Missing definitions
-{{-rfc9334}} uses the term Conceptual Messages without proper definition.
+{{-rfc9334}} uses the term Conceptual Messages in capitalization without proper definition.
 
 ### Missing Roles and Conceptual Messages
 * Identity Supplier and its corresponding conceptual message Identity are missing and need to be added to the architecture {{Tech-Concepts}}.
