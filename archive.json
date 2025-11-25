@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-23T01:46:29.079936+00:00",
+  "timestamp": "2025-11-25T01:27:04.932457+00:00",
   "repo": "muhammad-usama-sardar/rats-sec-cons",
   "labels": [
     {
@@ -244,9 +244,17 @@
       "labels": [],
       "body": "[ML link](https://mailarchive.ietf.org/arch/msg/rats/roWj9lPqIbDrC1z-eWw8f2KGxqU/) \n[Reviewed version](https://github.com/muhammad-usama-sardar/rats-sec-cons/commit/f02440f77d5ec64a271b42a075452549853af4d8)\n\n\n\n> I'd say that it's a thing.  A document can certainly try.\n> \n> Often it has been done because Security Considerations were not always\n> required.  (Routing area)\n> Or they did not cover situations that did not exist before.\n> It could be part of some kind of document that explained some new\n> requirement that was unknown before.  And that requires new considerations.\n> \n> Having said that, Section 3 and 4 of sardar-sec-cons is okay advice, but\n> really misses many important points.\n> \n\n- [ ] Update of published RFCs\n> I don't agree with comments about section 7.4.\n> Just because we allow conveyance in other protocols does not mean that we\n> require it.    The contents of section 6 are opinion, and do not contribute\n> to the process.",
       "createdAt": "2025-11-20T17:38:40Z",
-      "updatedAt": "2025-11-20T18:19:04Z",
+      "updatedAt": "2025-11-24T11:44:24Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "OWNER",
+          "body": "Clarify which version he was reviewing. \n\nThomas believes:\n> the \u00a77.4 he mentions is from RFC9334.",
+          "createdAt": "2025-11-24T11:44:24Z",
+          "updatedAt": "2025-11-24T11:44:24Z"
+        }
+      ]
     }
   ],
   "pulls": []
