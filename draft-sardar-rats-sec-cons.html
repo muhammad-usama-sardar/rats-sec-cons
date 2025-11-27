@@ -10,7 +10,19 @@
        This document aims to provide guidelines and best practices for writing
    security considerations for technical specifications for RATS
    targeting the needs of implementers, researchers, and protocol
-   designers. It presents an outline of the topics future versions will cover. 
+   designers. The current version presents an outline of the topics that future versions
+   will cover in more detail. 
+       
+         
+           Corrections in published RATS RFCs 
+         
+         
+           Security concerns in two RATS drafts 
+         
+         
+           General security guidelines, baseline or template for RATS 
+         
+       
     " name="description">
 <meta content="xml2rfc 3.31.0" name="generator">
 <meta content="security considerations" name="keyword">
@@ -1051,7 +1063,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Sardar</td>
-<td class="center">Expires 28 May 2026</td>
+<td class="center">Expires 31 May 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1067,12 +1079,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc9334" class="eref">9334</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-11-24" class="published">24 November 2025</time>
+<time datetime="2025-11-27" class="published">27 November 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-05-28">28 May 2026</time></dd>
+<dd class="expires"><time datetime="2026-05-31">31 May 2026</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1088,7 +1100,19 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <p id="section-abstract-1">This document aims to provide guidelines and best practices for writing
    security considerations for technical specifications for RATS
    targeting the needs of implementers, researchers, and protocol
-   designers. It presents an outline of the topics future versions will cover.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+   designers. The current version presents an outline of the topics that future versions
+   will cover in more detail.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-abstract-2.1">
+          <p id="section-abstract-2.1.1">Corrections in published RATS RFCs<a href="#section-abstract-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-abstract-2.2">
+          <p id="section-abstract-2.2.1">Security concerns in two RATS drafts<a href="#section-abstract-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-abstract-2.3">
+          <p id="section-abstract-2.3.1">General security guidelines, baseline or template for RATS<a href="#section-abstract-2.3.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1120,7 +1144,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 28 May 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 31 May 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1279,13 +1303,22 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">While <span>[<a href="#I-D.irtf-cfrg-cryptography-specification" class="cite xref">I-D.irtf-cfrg-cryptography-specification</a>]</span> provides excellent guidelines, remote attestation <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>
+<p id="section-1-1">While excellent guidelines such as <span>[<a href="#I-D.irtf-cfrg-cryptography-specification" class="cite xref">I-D.irtf-cfrg-cryptography-specification</a>]</span> exist, remote attestation <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>
 has several distinguishing features which necessitate a separate document.
-One specific example of such feature is architectural complexity.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">The draft covers three topics:
-* Corrections in published RATS RFCs
-* Security concerns in current adopted/proposed for adoption drafts
-* General security guidelines or baseline or template that other drafts can simply point to (that may or may not include threat modeling)<a href="#section-1-2" class="pilcrow">¶</a></p>
+One specific example of such a feature is architectural complexity.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">The draft presents an outline of three topics that future versions will cover in more detail:<a href="#section-1-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-1-3.1">
+          <p id="section-1-3.1.1">Corrections in published RATS RFCs <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>, <span>[<a href="#RFC9781" class="cite xref">RFC9781</a>]</span>, <span>[<a href="#RFC9783" class="cite xref">RFC9783</a>]</span> and <span>[<a href="#RFC9711" class="cite xref">RFC9711</a>]</span><a href="#section-1-3.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-1-3.2">
+          <p id="section-1-3.2.1">Security concerns in one currently adopted RATS draft <span>[<a href="#I-D.ietf-rats-coserv" class="cite xref">I-D.ietf-rats-coserv</a>]</span> and one proposed for
+adoption RATS draft <span>[<a href="#I-D.deshpande-rats-multi-verifier" class="cite xref">I-D.deshpande-rats-multi-verifier</a>]</span><a href="#section-1-3.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-1-3.3">
+          <p id="section-1-3.3.1">General security guidelines, baseline or template that other drafts can simply point to<a href="#section-1-3.3.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1326,13 +1359,13 @@ Details will be added in future versions.<a href="#section-3-3" class="pilcrow">
       <h2 id="name-threat-modeling">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-threat-modeling" class="section-name selfRef">Threat Modeling</a>
       </h2>
-<p id="section-4-1">This section describes "What can go wrong?" TODO: Details will be added in future versions.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">This section describes "What can go wrong?" TODO.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div id="system-model">
 <section id="section-4.1">
         <h3 id="name-system-model">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-system-model" class="section-name selfRef">System Model</a>
         </h3>
-<p id="section-4.1-1">TODO: Details will be added in future versions.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-1">TODO.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="actors">
@@ -1340,7 +1373,7 @@ Details will be added in future versions.<a href="#section-3-3" class="pilcrow">
         <h3 id="name-actors">
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-actors" class="section-name selfRef">Actors</a>
         </h3>
-<p id="section-4.2-1">TODO: Details will be added in future versions.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.2-1">TODO.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 <div id="legal-perspective">
 <section id="section-4.2.1">
           <h4 id="name-legal-perspective">
@@ -1357,7 +1390,7 @@ Details will be added in future versions.<a href="#section-3-3" class="pilcrow">
               <p id="section-4.2.1-1.3.1">(Data) Processor (as defined in Article 4 (8) of GDPR <span>[<a href="#GDPR" class="cite xref">GDPR</a>]</span>) performs data processing on behalf of the data controller.<a href="#section-4.2.1-1.3.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-4.2.1-2">TODO: Details will be added in future versions.<a href="#section-4.2.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.2.1-2">TODO.<a href="#section-4.2.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="technical-perspective">
@@ -1370,7 +1403,7 @@ Details will be added in future versions.<a href="#section-3-3" class="pilcrow">
               <p id="section-4.2.2-1.1.1">Infrastucture Provider is a role which refers to the Processor in GDPR. An example of this role is a cloud service provider (CSP).<a href="#section-4.2.2-1.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-4.2.2-2">TODO: Details will be added in future versions.<a href="#section-4.2.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.2.2-2">TODO.<a href="#section-4.2.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1380,7 +1413,7 @@ Details will be added in future versions.<a href="#section-3-3" class="pilcrow">
         <h3 id="name-threat-model">
 <a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-threat-model" class="section-name selfRef">Threat Model</a>
         </h3>
-<p id="section-4.3-1">TODO: Details will be added in future versions.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.3-1">TODO.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="typical-security-goals">
@@ -1388,7 +1421,7 @@ Details will be added in future versions.<a href="#section-3-3" class="pilcrow">
         <h3 id="name-typical-security-goals">
 <a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-typical-security-goals" class="section-name selfRef">Typical Security Goals</a>
         </h3>
-<p id="section-4.4-1">TODO: Details will be added in future versions.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+<p id="section-4.4-1">TODO.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1404,7 +1437,7 @@ Details will be added in future versions.<a href="#section-3-3" class="pilcrow">
         <h3 id="name-replay-attacks">
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-replay-attacks" class="section-name selfRef">Replay attacks</a>
         </h3>
-<p id="section-5.1-1">See <span>[<a href="#Meeting-124-RATS-Slides" class="cite xref">Meeting-124-RATS-Slides</a>]</span>.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-1">See <span>[<a href="#Meeting-124-RATS-Slides" class="cite xref">Meeting-124-RATS-Slides</a>]</span>. TODO.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="relay-attacks">
@@ -1412,7 +1445,7 @@ Details will be added in future versions.<a href="#section-3-3" class="pilcrow">
         <h3 id="name-relay-attacks">
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-relay-attacks" class="section-name selfRef">Relay attacks</a>
         </h3>
-<p id="section-5.2-1">See <span>[<a href="#Meeting-124-RATS-Slides" class="cite xref">Meeting-124-RATS-Slides</a>]</span>.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-1">See <span>[<a href="#Meeting-124-RATS-Slides" class="cite xref">Meeting-124-RATS-Slides</a>]</span>. TODO.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="diversion-attacks">
@@ -1423,7 +1456,7 @@ Details will be added in future versions.<a href="#section-3-3" class="pilcrow">
 <p id="section-5.3-1">In this attack, a network adversary -- with Dolev-Yao capabilities <span>[<a href="#Dolev-Yao" class="cite xref">Dolev-Yao</a>]</span> and access (e.g., via
 Foreshadow <span>[<a href="#Foreshadow" class="cite xref">Foreshadow</a>]</span>) to attestation key of any machine in the world -- can redirect a connection intended
 for a specific Infrastructure Provider to the compromised machine, potentially resulting in exposure of
-confidential data <span>[<a href="#Meeting-122-TLS-Slides" class="cite xref">Meeting-122-TLS-Slides</a>]</span>.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+confidential data <span>[<a href="#Meeting-122-TLS-Slides" class="cite xref">Meeting-122-TLS-Slides</a>]</span>. TODO.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1433,7 +1466,7 @@ confidential data <span>[<a href="#Meeting-122-TLS-Slides" class="cite xref">Mee
       <h2 id="name-potential-mitigations">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-potential-mitigations" class="section-name selfRef">Potential Mitigations</a>
       </h2>
-<p id="section-6-1">This section will describe the countermeasures and their evaluation. See <span>[<a href="#Meeting-124-RATS-Slides" class="cite xref">Meeting-124-RATS-Slides</a>]</span>.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">This section will describe the countermeasures and their evaluation. See <span>[<a href="#Meeting-124-RATS-Slides" class="cite xref">Meeting-124-RATS-Slides</a>]</span>. TODO.<a href="#section-6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="examples-of-specifications-that-could-be-improved">
@@ -1559,7 +1592,7 @@ that might not reflect the actual system state, but a past one.<a href="#section
       <h2 id="name-examples-of-parts-of-specif">
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-examples-of-parts-of-specif" class="section-name selfRef">Examples of Parts of Specifications That are Detrimental for Security</a>
       </h2>
-<p id="section-8-1">The author believes that the following parts of designs are detrimental for the RATS ecosystem:<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-1">We believe that the following parts of designs are detrimental for the RATS ecosystem:<a href="#section-8-1" class="pilcrow">¶</a></p>
 <div id="multi-verifiers">
 <section id="section-8.1">
         <h3 id="name-multi-verifiers">
@@ -1585,7 +1618,7 @@ makes it a special target of attack, and thus a single point of failure. It incr
 risks because Aggregator can be compromised independent of the Reference Values Provider and
 Endorsers. That is, even if Reference Values Provider and Endorsers are secure, the compromise
 of Aggregator breaks the security of the system.
-Moreover, if Aggregator is not running inside TEE, it is trivial to compromise the secrets.<a href="#section-8.2-2" class="pilcrow">¶</a></p>
+Moreover, if Aggregator is not running inside a TEE, it is relatively easy to compromise the secrets.<a href="#section-8.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1713,6 +1746,9 @@ Moreover, if Aggregator is not running inside TEE, it is trivial to compromise t
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
 <p id="appendix-A-1">The author wishes to thank Ira McDonald and Ivan Gudymenko for insightful discussions.
+The author also wishes to thank the authors of <span>[<a href="#I-D.ietf-rats-coserv" class="cite xref">I-D.ietf-rats-coserv</a>]</span> (in particular Thomas
+Fossati and Paul Howard) for several discussions, which unfortunately could not resolve the
+above concerns, and hence led to this draft.
 The author also gratefully acknowledges the authors of <span>[<a href="#I-D.irtf-cfrg-cryptography-specification" class="cite xref">I-D.irtf-cfrg-cryptography-specification</a>]</span>, which
 serves as the inspiration of this work.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 </section>

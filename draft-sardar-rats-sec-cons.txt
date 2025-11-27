@@ -4,9 +4,9 @@
 
 RATS Working Group                                          M. U. Sardar
 Internet-Draft                                                TU Dresden
-Updates: 9334 (if approved)                             24 November 2025
+Updates: 9334 (if approved)                             27 November 2025
 Intended status: Informational                                          
-Expires: 28 May 2026
+Expires: 31 May 2026
 
 
              Guidelines for Security Considerations of RATS
@@ -17,8 +17,14 @@ Abstract
    This document aims to provide guidelines and best practices for
    writing security considerations for technical specifications for RATS
    targeting the needs of implementers, researchers, and protocol
-   designers.  It presents an outline of the topics future versions will
-   cover.
+   designers.  The current version presents an outline of the topics
+   that future versions will cover in more detail.
+
+   *  Corrections in published RATS RFCs
+
+   *  Security concerns in two RATS drafts
+
+   *  General security guidelines, baseline or template for RATS
 
 About This Document
 
@@ -47,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 May 2026.
+   This Internet-Draft will expire on 31 May 2026.
 
 Copyright Notice
 
@@ -104,15 +110,24 @@ Table of Contents
 
 1.  Introduction
 
-   While [I-D.irtf-cfrg-cryptography-specification] provides excellent
-   guidelines, remote attestation [RFC9334] has several distinguishing
-   features which necessitate a separate document.  One specific example
-   of such feature is architectural complexity.
+   While excellent guidelines such as
+   [I-D.irtf-cfrg-cryptography-specification] exist, remote attestation
+   [RFC9334] has several distinguishing features which necessitate a
+   separate document.  One specific example of such a feature is
+   architectural complexity.
 
-   The draft covers three topics: * Corrections in published RATS RFCs *
-   Security concerns in current adopted/proposed for adoption drafts *
-   General security guidelines or baseline or template that other drafts
-   can simply point to (that may or may not include threat modeling)
+   The draft presents an outline of three topics that future versions
+   will cover in more detail:
+
+   *  Corrections in published RATS RFCs [RFC9334], [RFC9781], [RFC9783]
+      and [RFC9711]
+
+   *  Security concerns in one currently adopted RATS draft
+      [I-D.ietf-rats-coserv] and one proposed for adoption RATS draft
+      [I-D.deshpande-rats-multi-verifier]
+
+   *  General security guidelines, baseline or template that other
+      drafts can simply point to
 
 2.  Conventions and Definitions
 
@@ -139,16 +154,15 @@ Table of Contents
 
 4.  Threat Modeling
 
-   This section describes "What can go wrong?"  TODO: Details will be
-   added in future versions.
+   This section describes "What can go wrong?"  TODO.
 
 4.1.  System Model
 
-   TODO: Details will be added in future versions.
+   TODO.
 
 4.2.  Actors
 
-   TODO: Details will be added in future versions.
+   TODO.
 
 4.2.1.  Legal perspective
 
@@ -162,22 +176,22 @@ Table of Contents
    *  (Data) Processor (as defined in Article 4 (8) of GDPR [GDPR])
       performs data processing on behalf of the data controller.
 
-   TODO: Details will be added in future versions.
+   TODO.
 
 4.2.2.  Technical perspective
 
    *  Infrastucture Provider is a role which refers to the Processor in
       GDPR.  An example of this role is a cloud service provider (CSP).
 
-   TODO: Details will be added in future versions.
+   TODO.
 
 4.3.  Threat Model
 
-   TODO: Details will be added in future versions.
+   TODO.
 
 4.4.  Typical Security Goals
 
-   TODO: Details will be added in future versions.
+   TODO.
 
 5.  Attacks
 
@@ -186,11 +200,11 @@ Table of Contents
 
 5.1.  Replay attacks
 
-   See [Meeting-124-RATS-Slides].
+   See [Meeting-124-RATS-Slides].  TODO.
 
 5.2.  Relay attacks
 
-   See [Meeting-124-RATS-Slides].
+   See [Meeting-124-RATS-Slides].  TODO.
 
 5.3.  Diversion attacks
 
@@ -199,12 +213,12 @@ Table of Contents
    attestation key of any machine in the world -- can redirect a
    connection intended for a specific Infrastructure Provider to the
    compromised machine, potentially resulting in exposure of
-   confidential data [Meeting-122-TLS-Slides].
+   confidential data [Meeting-122-TLS-Slides].  TODO.
 
 6.  Potential Mitigations
 
    This section will describe the countermeasures and their evaluation.
-   See [Meeting-124-RATS-Slides].
+   See [Meeting-124-RATS-Slides].  TODO.
 
 7.  Examples of Specifications That Could Be Improved
 
@@ -294,8 +308,8 @@ Table of Contents
 8.  Examples of Parts of Specifications That are Detrimental for
     Security
 
-   The author believes that the following parts of designs are
-   detrimental for the RATS ecosystem:
+   We believe that the following parts of designs are detrimental for
+   the RATS ecosystem:
 
 8.1.  Multi-Verifiers
 
@@ -325,7 +339,8 @@ Table of Contents
    Values Provider and Endorsers.  That is, even if Reference Values
    Provider and Endorsers are secure, the compromise of Aggregator
    breaks the security of the system.  Moreover, if Aggregator is not
-   running inside TEE, it is trivial to compromise the secrets.
+   running inside a TEE, it is relatively easy to compromise the
+   secrets.
 
 9.  Security Considerations
 
@@ -457,9 +472,13 @@ Table of Contents
 Acknowledgments
 
    The author wishes to thank Ira McDonald and Ivan Gudymenko for
-   insightful discussions.  The author also gratefully acknowledges the
-   authors of [I-D.irtf-cfrg-cryptography-specification], which serves
-   as the inspiration of this work.
+   insightful discussions.  The author also wishes to thank the authors
+   of [I-D.ietf-rats-coserv] (in particular Thomas Fossati and Paul
+   Howard) for several discussions, which unfortunately could not
+   resolve the above concerns, and hence led to this draft.  The author
+   also gratefully acknowledges the authors of
+   [I-D.irtf-cfrg-cryptography-specification], which serves as the
+   inspiration of this work.
 
 Author's Address
 
