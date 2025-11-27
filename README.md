@@ -31,8 +31,15 @@ Command line usage requires that you have the necessary software installed.  See
 
 ## Publishing Updated Version on Datatracker
 
+- Commit the final changes. 
+
+- Publish
 ```sh
 $ git push origin main
-$ git tag -a draft-rats-sardar-sec-cons-01
-$ git push origin draft-rats-sardar-sec-cons-01
+$ git tag -a draft-sardar-rats-sec-cons-01 -m "<msg>"
+$ git push origin draft-sardar-rats-sec-cons-01
 ```
+
+- Confirm the email
+
+If it doesn't work, see [alternate methods](https://github.com/martinthomson/i-d-template/blob/main/doc/SUBMITTING.md).
