@@ -116,21 +116,27 @@ tive 95/46/EC (General Data Protection Regulation) (Text with EEA relevance)"
 This document aims to provide guidelines and best practices for writing
    security considerations for technical specifications for RATS
    targeting the needs of implementers, researchers, and protocol
-   designers. It presents an outline of the topics future versions will cover.
+   designers. The current version presents an outline of the topics that future versions
+   will cover in more detail.
 
+* Corrections in published RATS RFCs
+* Security concerns in two RATS drafts
+* General security guidelines, baseline or template for RATS
 
 --- middle
 
 # Introduction
 
-While {{I-D.irtf-cfrg-cryptography-specification}} provides excellent guidelines, remote attestation {{-rfc9334}}
+While excellent guidelines such as {{I-D.irtf-cfrg-cryptography-specification}} exist, remote attestation {{-rfc9334}}
 has several distinguishing features which necessitate a separate document.
-One specific example of such feature is architectural complexity.
+One specific example of such a feature is architectural complexity.
 
-The draft covers three topics:
-* Corrections in published RATS RFCs
-* Security concerns in current adopted/proposed for adoption drafts
-* General security guidelines or baseline or template that other drafts can simply point to (that may or may not include threat modeling)
+The draft presents an outline of three topics that future versions will cover in more detail:
+
+* Corrections in published RATS RFCs {{-rfc9334}}, {{-rfc9781}}, {{-rfc9783}} and {{-rfc9711}}
+* Security concerns in one currently adopted RATS draft {{I-D.ietf-rats-coserv}} and one proposed for
+adoption RATS draft {{I-D.deshpande-rats-multi-verifier}}
+* General security guidelines, baseline or template that other drafts can simply point to
 
 
 
@@ -150,13 +156,13 @@ Recentness can be added to each of these levels of authentication.
 Details will be added in future versions.
 
 # Threat Modeling
-This section describes "What can go wrong?" TODO: Details will be added in future versions.
+This section describes "What can go wrong?" TODO.
 
 ## System Model
-TODO: Details will be added in future versions.
+TODO.
 
 ## Actors
-TODO: Details will be added in future versions.
+TODO.
 
 ### Legal perspective
 
@@ -164,38 +170,38 @@ TODO: Details will be added in future versions.
 * (Data) Controller (as defined in Article 4 (7) of GDPR {{GDPR}}) manages and controls what happens with personal data of data subject.
 * (Data) Processor (as defined in Article 4 (8) of GDPR {{GDPR}}) performs data processing on behalf of the data controller.
 
-TODO: Details will be added in future versions.
+TODO.
 
 ### Technical perspective
 
 * Infrastucture Provider is a role which refers to the Processor in GDPR. An example of this role is a cloud service provider (CSP).
 
-TODO: Details will be added in future versions.
+TODO.
 
 ## Threat Model
-TODO: Details will be added in future versions.
+TODO.
 
 ## Typical Security Goals
-TODO: Details will be added in future versions.
+TODO.
 
 # Attacks
 
 Security considerations in RATS specifications need to clarify how the following attacks are avoided or mitigated:
 
 ## Replay attacks
-See {{Meeting-124-RATS-Slides}}.
+See {{Meeting-124-RATS-Slides}}. TODO.
 
 ## Relay attacks
-See {{Meeting-124-RATS-Slides}}.
+See {{Meeting-124-RATS-Slides}}. TODO.
 
 ## Diversion attacks
 In this attack, a network adversary -- with Dolev-Yao capabilities {{Dolev-Yao}} and access (e.g., via
 Foreshadow {{Foreshadow}}) to attestation key of any machine in the world -- can redirect a connection intended
 for a specific Infrastructure Provider to the compromised machine, potentially resulting in exposure of
-confidential data {{Meeting-122-TLS-Slides}}.
+confidential data {{Meeting-122-TLS-Slides}}. TODO.
 
 # Potential Mitigations
-This section will describe the countermeasures and their evaluation. See {{Meeting-124-RATS-Slides}}.
+This section will describe the countermeasures and their evaluation. See {{Meeting-124-RATS-Slides}}. TODO.
 
 # Examples of Specifications That Could Be Improved
 
@@ -266,7 +272,7 @@ For replay protection, nonce should *always* be derived remotely (for example, b
 
 # Examples of Parts of Specifications That are Detrimental for Security
 
-The author believes that the following parts of designs are detrimental for the RATS ecosystem:
+We believe that the following parts of designs are detrimental for the RATS ecosystem:
 
 ## Multi-Verifiers
 The design of multi-verifiers {{I-D.deshpande-rats-multi-verifier}} not only increases security risks
@@ -286,7 +292,7 @@ makes it a special target of attack, and thus a single point of failure. It incr
 risks because Aggregator can be compromised independent of the Reference Values Provider and
 Endorsers. That is, even if Reference Values Provider and Endorsers are secure, the compromise
 of Aggregator breaks the security of the system.
-Moreover, if Aggregator is not running inside TEE, it is trivial to compromise the secrets.
+Moreover, if Aggregator is not running inside a TEE, it is relatively easy to compromise the secrets.
 
 
 # Security Considerations
@@ -306,5 +312,8 @@ This document has no IANA actions.
 {:numbered="false"}
 
 The author wishes to thank Ira McDonald and Ivan Gudymenko for insightful discussions.
+The author also wishes to thank the authors of {{I-D.ietf-rats-coserv}} (in particular Thomas
+Fossati and Paul Howard) for several discussions, which unfortunately could not resolve the
+above concerns, and hence led to this draft.
 The author also gratefully acknowledges the authors of {{I-D.irtf-cfrg-cryptography-specification}}, which
 serves as the inspiration of this work.
