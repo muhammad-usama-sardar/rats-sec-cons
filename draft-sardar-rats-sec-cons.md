@@ -275,10 +275,18 @@ For replay protection, nonce should *always* be derived remotely (for example, b
 We believe that the following parts of designs are detrimental for the RATS ecosystem:
 
 ## Multi-Verifiers
-The design of multi-verifiers {{I-D.deshpande-rats-multi-verifier}} not only increases security risks
-in terms of increasing the Trusted Computing Base (TCB), but also increases the privacy risks, as potentially sensitive
-information is sent to multiple verifiers.
 
+### Security Considerations
+We believe the security considerations of multi-verifiers {{I-D.deshpande-rats-multi-verifier}} must say:
+
+Compared to a single verifier, the use of multi-verifiers increases security risks in terms of increasing the Trusted Computing Base (TCB).
+
+### Privacy Considerations
+We believe the privacy considerations of multi-verifiers {{I-D.deshpande-rats-multi-verifier}} should say:
+
+Compared to a single verifier, the use of multi-verifiers may increase the privacy risks, as potentially sensitive information may be sent to multiple verifiers.
+
+### Open-source
 Besides, the rationale presented by the authors -- appraisal policy being the intellectual property of the vendors -- breaks the
 open-source nature of RATS ecosystem. This requires blindly trusting the vendors and increases the attack surface.
 
@@ -287,7 +295,7 @@ Aggregator in {{I-D.ietf-rats-coserv}} is an explicit trust anchor and the addit
 Having a malicious Aggregator in the design trivially breaks all the guarantees.
 It should be clarified how trust is established between Aggregator and Verifier in the context of Confidential Computing threat model.
 
-The fact that Aggregator has collective information of Reference Values Provider and Endorsers
+The fact that Aggregator has collective information of Reference Values Providers and Endorsers
 makes it a special target of attack, and thus a single point of failure. It increases security
 risks because Aggregator can be compromised independent of the Reference Values Provider and
 Endorsers. That is, even if Reference Values Provider and Endorsers are secure, the compromise
