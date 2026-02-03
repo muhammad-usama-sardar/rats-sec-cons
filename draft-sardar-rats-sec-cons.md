@@ -297,8 +297,8 @@ It should be clarified how trust is established between Aggregator and Verifier 
 
 The fact that Aggregator has collective information of Reference Values Providers and Endorsers
 makes it a special target of attack, and thus a single point of failure. It increases security
-risks because Aggregator can be compromised independent of the Reference Values Provider and
-Endorsers. That is, even if Reference Values Provider and Endorsers are secure, the compromise
+risks because Aggregator can be compromised independent of the Reference Values Providers and
+Endorsers. That is, even if Reference Values Providers and Endorsers are secure, the compromise
 of Aggregator breaks the security of the system.
 Moreover, if Aggregator is not running inside a TEE, it is relatively easy to compromise the secrets.
 
