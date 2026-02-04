@@ -4,10 +4,10 @@
 
 This is the working area for the individual Internet-Draft, "Guidelines for Security Considerations of RATS".
 
-* [Editor's Copy](https://muhammad-usama-sardar.github.io/rats-sec-cons/#go.draft-rats-sardar-sec-cons.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-rats-sardar-sec-cons)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-rats-sardar-sec-cons)
-* [Compare Editor's Copy to Individual Draft](https://muhammad-usama-sardar.github.io/rats-sec-cons/#go.draft-rats-sardar-sec-cons.diff)
+* [Editor's Copy](https://muhammad-usama-sardar.github.io/rats-sec-cons/#go.draft-sardar-rats-sec-cons.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-sardar-rats-sec-cons)
+* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-sardar-rats-sec-cons)
+* [Compare Editor's Copy to Individual Draft](https://muhammad-usama-sardar.github.io/rats-sec-cons/#go.draft-sardar-rats-sec-cons.diff)
 
 
 ## Contributing
@@ -34,10 +34,13 @@ Command line usage requires that you have the necessary software installed.  See
 - Commit the final changes. 
 
 - Publish
+
+s/`00`/next version.
+
 ```sh
 $ git push origin main
-$ git tag -a draft-sardar-rats-sec-cons-01 -m "<msg>"
-$ git push origin draft-sardar-rats-sec-cons-01
+$ git tag -a draft-sardar-rats-sec-cons-00 -m "v00"
+$ git push origin draft-sardar-rats-sec-cons-00
 ```
 
 - Confirm the email
