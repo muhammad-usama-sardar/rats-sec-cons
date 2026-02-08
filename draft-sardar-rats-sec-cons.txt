@@ -4,9 +4,9 @@
 
 RATS Working Group                                          M. U. Sardar
 Internet-Draft                                                TU Dresden
-Updates: 9334 (if approved)                              3 February 2026
+Updates: 9334 (if approved)                              8 February 2026
 Intended status: Informational                                          
-Expires: 7 August 2026
+Expires: 12 August 2026
 
 
              Guidelines for Security Considerations of RATS
@@ -17,14 +17,15 @@ Abstract
    This document aims to provide guidelines and best practices for
    writing security considerations for technical specifications for RATS
    targeting the needs of implementers, researchers, and protocol
-   designers.  The current version presents an outline of the topics
-   that future versions will cover in more detail.
+   designers.  This is a work-in-progress, and the current version
+   mainly presents an outline of the topics that future versions will
+   cover in more detail.
 
    *  Corrections in published RATS RFCs
 
    *  Security concerns in two RATS drafts
 
-   *  General security guidelines, baseline or template for RATS
+   *  General security guidelines, baseline, or template for RATS
 
 About This Document
 
@@ -53,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 August 2026.
+   This Internet-Draft will expire on 12 August 2026.
 
 Copyright Notice
 
@@ -72,6 +73,11 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
+     1.1.  Need for Specialized Guidance in RATS
+     1.2.  Needs of the Target Audience of RATS
+     1.3.  Inaccuracies in Published RATS RFCs
+     1.4.  Aggregator in CoServ
+     1.5.  Scope
    2.  Conventions and Definitions
    3.  General Hierarchy of Authentication
    4.  Threat Modeling
@@ -82,9 +88,9 @@ Table of Contents
      4.3.  Threat Model
      4.4.  Typical Security Goals
    5.  Attacks
-     5.1.  Replay attacks
-     5.2.  Relay attacks
-     5.3.  Diversion attacks
+     5.1.  (Evidence) Replay Attacks
+     5.2.  Diversion Attacks
+     5.3.  Relay Attacks
    6.  Potential Mitigations
    7.  Examples of Specifications That Could Be Improved
      7.1.  RFC9334
@@ -109,18 +115,72 @@ Table of Contents
      11.1.  Normative References
      11.2.  Informative References
    Acknowledgments
+   History
    Author's Address
 
 1.  Introduction
 
-   While excellent guidelines such as
-   [I-D.irtf-cfrg-cryptography-specification] exist, remote attestation
-   [RFC9334] has several distinguishing features which necessitate a
-   separate document.  One specific example of such a feature is
-   architectural complexity.
+1.1.  Need for Specialized Guidance in RATS
 
-   The draft presents an outline of three topics that future versions
-   will cover in more detail:
+   Every Internet Draft needs to have a "Security Considerations"
+   section.  While general guidelines such as [RFC3552] exist, the
+   underlying threat model is that the endpoint is fully trusted (i.e.,
+   all software and hardware components in the device may access the
+   keys).  RATS [RFC9334] has a primarily different threat model in the
+   sense that only parts of the endpoint (called Attester) are trusted
+   (i.e., only specific software and hardware components in the device
+   may access the keys), and the goal is to establish the
+   trustworthiness of the endpoint.  In other words, [RFC3552] deals
+   with a network adversary, whereas RATS deals with an endpoint
+   adversary, which may have root access or physical control over the
+   device with which it can extract keys from software or hardware.
+
+   Moreover, remote attestation has several distinguishing features that
+   necessitate a separate document.  One specific example of such a
+   feature is the architectural complexity of the endpoint.  While
+   network protocols typically have 2 roles, RATS has additional roles,
+   which complicates the picture.  Unfortunately, no guidelines
+   currently exist for remote attestation [RFC9334] in RATS.  This
+   document aims to fill this gap.
+
+1.2.  Needs of the Target Audience of RATS
+
+   Moreover, while the target audience of Internet Drafts is
+   implementers, researchers, and protocol designers
+   [I-D.irtf-cfrg-cryptography-specification], RATS drafts generally do
+   not fulfill these needs, in particular the needs of researchers and
+   protocol designers.  On the other hand, in our observation,
+   implementers generally find it hard to relate the abstract concepts
+   of RATS to the real-world systems.  In general, implementers and
+   protocol designers of RATS are thus left with little or no guidance.
+
+1.3.  Inaccuracies in Published RATS RFCs
+
+   Unfortunately, many published RFCs of RATS provide inaccurate or
+   ambiguous security and privacy considerations, which may lead to
+   errors in design and implementation, and give a false sense of
+   security.  As an example, many proposed designs in [RFC9334] are
+   broken.
+
+1.4.  Aggregator in CoServ
+
+   RATS has recently adopted [I-D.ietf-rats-coserv], which has an
+   ambiguous role Aggregator, for which -- in our assessment -- the
+   authors have not yet provided a reasonable justification.  To the
+   best of our knowledge and understanding, a malicious Aggregator
+   breaks the security of the RATS ecosystem and invalidates the formal
+   proofs for RATS primitives.  Surprisingly, during the three-week
+   adoption call and one week discussion afterwards, one of the authors
+   of the draft [I-D.ietf-rats-coserv] did not support adoption of the
+   draft.  Based on the above reasons, as researchers, we have genuine
+   skepticism about this work.  We request the authors to be transparent
+   on this work and clarify the concerns raised at the adoption time
+   (summarized to some extent in this draft).
+
+1.5.  Scope
+
+   To improve the situation, this draft presents an outline of three
+   topics that future versions will cover in more detail:
 
    *  Corrections in published RATS RFCs [RFC9334], [RFC9781], [RFC9783]
       and [RFC9711]
@@ -129,8 +189,8 @@ Table of Contents
       [I-D.ietf-rats-coserv] and one proposed for adoption RATS draft
       [I-D.deshpande-rats-multi-verifier]
 
-   *  General security guidelines, baseline or template that other
-      drafts can simply point to
+   *  General security baseline that other drafts can simply point to,
+      or guidelines or template that other drafts can use
 
 2.  Conventions and Definitions
 
@@ -142,9 +202,10 @@ Table of Contents
 
 3.  General Hierarchy of Authentication
 
-   [Gen-Approach] proposes general hierarchy of one-way authentication,
-   which can help precisely state the intended level of authentication
-   (in decreasing order):
+   Authentication is a term which is often ambiguous in RATS
+   specifications.  We propose general hierarchy of one-way
+   authentication [Gen-Approach], which can help precisely state the
+   intended level of authentication (in decreasing order):
 
    *  One-way injective agreement
 
@@ -201,27 +262,58 @@ Table of Contents
    Security considerations in RATS specifications need to clarify how
    the following attacks are avoided or mitigated:
 
-5.1.  Replay attacks
+5.1.  (Evidence) Replay Attacks
 
-   See [Meeting-124-RATS-Slides].  TODO.
+   In this attack, a network or endpoint adversary -- with access to
+   older Evidence -- can replay Evidence with stale Claims which no
+   longer represent the actual state of the Attester, potentially
+   resulting in exposure of confidential data [RA-TLS].
 
-5.2.  Relay attacks
+   Replay of stale Evidence may be within the same connection or across
+   multiple connections.
 
-   See [Meeting-124-RATS-Slides].  TODO.
-
-5.3.  Diversion attacks
+5.2.  Diversion Attacks
 
    In this attack, a network adversary -- with Dolev-Yao capabilities
-   [Dolev-Yao] and access (e.g., via Foreshadow [Foreshadow]) to
+   [Dolev-Yao] and access (e.g., via Foreshadow [Foreshadow]) to the
    attestation key of any machine in the world -- can redirect a
    connection intended for a specific Infrastructure Provider to the
    compromised machine, potentially resulting in exposure of
-   confidential data [Meeting-122-TLS-Slides].  TODO.
+   confidential data [ID-Crisis].
+
+   In the context of confidential computing and TLS as a transport
+   protocol, we reported these attacks to the TLS WG in February 2025
+   [Usama-TLS-26Feb25].  A formal proof is available [ID-Crisis-Repo]
+   for further research and development.  Since reporting to TLS WG,
+   these attacks have been practically exploited in TEE.fail
+   (https://tee.fail/), Wiretap.fail (https://wiretap.fail/), and BadRAM
+   (https://badram.eu/).
+
+5.3.  Relay Attacks
+
+   In this attack, a network or endpoint adversary -- with access to
+   suitable binding material -- can relay an attestation request to a
+   genuine Attester and present the genuine Evidence as its own,
+   potentially resulting in impersonation of genuine Attester
+   [RelayAttacks-RATS].
+
+   Note that _replay_ is about _same_ Attester while _relay_ attack is
+   about _different_ Attesters.
 
 6.  Potential Mitigations
 
-   This section will describe the countermeasures and their evaluation.
-   See [Meeting-124-RATS-Slides].  TODO.
+   This section describes the countermeasures and their evaluation.
+
+   To mitigate the above attacks, we propose post-handshake attestation.
+   We are not aware of any attacks on post-handshake attestation.  Post-
+   handshake attestation avoids replay attacks by using a fresh
+   attestation nonce.  Moreover, considering TLS as the transport
+   protocol, it avoids diversion and relay attacks by binding the
+   Evidence to the underlying TLS connection, such as using Exported
+   Keying Material (EKM) [I-D.ietf-tls-rfc8446bis], as proposed in
+   Section 9.2 of [ID-Crisis].  [RFC9261] and [RFC9266] provide
+   mechanisms for such bindings.  Efforts for a formal proof of security
+   of post-handshake attestation are ongoing.
 
 7.  Examples of Specifications That Could Be Improved
 
@@ -336,10 +428,10 @@ Table of Contents
 
 8.1.3.  Open-source
 
-   Besides, the rationale presented by the authors -- appraisal policy
-   being the intellectual property of the vendors -- breaks the open-
-   source nature of RATS ecosystem.  This requires blindly trusting the
-   vendors and increases the attack surface.
+   Besides, the rationale presented by the authors at meeting 124 --
+   appraisal policy being the intellectual property of the vendors --
+   breaks the open-source nature of RATS ecosystem.  This requires
+   blindly trusting the vendors and increases the attack surface.
 
 8.2.  Aggregator-based design
 
@@ -438,9 +530,9 @@ Table of Contents
               Deshpande, Y., jun, Z., Labiod, H., and H. Birkholz,
               "Remote Attestation with Multiple Verifiers", Work in
               Progress, Internet-Draft, draft-deshpande-rats-multi-
-              verifier-03, 20 October 2025,
+              verifier-04, 7 February 2026,
               <https://datatracker.ietf.org/doc/html/draft-deshpande-
-              rats-multi-verifier-03>.
+              rats-multi-verifier-04>.
 
    [I-D.ietf-rats-coserv]
               Howard, P., Fossati, T., Birkholz, H., Kamal, S., Mandyam,
@@ -450,6 +542,13 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
               coserv-02>.
 
+   [I-D.ietf-tls-rfc8446bis]
+              Rescorla, E., "The Transport Layer Security (TLS) Protocol
+              Version 1.3", Work in Progress, Internet-Draft, draft-
+              ietf-tls-rfc8446bis-14, 13 September 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-tls-
+              rfc8446bis-14>.
+
    [I-D.irtf-cfrg-cryptography-specification]
               Sullivan, N. and C. A. Wood, "Guidelines for Writing
               Cryptography Specifications", Work in Progress, Internet-
@@ -457,22 +556,48 @@ Table of Contents
               July 2025, <https://datatracker.ietf.org/doc/html/draft-
               irtf-cfrg-cryptography-specification-02>.
 
-   [Meeting-122-TLS-Slides]
+   [ID-Crisis]
               Sardar, M. U., Moustafa, M., and T. Aura, "Identity Crisis
-              in Attested TLS for Confidential Computing", March 2025,
-              <https://datatracker.ietf.org/meeting/122/materials/
-              slides-122-tls-identity-crisis-00>.
+              in Confidential Computing: Formal Analysis of Attested
+              TLS", November 2025, <https://www.researchgate.net/publica
+              tion/398839141_Identity_Crisis_in_Confidential_Computing_F
+              ormal_Analysis_of_Attested_TLS>.
 
-   [Meeting-124-RATS-Slides]
-              Sardar, M. U., "Guidelines for Security Considerations of
-              RATS", November 2025,
-              <https://datatracker.ietf.org/meeting/124/materials/
-              slides-124-rats-sessb-guideline-for-security-
-              consideration-of-rats-00>.
+   [ID-Crisis-Repo]
+              Muhammad Usama Sardar, "Identity Crisis in Confidential
+              Computing: Formal analysis of attested TLS protocols",
+              <https://github.com/CCC-Attestation/formal-spec-id-
+              crisis>.
+
+   [RA-TLS]   Sardar, M. U., Niemi, A., Tschofenig, H., and T. Fossati,
+              "Towards Validation of TLS 1.3 Formal Model and
+              Vulnerabilities in Intel's RA-TLS Protocol", November
+              2024, <https://www.researchgate.net/publication/385384309_
+              Towards_Validation_of_TLS_13_Formal_Model_and_Vulnerabilit
+              ies_in_Intel's_RA-TLS_Protocol>.
+
+   [RelayAttacks-RATS]
+              Sardar, M. U., "Relay Attacks in Intra-handshake
+              Attestation for Confidential Agentic AI Systems", January
+              2026, <https://mailarchive.ietf.org/arch/msg/
+              rats/6gbqx0XY8WYrH3Mx4vO8n2-uKgY/>.
+
+   [RFC3552]  Rescorla, E. and B. Korver, "Guidelines for Writing RFC
+              Text on Security Considerations", BCP 72, RFC 3552,
+              DOI 10.17487/RFC3552, July 2003,
+              <https://www.rfc-editor.org/rfc/rfc3552>.
 
    [RFC8446]  Rescorla, E., "The Transport Layer Security (TLS) Protocol
               Version 1.3", RFC 8446, DOI 10.17487/RFC8446, August 2018,
               <https://www.rfc-editor.org/rfc/rfc8446>.
+
+   [RFC9261]  Sullivan, N., "Exported Authenticators in TLS", RFC 9261,
+              DOI 10.17487/RFC9261, July 2022,
+              <https://www.rfc-editor.org/rfc/rfc9261>.
+
+   [RFC9266]  Whited, S., "Channel Bindings for TLS 1.3", RFC 9266,
+              DOI 10.17487/RFC9266, July 2022,
+              <https://www.rfc-editor.org/rfc/rfc9266>.
 
    [Sec-Cons-RATS]
               Sardar, M. U., "Security considerations of remote
@@ -487,16 +612,35 @@ Table of Contents
               cuity_of_Attestation_Mechanisms_in_Confidential_Computing_
               Technical_Concepts>.
 
+   [Usama-TLS-26Feb25]
+              Muhammad Usama Sardar, "Impersonation attacks on protocol
+              in draft-fossati-tls-attestation (Identity crisis in
+              Attested TLS) for Confidential Computing", February 2025,
+              <https://mailarchive.ietf.org/arch/msg/tls/
+              Jx_yPoYWMIKaqXmPsytKZBDq23o/>.
+
 Acknowledgments
 
    The author wishes to thank Ira McDonald and Ivan Gudymenko for
    insightful discussions.  The author also wishes to thank the authors
    of [I-D.ietf-rats-coserv] (in particular Thomas Fossati and Paul
    Howard) for several discussions, which unfortunately could not
-   resolve the above concerns, and hence led to this draft.  The author
-   also gratefully acknowledges the authors of
-   [I-D.irtf-cfrg-cryptography-specification], which serves as the
-   inspiration of this work.
+   resolve the above concerns, and hence led to this draft.
+
+History
+
+   -01
+
+   *  Concrete text proposal for security and privacy considerations of
+      multi-verifiers [I-D.deshpande-rats-multi-verifier]
+
+   -02
+
+   *  Introduction and motivation
+
+   *  Defined replay and relay attacks
+
+   *  Added mitigations
 
 Author's Address
 
