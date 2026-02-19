@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-17T02:04:40.102605+00:00",
+  "timestamp": "2026-02-19T02:07:16.482131+00:00",
   "repo": "muhammad-usama-sardar/rats-sec-cons",
   "labels": [
     {
@@ -52,6 +52,16 @@
       "name": "interim",
       "description": "",
       "color": "7bdec1"
+    },
+    {
+      "name": "multi-verifiers",
+      "description": "",
+      "color": "6ac9f5"
+    },
+    {
+      "name": "Aggregator",
+      "description": "",
+      "color": "96505b"
     }
   ],
   "issues": [
@@ -182,10 +192,12 @@
       "author": "muhammad-usama-sardar",
       "authorAssociation": "OWNER",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "Aggregator"
+      ],
       "body": "Carl's claim:\n> \u201cThere is nothing that prevents an aggregator from possessing a certificate from a trust anchor already trusted by a verifier.\u201d \n\nI am not refuting your statement to be false. I just don't understand how it will be done in reality for confidential computing without falling into several rabbit holes, including but not limited to:\n\n1. In which infrastructure does Aggregator run? Is it the same as Verifier or different?\n2. Is the Aggregator running inside a TEE? If not, it is useless for Confidential Computing. If yes, then how is it provisioned with the certificate without having the Cloud Service Provider in TCB and how are the public attestation keys for Aggegator distributed?\n3. How is Aggregator provisioned with the keys? Who owns those keys? How is that entity trusted?",
       "createdAt": "2025-10-28T12:59:43Z",
-      "updatedAt": "2025-10-29T14:57:06Z",
+      "updatedAt": "2026-02-18T12:11:31Z",
       "closedAt": null,
       "comments": []
     },
@@ -214,10 +226,12 @@
       "author": "muhammad-usama-sardar",
       "authorAssociation": "OWNER",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "Aggregator"
+      ],
       "body": "Thread [here](https://mailarchive.ietf.org/arch/msg/rats/tWzvHz7rUChe3GpZ8WrOk_95b-A/)",
       "createdAt": "2025-11-17T12:39:24Z",
-      "updatedAt": "2025-11-17T12:39:24Z",
+      "updatedAt": "2026-02-18T12:10:12Z",
       "closedAt": null,
       "comments": []
     },
@@ -342,12 +356,22 @@
       "author": "muhammad-usama-sardar",
       "authorAssociation": "OWNER",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "multi-verifiers"
+      ],
       "body": "https://mailarchive.ietf.org/arch/msg/rats/jeb6Q7VPPyJ9_TVYRbxBB7coCNw/\n\n> SecConSec (addition):\n> \n> > Compared to a single verifier, the use of multi-verifiers increases security risks in terms of increasing the Trusted Computing Base (TCB).\n> \n> The term Trusted Computing Base (TCB) is not well defined. Personally, I \n> am under the strong opinion that a TCB is scoped to the system boundary \n> of an Attester (typically a subset), which would render this suggested \n> chance non-applicable, I think.\n> \n> PrivConSec (addition):\n> \n> > Compared to a single verifier, the use of multi-verifiers may increase the privacy risks, as potentially sensitive information may be sent to multiple verifiers.\n> \n> This was already confirmed to be acceptable and is included in the \n> current editor's version: \n> https://github.com/ietf-rats/draft-deshpande-multi-verifier",
       "createdAt": "2026-02-16T15:27:24Z",
-      "updatedAt": "2026-02-16T15:27:24Z",
+      "updatedAt": "2026-02-18T12:10:02Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "OWNER",
+          "body": "Clarify that what matters most is the TCB from the RP perspective. \n\nhttps://mailarchive.ietf.org/arch/msg/rats/Op8Pfq2Ma2a8hYht9d4jhbZsscs/\n\n> Compared to a single verifier, the use of multi-verifiers increases security risks in terms of increasing the Trusted Computing Base (TCB).\n\nCompared to a single verifier, the use of multi-verifiers increases security risks in terms of increasing the Trusted Computing Base (TCB) from the RP perspective.",
+          "createdAt": "2026-02-18T12:06:31Z",
+          "updatedAt": "2026-02-18T12:06:31Z"
+        }
+      ]
     }
   ],
   "pulls": []
