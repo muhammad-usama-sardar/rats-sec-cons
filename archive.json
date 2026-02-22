@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-19T02:07:16.482131+00:00",
+  "timestamp": "2026-02-22T02:07:09.308704+00:00",
   "repo": "muhammad-usama-sardar/rats-sec-cons",
   "labels": [
     {
@@ -361,7 +361,7 @@
       ],
       "body": "https://mailarchive.ietf.org/arch/msg/rats/jeb6Q7VPPyJ9_TVYRbxBB7coCNw/\n\n> SecConSec (addition):\n> \n> > Compared to a single verifier, the use of multi-verifiers increases security risks in terms of increasing the Trusted Computing Base (TCB).\n> \n> The term Trusted Computing Base (TCB) is not well defined. Personally, I \n> am under the strong opinion that a TCB is scoped to the system boundary \n> of an Attester (typically a subset), which would render this suggested \n> chance non-applicable, I think.\n> \n> PrivConSec (addition):\n> \n> > Compared to a single verifier, the use of multi-verifiers may increase the privacy risks, as potentially sensitive information may be sent to multiple verifiers.\n> \n> This was already confirmed to be acceptable and is included in the \n> current editor's version: \n> https://github.com/ietf-rats/draft-deshpande-multi-verifier",
       "createdAt": "2026-02-16T15:27:24Z",
-      "updatedAt": "2026-02-18T12:10:02Z",
+      "updatedAt": "2026-02-19T11:19:01Z",
       "closedAt": null,
       "comments": [
         {
@@ -370,6 +370,13 @@
           "body": "Clarify that what matters most is the TCB from the RP perspective. \n\nhttps://mailarchive.ietf.org/arch/msg/rats/Op8Pfq2Ma2a8hYht9d4jhbZsscs/\n\n> Compared to a single verifier, the use of multi-verifiers increases security risks in terms of increasing the Trusted Computing Base (TCB).\n\nCompared to a single verifier, the use of multi-verifiers increases security risks in terms of increasing the Trusted Computing Base (TCB) from the RP perspective.",
           "createdAt": "2026-02-18T12:06:31Z",
           "updatedAt": "2026-02-18T12:06:31Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "NONE",
+          "body": "> Compared to a single verifier, the use of multi-verifiers increases security risks in terms of increasing the Trusted Computing Base (TCB) from the RP perspective.\n\nAn Attester's TCB scope still seems to be not-applicable here. This is why the authors think that this warrants being a working group item (see https://mailarchive.ietf.org/arch/msg/rats/jMn5ukY7UVcPdwMLdcrCyK7myb0)",
+          "createdAt": "2026-02-19T11:19:01Z",
+          "updatedAt": "2026-02-19T11:19:01Z"
         }
       ]
     }
