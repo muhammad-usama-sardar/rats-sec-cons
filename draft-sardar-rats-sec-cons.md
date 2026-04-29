@@ -180,6 +180,8 @@ RATS has recently adopted {{I-D.ietf-rats-coserv}}, which has an ambiguous role 
 To the best of our knowledge and understanding, a malicious Aggregator breaks the security of the RATS ecosystem and invalidates the formal proofs for RATS primitives.
 Surprisingly, during the three-week adoption call and one week discussion afterwards, one of the authors of the draft {{I-D.ietf-rats-coserv}} did not support adoption of the draft. Based on the above reasons, as researchers, we have genuine skepticism about this work. We request the authors to be transparent on this work and clarify the concerns raised at the adoption time (summarized to some extent in this draft).
 
+We will keep making good-faith attempts and requesting the authors to state the risks properly.
+
 ## Scope
 To improve the situation, this draft presents an outline of three topics that future versions will cover in more detail:
 
@@ -338,17 +340,27 @@ For replay protection, nonce should *always* be derived remotely (for example, b
 
 # Examples of Parts of Specifications That are Detrimental for Security
 
-We believe that the following parts of designs are detrimental for the RATS ecosystem:
+We believe that the following parts of designs are detrimental for the RATS ecosystem and without proper security and privacy considerations, they put the community at risk.
 
 ## Multi-Verifiers
+We believe this draft {{I-D.deshpande-rats-multi-verifier}} in its current form is doing **disservice** to the community by substantially degrading **both** the security and privacy of the systems, and not properly highlighting the security and privacy risks, and by implicitly promoting the blind trust in vendors.
+
+In summary:
+
+* From a security perspective, if one of the Verifiers break, it breaks the whole system.
+* From a privacy perspective, the current design also exposes Personally Identifiable Information (PII) to all the Verifiers.
 
 ### Security Considerations
-We believe the security considerations of multi-verifiers {{I-D.deshpande-rats-multi-verifier}} must say:
+What's important from the security standpoint is the TCB of the RP, and not the Attester. This is because it is the RP who has to make final trust decision, and not the Attester. Verifier is -- in any case -- in the TCB of RP.
 
-Compared to a single verifier, the use of multi-verifiers increases security risks in terms of increasing the Trusted Computing Base (TCB).
+Hence, we believe the security considerations of multi-verifiers {{I-D.deshpande-rats-multi-verifier}} must say:
+
+Compared to a single verifier, the use of multi-verifiers increases security risks in terms of increasing the overall Trusted Computing Base (TCB) from the RP's perspective.
 
 ### Privacy Considerations
-We believe the privacy considerations of multi-verifiers {{I-D.deshpande-rats-multi-verifier}} should say:
+In addition to revealing the PII to the Lead Verifier (which say is kind of equivalent to monolithic verifier), the current proposal in draft reveals the PII to all those Component Verifiers as well.
+
+We believe the privacy considerations of multi-verifiers {{I-D.deshpande-rats-multi-verifier}} must say:
 
 Compared to a single verifier, the use of multi-verifiers may increase the privacy risks, as potentially sensitive information may be sent to multiple verifiers.
 
