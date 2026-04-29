@@ -24,23 +24,23 @@
          
        
     " name="description">
-<meta content="xml2rfc 3.31.0" name="generator">
+<meta content="xml2rfc 3.33.0" name="generator">
 <meta content="security considerations" name="keyword">
 <meta content="remote attestation" name="keyword">
 <meta content="draft-sardar-rats-sec-cons-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.31.0
-    Python 3.12.12
+  xml2rfc 3.33.0
+    Python 3.12.13
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.0.2
-    platformdirs 4.5.1
+    platformdirs 4.9.6
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.32.5
-    wcwidth 0.3.0
+    wcwidth 0.6.0
 -->
 <link href="draft-sardar-rats-sec-cons.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -181,7 +181,7 @@
   font-weight: 400;
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 @font-face {
   font-family: 'Oxygen Mono';
@@ -189,7 +189,8 @@
   font-weight: 400;
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 }
 
 @font-face {
@@ -1060,11 +1061,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">RATS Security Considerations</td>
-<td class="right">February 2026</td>
+<td class="right">April 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Sardar</td>
-<td class="center">Expires 12 August 2026</td>
+<td class="center">Expires 31 October 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1080,12 +1081,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc9334" class="eref">9334</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-02-08" class="published">8 February 2026</time>
+<time datetime="2026-04-29" class="published">29 April 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-08-12">12 August 2026</time></dd>
+<dd class="expires"><time datetime="2026-10-31">31 October 2026</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1145,7 +1146,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 12 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 31 October 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1380,6 +1381,7 @@ As an example, many proposed designs in <span>[<a href="#RFC9334" class="cite xr
 <p id="section-1.4-1">RATS has recently adopted <span>[<a href="#I-D.ietf-rats-coserv" class="cite xref">I-D.ietf-rats-coserv</a>]</span>, which has an ambiguous role Aggregator, for which -- in our assessment -- the authors have not yet provided a reasonable justification.
 To the best of our knowledge and understanding, a malicious Aggregator breaks the security of the RATS ecosystem and invalidates the formal proofs for RATS primitives.
 Surprisingly, during the three-week adoption call and one week discussion afterwards, one of the authors of the draft <span>[<a href="#I-D.ietf-rats-coserv" class="cite xref">I-D.ietf-rats-coserv</a>]</span> did not support adoption of the draft. Based on the above reasons, as researchers, we have genuine skepticism about this work. We request the authors to be transparent on this work and clarify the concerns raised at the adoption time (summarized to some extent in this draft).<a href="#section-1.4-1" class="pilcrow">¶</a></p>
+<p id="section-1.4-2">We will keep making good-faith attempts and requesting the authors to state the risks properly.<a href="#section-1.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="scope">
@@ -1688,19 +1690,30 @@ that might not reflect the actual system state, but a past one.<a href="#section
       <h2 id="name-examples-of-parts-of-specif">
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-examples-of-parts-of-specif" class="section-name selfRef">Examples of Parts of Specifications That are Detrimental for Security</a>
       </h2>
-<p id="section-8-1">We believe that the following parts of designs are detrimental for the RATS ecosystem:<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-1">We believe that the following parts of designs are detrimental for the RATS ecosystem and without proper security and privacy considerations, they put the community at risk.<a href="#section-8-1" class="pilcrow">¶</a></p>
 <div id="multi-verifiers">
 <section id="section-8.1">
         <h3 id="name-multi-verifiers">
 <a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-multi-verifiers" class="section-name selfRef">Multi-Verifiers</a>
         </h3>
+<p id="section-8.1-1">We believe this draft <span>[<a href="#I-D.deshpande-rats-multi-verifier" class="cite xref">I-D.deshpande-rats-multi-verifier</a>]</span> in its current form is doing <strong>disservice</strong> to the community by substantially degrading <strong>both</strong> the security and privacy of the systems, and not properly highlighting the security and privacy risks, and by implicitly promoting the blind trust in vendors.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.1-2">In summary:<a href="#section-8.1-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-8.1-3.1">
+            <p id="section-8.1-3.1.1">From a security perspective, if one of the Verifiers break, it breaks the whole system.<a href="#section-8.1-3.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.1-3.2">
+            <p id="section-8.1-3.2.1">From a privacy perspective, the current design also exposes Personally Identifiable Information (PII) to all the Verifiers.<a href="#section-8.1-3.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
 <div id="security-considerations">
 <section id="section-8.1.1">
           <h4 id="name-security-considerations">
 <a href="#section-8.1.1" class="section-number selfRef">8.1.1. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
           </h4>
-<p id="section-8.1.1-1">We believe the security considerations of multi-verifiers <span>[<a href="#I-D.deshpande-rats-multi-verifier" class="cite xref">I-D.deshpande-rats-multi-verifier</a>]</span> must say:<a href="#section-8.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-8.1.1-2">Compared to a single verifier, the use of multi-verifiers increases security risks in terms of increasing the Trusted Computing Base (TCB).<a href="#section-8.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-8.1.1-1">What's important from the security standpoint is the TCB of the RP, and not the Attester. This is because it is the RP who has to make final trust decision, and not the Attester. Verifier is -- in any case -- in the TCB of RP.<a href="#section-8.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.1.1-2">Hence, we believe the security considerations of multi-verifiers <span>[<a href="#I-D.deshpande-rats-multi-verifier" class="cite xref">I-D.deshpande-rats-multi-verifier</a>]</span> must say:<a href="#section-8.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-8.1.1-3">Compared to a single verifier, the use of multi-verifiers increases security risks in terms of increasing the overall Trusted Computing Base (TCB) from the RP's perspective.<a href="#section-8.1.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="privacy-considerations">
@@ -1708,8 +1721,9 @@ that might not reflect the actual system state, but a past one.<a href="#section
           <h4 id="name-privacy-considerations">
 <a href="#section-8.1.2" class="section-number selfRef">8.1.2. </a><a href="#name-privacy-considerations" class="section-name selfRef">Privacy Considerations</a>
           </h4>
-<p id="section-8.1.2-1">We believe the privacy considerations of multi-verifiers <span>[<a href="#I-D.deshpande-rats-multi-verifier" class="cite xref">I-D.deshpande-rats-multi-verifier</a>]</span> should say:<a href="#section-8.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-8.1.2-2">Compared to a single verifier, the use of multi-verifiers may increase the privacy risks, as potentially sensitive information may be sent to multiple verifiers.<a href="#section-8.1.2-2" class="pilcrow">¶</a></p>
+<p id="section-8.1.2-1">In addition to revealing the PII to the Lead Verifier (which say is kind of equivalent to monolithic verifier), the current proposal in draft reveals the PII to all those Component Verifiers as well.<a href="#section-8.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-8.1.2-2">We believe the privacy considerations of multi-verifiers <span>[<a href="#I-D.deshpande-rats-multi-verifier" class="cite xref">I-D.deshpande-rats-multi-verifier</a>]</span> must say:<a href="#section-8.1.2-2" class="pilcrow">¶</a></p>
+<p id="section-8.1.2-3">Compared to a single verifier, the use of multi-verifiers may increase the privacy risks, as potentially sensitive information may be sent to multiple verifiers.<a href="#section-8.1.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="open-source">
@@ -1827,7 +1841,7 @@ Moreover, if Aggregator is not running inside a TEE, it is relatively easy to co
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-coserv">[I-D.ietf-rats-coserv]</dt>
         <dd>
-<span class="refAuthor">Howard, P.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Kamal, S.</span>, <span class="refAuthor">Mandyam, G.</span>, and <span class="refAuthor">D. Ma</span>, <span class="refTitle">"Concise Selector for Endorsements and Reference Values"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-coserv-02</span>, <time datetime="2025-10-20" class="refDate">20 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-coserv-02">https://datatracker.ietf.org/doc/html/draft-ietf-rats-coserv-02</a>&gt;</span>. </dd>
+<span class="refAuthor">Howard, P.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Kamal, S.</span>, <span class="refAuthor">Mandyam, G.</span>, and <span class="refAuthor">D. Ma</span>, <span class="refTitle">"Concise Selector for Endorsements and Reference Values"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-coserv-05</span>, <time datetime="2026-03-02" class="refDate">2 March 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-coserv-05">https://datatracker.ietf.org/doc/html/draft-ietf-rats-coserv-05</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-tls-rfc8446bis">[I-D.ietf-tls-rfc8446bis]</dt>
         <dd>

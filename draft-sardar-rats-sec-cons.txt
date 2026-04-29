@@ -4,9 +4,9 @@
 
 RATS Working Group                                          M. U. Sardar
 Internet-Draft                                                TU Dresden
-Updates: 9334 (if approved)                              8 February 2026
+Updates: 9334 (if approved)                                29 April 2026
 Intended status: Informational                                          
-Expires: 12 August 2026
+Expires: 31 October 2026
 
 
              Guidelines for Security Considerations of RATS
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 August 2026.
+   This Internet-Draft will expire on 31 October 2026.
 
 Copyright Notice
 
@@ -176,6 +176,9 @@ Table of Contents
    skepticism about this work.  We request the authors to be transparent
    on this work and clarify the concerns raised at the adoption time
    (summarized to some extent in this draft).
+
+   We will keep making good-faith attempts and requesting the authors to
+   state the risks properly.
 
 1.5.  Scope
 
@@ -404,23 +407,47 @@ Table of Contents
     Security
 
    We believe that the following parts of designs are detrimental for
-   the RATS ecosystem:
+   the RATS ecosystem and without proper security and privacy
+   considerations, they put the community at risk.
 
 8.1.  Multi-Verifiers
 
+   We believe this draft [I-D.deshpande-rats-multi-verifier] in its
+   current form is doing *disservice* to the community by substantially
+   degrading *both* the security and privacy of the systems, and not
+   properly highlighting the security and privacy risks, and by
+   implicitly promoting the blind trust in vendors.
+
+   In summary:
+
+   *  From a security perspective, if one of the Verifiers break, it
+      breaks the whole system.
+
+   *  From a privacy perspective, the current design also exposes
+      Personally Identifiable Information (PII) to all the Verifiers.
+
 8.1.1.  Security Considerations
 
-   We believe the security considerations of multi-verifiers
+   What's important from the security standpoint is the TCB of the RP,
+   and not the Attester.  This is because it is the RP who has to make
+   final trust decision, and not the Attester.  Verifier is -- in any
+   case -- in the TCB of RP.
+
+   Hence, we believe the security considerations of multi-verifiers
    [I-D.deshpande-rats-multi-verifier] must say:
 
    Compared to a single verifier, the use of multi-verifiers increases
-   security risks in terms of increasing the Trusted Computing Base
-   (TCB).
+   security risks in terms of increasing the overall Trusted Computing
+   Base (TCB) from the RP's perspective.
 
 8.1.2.  Privacy Considerations
 
+   In addition to revealing the PII to the Lead Verifier (which say is
+   kind of equivalent to monolithic verifier), the current proposal in
+   draft reveals the PII to all those Component Verifiers as well.
+
    We believe the privacy considerations of multi-verifiers
-   [I-D.deshpande-rats-multi-verifier] should say:
+   [I-D.deshpande-rats-multi-verifier] must say:
 
    Compared to a single verifier, the use of multi-verifiers may
    increase the privacy risks, as potentially sensitive information may
@@ -522,9 +549,8 @@ Table of Contents
    [Gen-Approach]
               Sardar, M. U., "Perspicuity of Attestation Mechanisms in
               Confidential Computing: General Approach", October 2025,
-              <https://www.researchgate.net/publication/396593308_Perspi
-              cuity_of_Attestation_Mechanisms_in_Confidential_Computing_
-              General_Approach>.
+              <https://www.researchgate.net/
+              publication/396593308_Perspicuity_of_Attestation_Mechanisms_in_Confidential_Computing_General_Approach>.
 
    [I-D.deshpande-rats-multi-verifier]
               Deshpande, Y., jun, Z., Labiod, H., and H. Birkholz,
@@ -538,9 +564,9 @@ Table of Contents
               Howard, P., Fossati, T., Birkholz, H., Kamal, S., Mandyam,
               G., and D. Ma, "Concise Selector for Endorsements and
               Reference Values", Work in Progress, Internet-Draft,
-              draft-ietf-rats-coserv-02, 20 October 2025,
+              draft-ietf-rats-coserv-05, 2 March 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              coserv-02>.
+              coserv-05>.
 
    [I-D.ietf-tls-rfc8446bis]
               Rescorla, E., "The Transport Layer Security (TLS) Protocol
@@ -559,9 +585,8 @@ Table of Contents
    [ID-Crisis]
               Sardar, M. U., Moustafa, M., and T. Aura, "Identity Crisis
               in Confidential Computing: Formal Analysis of Attested
-              TLS", November 2025, <https://www.researchgate.net/publica
-              tion/398839141_Identity_Crisis_in_Confidential_Computing_F
-              ormal_Analysis_of_Attested_TLS>.
+              TLS", November 2025, <https://www.researchgate.net/
+              publication/398839141_Identity_Crisis_in_Confidential_Computing_Formal_Analysis_of_Attested_TLS>.
 
    [ID-Crisis-Repo]
               Muhammad Usama Sardar, "Identity Crisis in Confidential
@@ -572,9 +597,9 @@ Table of Contents
    [RA-TLS]   Sardar, M. U., Niemi, A., Tschofenig, H., and T. Fossati,
               "Towards Validation of TLS 1.3 Formal Model and
               Vulnerabilities in Intel's RA-TLS Protocol", November
-              2024, <https://www.researchgate.net/publication/385384309_
-              Towards_Validation_of_TLS_13_Formal_Model_and_Vulnerabilit
-              ies_in_Intel's_RA-TLS_Protocol>.
+              2024, <https://www.researchgate.net/
+              publication/385384309_Towards_Validation_of_TLS_13_Formal_Model_and_Vulnerabilities_in_Intel's_RA-
+              TLS_Protocol>.
 
    [RelayAttacks-RATS]
               Sardar, M. U., "Relay Attacks in Intra-handshake
@@ -608,9 +633,8 @@ Table of Contents
    [Tech-Concepts]
               Sardar, M. U., "Perspicuity of Attestation Mechanisms in
               Confidential Computing: Technical Concepts", October 2025,
-              <https://www.researchgate.net/publication/396199290_Perspi
-              cuity_of_Attestation_Mechanisms_in_Confidential_Computing_
-              Technical_Concepts>.
+              <https://www.researchgate.net/
+              publication/396199290_Perspicuity_of_Attestation_Mechanisms_in_Confidential_Computing_Technical_Concepts>.
 
    [Usama-TLS-26Feb25]
               Muhammad Usama Sardar, "Impersonation attacks on protocol
