@@ -177,6 +177,9 @@ Table of Contents
    on this work and clarify the concerns raised at the adoption time
    (summarized to some extent in this draft).
 
+   We will keep making good-faith attempts and requesting the authors to
+   state the risks properly.
+
 1.5.  Scope
 
    To improve the situation, this draft presents an outline of three
@@ -404,23 +407,47 @@ Table of Contents
     Security
 
    We believe that the following parts of designs are detrimental for
-   the RATS ecosystem:
+   the RATS ecosystem and without proper security and privacy
+   considerations, they put the community at risk.
 
 8.1.  Multi-Verifiers
 
+   We believe this draft [I-D.deshpande-rats-multi-verifier] in its
+   current form is doing *disservice* to the community by substantially
+   degrading *both* the security and privacy of the systems, and not
+   properly highlighting the security and privacy risks, and by
+   implicitly promoting the blind trust in vendors.
+
+   In summary:
+
+   *  From a security perspective, if one of the Verifiers break, it
+      breaks the whole system.
+
+   *  From a privacy perspective, the current design also exposes
+      Personally Identifiable Information (PII) to all the Verifiers.
+
 8.1.1.  Security Considerations
 
-   We believe the security considerations of multi-verifiers
+   What's important from the security standpoint is the TCB of the RP,
+   and not the Attester.  This is because it is the RP who has to make
+   final trust decision, and not the Attester.  Verifier is -- in any
+   case -- in the TCB of RP.
+
+   Hence, we believe the security considerations of multi-verifiers
    [I-D.deshpande-rats-multi-verifier] must say:
 
    Compared to a single verifier, the use of multi-verifiers increases
-   security risks in terms of increasing the Trusted Computing Base
-   (TCB).
+   security risks in terms of increasing the overall Trusted Computing
+   Base (TCB) from the RP's perspective.
 
 8.1.2.  Privacy Considerations
 
+   In addition to revealing the PII to the Lead Verifier (which say is
+   kind of equivalent to monolithic verifier), the current proposal in
+   draft reveals the PII to all those Component Verifiers as well.
+
    We believe the privacy considerations of multi-verifiers
-   [I-D.deshpande-rats-multi-verifier] should say:
+   [I-D.deshpande-rats-multi-verifier] must say:
 
    Compared to a single verifier, the use of multi-verifiers may
    increase the privacy risks, as potentially sensitive information may

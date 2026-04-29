@@ -1381,6 +1381,7 @@ As an example, many proposed designs in <span>[<a href="#RFC9334" class="cite xr
 <p id="section-1.4-1">RATS has recently adopted <span>[<a href="#I-D.ietf-rats-coserv" class="cite xref">I-D.ietf-rats-coserv</a>]</span>, which has an ambiguous role Aggregator, for which -- in our assessment -- the authors have not yet provided a reasonable justification.
 To the best of our knowledge and understanding, a malicious Aggregator breaks the security of the RATS ecosystem and invalidates the formal proofs for RATS primitives.
 Surprisingly, during the three-week adoption call and one week discussion afterwards, one of the authors of the draft <span>[<a href="#I-D.ietf-rats-coserv" class="cite xref">I-D.ietf-rats-coserv</a>]</span> did not support adoption of the draft. Based on the above reasons, as researchers, we have genuine skepticism about this work. We request the authors to be transparent on this work and clarify the concerns raised at the adoption time (summarized to some extent in this draft).<a href="#section-1.4-1" class="pilcrow">¶</a></p>
+<p id="section-1.4-2">We will keep making good-faith attempts and requesting the authors to state the risks properly.<a href="#section-1.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="scope">
@@ -1689,19 +1690,30 @@ that might not reflect the actual system state, but a past one.<a href="#section
       <h2 id="name-examples-of-parts-of-specif">
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-examples-of-parts-of-specif" class="section-name selfRef">Examples of Parts of Specifications That are Detrimental for Security</a>
       </h2>
-<p id="section-8-1">We believe that the following parts of designs are detrimental for the RATS ecosystem:<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-1">We believe that the following parts of designs are detrimental for the RATS ecosystem and without proper security and privacy considerations, they put the community at risk.<a href="#section-8-1" class="pilcrow">¶</a></p>
 <div id="multi-verifiers">
 <section id="section-8.1">
         <h3 id="name-multi-verifiers">
 <a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-multi-verifiers" class="section-name selfRef">Multi-Verifiers</a>
         </h3>
+<p id="section-8.1-1">We believe this draft <span>[<a href="#I-D.deshpande-rats-multi-verifier" class="cite xref">I-D.deshpande-rats-multi-verifier</a>]</span> in its current form is doing <strong>disservice</strong> to the community by substantially degrading <strong>both</strong> the security and privacy of the systems, and not properly highlighting the security and privacy risks, and by implicitly promoting the blind trust in vendors.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.1-2">In summary:<a href="#section-8.1-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-8.1-3.1">
+            <p id="section-8.1-3.1.1">From a security perspective, if one of the Verifiers break, it breaks the whole system.<a href="#section-8.1-3.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.1-3.2">
+            <p id="section-8.1-3.2.1">From a privacy perspective, the current design also exposes Personally Identifiable Information (PII) to all the Verifiers.<a href="#section-8.1-3.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
 <div id="security-considerations">
 <section id="section-8.1.1">
           <h4 id="name-security-considerations">
 <a href="#section-8.1.1" class="section-number selfRef">8.1.1. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
           </h4>
-<p id="section-8.1.1-1">We believe the security considerations of multi-verifiers <span>[<a href="#I-D.deshpande-rats-multi-verifier" class="cite xref">I-D.deshpande-rats-multi-verifier</a>]</span> must say:<a href="#section-8.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-8.1.1-2">Compared to a single verifier, the use of multi-verifiers increases security risks in terms of increasing the Trusted Computing Base (TCB).<a href="#section-8.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-8.1.1-1">What's important from the security standpoint is the TCB of the RP, and not the Attester. This is because it is the RP who has to make final trust decision, and not the Attester. Verifier is -- in any case -- in the TCB of RP.<a href="#section-8.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.1.1-2">Hence, we believe the security considerations of multi-verifiers <span>[<a href="#I-D.deshpande-rats-multi-verifier" class="cite xref">I-D.deshpande-rats-multi-verifier</a>]</span> must say:<a href="#section-8.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-8.1.1-3">Compared to a single verifier, the use of multi-verifiers increases security risks in terms of increasing the overall Trusted Computing Base (TCB) from the RP's perspective.<a href="#section-8.1.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="privacy-considerations">
@@ -1709,8 +1721,9 @@ that might not reflect the actual system state, but a past one.<a href="#section
           <h4 id="name-privacy-considerations">
 <a href="#section-8.1.2" class="section-number selfRef">8.1.2. </a><a href="#name-privacy-considerations" class="section-name selfRef">Privacy Considerations</a>
           </h4>
-<p id="section-8.1.2-1">We believe the privacy considerations of multi-verifiers <span>[<a href="#I-D.deshpande-rats-multi-verifier" class="cite xref">I-D.deshpande-rats-multi-verifier</a>]</span> should say:<a href="#section-8.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-8.1.2-2">Compared to a single verifier, the use of multi-verifiers may increase the privacy risks, as potentially sensitive information may be sent to multiple verifiers.<a href="#section-8.1.2-2" class="pilcrow">¶</a></p>
+<p id="section-8.1.2-1">In addition to revealing the PII to the Lead Verifier (which say is kind of equivalent to monolithic verifier), the current proposal in draft reveals the PII to all those Component Verifiers as well.<a href="#section-8.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-8.1.2-2">We believe the privacy considerations of multi-verifiers <span>[<a href="#I-D.deshpande-rats-multi-verifier" class="cite xref">I-D.deshpande-rats-multi-verifier</a>]</span> must say:<a href="#section-8.1.2-2" class="pilcrow">¶</a></p>
+<p id="section-8.1.2-3">Compared to a single verifier, the use of multi-verifiers may increase the privacy risks, as potentially sensitive information may be sent to multiple verifiers.<a href="#section-8.1.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="open-source">
