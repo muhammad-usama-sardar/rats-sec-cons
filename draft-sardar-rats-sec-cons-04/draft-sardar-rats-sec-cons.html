@@ -10,7 +10,7 @@
        This document aims to provide guidelines and best practices for writing
    security considerations for technical specifications for RATS
    targeting the needs of implementers, researchers, and protocol
-   designers. This is a work-in-progress, and the current version mainly presents an outline of the topics that future versions
+   designers. In particular, it discusses some of the 'bottom turtle' issues. This is a work-in-progress, and the current version mainly presents an outline of the topics that future versions
    will cover in more detail. 
        
          
@@ -1101,7 +1101,7 @@ svg {
 <p id="section-abstract-1">This document aims to provide guidelines and best practices for writing
    security considerations for technical specifications for RATS
    targeting the needs of implementers, researchers, and protocol
-   designers. This is a work-in-progress, and the current version mainly presents an outline of the topics that future versions
+   designers. In particular, it discusses some of the 'bottom turtle' issues. This is a work-in-progress, and the current version mainly presents an outline of the topics that future versions
    will cover in more detail.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-abstract-2.1">
@@ -1190,7 +1190,15 @@ svg {
                 <p id="section-toc.1-1.1.2.4.1"><a href="#section-1.4" class="auto internal xref">1.4</a>.  <a href="#name-aggregator-in-coserv" class="internal xref">Aggregator in CoServ</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.5">
-                <p id="section-toc.1-1.1.2.5.1"><a href="#section-1.5" class="auto internal xref">1.5</a>.  <a href="#name-scope" class="internal xref">Scope</a></p>
+                <p id="section-toc.1-1.1.2.5.1"><a href="#section-1.5" class="auto internal xref">1.5</a>.  <a href="#name-motivation" class="internal xref">Motivation</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.5.2.1">
+                    <p id="section-toc.1-1.1.2.5.2.1.1"><a href="#section-1.5.1" class="auto internal xref">1.5.1</a>.  <a href="#name-concrete-motivational-examp" class="internal xref">Concrete Motivational Example: Practical Exploits in Production Systems</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.6">
+                <p id="section-toc.1-1.1.2.6.1"><a href="#section-1.6" class="auto internal xref">1.6</a>.  <a href="#name-scope" class="internal xref">Scope</a></p>
 </li>
             </ul>
 </li>
@@ -1383,22 +1391,50 @@ Surprisingly, during the three-week adoption call and one week discussion afterw
 <p id="section-1.4-2">We will keep making good-faith attempts and requesting the authors to state the risks properly.<a href="#section-1.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="scope">
+<div id="motivation">
 <section id="section-1.5">
-        <h3 id="name-scope">
-<a href="#section-1.5" class="section-number selfRef">1.5. </a><a href="#name-scope" class="section-name selfRef">Scope</a>
+        <h3 id="name-motivation">
+<a href="#section-1.5" class="section-number selfRef">1.5. </a><a href="#name-motivation" class="section-name selfRef">Motivation</a>
         </h3>
-<p id="section-1.5-1">To improve the situation, this draft presents an outline of three topics that future versions will cover in more detail:<a href="#section-1.5-1" class="pilcrow">¶</a></p>
+<p id="section-1.5-1">Unverified protocol designs, imprecisely stated threat model and security goals have led to high and critical severity vulnerabilities related to remote attestation.<a href="#section-1.5-1" class="pilcrow">¶</a></p>
+<div id="sec-mot-example">
+<section id="section-1.5.1">
+          <h4 id="name-concrete-motivational-examp">
+<a href="#section-1.5.1" class="section-number selfRef">1.5.1. </a><a href="#name-concrete-motivational-examp" class="section-name selfRef">Concrete Motivational Example: Practical Exploits in Production Systems</a>
+          </h4>
+<p id="section-1.5.1-1">The formal analysis led to three orthogonal issues:<a href="#section-1.5.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-1.5-2.1">
-            <p id="section-1.5-2.1.1">Corrections in published RATS RFCs <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>, <span>[<a href="#RFC9781" class="cite xref">RFC9781</a>]</span>, <span>[<a href="#RFC9783" class="cite xref">RFC9783</a>]</span> and <span>[<a href="#RFC9711" class="cite xref">RFC9711</a>]</span><a href="#section-1.5-2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-1.5.1-2.1">
+              <p id="section-1.5.1-2.1.1">Formal analysis <span>[<a href="#ID-Crisis-repo" class="cite xref">ID-Crisis-repo</a>]</span> found <strong>diversion</strong> attacks when unique hardware identifier is not included in Evidence. For technical details, please see the corresponding paper <span>[<a href="#ID-Crisis" class="cite xref">ID-Crisis</a>]</span>.<a href="#section-1.5.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-1.5-2.2">
-            <p id="section-1.5-2.2.1">Security concerns in one currently adopted RATS draft <span>[<a href="#I-D.ietf-rats-coserv" class="cite xref">I-D.ietf-rats-coserv</a>]</span> and one proposed for
-adoption RATS draft <span>[<a href="#I-D.deshpande-rats-multi-verifier" class="cite xref">I-D.deshpande-rats-multi-verifier</a>]</span><a href="#section-1.5-2.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-1.5.1-2.2">
+              <p id="section-1.5.1-2.2.1">Formal analysis <span>[<a href="#Intra-handshake.fail-repo" class="cite xref">Intra-handshake.fail-repo</a>]</span> of several <strong>production</strong> implementations of remote attestation led to the discovery of <span>[<a href="#CVE-2026-33697" class="cite xref">CVE-2026-33697</a>]</span> of <strong>CVSS 7.5</strong> for <strong>relay</strong> attacks. For technical details, please see the corresponding paper <span>[<a href="#Intra-handshake.fail" class="cite xref">Intra-handshake.fail</a>]</span>.<a href="#section-1.5.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-1.5-2.3">
-            <p id="section-1.5-2.3.1">General security baseline that other drafts can simply point to, or guidelines or template that other drafts can use<a href="#section-1.5-2.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-1.5.1-2.3">
+              <p id="section-1.5.1-2.3.1">Further formal analysis of <strong>production</strong> implementation of remote attestation has led to discovery of another class of attacks and will potentially lead to three CVEs (currently under <em>responsible</em> disclosure) <em>each</em> with an expected <strong>CVSS 9.1</strong>.<a href="#section-1.5.1-2.3.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-1.5.1-3">This shows the value of precise threat model and formal analysis in the design of secure protocols to find subtle vulnerabilities, which could otherwise be missed. This draft aims to provide the baseline security considerations that other drafts can simply refer to.<a href="#section-1.5.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="scope">
+<section id="section-1.6">
+        <h3 id="name-scope">
+<a href="#section-1.6" class="section-number selfRef">1.6. </a><a href="#name-scope" class="section-name selfRef">Scope</a>
+        </h3>
+<p id="section-1.6-1">To improve the situation, this draft presents an outline of three topics that future versions will cover in more detail:<a href="#section-1.6-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-1.6-2.1">
+            <p id="section-1.6-2.1.1">Corrections in published RATS RFCs <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>, <span>[<a href="#RFC9781" class="cite xref">RFC9781</a>]</span>, <span>[<a href="#RFC9783" class="cite xref">RFC9783</a>]</span> and <span>[<a href="#RFC9711" class="cite xref">RFC9711</a>]</span><a href="#section-1.6-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.6-2.2">
+            <p id="section-1.6-2.2.1">Security concerns in one currently adopted RATS draft <span>[<a href="#I-D.ietf-rats-coserv" class="cite xref">I-D.ietf-rats-coserv</a>]</span> and one proposed for
+adoption RATS draft <span>[<a href="#I-D.deshpande-rats-multi-verifier" class="cite xref">I-D.deshpande-rats-multi-verifier</a>]</span><a href="#section-1.6-2.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.6-2.3">
+            <p id="section-1.6-2.3.1">General security baseline that other drafts can simply point to, or guidelines or template that other drafts can use<a href="#section-1.6-2.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -1443,13 +1479,13 @@ Details will be added in future versions.<a href="#section-3-3" class="pilcrow">
       <h2 id="name-threat-modeling">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-threat-modeling" class="section-name selfRef">Threat Modeling</a>
       </h2>
-<p id="section-4-1">This section describes "What can go wrong?" TODO.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">This section describes "What can go wrong?"<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div id="system-model">
 <section id="section-4.1">
         <h3 id="name-system-model">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-system-model" class="section-name selfRef">System Model</a>
         </h3>
-<p id="section-4.1-1">TODO.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-1">See Section 4 of <span>[<a href="#Intra-handshake.fail" class="cite xref">Intra-handshake.fail</a>]</span> as an example.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="actors">
@@ -1457,7 +1493,7 @@ Details will be added in future versions.<a href="#section-3-3" class="pilcrow">
         <h3 id="name-actors">
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-actors" class="section-name selfRef">Actors</a>
         </h3>
-<p id="section-4.2-1">TODO.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.2-1">It has both legal and technical perspective.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 <div id="legal-perspective">
 <section id="section-4.2.1">
           <h4 id="name-legal-perspective">
@@ -1474,7 +1510,6 @@ Details will be added in future versions.<a href="#section-3-3" class="pilcrow">
               <p id="section-4.2.1-1.3.1">(Data) Processor (as defined in Article 4 (8) of GDPR <span>[<a href="#GDPR" class="cite xref">GDPR</a>]</span>) performs data processing on behalf of the data controller.<a href="#section-4.2.1-1.3.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-4.2.1-2">TODO.<a href="#section-4.2.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="technical-perspective">
@@ -1487,7 +1522,6 @@ Details will be added in future versions.<a href="#section-3-3" class="pilcrow">
               <p id="section-4.2.2-1.1.1">Infrastucture Provider is a role which refers to the Processor in GDPR. An example of this role is a cloud service provider (CSP).<a href="#section-4.2.2-1.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-4.2.2-2">TODO.<a href="#section-4.2.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1497,7 +1531,7 @@ Details will be added in future versions.<a href="#section-3-3" class="pilcrow">
         <h3 id="name-threat-model">
 <a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-threat-model" class="section-name selfRef">Threat Model</a>
         </h3>
-<p id="section-4.3-1">TODO.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.3-1">See Section 6.1 of <span>[<a href="#Intra-handshake.fail" class="cite xref">Intra-handshake.fail</a>]</span> as an example.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="typical-security-goals">
@@ -1505,7 +1539,7 @@ Details will be added in future versions.<a href="#section-3-3" class="pilcrow">
         <h3 id="name-typical-security-goals">
 <a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-typical-security-goals" class="section-name selfRef">Typical Security Goals</a>
         </h3>
-<p id="section-4.4-1">TODO.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+<p id="section-4.4-1">See <span>[<a href="#ID-Crisis" class="cite xref">ID-Crisis</a>]</span> as an example.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1535,7 +1569,7 @@ Foreshadow <span>[<a href="#Foreshadow" class="cite xref">Foreshadow</a>]</span>
 for a specific Infrastructure Provider to the compromised machine, potentially resulting in exposure of
 confidential data <span>[<a href="#ID-Crisis" class="cite xref">ID-Crisis</a>]</span>.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.2-2">In the context of confidential computing and TLS as a transport protocol, we reported these attacks to the TLS WG in February 2025 <span>[<a href="#Usama-TLS-26Feb25" class="cite xref">Usama-TLS-26Feb25</a>]</span>. A formal proof is available
-<span>[<a href="#ID-Crisis-Repo" class="cite xref">ID-Crisis-Repo</a>]</span> for further research and
+<span>[<a href="#ID-Crisis-repo" class="cite xref">ID-Crisis-repo</a>]</span> for further research and
 development. Since reporting to TLS WG, these attacks have been practically
 exploited in <a href="https://tee.fail/">TEE.fail</a>, <a href="https://wiretap.fail/">Wiretap.fail</a>, and <a href="https://badram.eu/">BadRAM</a>.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 </section>
@@ -1546,7 +1580,7 @@ exploited in <a href="https://tee.fail/">TEE.fail</a>, <a href="https://wiretap.
 <a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-relay-attacks" class="section-name selfRef">Relay Attacks</a>
         </h3>
 <p id="section-5.3-1">In this attack, a network or endpoint adversary -- with access to suitable binding material -- can relay an attestation request to a genuine Attester and present the genuine Evidence as its own,
-potentially resulting in impersonation of genuine Attester <span>[<a href="#RelayAttacks-RATS" class="cite xref">RelayAttacks-RATS</a>]</span>.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+potentially resulting in impersonation of genuine Attester <span>[<a href="#Intra-handshake.fail" class="cite xref">Intra-handshake.fail</a>]</span>.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.3-2">Note that <em>replay</em> is about <em>same</em> Attester while <em>relay</em> attack is about <em>different</em> Attesters.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1699,7 +1733,7 @@ that might not reflect the actual system state, but a past one.<a href="#section
 <p id="section-8.1-2">In summary:<a href="#section-8.1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-8.1-3.1">
-            <p id="section-8.1-3.1.1">From a security perspective, if one of the Verifiers break, it breaks the whole system.<a href="#section-8.1-3.1.1" class="pilcrow">¶</a></p>
+            <p id="section-8.1-3.1.1">From a security perspective, if one of the Verifiers breaks, it breaks the whole system.<a href="#section-8.1-3.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-8.1-3.2">
             <p id="section-8.1-3.2.1">From a privacy perspective, the current design also exposes Personally Identifiable Information (PII) to all the Verifiers.<a href="#section-8.1-3.2.1" class="pilcrow">¶</a></p>
@@ -1711,8 +1745,9 @@ that might not reflect the actual system state, but a past one.<a href="#section
 <a href="#section-8.1.1" class="section-number selfRef">8.1.1. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
           </h4>
 <p id="section-8.1.1-1">What's important from the security standpoint is the TCB of the RP, and not the Attester. This is because it is the RP who has to make final trust decision, and not the Attester. Verifier is -- in any case -- in the TCB of RP.<a href="#section-8.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-8.1.1-2">Hence, we believe the security considerations of multi-verifiers <span>[<a href="#I-D.deshpande-rats-multi-verifier" class="cite xref">I-D.deshpande-rats-multi-verifier</a>]</span> must say:<a href="#section-8.1.1-2" class="pilcrow">¶</a></p>
-<p id="section-8.1.1-3">Compared to a single verifier, the use of multi-verifiers increases security risks in terms of increasing the overall Trusted Computing Base (TCB) from the RP's perspective.<a href="#section-8.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-8.1.1-2">Say there are two Verifiers; how do they establish trust with each other? Who verifies the Verifier - Verifier attested TLS? Section 7.2 of <span>[<a href="#I-D.deshpande-rats-multi-verifier" class="cite xref">I-D.deshpande-rats-multi-verifier</a>]</span> falls apart on this.<a href="#section-8.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-8.1.1-3">Hence, we believe the security considerations of multi-verifiers <span>[<a href="#I-D.deshpande-rats-multi-verifier" class="cite xref">I-D.deshpande-rats-multi-verifier</a>]</span> must say:<a href="#section-8.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-8.1.1-4">Compared to a single verifier, the use of multi-verifiers increases security risks in terms of increasing the overall Trusted Computing Base (TCB) from the RP's perspective.<a href="#section-8.1.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="privacy-considerations">
@@ -1818,6 +1853,10 @@ Moreover, if Aggregator is not running inside a TEE, it is relatively easy to co
         <dd>
 <span class="refAuthor">Sardar, M. U.</span>, <span class="refTitle">"Clarifications in draft-ietf-rats-eat"</span>, <time datetime="2025-04" class="refDate">April 2025</time>, <span>&lt;<a href="https://mailarchive.ietf.org/arch/msg/rats/4V2zZHhk5IuxwcUMNWpPBpnzpaM/">https://mailarchive.ietf.org/arch/msg/rats/4V2zZHhk5IuxwcUMNWpPBpnzpaM/</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="CVE-2026-33697">[CVE-2026-33697]</dt>
+        <dd>
+<span class="refAuthor">CVE</span>, <span class="refTitle">"CoCoS attested TLS is vulnerable to relay attacks via extracted ephemeral TLS keys"</span>, <time datetime="2026-03" class="refDate">March 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-33697">https://www.cve.org/CVERecord?id=CVE-2026-33697</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="Dolev-Yao">[Dolev-Yao]</dt>
         <dd>
 <span class="refAuthor">Dolev, D.</span> and <span class="refAuthor">A. Yao</span>, <span class="refTitle">"On the security of public key protocols"</span>, <time datetime="1983-03" class="refDate">March 1983</time>. </dd>
@@ -1828,7 +1867,7 @@ Moreover, if Aggregator is not running inside a TEE, it is relatively easy to co
 <dd class="break"></dd>
 <dt id="GDPR">[GDPR]</dt>
         <dd>
-<span class="refAuthor">European Commission</span>, <span class="refTitle">"Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 on the protection of natural persons with regard to the pro- cessing of personal data and on the free movement of such data, and repealing Direc- tive 95/46/EC (General Data Protection Regulation) (Text with EEA relevance)"</span>, <time datetime="2016-05" class="refDate">May 2016</time>, <span>&lt;<a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj">https://eur-lex.europa.eu/eli/reg/2016/679/oj</a>&gt;</span>. </dd>
+<span class="refAuthor">European Commission</span>, <span class="refTitle">"Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 on the protection of natural persons with regard to the processing of personal data and on the free movement of such data, and repealing Directive 95/46/EC (General Data Protection Regulation) (Text with EEA relevance)"</span>, <time datetime="2016-05" class="refDate">May 2016</time>, <span>&lt;<a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj">https://eur-lex.europa.eu/eli/reg/2016/679/oj</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="Gen-Approach">[Gen-Approach]</dt>
         <dd>
@@ -1852,19 +1891,23 @@ Moreover, if Aggregator is not running inside a TEE, it is relatively easy to co
 <dd class="break"></dd>
 <dt id="ID-Crisis">[ID-Crisis]</dt>
         <dd>
-<span class="refAuthor">Sardar, M. U.</span>, <span class="refAuthor">Moustafa, M.</span>, and <span class="refAuthor">T. Aura</span>, <span class="refTitle">"Identity Crisis in Confidential Computing: Formal Analysis of Attested TLS"</span>, <time datetime="2025-11" class="refDate">November 2025</time>, <span>&lt;<a href="https://www.researchgate.net/publication/398839141_Identity_Crisis_in_Confidential_Computing_Formal_Analysis_of_Attested_TLS">https://www.researchgate.net/publication/398839141_Identity_Crisis_in_Confidential_Computing_Formal_Analysis_of_Attested_TLS</a>&gt;</span>. </dd>
+<span class="refAuthor">Sardar, M.</span>, <span class="refAuthor">Moustafa, M.</span>, and <span class="refAuthor">T. Aura</span>, <span class="refTitle">"Identity Crisis in Confidential Computing: Formal Analysis of Attested TLS"</span>, <span class="refContent">ACM</span>, <span class="seriesInfo">Proceedings of the ACM Asia Conference on Computer and Communications Security pp. 547-560</span>, <span class="seriesInfo">DOI 10.1145/3779208.3785387</span>, <time datetime="2026-06" class="refDate">June 2026</time>, <span>&lt;<a href="https://doi.org/10.1145/3779208.3785387">https://doi.org/10.1145/3779208.3785387</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="ID-Crisis-Repo">[ID-Crisis-Repo]</dt>
+<dt id="ID-Crisis-repo">[ID-Crisis-repo]</dt>
         <dd>
-<span class="refAuthor">Muhammad Usama Sardar</span>, <span class="refTitle">"Identity Crisis in Confidential Computing: Formal analysis of attested TLS protocols"</span>, <span>&lt;<a href="https://github.com/CCC-Attestation/formal-spec-id-crisis">https://github.com/CCC-Attestation/formal-spec-id-crisis</a>&gt;</span>. </dd>
+<span class="refAuthor">Sardar, M. U.</span>, <span class="refAuthor">Moustafa, M.</span>, and <span class="refAuthor">T. Aura</span>, <span class="refTitle">"Identity Crisis in Confidential Computing: Formal Analysis of Attested TLS"</span>, <time datetime="2025-11" class="refDate">November 2025</time>, <span>&lt;<a href="https://github.com/CCC-Attestation/formal-spec-id-crisis">https://github.com/CCC-Attestation/formal-spec-id-crisis</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="Intra-handshake.fail">[Intra-handshake.fail]</dt>
+        <dd>
+<span class="refAuthor">Sardar, M. U.</span>, <span class="refAuthor">Dubeyko, V.</span>, and <span class="refAuthor">J.-M. Jacquet</span>, <span class="refTitle">"Intra-handshake.fail (CVE-2026-33697): High-severity CVE in Attested TLS"</span>, <time datetime="2026-06" class="refDate">June 2026</time>, <span>&lt;<a href="https://www.researchgate.net/publication/408219182_Intra-handshakefail_CVE-2026-33697_High-severity_CVE_in_Attested_TLS">https://www.researchgate.net/publication/408219182_Intra-handshakefail_CVE-2026-33697_High-severity_CVE_in_Attested_TLS</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="Intra-handshake.fail-repo">[Intra-handshake.fail-repo]</dt>
+        <dd>
+<span class="refAuthor">Sardar, M. U.</span>, <span class="refAuthor">Dubeyko, V.</span>, and <span class="refAuthor">J.-M. Jacquet</span>, <span class="refTitle">"Intra-handshake.fail (CVE-2026-33697): High-severity CVE in Attested TLS"</span>, <time datetime="2026-06" class="refDate">June 2026</time>, <span>&lt;<a href="https://github.com/CCC-Attestation/formal-spec-KBS">https://github.com/CCC-Attestation/formal-spec-KBS</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RA-TLS">[RA-TLS]</dt>
         <dd>
-<span class="refAuthor">Sardar, M. U.</span>, <span class="refAuthor">Niemi, A.</span>, <span class="refAuthor">Tschofenig, H.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"Towards Validation of TLS 1.3 Formal Model and Vulnerabilities in Intel's RA-TLS Protocol"</span>, <time datetime="2024-11" class="refDate">November 2024</time>, <span>&lt;<a href="https://www.researchgate.net/publication/385384309_Towards_Validation_of_TLS_13_Formal_Model_and_Vulnerabilities_in_Intel's_RA-TLS_Protocol">https://www.researchgate.net/publication/385384309_Towards_Validation_of_TLS_13_Formal_Model_and_Vulnerabilities_in_Intel's_RA-TLS_Protocol</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RelayAttacks-RATS">[RelayAttacks-RATS]</dt>
-        <dd>
-<span class="refAuthor">Sardar, M. U.</span>, <span class="refTitle">"Relay Attacks in Intra-handshake Attestation for Confidential Agentic AI Systems"</span>, <time datetime="2026-01" class="refDate">January 2026</time>, <span>&lt;<a href="https://mailarchive.ietf.org/arch/msg/rats/6gbqx0XY8WYrH3Mx4vO8n2-uKgY/">https://mailarchive.ietf.org/arch/msg/rats/6gbqx0XY8WYrH3Mx4vO8n2-uKgY/</a>&gt;</span>. </dd>
+<span class="refAuthor">Sardar, M.</span>, <span class="refAuthor">Niemi, A.</span>, <span class="refAuthor">Tschofenig, H.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"Towards Validation of TLS 1.3 Formal Model and Vulnerabilities in Intel’s RA-TLS Protocol"</span>, <span class="refContent">Institute of Electrical and Electronics Engineers (IEEE)</span>, <span class="seriesInfo">IEEE Access vol. 12, pp. 173670-173685</span>, <span class="seriesInfo">DOI 10.1109/access.2024.3497184</span>, <time datetime="2024" class="refDate">2024</time>, <span>&lt;<a href="https://doi.org/10.1109/access.2024.3497184">https://doi.org/10.1109/access.2024.3497184</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC3552">[RFC3552]</dt>
         <dd>
