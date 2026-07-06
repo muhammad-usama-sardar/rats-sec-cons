@@ -51,10 +51,7 @@ informative:
      author:
       - ins: M. U. Sardar
   GDPR:
-     title: "Regulation (EU) 2016/679 of the European Parliament and of
-the Council of 27 April 2016 on the protection of natural persons with regard to the pro-
-cessing of personal data and on the free movement of such data, and repealing Direc-
-tive 95/46/EC (General Data Protection Regulation) (Text with EEA relevance)"
+     title: "Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 on the protection of natural persons with regard to the processing of personal data and on the free movement of such data, and repealing Directive 95/46/EC (General Data Protection Regulation) (Text with EEA relevance)"
      date: May 4, 2016,
      target: https://eur-lex.europa.eu/eli/reg/2016/679/oj
      author:
@@ -104,26 +101,38 @@ tive 95/46/EC (General Data Protection Regulation) (Text with EEA relevance)"
       - ins: A. Niemi
       - ins: H. Tschofenig
       - ins: T. Fossati
-  RelayAttacks-RATS:
-     title: "Relay Attacks in Intra-handshake Attestation for Confidential Agentic AI Systems"
-     date: 11 January 2026,
-     target: https://mailarchive.ietf.org/arch/msg/rats/6gbqx0XY8WYrH3Mx4vO8n2-uKgY/
-     author:
-     - ins: M. U. Sardar
-  ID-Crisis:
+  ID-Crisis: DOI.10.1145/3779208.3785387
+  ID-Crisis-repo:
     title: "Identity Crisis in Confidential Computing: Formal Analysis of Attested TLS"
     date: November 2025,
-    target: https://www.researchgate.net/publication/398839141_Identity_Crisis_in_Confidential_Computing_Formal_Analysis_of_Attested_TLS
+    target: https://github.com/CCC-Attestation/formal-spec-id-crisis
     author:
       - ins: M. U. Sardar
       - ins: M. Moustafa
       - ins: T. Aura
-  ID-Crisis-Repo:
-     title: "Identity Crisis in Confidential Computing: Formal analysis of attested TLS protocols"
-     date: 2025,
-     target: https://github.com/CCC-Attestation/formal-spec-id-crisis
+  Intra-handshake.fail:
+    title: "Intra-handshake.fail (CVE-2026-33697): High-severity CVE in Attested TLS"
+    date: June 2026,
+    target: https://www.researchgate.net/publication/408219182_Intra-handshakefail_CVE-2026-33697_High-severity_CVE_in_Attested_TLS
+    author:
+      - ins: M. U. Sardar
+      - ins: V. Dubeyko
+      - ins: J-M. Jacquet
+  Intra-handshake.fail-repo:
+    title: "Intra-handshake.fail (CVE-2026-33697): High-severity CVE in Attested TLS"
+    date: June 2026,
+    target: https://github.com/CCC-Attestation/formal-spec-KBS
+    author:
+      - ins: M. U. Sardar
+      - ins: V. Dubeyko
+      - ins: J-M. Jacquet
+  CVE-2026-33697:
      author:
-      - ins: Muhammad Usama Sardar
+        org: CVE
+     title: CoCoS attested TLS is vulnerable to relay attacks via extracted ephemeral TLS keys
+     target: https://www.cve.org/CVERecord?id=CVE-2026-33697
+     date: March 2026
+  RA-TLS: DOI.10.1109/ACCESS.2024.3497184
   Usama-TLS-26Feb25:
      title: "Impersonation attacks on protocol in draft-fossati-tls-attestation (Identity crisis in Attested TLS) for Confidential Computing"
      date: 26 February 2025,
@@ -141,7 +150,7 @@ tive 95/46/EC (General Data Protection Regulation) (Text with EEA relevance)"
 This document aims to provide guidelines and best practices for writing
    security considerations for technical specifications for RATS
    targeting the needs of implementers, researchers, and protocol
-   designers. This is a work-in-progress, and the current version mainly presents an outline of the topics that future versions
+   designers. In particular, it discusses some of the 'bottom turtle' issues. This is a work-in-progress, and the current version mainly presents an outline of the topics that future versions
    will cover in more detail.
 
 * Corrections in published RATS RFCs
@@ -182,6 +191,22 @@ Surprisingly, during the three-week adoption call and one week discussion afterw
 
 We will keep making good-faith attempts and requesting the authors to state the risks properly.
 
+## Motivation
+Unverified protocol designs, imprecisely stated threat model and security goals have led to high and critical severity vulnerabilities related to remote attestation.
+
+### Concrete Motivational Example: Practical Exploits in Production Systems
+{: #sec-mot-example }
+
+The formal analysis led to three orthogonal issues:
+
+- Formal analysis {{ID-Crisis-repo}} found **diversion** attacks when unique hardware identifier is not included in Evidence. For technical details, please see the corresponding paper {{ID-Crisis}}.
+
+- Formal analysis {{Intra-handshake.fail-repo}} of several **production** implementations of remote attestation led to the discovery of {{CVE-2026-33697}} of **CVSS 7.5** for **relay** attacks. For technical details, please see the corresponding paper {{Intra-handshake.fail}}.
+
+- Further formal analysis of **production** implementation of remote attestation has led to discovery of another class of attacks and will potentially lead to three CVEs (currently under *responsible* disclosure) *each* with an expected **CVSS 9.1**.
+
+This shows the value of precise threat model and formal analysis in the design of secure protocols to find subtle vulnerabilities, which could otherwise be missed. This draft aims to provide the baseline security considerations that other drafts can simply refer to.
+
 ## Scope
 To improve the situation, this draft presents an outline of three topics that future versions will cover in more detail:
 
@@ -207,13 +232,13 @@ Recentness can be added to each of these levels of authentication.
 Details will be added in future versions.
 
 # Threat Modeling
-This section describes "What can go wrong?" TODO.
+This section describes "What can go wrong?"
 
 ## System Model
-TODO.
+See Section 4 of {{Intra-handshake.fail}} as an example.
 
 ## Actors
-TODO.
+It has both legal and technical perspective.
 
 ### Legal perspective
 
@@ -221,19 +246,16 @@ TODO.
 * (Data) Controller (as defined in Article 4 (7) of GDPR {{GDPR}}) manages and controls what happens with personal data of data subject.
 * (Data) Processor (as defined in Article 4 (8) of GDPR {{GDPR}}) performs data processing on behalf of the data controller.
 
-TODO.
-
 ### Technical perspective
 
 * Infrastucture Provider is a role which refers to the Processor in GDPR. An example of this role is a cloud service provider (CSP).
 
-TODO.
-
 ## Threat Model
-TODO.
+See Section 6.1 of {{Intra-handshake.fail}} as an example.
+
 
 ## Typical Security Goals
-TODO.
+See {{ID-Crisis}} as an example.
 
 # Attacks
 
@@ -251,13 +273,13 @@ for a specific Infrastructure Provider to the compromised machine, potentially r
 confidential data {{ID-Crisis}}.
 
 In the context of confidential computing and TLS as a transport protocol, we reported these attacks to the TLS WG in February 2025 {{Usama-TLS-26Feb25}}. A formal proof is available
-{{ID-Crisis-Repo}} for further research and
+{{ID-Crisis-repo}} for further research and
 development. Since reporting to TLS WG, these attacks have been practically
 exploited in [TEE.fail](https://tee.fail/), [Wiretap.fail](https://wiretap.fail/), and [BadRAM](https://badram.eu/).
 
 ## Relay Attacks
 In this attack, a network or endpoint adversary -- with access to suitable binding material -- can relay an attestation request to a genuine Attester and present the genuine Evidence as its own,
-potentially resulting in impersonation of genuine Attester {{RelayAttacks-RATS}}.
+potentially resulting in impersonation of genuine Attester {{Intra-handshake.fail}}.
 
 Note that *replay* is about *same* Attester while *relay* attack is about *different* Attesters.
 
@@ -347,11 +369,13 @@ We believe this draft {{I-D.deshpande-rats-multi-verifier}} in its current form 
 
 In summary:
 
-* From a security perspective, if one of the Verifiers break, it breaks the whole system.
+* From a security perspective, if one of the Verifiers breaks, it breaks the whole system.
 * From a privacy perspective, the current design also exposes Personally Identifiable Information (PII) to all the Verifiers.
 
 ### Security Considerations
 What's important from the security standpoint is the TCB of the RP, and not the Attester. This is because it is the RP who has to make final trust decision, and not the Attester. Verifier is -- in any case -- in the TCB of RP.
+
+Say there are two Verifiers; how do they establish trust with each other? Who verifies the Verifier - Verifier attested TLS? Section 7.2 of {{I-D.deshpande-rats-multi-verifier}} falls apart on this.
 
 Hence, we believe the security considerations of multi-verifiers {{I-D.deshpande-rats-multi-verifier}} must say:
 
