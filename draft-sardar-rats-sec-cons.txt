@@ -4,9 +4,9 @@
 
 RATS Working Group                                          M. U. Sardar
 Internet-Draft                                                TU Dresden
-Updates: 9334 (if approved)                                29 April 2026
+Updates: 9334 (if approved)                                  6 July 2026
 Intended status: Informational                                          
-Expires: 31 October 2026
+Expires: 7 January 2027
 
 
              Guidelines for Security Considerations of RATS
@@ -17,9 +17,10 @@ Abstract
    This document aims to provide guidelines and best practices for
    writing security considerations for technical specifications for RATS
    targeting the needs of implementers, researchers, and protocol
-   designers.  This is a work-in-progress, and the current version
-   mainly presents an outline of the topics that future versions will
-   cover in more detail.
+   designers.  In particular, it discusses some of the 'bottom turtle'
+   issues.  This is a work-in-progress, and the current version mainly
+   presents an outline of the topics that future versions will cover in
+   more detail.
 
    *  Corrections in published RATS RFCs
 
@@ -54,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 October 2026.
+   This Internet-Draft will expire on 7 January 2027.
 
 Copyright Notice
 
@@ -77,7 +78,10 @@ Table of Contents
      1.2.  Needs of the Target Audience of RATS
      1.3.  Inaccuracies in Published RATS RFCs
      1.4.  Aggregator in CoServ
-     1.5.  Scope
+     1.5.  Motivation
+       1.5.1.  Concrete Motivational Example: Practical Exploits in
+               Production Systems
+     1.6.  Scope
    2.  Conventions and Definitions
    3.  General Hierarchy of Authentication
    4.  Threat Modeling
@@ -180,7 +184,38 @@ Table of Contents
    We will keep making good-faith attempts and requesting the authors to
    state the risks properly.
 
-1.5.  Scope
+1.5.  Motivation
+
+   Unverified protocol designs, imprecisely stated threat model and
+   security goals have led to high and critical severity vulnerabilities
+   related to remote attestation.
+
+1.5.1.  Concrete Motivational Example: Practical Exploits in Production
+        Systems
+
+   The formal analysis led to three orthogonal issues:
+
+   *  Formal analysis [ID-Crisis-repo] found *diversion* attacks when
+      unique hardware identifier is not included in Evidence.  For
+      technical details, please see the corresponding paper [ID-Crisis].
+
+   *  Formal analysis [Intra-handshake.fail-repo] of several
+      *production* implementations of remote attestation led to the
+      discovery of [CVE-2026-33697] of *CVSS 7.5* for *relay* attacks.
+      For technical details, please see the corresponding paper
+      [Intra-handshake.fail].
+
+   *  Further formal analysis of *production* implementation of remote
+      attestation has led to discovery of another class of attacks and
+      will potentially lead to three CVEs (currently under _responsible_
+      disclosure) _each_ with an expected *CVSS 9.1*.
+
+   This shows the value of precise threat model and formal analysis in
+   the design of secure protocols to find subtle vulnerabilities, which
+   could otherwise be missed.  This draft aims to provide the baseline
+   security considerations that other drafts can simply refer to.
+
+1.6.  Scope
 
    To improve the situation, this draft presents an outline of three
    topics that future versions will cover in more detail:
@@ -221,15 +256,15 @@ Table of Contents
 
 4.  Threat Modeling
 
-   This section describes "What can go wrong?"  TODO.
+   This section describes "What can go wrong?"
 
 4.1.  System Model
 
-   TODO.
+   See Section 4 of [Intra-handshake.fail] as an example.
 
 4.2.  Actors
 
-   TODO.
+   It has both legal and technical perspective.
 
 4.2.1.  Legal perspective
 
@@ -243,22 +278,18 @@ Table of Contents
    *  (Data) Processor (as defined in Article 4 (8) of GDPR [GDPR])
       performs data processing on behalf of the data controller.
 
-   TODO.
-
 4.2.2.  Technical perspective
 
    *  Infrastucture Provider is a role which refers to the Processor in
       GDPR.  An example of this role is a cloud service provider (CSP).
 
-   TODO.
-
 4.3.  Threat Model
 
-   TODO.
+   See Section 6.1 of [Intra-handshake.fail] as an example.
 
 4.4.  Typical Security Goals
 
-   TODO.
+   See [ID-Crisis] as an example.
 
 5.  Attacks
 
@@ -286,7 +317,7 @@ Table of Contents
 
    In the context of confidential computing and TLS as a transport
    protocol, we reported these attacks to the TLS WG in February 2025
-   [Usama-TLS-26Feb25].  A formal proof is available [ID-Crisis-Repo]
+   [Usama-TLS-26Feb25].  A formal proof is available [ID-Crisis-repo]
    for further research and development.  Since reporting to TLS WG,
    these attacks have been practically exploited in TEE.fail
    (https://tee.fail/), Wiretap.fail (https://wiretap.fail/), and BadRAM
@@ -298,7 +329,7 @@ Table of Contents
    suitable binding material -- can relay an attestation request to a
    genuine Attester and present the genuine Evidence as its own,
    potentially resulting in impersonation of genuine Attester
-   [RelayAttacks-RATS].
+   [Intra-handshake.fail].
 
    Note that _replay_ is about _same_ Attester while _relay_ attack is
    about _different_ Attesters.
@@ -420,7 +451,7 @@ Table of Contents
 
    In summary:
 
-   *  From a security perspective, if one of the Verifiers break, it
+   *  From a security perspective, if one of the Verifiers breaks, it
       breaks the whole system.
 
    *  From a privacy perspective, the current design also exposes
@@ -432,6 +463,11 @@ Table of Contents
    and not the Attester.  This is because it is the RP who has to make
    final trust decision, and not the Attester.  Verifier is -- in any
    case -- in the TCB of RP.
+
+   Say there are two Verifiers; how do they establish trust with each
+   other?  Who verifies the Verifier - Verifier attested TLS?
+   Section 7.2 of [I-D.deshpande-rats-multi-verifier] falls apart on
+   this.
 
    Hence, we believe the security considerations of multi-verifiers
    [I-D.deshpande-rats-multi-verifier] must say:
@@ -528,6 +564,11 @@ Table of Contents
               April 2025, <https://mailarchive.ietf.org/arch/msg/
               rats/4V2zZHhk5IuxwcUMNWpPBpnzpaM/>.
 
+   [CVE-2026-33697]
+              CVE, "CoCoS attested TLS is vulnerable to relay attacks
+              via extracted ephemeral TLS keys", March 2026,
+              <https://www.cve.org/CVERecord?id=CVE-2026-33697>.
+
    [Dolev-Yao]
               Dolev, D. and A. Yao, "On the security of public key
               protocols", March 1983.
@@ -540,9 +581,9 @@ Table of Contents
 
    [GDPR]     European Commission, "Regulation (EU) 2016/679 of the
               European Parliament and of the Council of 27 April 2016 on
-              the protection of natural persons with regard to the pro-
-              cessing of personal data and on the free movement of such
-              data, and repealing Direc- tive 95/46/EC (General Data
+              the protection of natural persons with regard to the
+              processing of personal data and on the free movement of
+              such data, and repealing Directive 95/46/EC (General Data
               Protection Regulation) (Text with EEA relevance)", May
               2016, <https://eur-lex.europa.eu/eli/reg/2016/679/oj>.
 
@@ -564,9 +605,9 @@ Table of Contents
               Howard, P., Fossati, T., Birkholz, H., Kamal, S., Mandyam,
               G., and D. Ma, "Concise Selector for Endorsements and
               Reference Values", Work in Progress, Internet-Draft,
-              draft-ietf-rats-coserv-05, 2 March 2026,
+              draft-ietf-rats-coserv-07, 6 July 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              coserv-05>.
+              coserv-07>.
 
    [I-D.ietf-tls-rfc8446bis]
               Rescorla, E., "The Transport Layer Security (TLS) Protocol
@@ -583,29 +624,39 @@ Table of Contents
               irtf-cfrg-cryptography-specification-02>.
 
    [ID-Crisis]
+              Sardar, M., Moustafa, M., and T. Aura, "Identity Crisis in
+              Confidential Computing: Formal Analysis of Attested TLS",
+              ACM, Proceedings of the ACM Asia Conference on Computer
+              and Communications Security pp. 547-560,
+              DOI 10.1145/3779208.3785387, June 2026,
+              <https://doi.org/10.1145/3779208.3785387>.
+
+   [ID-Crisis-repo]
               Sardar, M. U., Moustafa, M., and T. Aura, "Identity Crisis
               in Confidential Computing: Formal Analysis of Attested
-              TLS", November 2025, <https://www.researchgate.net/
-              publication/398839141_Identity_Crisis_in_Confidential_Computing_Formal_Analysis_of_Attested_TLS>.
+              TLS", November 2025, <https://github.com/CCC-Attestation/
+              formal-spec-id-crisis>.
 
-   [ID-Crisis-Repo]
-              Muhammad Usama Sardar, "Identity Crisis in Confidential
-              Computing: Formal analysis of attested TLS protocols",
-              <https://github.com/CCC-Attestation/formal-spec-id-
-              crisis>.
+   [Intra-handshake.fail]
+              Sardar, M. U., Dubeyko, V., and J.-M. Jacquet, "Intra-
+              handshake.fail (CVE-2026-33697): High-severity CVE in
+              Attested TLS", June 2026, <https://www.researchgate.net/
+              publication/408219182_Intra-handshakefail_CVE-2026-
+              33697_High-severity_CVE_in_Attested_TLS>.
 
-   [RA-TLS]   Sardar, M. U., Niemi, A., Tschofenig, H., and T. Fossati,
+   [Intra-handshake.fail-repo]
+              Sardar, M. U., Dubeyko, V., and J.-M. Jacquet, "Intra-
+              handshake.fail (CVE-2026-33697): High-severity CVE in
+              Attested TLS", June 2026,
+              <https://github.com/CCC-Attestation/formal-spec-KBS>.
+
+   [RA-TLS]   Sardar, M., Niemi, A., Tschofenig, H., and T. Fossati,
               "Towards Validation of TLS 1.3 Formal Model and
-              Vulnerabilities in Intel's RA-TLS Protocol", November
-              2024, <https://www.researchgate.net/
-              publication/385384309_Towards_Validation_of_TLS_13_Formal_Model_and_Vulnerabilities_in_Intel's_RA-
-              TLS_Protocol>.
-
-   [RelayAttacks-RATS]
-              Sardar, M. U., "Relay Attacks in Intra-handshake
-              Attestation for Confidential Agentic AI Systems", January
-              2026, <https://mailarchive.ietf.org/arch/msg/
-              rats/6gbqx0XY8WYrH3Mx4vO8n2-uKgY/>.
+              Vulnerabilities in Intel’s RA-TLS Protocol", Institute of
+              Electrical and Electronics Engineers (IEEE), IEEE
+              Access vol. 12, pp. 173670-173685,
+              DOI 10.1109/access.2024.3497184, 2024,
+              <https://doi.org/10.1109/access.2024.3497184>.
 
    [RFC3552]  Rescorla, E. and B. Korver, "Guidelines for Writing RFC
               Text on Security Considerations", BCP 72, RFC 3552,
