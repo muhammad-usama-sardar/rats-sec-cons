@@ -10,7 +10,7 @@
        This document aims to provide guidelines and best practices for writing
    security considerations for technical specifications for RATS
    targeting the needs of implementers, researchers, and protocol
-   designers. The current version presents an outline of the topics that future versions
+   designers. This is a work-in-progress, and the current version mainly presents an outline of the topics that future versions
    will cover in more detail. 
        
          
@@ -20,27 +20,28 @@
            Security concerns in two RATS drafts 
          
          
-           General security guidelines, baseline or template for RATS 
+           General security guidelines, baseline, or template for RATS 
          
        
     " name="description">
-<meta content="xml2rfc 3.31.0" name="generator">
+<meta content="xml2rfc 3.34.0" name="generator">
 <meta content="security considerations" name="keyword">
 <meta content="remote attestation" name="keyword">
 <meta content="draft-sardar-rats-sec-cons-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.31.0
-    Python 3.12.12
-    ConfigArgParse 1.7
+  xml2rfc 3.34.0
+    Python 3.14.5
+    ConfigArgParse 1.7.5
     google-i18n-address 3.1.1
-    intervaltree 3.1.0
+    intervaltree 3.2.1
     Jinja2 3.1.6
-    lxml 5.3.1
-    platformdirs 4.5.0
+    lxml 6.1.1
+    natsort 8.4.0
+    platformdirs 4.10.0
     pycountry 24.6.1
-    PyYAML 6.0.2
-    requests 2.32.5
-    wcwidth 0.2.14
+    PyYAML 6.0.3
+    requests 2.33.1
+    wcwidth 0.8.2
 -->
 <link href="draft-sardar-rats-sec-cons.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -181,7 +182,7 @@
   font-weight: 400;
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 @font-face {
   font-family: 'Oxygen Mono';
@@ -189,7 +190,8 @@
   font-weight: 400;
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 }
 
 @font-face {
@@ -306,16 +308,19 @@ h1, h2, h3, h4, h5, h6 {
   font-size-adjust: 0.5;
   color: var(--title-color);
 }
-h1#title {
-  font-size: 32px;
-  line-height: 40px;
-  clear: both;
-}
-h1#title, h1#rfcnum {
-  margin: 1.5em 0 0.2em;
-}
-h1#rfcnum + h1#title {
-  margin: 0.2em 0;
+h1 {
+  &#title {
+    font-size: 32px;
+    line-height: 40px;
+    clear: both;
+    margin: 1.5em 0 0.2em;
+  }
+  &#rfcnum {
+    margin: 1.5em 0 0.2em;
+    & + h1#title {
+      margin: 0.2em 0;
+    }
+  }
 }
 
 h1, h2, h3 {
@@ -335,10 +340,10 @@ h4, h5, h6 {
 #abstract+p {
   font-size: 18px;
   line-height: 24px;
-}
-#abstract+p code, #abstract+p samp, #abstract+p tt {
-  font-size: 16px;
-  line-height: 0;
+  & code, & samp, & tt {
+    font-size: 16px;
+    line-height: 0;
+  }
 }
 
 p {
@@ -349,59 +354,59 @@ p {
 div {
   margin: 0;
 }
-.alignRight.art-text {
-  background-color: var(--highlight-color);
-  border: 1px solid var(--line-color);
-  border-radius: 3px;
-  padding: 0.5em 1em 0;
-  margin-bottom: 0.5em;
-}
-.alignRight.art-text pre {
-  padding: 0;
-  width: auto;
-}
 .alignRight {
   margin: 1em 0;
-}
-.alignRight > *:first-child {
-  border: none;
-  margin: 0;
-  float: right;
-  clear: both;
-}
-.alignRight > *:nth-child(2) {
-  clear: both;
-  display: block;
-  border: none;
+  &.art-text {
+    background-color: var(--highlight-color);
+    border: 1px solid var(--line-color);
+    border-radius: 3px;
+    padding: 0.5em 1em 0;
+    margin-bottom: 0.5em;
+    & pre {
+      padding: 0;
+      width: auto;
+    }
+  }
+  & > *:first-child {
+    border: none;
+    margin: 0;
+    float: right;
+    clear: both;
+  }
+  & > *:nth-child(2) {
+    clear: both;
+    display: block;
+    border: none;
+  }
 }
 svg {
   display: block;
-}
-/* font-family isn't space-separated, but =~ will have to do */
-svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
-  font-family: var(--font-mono);
-}
-.alignCenter.art-text {
-  background-color: var(--highlight-color);
-  border: 1px solid var(--line-color);
-  border-radius: 3px;
-  padding: 0.5em 1em 0;
-  margin-bottom: 0.5em;
-}
-.alignCenter.art-text pre {
-  padding: 0;
-  width: auto;
+  /* font-family isn't space-separated, but =~ will have to do */
+  &[font-family~="monospace" i], & [font-family~="monospace" i] {
+    font-family: var(--font-mono);
+  }
 }
 .alignCenter {
   margin: 1em 0;
-}
-.alignCenter > *:first-child {
-  border: none;
-  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
-     support flexbox yet.
-  */
-  display: table;
-  margin: 0 auto;
+  &.art-text {
+    background-color: var(--highlight-color);
+    border: 1px solid var(--line-color);
+    border-radius: 3px;
+    padding: 0.5em 1em 0;
+    margin-bottom: 0.5em;
+    & pre {
+      padding: 0;
+      width: auto;
+    }
+  }
+  & > *:first-child {
+    border: none;
+    /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+       support flexbox yet.
+    */
+    display: table;
+    margin: 0 auto;
+  }
 }
 
 /* lists */
@@ -439,26 +444,25 @@ dl {
     --indent: 5ch;
     & > dt {
       min-width: calc(var(--indent) - 2ch);
+      float: none;
     }
-  }
-  &.olPercent > dt {
-    float: none;
   }
 
   dl > dd > & {
     margin-top: 0.5em;
     margin-bottom: 0;
   }
-}
-dl:not(.dlNewline) > dt {
-  float: left;
-  margin-right: 2ch;
-  min-width: 8ch;
-}
-dl > dd {
-  margin-bottom: .8em;
-  margin-left: var(--indent) !important; /* stupid element overrides */
-  min-height: 2ex;
+
+  &:not(.dlNewline) > dt {
+    float: left;
+    margin-right: 2ch;
+    min-width: 8ch;
+  }
+  & > dd {
+    margin-bottom: .8em;
+    margin-left: var(--indent) !important; /* stupid element overrides */
+    min-height: 2ex;
+  }
 }
 :is(dl.compact, .dlCompact) > dd {
   margin-bottom: 0;
@@ -474,20 +478,22 @@ dl > dd {
 }
 
 /* links */
-a, a[href].selfRef:hover {
+a {
   text-decoration: none;
+  &[href] {
+    color: var(--link-color);
+    &:hover { text-decoration: underline; }
+    &.selfRef {
+      color: var(--text-color);
+      &:hover {
+        text-decoration: none;
+        background-color: var(--highlight-color);
+      }
+    }
+  }
 }
-a[href] {
-  color: var(--link-color);
-}
-a[href].selfRef, .iref + a[href].internal {
+.iref + a[href].internal {
   color: var(--text-color);
-}
-a[href]:hover {
-  text-decoration: underline;
-}
-a[href].selfRef:hover {
-  background-color: var(--highlight-color);
 }
 a.xref:is(.cite, .auto), :is(#status-of-memo, #copyright) a {
   white-space: nowrap;
@@ -523,9 +529,9 @@ img {
 figure {
   margin: 0.5em 0;
   padding: 0;
-}
-figure blockquote {
-  margin: 0.8em 0.4em 0.4em;
+  & blockquote {
+    margin: 0.8em 0.4em 0.4em;
+  }
 }
 figcaption, caption {
   font-style: italic;
@@ -535,17 +541,19 @@ figcaption, caption {
 }
 @media screen {
   /* Auto-collapse boilerplate. */
-  :is(#status-of-memo, #copyright) p {
-    margin: -2px 0;
-    max-height: 0;
-    transition: max-height 2s ease, margin 0.5s ease 0.5s;
-    overflow: hidden;
-  }
-  :is(#status-of-memo, #copyright):hover p,
-  :is(#status-of-memo, #copyright) h2:target ~ p {
-    margin: 0.5em 0;
-    max-height: 500px;
-    overflow: auto;
+  :is(#status-of-memo, #copyright) {
+    & p {
+      margin: -2px 0;
+      max-height: 0;
+      transition: max-height 2s ease, margin 0.5s ease 0.5s;
+      overflow: hidden;
+    }
+    &:hover p,
+    & h2:target ~ p {
+      margin: 0.5em 0;
+      max-height: 500px;
+      overflow: auto;
+    }
   }
   pre, svg {
     display: inline-block;
@@ -581,6 +589,7 @@ aside, blockquote {
 }
 blockquote {
   margin: 1em 0;
+  border-left: 2px var(--pilcrow-strong) solid;
 }
 cite {
   display: block;
@@ -594,25 +603,17 @@ table {
   max-width: 100%;
   margin: 0 0 1em;
   border-collapse: collapse;
-}
-table.right {
-  margin-left: auto;
-}
-table.center {
-  margin-left: auto;
-  margin-right: auto;
-}
-table.left {
-  margin-right: auto;
-}
-table .text-left {
-  text-align: left;
-}
-table .text-center {
-  text-align: center;
-}
-table .text-right {
-  text-align: right;
+  &.right { margin-left: auto; }
+  &.center { margin-left: auto; margin-right: auto; }
+  &.left { margin-right: auto; }
+  & .text-left { text-align: left; }
+  & .text-center { text-align: center; }
+  & .text-right { text-align: right; }
+  & caption {
+    margin: 0;
+    padding: 3px 0 3px 1em;
+  }
+  & p { margin: 0; }
 }
 
 thead, tbody {
@@ -632,13 +633,6 @@ th {
 :is(tr:nth-child(2n+1), thead+tbody > tr:nth-child(2n)) > td {
   background-color: var(--highlight-color);
 }
-table caption {
-  margin: 0;
-  padding: 3px 0 3px 1em;
-}
-table p {
-  margin: 0;
-}
 
 /* pilcrow */
 a.pilcrow {
@@ -649,18 +643,16 @@ a.pilcrow {
     color: var(--pilcrow-weak);
     &:hover { text-decoration: none; }
   }
-}
-@media not print {
-  :hover > a.pilcrow {
-    opacity: 1;
+  @media not print {
+    :hover > &, &:focus {
+      opacity: 1;
+    }
+    &[href]:hover {
+      color: var(--pilcrow-strong);
+      background-color: transparent;
+    }
   }
-  a.pilcrow[href]:hover {
-    color: var(--pilcrow-strong);
-    background-color: transparent;
-  }
-}
-@media print {
-  a.pilcrow {
+  @media print {
     display: none;
   }
 }
@@ -719,9 +711,9 @@ sub, sup {
   font-size: 0.9em;
   font-style: italic;
   margin-top: 2em;
-}
-.docInfo .prepared {
-  float: right;
+  & .prepared {
+    float: right;
+  }
 }
 
 /* table of contents */
@@ -811,23 +803,27 @@ hr.addr {
   max-width: calc(100% - 16px);
 }
 @media (min-width: 500px) {
-  #authors-addresses > section {
-    column-count: 2;
-    column-gap: 20px;
-  }
-  #authors-addresses > section > h2 {
-    column-span: all;
-  }
-  /* hack for break-inside: avoid-column */
-  #authors-addresses address {
-    display: inline-block;
-    break-inside: avoid-column;
+  #authors-addresses {
+    & > section {
+      column-count: 2;
+      column-gap: 20px;
+    }
+    & > section > h2 {
+      column-span: all;
+    }
+    /* hack for break-inside: avoid-column */
+    & address {
+      display: inline-block;
+      break-inside: avoid-column;
+    }
   }
 }
 
 /* Comments */
-.rfcEditorRemove p:first-of-type {
-  font-style: italic;
+.rfcEditorRemove {
+  & p:first-of-type {
+    font-style: italic;
+  }
 }
 .cref {
   background-color: rgba(249, 232, 105, 0.3);
@@ -838,19 +834,21 @@ hr.addr {
 }
 
 @media screen {
-  #toc nav {
-    font-family: var(--font-title);
-    font-weight: 360;
-    & > ul { margin-bottom: 2em; }
-    & ul {
-      margin: 0 0 0 4px;
-      & :is(p, li) {
-        margin: 2px 0;
+  #toc {
+    & nav {
+      font-family: var(--font-title);
+      font-weight: 360;
+      & > ul { margin-bottom: 2em; }
+      & ul {
+        margin: 0 0 0 4px;
+        & :is(p, li) {
+          margin: 2px 0;
+        }
       }
     }
-  }
-  #toc a.toplink {
-    float: right;
+    & a.toplink {
+      float: right;
+    }
   }
 }
 @media not screen {
@@ -871,54 +869,54 @@ hr.addr {
     margin: 0;
     border-bottom: 1px solid #ccc;
     opacity: 0.6;
-  }
-  #toc h2 {
-    margin: 0;
-    padding: 2px 0 2px 6px;
-    padding-right: 1em;
-    font-size: 18px;
-    line-height: 24px;
-    min-width: 190px;
-    text-align: right;
-    background-color: #444;
-    color: white;
-    cursor: pointer;
-    &::before { /* css hamburger */
-      float: right;
-      position: relative;
-      width: 1em;
-      height: 1px;
-      left: -164px;
-      margin: 8px 0 0 0;
-      background: white none repeat scroll 0 0;
-      box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
-      content: "";
+    & h2 {
+      margin: 0;
+      padding: 2px 0 2px 6px;
+      padding-right: 1em;
+      font-size: 18px;
+      line-height: 24px;
+      min-width: 190px;
+      text-align: right;
+      background-color: #444;
+      color: white;
+      cursor: pointer;
+      &::before { /* css hamburger */
+        float: right;
+        position: relative;
+        width: 1em;
+        height: 1px;
+        left: -164px;
+        margin: 8px 0 0 0;
+        background: white none repeat scroll 0 0;
+        box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+        content: "";
+      }
     }
-  }
-  #toc nav {
-    display: none;
-    background-color: var(--background-color);
-    padding: 0.5em 1em 1em;
-    overflow: auto;
-    overscroll-behavior: contain;
-    height: calc(100vh - 48px);
-    border-left: 1px solid #ddd;
-  }
-  #toc.active {
-    opacity: 1;
-    & nav { display: block; }
-  }
-  /* Make the collapsed ToC header render white on gray also when it's a link */
-  #toc h2 a,
-  #toc h2 a:is(:link, :focus, :hover),
-  #toc a.toplink,
-  #toc a.toplink:hover {
-    color: white;
-    background-color: #444;
-    text-decoration: none;
-  }
-  #toc a.toplink {
-    margin: 2px 0.5em 0;
+    & nav {
+      display: none;
+      background-color: var(--background-color);
+      padding: 0.5em 1em 1em;
+      overflow: auto;
+      overscroll-behavior: contain;
+      height: calc(100vh - 48px);
+      border-left: 1px solid #ddd;
+    }
+    &.active {
+      opacity: 1;
+      & nav { display: block; }
+    }
+    /* Make the collapsed ToC header render white on gray also when it's a link */
+    & h2 a,
+    & h2 a:is(:link, :focus, :hover),
+    & a.toplink,
+    & a.toplink:hover {
+      color: white;
+      background-color: #444;
+      text-decoration: none;
+    }
+    & a.toplink {
+      margin: 2px 0.5em 0;
+    }
   }
 }
 
@@ -937,26 +935,26 @@ hr.addr {
     margin: 0;
     padding: 0;
     z-index: 1;
-  }
-  #toc h2 {
-    margin: 0;
-    padding: 0.25em 1em 1em 0;
-  }
-  #toc nav {
-    display: block;
-    height: calc(90vh - 84px);
-    bottom: 0;
-    padding: 0.5em 0 2em;
-    overflow: auto;
-    overscroll-behavior: contain;
-    scrollbar-width: thin;
+    & h2 {
+      margin: 0;
+      padding: 0.25em 1em 1em 0;
+    }
+    & nav {
+      display: block;
+      height: calc(90vh - 84px);
+      bottom: 0;
+      padding: 0.5em 0 2em;
+      overflow: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+    }
+    & a.toplink {
+      margin: 8px 0.5em 0;
+    }
   }
   img { /* future proofing */
     max-width: 100%;
     height: auto;
-  }
-  #toc a.toplink {
-    margin: 8px 0.5em 0;
   }
 }
 
@@ -972,12 +970,13 @@ hr.addr {
   #n-copyright-notice {
     border-bottom: none;
   }
-  #toc, #n-introduction {
-    page-break-before: always;
-  }
   #toc {
+    page-break-before: always;
     border-top: none;
     padding-top: 0;
+  }
+  #n-introduction {
+    page-break-before: always;
   }
   figure, pre, .vcard {
     page-break-inside: avoid;
@@ -1039,17 +1038,19 @@ hr.addr {
 }
 
 /* SVG Trick: a prefix match works because only black and white are allowed */
-svg :is([stroke="black"], [stroke^="#000"]) {
-  stroke: var(--text-color);
-}
-svg :is([stroke="white"], [stroke^="#fff"]) {
-  stroke: var(--background-color);
-}
-svg :is([fill="black"], [fill^="#000"], :not([fill])) {
-  fill: var(--text-color);
-}
-svg :is([fill="white"], [fill^="#fff"]) {
-  fill: var(--background-color);
+svg {
+  & :is([stroke="black"], [stroke^="#000"]) {
+    stroke: var(--text-color);
+  }
+  & :is([stroke="white"], [stroke^="#fff"]) {
+    stroke: var(--background-color);
+  }
+  & :is([fill="black"], [fill^="#000"], :not([fill])) {
+    fill: var(--text-color);
+  }
+  & :is([fill="white"], [fill^="#fff"]) {
+    fill: var(--background-color);
+  }
 }
 </style>
 
@@ -1059,11 +1060,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">RATS Security Considerations</td>
-<td class="right">November 2025</td>
+<td class="right">July 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Sardar</td>
-<td class="center">Expires 31 May 2026</td>
+<td class="center">Expires 7 January 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1079,12 +1080,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc9334" class="eref">9334</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-11-27" class="published">27 November 2025</time>
+<time datetime="2026-07-06" class="published">6 July 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-05-31">31 May 2026</time></dd>
+<dd class="expires"><time datetime="2027-01-07">7 January 2027</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1100,7 +1101,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <p id="section-abstract-1">This document aims to provide guidelines and best practices for writing
    security considerations for technical specifications for RATS
    targeting the needs of implementers, researchers, and protocol
-   designers. The current version presents an outline of the topics that future versions
+   designers. This is a work-in-progress, and the current version mainly presents an outline of the topics that future versions
    will cover in more detail.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-abstract-2.1">
@@ -1110,7 +1111,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
           <p id="section-abstract-2.2.1">Security concerns in two RATS drafts<a href="#section-abstract-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-abstract-2.3">
-          <p id="section-abstract-2.3.1">General security guidelines, baseline or template for RATS<a href="#section-abstract-2.3.1" class="pilcrow">¶</a></p>
+          <p id="section-abstract-2.3.1">General security guidelines, baseline, or template for RATS<a href="#section-abstract-2.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
@@ -1144,7 +1145,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 31 May 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 7 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1153,7 +1154,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2025 IETF Trust and the persons identified as the
+            Copyright (c) 2026 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1174,13 +1175,30 @@ svg :is([fill="white"], [fill^="#fff"]) {
         </h2>
 <nav class="toc"><ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
-            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+            <p id="section-toc.1-1.1.1"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-need-for-specialized-guidan" class="internal xref">Need for Specialized Guidance in RATS</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
+                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.  <a href="#name-needs-of-the-target-audienc" class="internal xref">Needs of the Target Audience of RATS</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.3">
+                <p id="section-toc.1-1.1.2.3.1" class="keepWithNext"><a href="#section-1.3" class="auto internal xref">1.3</a>.  <a href="#name-inaccuracies-in-published-r" class="internal xref">Inaccuracies in Published RATS RFCs</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.4">
+                <p id="section-toc.1-1.1.2.4.1"><a href="#section-1.4" class="auto internal xref">1.4</a>.  <a href="#name-aggregator-in-coserv" class="internal xref">Aggregator in CoServ</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.5">
+                <p id="section-toc.1-1.1.2.5.1"><a href="#section-1.5" class="auto internal xref">1.5</a>.  <a href="#name-scope" class="internal xref">Scope</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
+            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-general-hierarchy-of-authen" class="internal xref">General Hierarchy of Authentication</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-general-hierarchy-of-authen" class="internal xref">General Hierarchy of Authentication</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-threat-modeling" class="internal xref">Threat Modeling</a></p>
@@ -1211,13 +1229,13 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-attacks" class="internal xref">Attacks</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
-                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-replay-attacks" class="internal xref">Replay attacks</a></p>
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-evidence-replay-attacks" class="internal xref">(Evidence) Replay Attacks</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
-                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-relay-attacks" class="internal xref">Relay attacks</a></p>
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-diversion-attacks" class="internal xref">Diversion Attacks</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
-                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-diversion-attacks" class="internal xref">Diversion attacks</a></p>
+                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-relay-attacks" class="internal xref">Relay Attacks</a></p>
 </li>
             </ul>
 </li>
@@ -1265,6 +1283,17 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
                 <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-multi-verifiers" class="internal xref">Multi-Verifiers</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1.2.1">
+                    <p id="section-toc.1-1.8.2.1.2.1.1"><a href="#section-8.1.1" class="auto internal xref">8.1.1</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1.2.2">
+                    <p id="section-toc.1-1.8.2.1.2.2.1"><a href="#section-8.1.2" class="auto internal xref">8.1.2</a>.  <a href="#name-privacy-considerations" class="internal xref">Privacy Considerations</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1.2.3">
+                    <p id="section-toc.1-1.8.2.1.2.3.1"><a href="#section-8.1.3" class="auto internal xref">8.1.3</a>.  <a href="#name-open-source" class="internal xref">Open-source</a></p>
+</li>
+                </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
                 <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-aggregator-based-design" class="internal xref">Aggregator-based design</a></p>
@@ -1272,7 +1301,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-security-considerations-2" class="internal xref">Security Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
             <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
@@ -1292,7 +1321,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.12.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+            <p id="section-toc.1-1.13.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-history" class="internal xref">History</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
+            <p id="section-toc.1-1.14.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
 </li>
         </ul>
 </nav>
@@ -1303,22 +1335,74 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">While excellent guidelines such as <span>[<a href="#I-D.irtf-cfrg-cryptography-specification" class="cite xref">I-D.irtf-cfrg-cryptography-specification</a>]</span> exist, remote attestation <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>
-has several distinguishing features which necessitate a separate document.
-One specific example of such a feature is architectural complexity.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">The draft presents an outline of three topics that future versions will cover in more detail:<a href="#section-1-2" class="pilcrow">¶</a></p>
+<div id="need-for-specialized-guidance-in-rats">
+<section id="section-1.1">
+        <h3 id="name-need-for-specialized-guidan">
+<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-need-for-specialized-guidan" class="section-name selfRef">Need for Specialized Guidance in RATS</a>
+        </h3>
+<p id="section-1.1-1">Every Internet Draft needs to have a "Security Considerations" section.
+While general guidelines such as <span>[<a href="#RFC3552" class="cite xref">RFC3552</a>]</span> exist, the underlying threat model is that
+the endpoint is fully trusted (i.e., all software and hardware components in the device may access the keys).
+RATS <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> has a primarily different threat model in the sense that only parts of the endpoint (called Attester) are trusted (i.e., only specific software and hardware components in the device may access the keys), and the goal is to establish the trustworthiness of the endpoint.
+In other words, <span>[<a href="#RFC3552" class="cite xref">RFC3552</a>]</span> deals with a network adversary, whereas RATS deals with an endpoint adversary, which may have root access or physical control over the device with which it can extract keys from software or hardware.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-2">Moreover, remote attestation has several distinguishing features that necessitate a separate document.
+One specific example of such a feature is the architectural complexity of the endpoint.
+While network protocols typically have 2 roles, RATS has additional roles, which complicates
+the picture.
+Unfortunately, no guidelines currently exist for remote attestation <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> in RATS.
+This document aims to fill this gap.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="needs-of-the-target-audience-of-rats">
+<section id="section-1.2">
+        <h3 id="name-needs-of-the-target-audienc">
+<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-needs-of-the-target-audienc" class="section-name selfRef">Needs of the Target Audience of RATS</a>
+        </h3>
+<p id="section-1.2-1">Moreover, while the target audience of Internet Drafts is implementers, researchers, and protocol designers <span>[<a href="#I-D.irtf-cfrg-cryptography-specification" class="cite xref">I-D.irtf-cfrg-cryptography-specification</a>]</span>, RATS drafts generally do not fulfill these needs, in particular the needs of researchers and protocol designers.
+On the other hand, in our observation, implementers generally find it hard to relate the abstract concepts of RATS to the real-world systems. In general, implementers and protocol designers of RATS are thus left with little or no guidance.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="inaccuracies-in-published-rats-rfcs">
+<section id="section-1.3">
+        <h3 id="name-inaccuracies-in-published-r">
+<a href="#section-1.3" class="section-number selfRef">1.3. </a><a href="#name-inaccuracies-in-published-r" class="section-name selfRef">Inaccuracies in Published RATS RFCs</a>
+        </h3>
+<p id="section-1.3-1">Unfortunately, many published RFCs of RATS provide inaccurate or ambiguous security and privacy considerations, which may lead to errors in design and implementation, and give a false
+sense of security.
+As an example, many proposed designs in <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> are broken.<a href="#section-1.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="aggregator-in-coserv">
+<section id="section-1.4">
+        <h3 id="name-aggregator-in-coserv">
+<a href="#section-1.4" class="section-number selfRef">1.4. </a><a href="#name-aggregator-in-coserv" class="section-name selfRef">Aggregator in CoServ</a>
+        </h3>
+<p id="section-1.4-1">RATS has recently adopted <span>[<a href="#I-D.ietf-rats-coserv" class="cite xref">I-D.ietf-rats-coserv</a>]</span>, which has an ambiguous role Aggregator, for which -- in our assessment -- the authors have not yet provided a reasonable justification.
+To the best of our knowledge and understanding, a malicious Aggregator breaks the security of the RATS ecosystem and invalidates the formal proofs for RATS primitives.
+Surprisingly, during the three-week adoption call and one week discussion afterwards, one of the authors of the draft <span>[<a href="#I-D.ietf-rats-coserv" class="cite xref">I-D.ietf-rats-coserv</a>]</span> did not support adoption of the draft. Based on the above reasons, as researchers, we have genuine skepticism about this work. We request the authors to be transparent on this work and clarify the concerns raised at the adoption time (summarized to some extent in this draft).<a href="#section-1.4-1" class="pilcrow">¶</a></p>
+<p id="section-1.4-2">We will keep making good-faith attempts and requesting the authors to state the risks properly.<a href="#section-1.4-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="scope">
+<section id="section-1.5">
+        <h3 id="name-scope">
+<a href="#section-1.5" class="section-number selfRef">1.5. </a><a href="#name-scope" class="section-name selfRef">Scope</a>
+        </h3>
+<p id="section-1.5-1">To improve the situation, this draft presents an outline of three topics that future versions will cover in more detail:<a href="#section-1.5-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-1-3.1">
-          <p id="section-1-3.1.1">Corrections in published RATS RFCs <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>, <span>[<a href="#RFC9781" class="cite xref">RFC9781</a>]</span>, <span>[<a href="#RFC9783" class="cite xref">RFC9783</a>]</span> and <span>[<a href="#RFC9711" class="cite xref">RFC9711</a>]</span><a href="#section-1-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-1.5-2.1">
+            <p id="section-1.5-2.1.1">Corrections in published RATS RFCs <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>, <span>[<a href="#RFC9781" class="cite xref">RFC9781</a>]</span>, <span>[<a href="#RFC9783" class="cite xref">RFC9783</a>]</span> and <span>[<a href="#RFC9711" class="cite xref">RFC9711</a>]</span><a href="#section-1.5-2.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-1-3.2">
-          <p id="section-1-3.2.1">Security concerns in one currently adopted RATS draft <span>[<a href="#I-D.ietf-rats-coserv" class="cite xref">I-D.ietf-rats-coserv</a>]</span> and one proposed for
-adoption RATS draft <span>[<a href="#I-D.deshpande-rats-multi-verifier" class="cite xref">I-D.deshpande-rats-multi-verifier</a>]</span><a href="#section-1-3.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-1.5-2.2">
+            <p id="section-1.5-2.2.1">Security concerns in one currently adopted RATS draft <span>[<a href="#I-D.ietf-rats-coserv" class="cite xref">I-D.ietf-rats-coserv</a>]</span> and one proposed for
+adoption RATS draft <span>[<a href="#I-D.deshpande-rats-multi-verifier" class="cite xref">I-D.deshpande-rats-multi-verifier</a>]</span><a href="#section-1.5-2.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-1-3.3">
-          <p id="section-1-3.3.1">General security guidelines, baseline or template that other drafts can simply point to<a href="#section-1-3.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-1.5-2.3">
+            <p id="section-1.5-2.3.1">General security baseline that other drafts can simply point to, or guidelines or template that other drafts can use<a href="#section-1.5-2.3.1" class="pilcrow">¶</a></p>
 </li>
-      </ul>
+        </ul>
+</section>
+</div>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1337,7 +1421,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-general-hierarchy-of-authen">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-general-hierarchy-of-authen" class="section-name selfRef">General Hierarchy of Authentication</a>
       </h2>
-<p id="section-3-1"><span>[<a href="#Gen-Approach" class="cite xref">Gen-Approach</a>]</span> proposes general hierarchy of one-way authentication, which can help precisely
+<p id="section-3-1">Authentication is a term which is often ambiguous in RATS specifications. We propose general hierarchy of one-way authentication <span>[<a href="#Gen-Approach" class="cite xref">Gen-Approach</a>]</span>, which can help precisely
 state the intended level of authentication (in decreasing order):<a href="#section-3-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3-2.1">
@@ -1432,31 +1516,38 @@ Details will be added in future versions.<a href="#section-3-3" class="pilcrow">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-attacks" class="section-name selfRef">Attacks</a>
       </h2>
 <p id="section-5-1">Security considerations in RATS specifications need to clarify how the following attacks are avoided or mitigated:<a href="#section-5-1" class="pilcrow">¶</a></p>
-<div id="replay-attacks">
+<div id="evidence-replay-attacks">
 <section id="section-5.1">
-        <h3 id="name-replay-attacks">
-<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-replay-attacks" class="section-name selfRef">Replay attacks</a>
+        <h3 id="name-evidence-replay-attacks">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-evidence-replay-attacks" class="section-name selfRef">(Evidence) Replay Attacks</a>
         </h3>
-<p id="section-5.1-1">See <span>[<a href="#Meeting-124-RATS-Slides" class="cite xref">Meeting-124-RATS-Slides</a>]</span>. TODO.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="relay-attacks">
-<section id="section-5.2">
-        <h3 id="name-relay-attacks">
-<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-relay-attacks" class="section-name selfRef">Relay attacks</a>
-        </h3>
-<p id="section-5.2-1">See <span>[<a href="#Meeting-124-RATS-Slides" class="cite xref">Meeting-124-RATS-Slides</a>]</span>. TODO.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-1">In this attack, a network or endpoint adversary -- with access to older Evidence -- can replay Evidence with stale Claims which no longer represent the actual state of the Attester, potentially resulting in exposure of confidential data <span>[<a href="#RA-TLS" class="cite xref">RA-TLS</a>]</span>.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-2">Replay of stale Evidence may be within the same connection or across multiple connections.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="diversion-attacks">
-<section id="section-5.3">
+<section id="section-5.2">
         <h3 id="name-diversion-attacks">
-<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-diversion-attacks" class="section-name selfRef">Diversion attacks</a>
+<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-diversion-attacks" class="section-name selfRef">Diversion Attacks</a>
         </h3>
-<p id="section-5.3-1">In this attack, a network adversary -- with Dolev-Yao capabilities <span>[<a href="#Dolev-Yao" class="cite xref">Dolev-Yao</a>]</span> and access (e.g., via
-Foreshadow <span>[<a href="#Foreshadow" class="cite xref">Foreshadow</a>]</span>) to attestation key of any machine in the world -- can redirect a connection intended
+<p id="section-5.2-1">In this attack, a network adversary -- with Dolev-Yao capabilities <span>[<a href="#Dolev-Yao" class="cite xref">Dolev-Yao</a>]</span> and access (e.g., via
+Foreshadow <span>[<a href="#Foreshadow" class="cite xref">Foreshadow</a>]</span>) to the attestation key of any machine in the world -- can redirect a connection intended
 for a specific Infrastructure Provider to the compromised machine, potentially resulting in exposure of
-confidential data <span>[<a href="#Meeting-122-TLS-Slides" class="cite xref">Meeting-122-TLS-Slides</a>]</span>. TODO.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+confidential data <span>[<a href="#ID-Crisis" class="cite xref">ID-Crisis</a>]</span>.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-2">In the context of confidential computing and TLS as a transport protocol, we reported these attacks to the TLS WG in February 2025 <span>[<a href="#Usama-TLS-26Feb25" class="cite xref">Usama-TLS-26Feb25</a>]</span>. A formal proof is available
+<span>[<a href="#ID-Crisis-Repo" class="cite xref">ID-Crisis-Repo</a>]</span> for further research and
+development. Since reporting to TLS WG, these attacks have been practically
+exploited in <a href="https://tee.fail/">TEE.fail</a>, <a href="https://wiretap.fail/">Wiretap.fail</a>, and <a href="https://badram.eu/">BadRAM</a>.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="relay-attacks">
+<section id="section-5.3">
+        <h3 id="name-relay-attacks">
+<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-relay-attacks" class="section-name selfRef">Relay Attacks</a>
+        </h3>
+<p id="section-5.3-1">In this attack, a network or endpoint adversary -- with access to suitable binding material -- can relay an attestation request to a genuine Attester and present the genuine Evidence as its own,
+potentially resulting in impersonation of genuine Attester <span>[<a href="#RelayAttacks-RATS" class="cite xref">RelayAttacks-RATS</a>]</span>.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.3-2">Note that <em>replay</em> is about <em>same</em> Attester while <em>relay</em> attack is about <em>different</em> Attesters.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1466,7 +1557,13 @@ confidential data <span>[<a href="#Meeting-122-TLS-Slides" class="cite xref">Mee
       <h2 id="name-potential-mitigations">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-potential-mitigations" class="section-name selfRef">Potential Mitigations</a>
       </h2>
-<p id="section-6-1">This section will describe the countermeasures and their evaluation. See <span>[<a href="#Meeting-124-RATS-Slides" class="cite xref">Meeting-124-RATS-Slides</a>]</span>. TODO.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">This section describes the countermeasures and their evaluation.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2">To mitigate the above attacks, we propose post-handshake attestation.
+We are not aware of any attacks on post-handshake attestation. Post-handshake attestation
+avoids replay attacks by using a fresh attestation nonce. Moreover, considering TLS as the transport protocol, it avoids diversion and relay attacks
+by binding the Evidence to the underlying TLS connection, such as using Exported Keying Material (EKM)
+<span>[<a href="#I-D.ietf-tls-rfc8446bis" class="cite xref">I-D.ietf-tls-rfc8446bis</a>]</span>, as proposed in Section 9.2 of <span>[<a href="#ID-Crisis" class="cite xref">ID-Crisis</a>]</span>. <span>[<a href="#RFC9261" class="cite xref">RFC9261</a>]</span> and <span>[<a href="#RFC9266" class="cite xref">RFC9266</a>]</span> provide mechanisms for such bindings. Efforts for a formal proof
+of security of post-handshake attestation are ongoing.<a href="#section-6-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="examples-of-specifications-that-could-be-improved">
@@ -1592,17 +1689,51 @@ that might not reflect the actual system state, but a past one.<a href="#section
       <h2 id="name-examples-of-parts-of-specif">
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-examples-of-parts-of-specif" class="section-name selfRef">Examples of Parts of Specifications That are Detrimental for Security</a>
       </h2>
-<p id="section-8-1">We believe that the following parts of designs are detrimental for the RATS ecosystem:<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-1">We believe that the following parts of designs are detrimental for the RATS ecosystem and without proper security and privacy considerations, they put the community at risk.<a href="#section-8-1" class="pilcrow">¶</a></p>
 <div id="multi-verifiers">
 <section id="section-8.1">
         <h3 id="name-multi-verifiers">
 <a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-multi-verifiers" class="section-name selfRef">Multi-Verifiers</a>
         </h3>
-<p id="section-8.1-1">The design of multi-verifiers <span>[<a href="#I-D.deshpande-rats-multi-verifier" class="cite xref">I-D.deshpande-rats-multi-verifier</a>]</span> not only increases security risks
-in terms of increasing the Trusted Computing Base (TCB), but also increases the privacy risks, as potentially sensitive
-information is sent to multiple verifiers.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
-<p id="section-8.1-2">Besides, the rationale presented by the authors -- appraisal policy being the intellectual property of the vendors -- breaks the
-open-source nature of RATS ecosystem. This requires blindly trusting the vendors and increases the attack surface.<a href="#section-8.1-2" class="pilcrow">¶</a></p>
+<p id="section-8.1-1">We believe this draft <span>[<a href="#I-D.deshpande-rats-multi-verifier" class="cite xref">I-D.deshpande-rats-multi-verifier</a>]</span> in its current form is doing <strong>disservice</strong> to the community by substantially degrading <strong>both</strong> the security and privacy of the systems, and not properly highlighting the security and privacy risks, and by implicitly promoting the blind trust in vendors.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.1-2">In summary:<a href="#section-8.1-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-8.1-3.1">
+            <p id="section-8.1-3.1.1">From a security perspective, if one of the Verifiers break, it breaks the whole system.<a href="#section-8.1-3.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.1-3.2">
+            <p id="section-8.1-3.2.1">From a privacy perspective, the current design also exposes Personally Identifiable Information (PII) to all the Verifiers.<a href="#section-8.1-3.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<div id="security-considerations">
+<section id="section-8.1.1">
+          <h4 id="name-security-considerations">
+<a href="#section-8.1.1" class="section-number selfRef">8.1.1. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+          </h4>
+<p id="section-8.1.1-1">What's important from the security standpoint is the TCB of the RP, and not the Attester. This is because it is the RP who has to make final trust decision, and not the Attester. Verifier is -- in any case -- in the TCB of RP.<a href="#section-8.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.1.1-2">Hence, we believe the security considerations of multi-verifiers <span>[<a href="#I-D.deshpande-rats-multi-verifier" class="cite xref">I-D.deshpande-rats-multi-verifier</a>]</span> must say:<a href="#section-8.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-8.1.1-3">Compared to a single verifier, the use of multi-verifiers increases security risks in terms of increasing the overall Trusted Computing Base (TCB) from the RP's perspective.<a href="#section-8.1.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="privacy-considerations">
+<section id="section-8.1.2">
+          <h4 id="name-privacy-considerations">
+<a href="#section-8.1.2" class="section-number selfRef">8.1.2. </a><a href="#name-privacy-considerations" class="section-name selfRef">Privacy Considerations</a>
+          </h4>
+<p id="section-8.1.2-1">In addition to revealing the PII to the Lead Verifier (which say is kind of equivalent to monolithic verifier), the current proposal in draft reveals the PII to all those Component Verifiers as well.<a href="#section-8.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-8.1.2-2">We believe the privacy considerations of multi-verifiers <span>[<a href="#I-D.deshpande-rats-multi-verifier" class="cite xref">I-D.deshpande-rats-multi-verifier</a>]</span> must say:<a href="#section-8.1.2-2" class="pilcrow">¶</a></p>
+<p id="section-8.1.2-3">Compared to a single verifier, the use of multi-verifiers may increase the privacy risks, as potentially sensitive information may be sent to multiple verifiers.<a href="#section-8.1.2-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="open-source">
+<section id="section-8.1.3">
+          <h4 id="name-open-source">
+<a href="#section-8.1.3" class="section-number selfRef">8.1.3. </a><a href="#name-open-source" class="section-name selfRef">Open-source</a>
+          </h4>
+<p id="section-8.1.3-1">Besides, the rationale presented by the authors at meeting 124 -- appraisal policy being the intellectual property of the vendors -- breaks the
+open-source nature of RATS ecosystem. This requires blindly trusting the vendors and increases the attack surface.<a href="#section-8.1.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="aggregator-based-design">
@@ -1613,20 +1744,20 @@ open-source nature of RATS ecosystem. This requires blindly trusting the vendors
 <p id="section-8.2-1">Aggregator in <span>[<a href="#I-D.ietf-rats-coserv" class="cite xref">I-D.ietf-rats-coserv</a>]</span> is an explicit trust anchor and the addition of new trust anchor needs to have a strong justification.
 Having a malicious Aggregator in the design trivially breaks all the guarantees.
 It should be clarified how trust is established between Aggregator and Verifier in the context of Confidential Computing threat model.<a href="#section-8.2-1" class="pilcrow">¶</a></p>
-<p id="section-8.2-2">The fact that Aggregator has collective information of Reference Values Provider and Endorsers
+<p id="section-8.2-2">The fact that Aggregator has collective information of Reference Values Providers and Endorsers
 makes it a special target of attack, and thus a single point of failure. It increases security
-risks because Aggregator can be compromised independent of the Reference Values Provider and
-Endorsers. That is, even if Reference Values Provider and Endorsers are secure, the compromise
+risks because Aggregator can be compromised independent of the Reference Values Providers and
+Endorsers. That is, even if Reference Values Providers and Endorsers are secure, the compromise
 of Aggregator breaks the security of the system.
 Moreover, if Aggregator is not running inside a TEE, it is relatively easy to compromise the secrets.<a href="#section-8.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
-<div id="security-considerations">
+<div id="security-considerations-1">
 <section id="section-9">
-      <h2 id="name-security-considerations">
-<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      <h2 id="name-security-considerations-2">
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-security-considerations-2" class="section-name selfRef">Security Considerations</a>
       </h2>
 <p id="section-9-1">All of this document is about security considerations.<a href="#section-9-1" class="pilcrow">¶</a></p>
 </section>
@@ -1705,35 +1836,63 @@ Moreover, if Aggregator is not running inside a TEE, it is relatively easy to co
 <dd class="break"></dd>
 <dt id="I-D.deshpande-rats-multi-verifier">[I-D.deshpande-rats-multi-verifier]</dt>
         <dd>
-<span class="refAuthor">Deshpande, Y.</span>, <span class="refAuthor">jun, Z.</span>, <span class="refAuthor">Labiod, H.</span>, and <span class="refAuthor">H. Birkholz</span>, <span class="refTitle">"Remote Attestation with Multiple Verifiers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-deshpande-rats-multi-verifier-03</span>, <time datetime="2025-10-20" class="refDate">20 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-deshpande-rats-multi-verifier-03">https://datatracker.ietf.org/doc/html/draft-deshpande-rats-multi-verifier-03</a>&gt;</span>. </dd>
+<span class="refAuthor">Deshpande, Y.</span>, <span class="refAuthor">jun, Z.</span>, <span class="refAuthor">Labiod, H.</span>, and <span class="refAuthor">H. Birkholz</span>, <span class="refTitle">"Remote Attestation with Multiple Verifiers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-deshpande-rats-multi-verifier-04</span>, <time datetime="2026-02-07" class="refDate">7 February 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-deshpande-rats-multi-verifier-04">https://datatracker.ietf.org/doc/html/draft-deshpande-rats-multi-verifier-04</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-coserv">[I-D.ietf-rats-coserv]</dt>
         <dd>
-<span class="refAuthor">Howard, P.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Kamal, S.</span>, <span class="refAuthor">Mandyam, G.</span>, and <span class="refAuthor">D. Ma</span>, <span class="refTitle">"Concise Selector for Endorsements and Reference Values"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-coserv-02</span>, <time datetime="2025-10-20" class="refDate">20 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-coserv-02">https://datatracker.ietf.org/doc/html/draft-ietf-rats-coserv-02</a>&gt;</span>. </dd>
+<span class="refAuthor">Howard, P.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Kamal, S.</span>, <span class="refAuthor">Mandyam, G.</span>, and <span class="refAuthor">D. Ma</span>, <span class="refTitle">"Concise Selector for Endorsements and Reference Values"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-coserv-07</span>, <time datetime="2026-07-06" class="refDate">6 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-coserv-07">https://datatracker.ietf.org/doc/html/draft-ietf-rats-coserv-07</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-tls-rfc8446bis">[I-D.ietf-tls-rfc8446bis]</dt>
+        <dd>
+<span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tls-rfc8446bis-14</span>, <time datetime="2025-09-13" class="refDate">13 September 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tls-rfc8446bis-14">https://datatracker.ietf.org/doc/html/draft-ietf-tls-rfc8446bis-14</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.irtf-cfrg-cryptography-specification">[I-D.irtf-cfrg-cryptography-specification]</dt>
         <dd>
 <span class="refAuthor">Sullivan, N.</span> and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"Guidelines for Writing Cryptography Specifications"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-cryptography-specification-02</span>, <time datetime="2025-07-07" class="refDate">7 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-cryptography-specification-02">https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-cryptography-specification-02</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="Meeting-122-TLS-Slides">[Meeting-122-TLS-Slides]</dt>
+<dt id="ID-Crisis">[ID-Crisis]</dt>
         <dd>
-<span class="refAuthor">Sardar, M. U.</span>, <span class="refAuthor">Moustafa, M.</span>, and <span class="refAuthor">T. Aura</span>, <span class="refTitle">"Identity Crisis in Attested TLS for Confidential Computing"</span>, <time datetime="2025-03" class="refDate">March 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/meeting/122/materials/slides-122-tls-identity-crisis-00">https://datatracker.ietf.org/meeting/122/materials/slides-122-tls-identity-crisis-00</a>&gt;</span>. </dd>
+<span class="refAuthor">Sardar, M. U.</span>, <span class="refAuthor">Moustafa, M.</span>, and <span class="refAuthor">T. Aura</span>, <span class="refTitle">"Identity Crisis in Confidential Computing: Formal Analysis of Attested TLS"</span>, <time datetime="2025-11" class="refDate">November 2025</time>, <span>&lt;<a href="https://www.researchgate.net/publication/398839141_Identity_Crisis_in_Confidential_Computing_Formal_Analysis_of_Attested_TLS">https://www.researchgate.net/publication/398839141_Identity_Crisis_in_Confidential_Computing_Formal_Analysis_of_Attested_TLS</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="Meeting-124-RATS-Slides">[Meeting-124-RATS-Slides]</dt>
+<dt id="ID-Crisis-Repo">[ID-Crisis-Repo]</dt>
         <dd>
-<span class="refAuthor">Sardar, M. U.</span>, <span class="refTitle">"Guidelines for Security Considerations of RATS"</span>, <time datetime="2025-11" class="refDate">November 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/meeting/124/materials/slides-124-rats-sessb-guideline-for-security-consideration-of-rats-00">https://datatracker.ietf.org/meeting/124/materials/slides-124-rats-sessb-guideline-for-security-consideration-of-rats-00</a>&gt;</span>. </dd>
+<span class="refAuthor">Muhammad Usama Sardar</span>, <span class="refTitle">"Identity Crisis in Confidential Computing: Formal analysis of attested TLS protocols"</span>, <span>&lt;<a href="https://github.com/CCC-Attestation/formal-spec-id-crisis">https://github.com/CCC-Attestation/formal-spec-id-crisis</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RA-TLS">[RA-TLS]</dt>
+        <dd>
+<span class="refAuthor">Sardar, M. U.</span>, <span class="refAuthor">Niemi, A.</span>, <span class="refAuthor">Tschofenig, H.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"Towards Validation of TLS 1.3 Formal Model and Vulnerabilities in Intel's RA-TLS Protocol"</span>, <time datetime="2024-11" class="refDate">November 2024</time>, <span>&lt;<a href="https://www.researchgate.net/publication/385384309_Towards_Validation_of_TLS_13_Formal_Model_and_Vulnerabilities_in_Intel's_RA-TLS_Protocol">https://www.researchgate.net/publication/385384309_Towards_Validation_of_TLS_13_Formal_Model_and_Vulnerabilities_in_Intel's_RA-TLS_Protocol</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RelayAttacks-RATS">[RelayAttacks-RATS]</dt>
+        <dd>
+<span class="refAuthor">Sardar, M. U.</span>, <span class="refTitle">"Relay Attacks in Intra-handshake Attestation for Confidential Agentic AI Systems"</span>, <time datetime="2026-01" class="refDate">January 2026</time>, <span>&lt;<a href="https://mailarchive.ietf.org/arch/msg/rats/6gbqx0XY8WYrH3Mx4vO8n2-uKgY/">https://mailarchive.ietf.org/arch/msg/rats/6gbqx0XY8WYrH3Mx4vO8n2-uKgY/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC3552">[RFC3552]</dt>
+        <dd>
+<span class="refAuthor">Rescorla, E.</span> and <span class="refAuthor">B. Korver</span>, <span class="refTitle">"Guidelines for Writing RFC Text on Security Considerations"</span>, <span class="seriesInfo">BCP 72</span>, <span class="seriesInfo">RFC 3552</span>, <span class="seriesInfo">DOI 10.17487/RFC3552</span>, <time datetime="2003-07" class="refDate">July 2003</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3552">https://www.rfc-editor.org/rfc/rfc3552</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8446">[RFC8446]</dt>
         <dd>
 <span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="seriesInfo">RFC 8446</span>, <span class="seriesInfo">DOI 10.17487/RFC8446</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8446">https://www.rfc-editor.org/rfc/rfc8446</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9261">[RFC9261]</dt>
+        <dd>
+<span class="refAuthor">Sullivan, N.</span>, <span class="refTitle">"Exported Authenticators in TLS"</span>, <span class="seriesInfo">RFC 9261</span>, <span class="seriesInfo">DOI 10.17487/RFC9261</span>, <time datetime="2022-07" class="refDate">July 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9261">https://www.rfc-editor.org/rfc/rfc9261</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9266">[RFC9266]</dt>
+        <dd>
+<span class="refAuthor">Whited, S.</span>, <span class="refTitle">"Channel Bindings for TLS 1.3"</span>, <span class="seriesInfo">RFC 9266</span>, <span class="seriesInfo">DOI 10.17487/RFC9266</span>, <time datetime="2022-07" class="refDate">July 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9266">https://www.rfc-editor.org/rfc/rfc9266</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="Sec-Cons-RATS">[Sec-Cons-RATS]</dt>
         <dd>
 <span class="refAuthor">Sardar, M. U.</span>, <span class="refTitle">"Security considerations of remote attestation (RFC9334)"</span>, <time datetime="2024-11" class="refDate">November 2024</time>, <span>&lt;<a href="https://mailarchive.ietf.org/arch/msg/rats/jcAv9FKbYSIVtUNQ8ggEHL8lrmM/">https://mailarchive.ietf.org/arch/msg/rats/jcAv9FKbYSIVtUNQ8ggEHL8lrmM/</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="Tech-Concepts">[Tech-Concepts]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Sardar, M. U.</span>, <span class="refTitle">"Perspicuity of Attestation Mechanisms in Confidential Computing: Technical Concepts"</span>, <time datetime="2025-10" class="refDate">October 2025</time>, <span>&lt;<a href="https://www.researchgate.net/publication/396199290_Perspicuity_of_Attestation_Mechanisms_in_Confidential_Computing_Technical_Concepts">https://www.researchgate.net/publication/396199290_Perspicuity_of_Attestation_Mechanisms_in_Confidential_Computing_Technical_Concepts</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="Usama-TLS-26Feb25">[Usama-TLS-26Feb25]</dt>
+      <dd>
+<span class="refAuthor">Muhammad Usama Sardar</span>, <span class="refTitle">"Impersonation attacks on protocol in draft-fossati-tls-attestation (Identity crisis in Attested TLS) for Confidential Computing"</span>, <time datetime="2025-02" class="refDate">February 2025</time>, <span>&lt;<a href="https://mailarchive.ietf.org/arch/msg/tls/Jx_yPoYWMIKaqXmPsytKZBDq23o/">https://mailarchive.ietf.org/arch/msg/tls/Jx_yPoYWMIKaqXmPsytKZBDq23o/</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -1748,13 +1907,36 @@ Moreover, if Aggregator is not running inside a TEE, it is relatively easy to co
 <p id="appendix-A-1">The author wishes to thank Ira McDonald and Ivan Gudymenko for insightful discussions.
 The author also wishes to thank the authors of <span>[<a href="#I-D.ietf-rats-coserv" class="cite xref">I-D.ietf-rats-coserv</a>]</span> (in particular Thomas
 Fossati and Paul Howard) for several discussions, which unfortunately could not resolve the
-above concerns, and hence led to this draft.
-The author also gratefully acknowledges the authors of <span>[<a href="#I-D.irtf-cfrg-cryptography-specification" class="cite xref">I-D.irtf-cfrg-cryptography-specification</a>]</span>, which
-serves as the inspiration of this work.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+above concerns, and hence led to this draft.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="history">
+<section id="appendix-B">
+      <h2 id="name-history">
+<a href="#name-history" class="section-name selfRef">History</a>
+      </h2>
+<p id="appendix-B-1">-01<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B-2.1">
+          <p id="appendix-B-2.1.1">Concrete text proposal for security and privacy considerations of multi-verifiers <span>[<a href="#I-D.deshpande-rats-multi-verifier" class="cite xref">I-D.deshpande-rats-multi-verifier</a>]</span><a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="appendix-B-3">-02<a href="#appendix-B-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B-4.1">
+          <p id="appendix-B-4.1.1">Introduction and motivation<a href="#appendix-B-4.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-4.2">
+          <p id="appendix-B-4.2.1">Defined replay and relay attacks<a href="#appendix-B-4.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-4.3">
+          <p id="appendix-B-4.3.1">Added mitigations<a href="#appendix-B-4.3.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-B">
+<section id="appendix-C">
       <h2 id="name-authors-address">
 <a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
       </h2>
