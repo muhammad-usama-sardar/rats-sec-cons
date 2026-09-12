@@ -28,6 +28,10 @@ author:
     fullname: "Muhammad Usama Sardar"
     organization: TU Dresden
     email: "muhammad_usama.sardar@tu-dresden.de"
+ -
+    fullname: "Serhii Nikolaichuk"
+    organization: The Capital Index, Austin, Texas
+    email: "nikolaichuk.s.f@gmail.com"
 
 normative:
   RFC9334: rfc9334
