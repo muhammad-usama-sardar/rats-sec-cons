@@ -6,6 +6,7 @@
 <meta content="initial-scale=1.0" name="viewport">
 <title>Guidelines for Security Considerations of RATS</title>
 <meta content="Muhammad Usama Sardar" name="author">
+<meta content="Serhii Nikolaichuk" name="author">
 <meta content="
        This document aims to provide guidelines and best practices for writing
    security considerations for technical specifications for RATS
@@ -30,18 +31,18 @@
 <meta content="draft-sardar-rats-sec-cons-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.34.0
-    Python 3.14.5
+    Python 3.14.7
     ConfigArgParse 1.7.5
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.10.0
+    platformdirs 4.11.7
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.8.2
+    wcwidth 0.8.3
 -->
 <link href="draft-sardar-rats-sec-cons.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -77,7 +78,6 @@
   src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
   unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
-
 @font-face {
   font-family: 'Lora';
   font-style: italic;
@@ -126,7 +126,6 @@
   src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-
 @font-face {
   font-family: 'Lora';
   font-style: normal;
@@ -191,7 +190,6 @@
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
 }
 
 @font-face {
@@ -1060,11 +1058,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">RATS Security Considerations</td>
-<td class="right">July 2026</td>
+<td class="right">September 2026</td>
 </tr></thead>
 <tfoot><tr>
-<td class="left">Sardar</td>
-<td class="center">Expires 7 January 2027</td>
+<td class="left">Sardar &amp; Nikolaichuk</td>
+<td class="center">Expires 16 March 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1080,17 +1078,21 @@ svg {
 <a href="https://www.rfc-editor.org/rfc/rfc9334" class="eref">9334</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-07-06" class="published">6 July 2026</time>
+<time datetime="2026-09-12" class="published">12 September 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-01-07">7 January 2027</time></dd>
-<dt class="label-authors">Author:</dt>
+<dd class="expires"><time datetime="2027-03-16">16 March 2027</time></dd>
+<dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
       <div class="author-name">M. U. Sardar</div>
 <div class="org">TU Dresden</div>
+</div>
+<div class="author">
+      <div class="author-name">S. Nikolaichuk</div>
+<div class="org">The Capital Index, Austin, Texas</div>
 </div>
 </dd>
 </dl>
@@ -1145,7 +1147,7 @@ svg {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 7 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 16 March 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1332,7 +1334,7 @@ svg {
             <p id="section-toc.1-1.13.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-history" class="internal xref">History</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
-            <p id="section-toc.1-1.14.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+            <p id="section-toc.1-1.14.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1887,7 +1889,7 @@ Moreover, if Aggregator is not running inside a TEE, it is relatively easy to co
 <dd class="break"></dd>
 <dt id="I-D.irtf-cfrg-cryptography-specification">[I-D.irtf-cfrg-cryptography-specification]</dt>
         <dd>
-<span class="refAuthor">Sullivan, N.</span> and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"Guidelines for Writing Cryptography Specifications"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-cryptography-specification-02</span>, <time datetime="2025-07-07" class="refDate">7 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-cryptography-specification-02">https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-cryptography-specification-02</a>&gt;</span>. </dd>
+<span class="refAuthor">Sullivan, N.</span> and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"Guidelines for Writing Cryptography Specifications"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-cryptography-specification-03</span>, <time datetime="2026-07-06" class="refDate">6 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-cryptography-specification-03">https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-cryptography-specification-03</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="ID-Crisis">[ID-Crisis]</dt>
         <dd>
@@ -1980,8 +1982,8 @@ above concerns, and hence led to this draft.<a href="#appendix-A-1" class="pilcr
 </div>
 <div id="authors-addresses">
 <section id="appendix-C">
-      <h2 id="name-authors-address">
-<a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
 <address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Muhammad Usama Sardar</span></div>
@@ -1989,6 +1991,14 @@ above concerns, and hence led to this draft.<a href="#appendix-A-1" class="pilcr
 <div class="email">
 <span>Email:</span>
 <a href="mailto:muhammad_usama.sardar@tu-dresden.de" class="email">muhammad_usama.sardar@tu-dresden.de</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Serhii Nikolaichuk</span></div>
+<div dir="auto" class="left"><span class="org">The Capital Index, Austin, Texas</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:nikolaichuk.s.f@gmail.com" class="email">nikolaichuk.s.f@gmail.com</a>
 </div>
 </address>
 </section>

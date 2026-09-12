@@ -4,9 +4,9 @@
 
 RATS Working Group                                          M. U. Sardar
 Internet-Draft                                                TU Dresden
-Updates: 9334 (if approved)                                  6 July 2026
-Intended status: Informational                                          
-Expires: 7 January 2027
+Updates: 9334 (if approved)                               S. Nikolaichuk
+Intended status: Informational          The Capital Index, Austin, Texas
+Expires: 16 March 2027                                 12 September 2026
 
 
              Guidelines for Security Considerations of RATS
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 January 2027.
+   This Internet-Draft will expire on 16 March 2027.
 
 Copyright Notice
 
@@ -120,7 +120,7 @@ Table of Contents
      11.2.  Informative References
    Acknowledgments
    History
-   Author's Address
+   Authors' Addresses
 
 1.  Introduction
 
@@ -619,9 +619,9 @@ Table of Contents
    [I-D.irtf-cfrg-cryptography-specification]
               Sullivan, N. and C. A. Wood, "Guidelines for Writing
               Cryptography Specifications", Work in Progress, Internet-
-              Draft, draft-irtf-cfrg-cryptography-specification-02, 7
-              July 2025, <https://datatracker.ietf.org/doc/html/draft-
-              irtf-cfrg-cryptography-specification-02>.
+              Draft, draft-irtf-cfrg-cryptography-specification-03, 6
+              July 2026, <https://datatracker.ietf.org/doc/html/draft-
+              irtf-cfrg-cryptography-specification-03>.
 
    [ID-Crisis]
               Sardar, M., Moustafa, M., and T. Aura, "Identity Crisis in
@@ -717,8 +717,13 @@ History
 
    *  Added mitigations
 
-Author's Address
+Authors' Addresses
 
    Muhammad Usama Sardar
    TU Dresden
    Email: muhammad_usama.sardar@tu-dresden.de
+
+
+   Serhii Nikolaichuk
+   The Capital Index, Austin, Texas
+   Email: nikolaichuk.s.f@gmail.com
