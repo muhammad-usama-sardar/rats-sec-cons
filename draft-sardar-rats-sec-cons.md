@@ -29,6 +29,10 @@ author:
     organization: TU Dresden
     email: "muhammad_usama.sardar@tu-dresden.de"
  -
+    fullname: "Songbo Bu"
+    organization: Shanghai Guan An Information Technology Co., Ltd., China
+    email: "bluedognull@gmail.com"
+ -
     fullname: "Serhii Nikolaichuk"
     organization: The Capital Index, Austin, Texas
     email: "nikolaichuk.s.f@gmail.com"
