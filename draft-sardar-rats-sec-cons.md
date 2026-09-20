@@ -33,6 +33,15 @@ author:
     organization: Shanghai Guan An Information Technology Co., Ltd., China
     email: "bluedognull@gmail.com"
  -
+    fullname: "Chengxin Huang"
+    organization: Independent
+    email: "aurestarnull@gmail.com"
+ -
+    fullname: "Haowen Song"
+    organization: Shanghai Guan An Information Technology Co., Ltd.
+    country: China
+    email: "havan12050544@gmail.com"
+ -
     fullname: "Serhii Nikolaichuk"
     organization: The Capital Index, Austin, Texas
     email: "nikolaichuk.s.f@gmail.com"
