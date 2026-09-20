@@ -6,9 +6,13 @@ RATS Working Group                                          M. U. Sardar
 Internet-Draft                                                TU Dresden
 Updates: 9334 (if approved)                                        S. Bu
 Intended status: InformationalShanghai Guan An Information Technology Co., Ltd., China
-Expires: 17 March 2027                                    S. Nikolaichuk
+Expires: 24 March 2027                                          C. Huang
+                                                             Independent
+                                                                 H. Song
+                       Shanghai Guan An Information Technology Co., Ltd.
+                                                          S. Nikolaichuk
                                         The Capital Index, Austin, Texas
-                                                       13 September 2026
+                                                       20 September 2026
 
 
              Guidelines for Security Considerations of RATS
@@ -57,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 March 2027.
+   This Internet-Draft will expire on 24 March 2027.
 
 Copyright Notice
 
@@ -729,6 +733,17 @@ Authors' Addresses
    Songbo Bu
    Shanghai Guan An Information Technology Co., Ltd., China
    Email: bluedognull@gmail.com
+
+
+   Chengxin Huang
+   Independent
+   Email: aurestarnull@gmail.com
+
+
+   Haowen Song
+   Shanghai Guan An Information Technology Co., Ltd.
+   China
+   Email: havan12050544@gmail.com
 
 
    Serhii Nikolaichuk
