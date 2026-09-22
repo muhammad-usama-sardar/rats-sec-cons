@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-15T03:34:23.205743+00:00",
+  "timestamp": "2026-09-22T03:29:11.660424+00:00",
   "repo": "muhammad-usama-sardar/rats-sec-cons",
   "labels": [
     {
@@ -462,6 +462,61 @@
           "body": "Reviewed the author metadata at 144f8b7. My name, affiliation and email are correct. Approved.",
           "createdAt": "2026-09-13T09:54:43Z",
           "updatedAt": "2026-09-13T09:54:43Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "id": "PR_kwDOQF8zd88AAAABESbwvA",
+      "title": "Add Chengxin and Haowen",
+      "url": "https://github.com/muhammad-usama-sardar/rats-sec-cons/pull/18",
+      "state": "MERGED",
+      "author": "muhammad-usama-sardar",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "They are both working on security analysis.",
+      "createdAt": "2026-09-20T06:34:55Z",
+      "updatedAt": "2026-09-20T13:41:23Z",
+      "baseRepository": "muhammad-usama-sardar/rats-sec-cons",
+      "baseRefName": "main",
+      "baseRefOid": "eb93dfee1058e0747f93408c2308f43269afd12a",
+      "headRepository": "muhammad-usama-sardar/rats-sec-cons",
+      "headRefName": "add-authors",
+      "headRefOid": "c82ac45118b4236b96aba8cf75de50a5fb8b023b",
+      "closedAt": "2026-09-20T13:41:23Z",
+      "mergedAt": "2026-09-20T13:41:23Z",
+      "mergedBy": "muhammad-usama-sardar",
+      "mergeCommit": {
+        "oid": "5a1818bbcc4f1911cfd62f5606be0e2102129a08"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOQF8zd88AAAABOYdw6g",
+          "commit": {
+            "abbreviatedOid": "c82ac45"
+          },
+          "author": "B1ueD0g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-09-20T09:06:25Z",
+          "updatedAt": "2026-09-20T09:06:25Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOQF8zd88AAAABOY-OmA",
+          "commit": {
+            "abbreviatedOid": "c82ac45"
+          },
+          "author": "nikolaichuk7",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "No objections. Welcome, Chengxin and Haowen.",
+          "createdAt": "2026-09-20T13:24:01Z",
+          "updatedAt": "2026-09-20T13:24:01Z",
           "comments": []
         }
       ]
