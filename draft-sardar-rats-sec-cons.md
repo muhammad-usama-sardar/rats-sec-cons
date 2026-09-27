@@ -41,10 +41,6 @@ author:
     organization: Shanghai Guan An Information Technology Co., Ltd.
     country: China
     email: "havan12050544@gmail.com"
- -
-    fullname: "Serhii Nikolaichuk"
-    organization: The Capital Index, Austin, Texas
-    email: "nikolaichuk.s.f@gmail.com"
 
 normative:
   RFC9334: rfc9334
