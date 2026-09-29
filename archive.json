@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-27T03:52:04.861260+00:00",
+  "timestamp": "2026-09-29T04:25:59.000953+00:00",
   "repo": "muhammad-usama-sardar/rats-sec-cons",
   "labels": [
     {
@@ -526,24 +526,26 @@
       "id": "PR_kwDOQF8zd88AAAABFJyw1g",
       "title": "Remove Serhii Nikolaichuk from the author block",
       "url": "https://github.com/muhammad-usama-sardar/rats-sec-cons/pull/19",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "nikolaichuk7",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Please take me off the author block of draft-sardar-rats-sec-cons. There is no text of mine in the document, and I keep my name only where my own text or measurement is.\n\nCompanion to muhammad-usama-sardar/intra-handshake-fail#22.",
       "createdAt": "2026-09-25T17:26:31Z",
-      "updatedAt": "2026-09-25T18:14:59Z",
+      "updatedAt": "2026-09-27T09:28:41Z",
       "baseRepository": "muhammad-usama-sardar/rats-sec-cons",
       "baseRefName": "main",
       "baseRefOid": "5a1818bbcc4f1911cfd62f5606be0e2102129a08",
       "headRepository": "nikolaichuk7/rats-sec-cons",
       "headRefName": "remove-nikolaichuk-from-authors",
       "headRefOid": "b0329a7faff646d7e90c141bf2954c76d1e8c61e",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-09-27T09:28:40Z",
+      "mergedAt": "2026-09-27T09:28:40Z",
+      "mergedBy": "muhammad-usama-sardar",
+      "mergeCommit": {
+        "oid": "3518285a906c90dbe9d76ed32e42d0e642a0529d"
+      },
       "comments": [],
       "reviews": [
         {
@@ -557,6 +559,19 @@
           "body": "As per request of Serhii.\n\nFor the record, he was added after his explicit approval in #16.",
           "createdAt": "2026-09-25T18:14:48Z",
           "updatedAt": "2026-09-25T18:14:48Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOQF8zd88AAAABPaorYg",
+          "commit": {
+            "abbreviatedOid": "b0329a7"
+          },
+          "author": "B1ueD0g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-09-27T08:34:57Z",
+          "updatedAt": "2026-09-27T08:34:57Z",
           "comments": []
         }
       ]
