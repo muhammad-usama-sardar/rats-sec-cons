@@ -30,7 +30,9 @@ author:
     email: "muhammad_usama.sardar@tu-dresden.de"
  -
     fullname: "Songbo Bu"
-    organization: Shanghai Guan An Information Technology Co., Ltd., China
+    organization: Stevens Institute of Technology
+    city: New York
+    country: USA
     email: "bluedognull@gmail.com"
  -
     fullname: "Chengxin Huang"
@@ -44,25 +46,9 @@ author:
 
 normative:
   RFC9334: rfc9334
-  RFC9781: rfc9781
-  RFC9711: rfc9711
-  RFC9783: rfc9783
 
 informative:
-  RFC8446: rfc8446
   RFC3552: rfc3552
-  Tech-Concepts:
-     title: "Perspicuity of Attestation Mechanisms in Confidential Computing: Technical Concepts"
-     date: October 2025,
-     target: https://www.researchgate.net/publication/396199290_Perspicuity_of_Attestation_Mechanisms_in_Confidential_Computing_Technical_Concepts
-     author:
-      - ins: M. U. Sardar
-  Gen-Approach:
-     title: "Perspicuity of Attestation Mechanisms in Confidential Computing: General Approach"
-     date: October 2025,
-     target: https://www.researchgate.net/publication/396593308_Perspicuity_of_Attestation_Mechanisms_in_Confidential_Computing_General_Approach
-     author:
-      - ins: M. U. Sardar
   GDPR:
      title: "Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 on the protection of natural persons with regard to the processing of personal data and on the free movement of such data, and repealing Directive 95/46/EC (General Data Protection Regulation) (Text with EEA relevance)"
      date: May 4, 2016,
@@ -92,19 +78,6 @@ informative:
       - ins: Raoul Strackx
   I-D.irtf-cfrg-cryptography-specification:
   I-D.deshpande-rats-multi-verifier:
-  I-D.ietf-rats-coserv:
-  Clarifications-EAT:
-     title: "Clarifications in draft-ietf-rats-eat"
-     date: 11 April 2025,
-     target: https://mailarchive.ietf.org/arch/msg/rats/4V2zZHhk5IuxwcUMNWpPBpnzpaM/
-     author:
-     - ins: M. U. Sardar
-  Sec-Cons-RATS:
-     title: "Security considerations of remote attestation (RFC9334)"
-     date: 25 November 2024,
-     target: https://mailarchive.ietf.org/arch/msg/rats/jcAv9FKbYSIVtUNQ8ggEHL8lrmM/
-     author:
-     - ins: M. U. Sardar
   RA-TLS:
     title: "Towards Validation of TLS 1.3 Formal Model and Vulnerabilities in Intel's RA-TLS Protocol"
     date: 13 November 2024,
@@ -163,12 +136,8 @@ informative:
 This document aims to provide guidelines and best practices for writing
    security considerations for technical specifications for RATS
    targeting the needs of implementers, researchers, and protocol
-   designers. In particular, it discusses some of the 'bottom turtle' issues. This is a work-in-progress, and the current version mainly presents an outline of the topics that future versions
+   designers. In particular, it discusses some of the 'bottom turtle' issues. This is a work-in-progress, and the current version mainly presents an outline of the general security guidelines, baseline, or template for RATS that future versions
    will cover in more detail.
-
-* Corrections in published RATS RFCs
-* Security concerns in two RATS drafts
-* General security guidelines, baseline, or template for RATS
 
 --- middle
 
@@ -192,18 +161,6 @@ This document aims to fill this gap.
 Moreover, while the target audience of Internet Drafts is implementers, researchers, and protocol designers {{I-D.irtf-cfrg-cryptography-specification}}, RATS drafts generally do not fulfill these needs, in particular the needs of researchers and protocol designers.
 On the other hand, in our observation, implementers generally find it hard to relate the abstract concepts of RATS to the real-world systems. In general, implementers and protocol designers of RATS are thus left with little or no guidance.
 
-## Inaccuracies in Published RATS RFCs
-Unfortunately, many published RFCs of RATS provide inaccurate or ambiguous security and privacy considerations, which may lead to errors in design and implementation, and give a false
-sense of security.
-As an example, many proposed designs in {{-rfc9334}} are broken.
-
-## Aggregator in CoServ
-RATS has recently adopted {{I-D.ietf-rats-coserv}}, which has an ambiguous role Aggregator, for which -- in our assessment -- the authors have not yet provided a reasonable justification.
-To the best of our knowledge and understanding, a malicious Aggregator breaks the security of the RATS ecosystem and invalidates the formal proofs for RATS primitives.
-Surprisingly, during the three-week adoption call and one week discussion afterwards, one of the authors of the draft {{I-D.ietf-rats-coserv}} did not support adoption of the draft. Based on the above reasons, as researchers, we have genuine skepticism about this work. We request the authors to be transparent on this work and clarify the concerns raised at the adoption time (summarized to some extent in this draft).
-
-We will keep making good-faith attempts and requesting the authors to state the risks properly.
-
 ## Motivation
 Unverified protocol designs, imprecisely stated threat model and security goals have led to high and critical severity vulnerabilities related to remote attestation.
 
@@ -221,12 +178,7 @@ The formal analysis led to three orthogonal issues:
 This shows the value of precise threat model and formal analysis in the design of secure protocols to find subtle vulnerabilities, which could otherwise be missed. This draft aims to provide the baseline security considerations that other drafts can simply refer to.
 
 ## Scope
-To improve the situation, this draft presents an outline of three topics that future versions will cover in more detail:
-
-* Corrections in published RATS RFCs {{-rfc9334}}, {{-rfc9781}}, {{-rfc9783}} and {{-rfc9711}}
-* Security concerns in one currently adopted RATS draft {{I-D.ietf-rats-coserv}} and one proposed for
-adoption RATS draft {{I-D.deshpande-rats-multi-verifier}}
-* General security baseline that other drafts can simply point to, or guidelines or template that other drafts can use
+To improve the situation, this draft presents general security baseline that other drafts can simply point to, or guidelines or template that other drafts can use.
 
 
 # Conventions and Definitions
@@ -234,7 +186,7 @@ adoption RATS draft {{I-D.deshpande-rats-multi-verifier}}
 {::boilerplate bcp14-tagged}
 
 # General Hierarchy of Authentication
-Authentication is a term which is often ambiguous in RATS specifications. We propose general hierarchy of one-way authentication {{Gen-Approach}}, which can help precisely
+Authentication is a term which is often ambiguous in RATS specifications. We propose general hierarchy of one-way authentication, which can help precisely
 state the intended level of authentication (in decreasing order):
 
 * One-way injective agreement
@@ -306,118 +258,6 @@ by binding the Evidence to the underlying TLS connection, such as using Exported
 {{I-D.ietf-tls-rfc8446bis}}, as proposed in Section 9.2 of {{ID-Crisis}}. {{-rfc9261}} and {{-rfc9266}} provide mechanisms for such bindings. Efforts for a formal proof
 of security of post-handshake attestation are ongoing.
 
-# Examples of Specifications That Could Be Improved
-
-## RFC9334
-
-### Unprotected Evidence
-{{Section 7.4 of -rfc9334}} has:
-
-{:quote}
->  A conveyance protocol that provides authentication and integrity protection can be used to convey Evidence that is otherwise unprotected (e.g., not signed).
-
-Using a conveyance protocol that provides authentication and integrity protection, such as TLS 1.3 {{-rfc8446}},
-to convey Evidence that is otherwise unprotected (e.g., not signed) undermines all security of remote attestation.
-Essentially, this breaks the chain up to the trust anchor (such as hardware manufacturer) for remote attestation.
-Hence, remote attestation effectively provides no protection in this case and the security guarantees are limited
-to those of the conveyance protocol only. In order to benefit from remote attestation, Evidence MUST be protected
-using dedicated keys chaining back to the trust anchor for remote attestation.
-
-### Missing definitions
-{{-rfc9334}} uses the term Conceptual Messages in capitalization without proper definition.
-
-### Missing Roles and Conceptual Messages
-* Identity Supplier and its corresponding conceptual message Identity are missing and need to be added to the architecture {{Tech-Concepts}}.
-* Attestation Challenge as conceptual message needs to be added to the architecture {{Tech-Concepts}}.
-
-## RFC9781
-
-As argued above for RFC9334, security considerations in {{-rfc9781}} are essentially insufficient.
-
-## RFC9783
-{{-rfc9783}} uses:
-
-* 3x epoch handle (with reference to {{Section 10.2 of -rfc9334}} and
-{{Section 10.3 of -rfc9334}}) whereas RFC9334 never uses epoch handle at all!
-* 1x epoch ID with no reference and no explanation of how it is
-    different from epoch handle
-
-## RFC9711
-
-### Inaccurate opinion
-
-{{Section 7.4 of -rfc9711}} has:
-
-{:quote}
->  For attestation, the keys are associated with specific devices and are configured by device manufacturers.
-
-The quoted text is inaccurate and just an opinion of the editors.
-It should preferably be removed from the RFC.
-For example, in SGX, the keys are not configured by the manufacturer alone.
-The platform owner can provide a random value called OWNER_EPOCH.
-
-For technical details and proposed text, see {{Clarifications-EAT}}.
-
-### Inaccurate Privacy Considerations
-
-{{Section 8.4 of -rfc9711}} has:
-
-{:quote}
->
-The nonce claim is based on a value usually derived remotely (outside of the entity).
-
-Attester-generated nonce does not provide any replay protection since the Attester can pre-generate an Evidence
-that might not reflect the actual system state, but a past one.
-
-See the attack trace for Attester-generated nonce at {{Sec-Cons-RATS}}.
-
-For replay protection, nonce should *always* be derived remotely (for example, by the Relying Party).
-
-# Examples of Parts of Specifications That are Detrimental for Security
-
-We believe that the following parts of designs are detrimental for the RATS ecosystem and without proper security and privacy considerations, they put the community at risk.
-
-## Multi-Verifiers
-We believe this draft {{I-D.deshpande-rats-multi-verifier}} in its current form is doing **disservice** to the community by substantially degrading **both** the security and privacy of the systems, and not properly highlighting the security and privacy risks, and by implicitly promoting the blind trust in vendors.
-
-In summary:
-
-* From a security perspective, if one of the Verifiers breaks, it breaks the whole system.
-* From a privacy perspective, the current design also exposes Personally Identifiable Information (PII) to all the Verifiers.
-
-### Security Considerations
-What's important from the security standpoint is the TCB of the RP, and not the Attester. This is because it is the RP who has to make final trust decision, and not the Attester. Verifier is -- in any case -- in the TCB of RP.
-
-Say there are two Verifiers; how do they establish trust with each other? Who verifies the Verifier - Verifier attested TLS? Section 7.2 of {{I-D.deshpande-rats-multi-verifier}} falls apart on this.
-
-Hence, we believe the security considerations of multi-verifiers {{I-D.deshpande-rats-multi-verifier}} must say:
-
-Compared to a single verifier, the use of multi-verifiers increases security risks in terms of increasing the overall Trusted Computing Base (TCB) from the RP's perspective.
-
-### Privacy Considerations
-In addition to revealing the PII to the Lead Verifier (which say is kind of equivalent to monolithic verifier), the current proposal in draft reveals the PII to all those Component Verifiers as well.
-
-We believe the privacy considerations of multi-verifiers {{I-D.deshpande-rats-multi-verifier}} must say:
-
-Compared to a single verifier, the use of multi-verifiers may increase the privacy risks, as potentially sensitive information may be sent to multiple verifiers.
-
-### Open-source
-Besides, the rationale presented by the authors at meeting 124 -- appraisal policy being the intellectual property of the vendors -- breaks the
-open-source nature of RATS ecosystem. This requires blindly trusting the vendors and increases the attack surface.
-
-## Aggregator-based design
-Aggregator in {{I-D.ietf-rats-coserv}} is an explicit trust anchor and the addition of new trust anchor needs to have a strong justification.
-Having a malicious Aggregator in the design trivially breaks all the guarantees.
-It should be clarified how trust is established between Aggregator and Verifier in the context of Confidential Computing threat model.
-
-The fact that Aggregator has collective information of Reference Values Providers and Endorsers
-makes it a special target of attack, and thus a single point of failure. It increases security
-risks because Aggregator can be compromised independent of the Reference Values Providers and
-Endorsers. That is, even if Reference Values Providers and Endorsers are secure, the compromise
-of Aggregator breaks the security of the system.
-Moreover, if Aggregator is not running inside a TEE, it is relatively easy to compromise the secrets.
-
-
 # Security Considerations
 
 All of this document is about security considerations.
@@ -435,9 +275,6 @@ This document has no IANA actions.
 {:numbered="false"}
 
 The author wishes to thank Ira McDonald and Ivan Gudymenko for insightful discussions.
-The author also wishes to thank the authors of {{I-D.ietf-rats-coserv}} (in particular Thomas
-Fossati and Paul Howard) for several discussions, which unfortunately could not resolve the
-above concerns, and hence led to this draft.
 
 # History
 {:numbered="false"}
