@@ -26,8 +26,11 @@ venue:
 author:
  -
     fullname: "Muhammad Usama Sardar"
-    organization: TU Dresden
-    email: "muhammad_usama.sardar@tu-dresden.de"
+    organization: Technical University of Dresden
+    abbrev: TU Dresden
+    city: Dresden
+    country: Germany
+    email: muhammad_usama.sardar@tu-dresden.de
  -
     fullname: "Songbo Bu"
     organization: Stevens Institute of Technology
@@ -77,7 +80,6 @@ informative:
       - ins: Yuval Yarom
       - ins: Raoul Strackx
   I-D.irtf-cfrg-cryptography-specification:
-  I-D.deshpande-rats-multi-verifier:
   RA-TLS:
     title: "Towards Validation of TLS 1.3 Formal Model and Vulnerabilities in Intel's RA-TLS Protocol"
     date: 13 November 2024,
@@ -128,6 +130,340 @@ informative:
   I-D.ietf-tls-rfc8446bis:
   RFC9261: rfc9261
   RFC9266: rfc9266
+  Intra-handshake.fail:
+    title: "Intra-handshake.fail (CVE-2026-33697): High-severity CVE in Attested TLS"
+    date: June 2026,
+    target: https://www.researchgate.net/publication/408219182_Intra-handshakefail_CVE-2026-33697_High-severity_CVE_in_Attested_TLS
+    author:
+      - ins: M. U. Sardar
+      - ins: V. Dubeyko
+      - ins: J-M. Jacquet
+  Intra-handshake.fail-repo:
+    title: "Intra-handshake.fail (CVE-2026-33697): High-severity CVE in Attested TLS"
+    date: July 2026,
+    target: https://github.com/muhammad-usama-sardar/intra-handshake.fail
+    author:
+      - ins: M. U. Sardar
+      - ins: V. Dubeyko
+      - ins: J-M. Jacquet
+  CVE-2026-33697:
+     author:
+        org: CVE
+     title: CoCoS attested TLS is vulnerable to relay attacks via extracted ephemeral TLS keys
+     target: https://www.cve.org/CVERecord?id=CVE-2026-33697
+     date: 26 March 2026
+  EUVD-2026-16488:
+     author:
+        org: ENISA
+     title: CoCoS attested TLS is vulnerable to relay attacks via extracted ephemeral TLS keys
+     target: https://euvd.enisa.europa.eu/enisa/EUVD-2026-16488
+     date: 26 March 2026
+  CVE-2026-92701:
+     author:
+        org: CVE
+     title: Cocos AI Intra-handshake attested TLS implementation is vulnerable to session-misbinding attacks for Intel TDX verifier path
+     target: https://www.cve.org/CVERecord?id=CVE-2026-92701
+     date: 18 Sept 2026
+  CVE-2026-92702:
+     author:
+        org: CVE
+     title: Cocos AI Intra-handshake attested TLS implementation can accept Evidence with nil, empty, or omitted reportData in the AMD SEV-SNP path
+     target: https://www.cve.org/CVERecord?id=CVE-2026-92702
+     date: 18 Sept 2026
+  CVE-2026-108265:
+     author:
+        org: CVE
+     title: CVE-2026-108265
+     target: https://www.cve.org/CVERecord?id=CVE-2026-108265
+     date: 9 Oct 2026
+  CVE-2026-108266:
+     author:
+        org: CVE
+     title: CVE-2026-108266
+     target: https://www.cve.org/CVERecord?id=CVE-2026-108266
+     date: 9 Oct 2026
+  CVE-2026-108267:
+     author:
+        org: CVE
+     title: CVE-2026-108267
+     target: https://www.cve.org/CVERecord?id=CVE-2026-108267
+     date: 9 Oct 2026
+  CVE-2026-108268:
+     author:
+        org: CVE
+     title: CVE-2026-108268
+     target: https://www.cve.org/CVERecord?id=CVE-2026-108268
+     date: 9 Oct 2026
+  CVE-2026-108269:
+     author:
+        org: CVE
+     title: CVE-2026-108269
+     target: https://www.cve.org/CVERecord?id=CVE-2026-108269
+     date: 9 Oct 2026
+  EUVD-2026-83194:
+     author:
+        org: ENISA
+     title: EUVD-2026-83194
+     target: https://euvd.enisa.europa.eu/enisa/EUVD-2026-83194
+     date: 18 Sept 2026
+  EUVD-2026-83192:
+     author:
+        org: ENISA
+     title: EUVD-2026-83192
+     target: https://euvd.enisa.europa.eu/enisa/EUVD-2026-83192
+     date: 18 Sept 2026
+  GHSA-Cocos-AI:
+    title: "CoCoS attested TLS is vulnerable to relay attacks via extracted ephemeral TLS keys"
+    date: 23 March 2026
+    target: https://github.com/ultravioletrs/cocos/security/advisories/GHSA-vfgg-mvxx-mgg7
+    author:
+      - ins: Ultraviolet Cocos AI
+  GHSA-Cocos-AI2:
+    title: "Cocos AI intra-handshake attested TLS implementation is vulnerable to session-misbinding attacks for Intel TDX verifier path"
+    date: 16 August 2026
+    target: https://github.com/ultravioletrs/cocos/security/advisories/GHSA-4px3-wj2x-xx47
+    author:
+      - ins: Ultraviolet Cocos AI
+  GHSA-Cocos-AI3:
+    title: "Cocos AI intra-handshake attested TLS implementation can accept Evidence with nil, empty, or omitted reportData in the AMD SEV-SNP path"
+    date: 16 August 2026
+    target: https://github.com/ultravioletrs/cocos/security/advisories/GHSA-4r6g-mp48-j2rw
+    author:
+      - ins: Ultraviolet Cocos AI
+  GHSA-Edgeless-Systems:
+    title: "Remote attestation is susceptible to relay attacks"
+    date: August 2026
+    target: https://github.com/edgelesssys/contrast/security/advisories/GHSA-hjgc-jc5v-fw7h
+    author:
+      - ins: Edgeless Systems
+  GHSA-Edgeless-Systems2:
+    title: "Generated policies don't detect all image substitutions"
+    date: August 2026
+    target: https://github.com/edgelesssys/contrast/security/advisories/GHSA-m2qg-wrxv-h898
+    author:
+      - ins: Edgeless Systems
+  GHSA-Edgeless-Systems3:
+    title: "Existing Mesh CA key can cross manifest boundaries during Contrast peer recovery"
+    date: September 2026
+    target: https://github.com/edgelesssys/contrast/security/advisories/GHSA-rxcv-p3px-m3c3
+    author:
+      - ins: Edgeless Systems
+  GHSA-Edgeless-Systems4:
+    title: "Node installer leaves the host containerd configuration world-writable (0666), allowing local privilege escalation"
+    date: September 2026
+    target: https://github.com/edgelesssys/contrast/security/advisories/GHSA-376m-h37w-4rvq
+    author:
+      - ins: Edgeless Systems
+  GHSA-Edgeless-Systems5:
+    title: "Contrast before 1.16.0 is susceptible to remote attestation relay attacks"
+    date: August 2026
+    target: https://github.com/advisories/GHSA-jw33-f4wc-8736
+    author:
+      - ins: Edgeless Systems
+  SEAT-vulnerability-report:
+    title: "Relay Attacks in Intra-handshake Attestation for Confidential Agentic AI Systems"
+    date: 11 Jan 2026,
+    target: https://mailarchive.ietf.org/arch/msg/seat/x3eQxFjQFJLceae6l4_NgXnmsDY/
+    author:
+      - ins: M. U. Sardar
+  GHSA-Privasys-rustls:
+    title: "Privasys RA-TLS challenge mode did not bind attestation evidence to the TLS session"
+    date: 3 September 2026
+    target: https://github.com/Privasys/rustls/security/advisories/GHSA-j6qv-435v-r492
+    author:
+      - ins: Privasys
+  GHSA-Privasys-go:
+    title: "Privasys Go fork: RA-TLS challenge mode did not bind attestation evidence to the TLS session"
+    date: 3 September 2026
+    target: https://github.com/Privasys/go/security/advisories/GHSA-7jfw-53rm-phh2
+    author:
+      - ins: Privasys
+  GHSA-Privasys-eov:
+    title: "enclave-os-virtual: RA-TLS challenge certificates were not bound to the TLS session"
+    date: 3 September 2026
+    target: https://github.com/Privasys/enclave-os-virtual/security/advisories/GHSA-p5fp-g94g-g9m9
+    author:
+      - ins: Privasys
+  GHSA-Privasys-eom:
+    title: "enclave-os-mini: RA-TLS challenge certificates were not bound to the TLS session"
+    date: 3 September 2026
+    target: https://github.com/Privasys/enclave-os-mini/security/advisories/GHSA-49qm-4pj3-w2c6
+    author:
+      - ins: Privasys
+  GHSA-Privasys-rtc:
+    title: "ra-tls-clients: RA-TLS challenge verifier accepted quotes not bound to the TLS session"
+    date: 3 September 2026
+    target: https://github.com/Privasys/ra-tls-clients/security/advisories/GHSA-5qrc-v874-mxvx
+    author:
+      - ins: Privasys
+  GHSA-Privasys-rtc-da:
+    title: "Privasys Intra-handshake attested TLS implementation is vulnerable to Diversion Attacks"
+    date: 6 September 2026
+    target: https://github.com/Privasys/ra-tls-clients/security/advisories/GHSA-pj2x-5wqv-fh57
+    author:
+      - ins: Privasys
+  GHSA-Privasys-rtc-tcu:
+    title: "Privasys Intra-handshake attested TLS implementation is vulnerable to TOCTOU Attacks"
+    date: 6 September 2026
+    target: https://github.com/Privasys/ra-tls-clients/security/advisories/GHSA-gg8q-mfhh-wrrc
+    author:
+      - ins: Privasys
+  GHSA-Cocos-AI4:
+    title: "Cocos Intra-handshake attested TLS implementation is vulnerable to Diversion Attacks"
+    date: 25 September 2026
+    target: https://github.com/ultravioletrs/cocos/security/advisories/GHSA-v5m8-5wxc-vjgp
+    author:
+      - ins: Ultraviolet Cocos AI
+  GHSA-Cocos-AI5:
+    title: "Cocos AI Intra-handshake attested TLS implementation is vulnerable to TOCTOU Attacks"
+    date: 25 September 2026
+    target: https://github.com/ultravioletrs/cocos/security/advisories/GHSA-ghwv-vrp2-2975
+    author:
+      - ins: Ultraviolet Cocos AI
+  ID-Crisis: DOI.10.1145/3779208.3785387
+  ID-Crisis-repo:
+    title: "Identity Crisis in Confidential Computing: Formal Analysis of Attested TLS"
+    date: November 2025,
+    target: https://github.com/CCC-Attestation/formal-spec-id-crisis
+    author:
+      - ins: M. U. Sardar
+      - ins: M. Moustafa
+      - ins: T. Aura
+  refTLS: DOI.10.1109/SP.2017.26
+  TLS-RA:
+    title: "Separate but together: integrating remote attestation into TLS"
+    date: July 2025,
+    target: https://www.usenix.org/conference/atc25/presentation/weinhold
+    author:
+      - ins: Carsten Weinhold
+      - ins: M. U. Sardar
+      - ins: Ionuț Mihalcea
+      - ins: Yogesh Deshpande
+      - ins: Hannes Tschofenig
+      - ins: Yaron Sheffer
+      - ins: Thomas Fossati
+      - ins: Michael Roitzsch
+  CSA-eBPF:
+    title: "MITRE's New Framework: Securing the eBPF Layer Your AI Depends On"
+    date: 9 September 2026
+    target: https://cloudsecurityalliance.org/blog/2026/09/09/mitre-s-new-framework-securing-the-ebpf-layer-your-ai-depends-on
+    author:
+      - ins: Cloud Security Alliance
+  MITRE-Continuous-Attestation:
+    title: "Framework for Continuous Remote Attestation"
+    date: 16 July 2026
+    target: https://www.mitre.org/news-insights/publication/framework-continuous-remote-attestation
+    author:
+      - ins: MITRE's Confidential Computing Layered Attestation Working Group
+  EarlyAttestationBleed:
+    title: "EarlyAttestationBleed: Three Critical-severity Vulnerabilities of CVSS ≥ 9.0 in Confidential Computing"
+    date: 21 September 2026,
+    target: https://www.researchgate.net/publication/414529199_EarlyAttestationBleed_Three_Critical-severity_Vulnerabilities_of_CVSS_90_in_Confidential_Computing
+    author:
+      - ins: M. U. Sardar
+      - ins: Songbo Bu
+  CVE-2026-100835:
+     author:
+        org: CVE
+     title: Contrast before 1.16.0 Remote Attestation Relay Attack
+     target: https://www.cve.org/CVERecord?id=CVE-2026-100835
+     date: 27 Sept 2026
+  EUVD-2026-87851:
+     author:
+        org: ENISA
+     title: EUVD-2026-87851
+     target: https://euvd.enisa.europa.eu/enisa/EUVD-2026-87851
+     date: 27 Sept 2026
+  CVE-2026-100833:
+     author:
+        org: CVE
+     title: Contrast before 1.23.1 Image Substitution via Policy Generation
+     target: https://www.cve.org/CVERecord?id=CVE-2026-100833
+     date: 27 Sept 2026
+  EUVD-2026-87851:
+     author:
+        org: ENISA
+     title: EUVD-2026-87851
+     target: https://euvd.enisa.europa.eu/enisa/EUVD-2026-87851
+     date: 27 Sept 2026
+  GHSA-Edgeless-Systems6:
+    title: "Contrast (edgelesssys/contrast) versions 1.14.0 before 1.23.1 generate runtime policies that fail to detect all container image substitutions."
+    date: 27 Sept 2026
+    target: https://github.com/advisories/GHSA-MJJ6-PX65-JQ92
+    author:
+      - ins: Edgeless Systems
+  EUVD-2026-87853:
+     author:
+        org: ENISA
+     title: EUVD-2026-87853
+     target: https://euvd.enisa.europa.eu/enisa/EUVD-2026-87853
+     date: 27 Sept 2026
+  CVE-2026-108362:
+     author:
+        org: CVE
+     title: CVE-2026-108362
+     target: https://www.cve.org/CVERecord?id=CVE-2026-108362
+     date: 12 Oct 2026
+  CVE-2026-108361:
+     author:
+        org: CVE
+     title: CVE-2026-108361
+     target: https://www.cve.org/CVERecord?id=CVE-2026-108361
+     date: 12 Oct 2026
+  CVE-2026-112377:
+     author:
+        org: CVE
+     title: CVE-2026-112377
+     target: https://www.cve.org/CVERecord?id=CVE-2026-112377
+     date: 19 Oct 2026
+  EUVD-2026-95996:
+     author:
+        org: ENISA
+     title: EUVD-2026-95996
+     target: https://euvd.enisa.europa.eu/enisa/EUVD-2026-95996
+     date: 9 Oct 2026
+  EUVD-2026-95997:
+     author:
+        org: ENISA
+     title: EUVD-2026-95997
+     target: https://euvd.enisa.europa.eu/enisa/EUVD-2026-95997
+     date: 9 Oct 2026
+  EUVD-2026-96017:
+     author:
+        org: ENISA
+     title: EUVD-2026-96017
+     target: https://euvd.enisa.europa.eu/enisa/EUVD-2026-96017
+     date: 9 Oct 2026
+  EUVD-2026-96018:
+     author:
+        org: ENISA
+     title: EUVD-2026-96018
+     target: https://euvd.enisa.europa.eu/enisa/EUVD-2026-96018
+     date: 9 Oct 2026
+  EUVD-2026-96019:
+     author:
+        org: ENISA
+     title: EUVD-2026-96019
+     target: https://euvd.enisa.europa.eu/enisa/EUVD-2026-96019
+     date: 9 Oct 2026
+  EUVD-2026-97782:
+     author:
+        org: ENISA
+     title: EUVD-2026-97782
+     target: https://euvd.enisa.europa.eu/enisa/EUVD-2026-97782
+     date: 12 Oct 2026
+  EUVD-2026-97781:
+     author:
+        org: ENISA
+     title: EUVD-2026-97781
+     target: https://euvd.enisa.europa.eu/enisa/EUVD-2026-97781
+     date: 12 Oct 2026
+  EUVD-2026-104535:
+     author:
+        org: ENISA
+     title: EUVD-2026-104535
+     target: https://euvd.enisa.europa.eu/enisa/EUVD-2026-104535
+     date: 19 Oct 2026
 
 ...
 
@@ -248,6 +584,45 @@ potentially resulting in impersonation of genuine Attester {{Intra-handshake.fai
 
 Note that *replay* is about *same* Attester while *relay* attack is about *different* Attesters.
 
+# Concrete CVEs
+
+## Intra-handshake.fail
+{{Intra-handshake.fail}} presents a general approach to analyze the intra-handshake (aka early) attestation proposals, regardless of whether they are within the scope of SEAT charter or not. From a security perspective, one of the key decision factors is the candidate binding mechanism. Some binding mechanisms are within scope of SEAT charter and others are not. The artifacts are available in {{Intra-handshake.fail-repo}} under Apache-2.0 license for reproducibility, extensibility, and further research.
+
+- This work resulted in {{CVE-2026-33697}} of CVSS 7.5.
+
+## ID-Crisis
+A *complementary* paper {{ID-Crisis}} presents the identity crisis in pre- and intra-handshake attestation. The formal analysis is available in {{ID-Crisis-repo}} under Apache-2.0 license for reproducibility, extensibility, and further research.
+
+## EarlyAttestationBleed
+{{EarlyAttestationBleed}} presents a formal analysis together with regression tests of the broader attestation ecosystem and discovered three critical-severity vulnerabilities in implementations of early attestation:
+
+- Ultraviolet Cocos AI in TDX path resulting in {{CVE-2026-92701}} of CVSS 9.1.
+- Ultraviolet Cocos AI in AMD SEV-SNP path resulting in {{CVE-2026-92702}} of CVSS 9.1.
+- Edgeless Systems Contrast in policies resulting in {{GHSA-Edgeless-Systems2}} of CVSS 9.0-10.0 and {{CVE-2026-100833}} of CVSS v3.1 of 9.6.
+
+### Architectural Flaws in Early Attestation
+
+Sec. 7 of {{EarlyAttestationBleed}} presents four architectural flaws in early attestation:
+
+- Hardware-level Information of Server
+- Only Boot-time Claims
+- Re-attestation
+- High Handshake Latency, Timeouts, and Failures
+
+
+## EarlyAttestationTschüss (EAT)
+
+- {{CVE-2026-100835}} of CVSS 9.1 against Edgeless Systems Contrast
+- {{CVE-2026-112377}} of CVSS 9.1 against CCC Attestation SIG
+- {{CVE-2026-108362}} of CVSS 9.1 against Privasys
+- {{CVE-2026-108265}} of CVSS 9.1 against Privasys
+- {{CVE-2026-108266}} of CVSS 9.1 against Privasys
+- {{CVE-2026-108267}} of CVSS 9.1 against Privasys
+- {{CVE-2026-108268}} of CVSS 9.1 against Privasys
+- {{CVE-2026-108269}} of CVSS 9.1 against Privasys
+
+
 # Potential Mitigations
 This section describes the countermeasures and their evaluation.
 
@@ -281,7 +656,7 @@ The author wishes to thank Ira McDonald and Ivan Gudymenko for insightful discus
 
 -01
 
-* Concrete text proposal for security and privacy considerations of multi-verifiers {{I-D.deshpande-rats-multi-verifier}}
+* Concrete text proposal for security and privacy considerations of multi-verifiers
 
 -02
 
