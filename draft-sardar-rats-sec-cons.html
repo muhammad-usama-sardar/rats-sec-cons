@@ -22,18 +22,18 @@
 <meta content="draft-sardar-rats-sec-cons-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.34.1
-    Python 3.14.7
-    ConfigArgParse 1.7.7
+    Python 3.14.8
+    ConfigArgParse 1.8.0
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.11.10
+    platformdirs 4.13.4
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.8.4
+    wcwidth 0.9.2
 -->
 <link href="draft-sardar-rats-sec-cons.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1049,11 +1049,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">RATS Security Considerations</td>
-<td class="right">September 2026</td>
+<td class="right">November 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Sardar, et al.</td>
-<td class="center">Expires 2 April 2027</td>
+<td class="center">Expires 5 May 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1069,12 +1069,12 @@ svg {
 <a href="https://www.rfc-editor.org/rfc/rfc9334" class="eref">9334</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-09-29" class="published">29 September 2026</time>
+<time datetime="2026-11-01" class="published">1 November 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-04-02">2 April 2027</time></dd>
+<dd class="expires"><time datetime="2027-05-05">5 May 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1135,7 +1135,7 @@ svg {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 2 April 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 5 May 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1232,33 +1232,55 @@ svg {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-potential-mitigations" class="internal xref">Potential Mitigations</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-references" class="internal xref">References</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-concrete-cves" class="internal xref">Concrete CVEs</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
-                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-intra-handshakefail" class="internal xref">Intra-handshake.fail</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
-                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-id-crisis" class="internal xref">ID-Crisis</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
+                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-earlyattestationbleed" class="internal xref">EarlyAttestationBleed</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.1">
+                    <p id="section-toc.1-1.6.2.3.2.1.1"><a href="#section-6.3.1" class="auto internal xref">6.3.1</a>.  <a href="#name-architectural-flaws-in-earl" class="internal xref">Architectural Flaws in Early Attestation</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.4">
+                <p id="section-toc.1-1.6.2.4.1"><a href="#section-6.4" class="auto internal xref">6.4</a>.  <a href="#name-earlyattestationtschuss-eat" class="internal xref">EarlyAttestationTschüss (EAT)</a></p>
 </li>
             </ul>
 </li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-potential-mitigations" class="internal xref">Potential Mitigations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+</li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
+                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="auto internal xref">10.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
+                <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="auto internal xref">10.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-history" class="internal xref">History</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-history" class="internal xref">History</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1479,45 +1501,147 @@ potentially resulting in impersonation of genuine Attester <span>[<a href="#Intr
 </div>
 </section>
 </div>
-<div id="potential-mitigations">
+<div id="concrete-cves">
 <section id="section-6">
-      <h2 id="name-potential-mitigations">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-potential-mitigations" class="section-name selfRef">Potential Mitigations</a>
+      <h2 id="name-concrete-cves">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-concrete-cves" class="section-name selfRef">Concrete CVEs</a>
       </h2>
-<p id="section-6-1">This section describes the countermeasures and their evaluation.<a href="#section-6-1" class="pilcrow">¶</a></p>
-<p id="section-6-2">To mitigate the above attacks, we propose post-handshake attestation.
+<div id="intra-handshakefail">
+<section id="section-6.1">
+        <h3 id="name-intra-handshakefail">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-intra-handshakefail" class="section-name selfRef">Intra-handshake.fail</a>
+        </h3>
+<p id="section-6.1-1"><span>[<a href="#Intra-handshake.fail" class="cite xref">Intra-handshake.fail</a>]</span> presents a general approach to analyze the intra-handshake (aka early) attestation proposals, regardless of whether they are within the scope of SEAT charter or not. From a security perspective, one of the key decision factors is the candidate binding mechanism. Some binding mechanisms are within scope of SEAT charter and others are not. The artifacts are available in <span>[<a href="#Intra-handshake.fail-repo" class="cite xref">Intra-handshake.fail-repo</a>]</span> under Apache-2.0 license for reproducibility, extensibility, and further research.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.1-2.1">
+            <p id="section-6.1-2.1.1">This work resulted in <span>[<a href="#CVE-2026-33697" class="cite xref">CVE-2026-33697</a>]</span> of CVSS 7.5.<a href="#section-6.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="id-crisis">
+<section id="section-6.2">
+        <h3 id="name-id-crisis">
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-id-crisis" class="section-name selfRef">ID-Crisis</a>
+        </h3>
+<p id="section-6.2-1">A <em>complementary</em> paper <span>[<a href="#ID-Crisis" class="cite xref">ID-Crisis</a>]</span> presents the identity crisis in pre- and intra-handshake attestation. The formal analysis is available in <span>[<a href="#ID-Crisis-repo" class="cite xref">ID-Crisis-repo</a>]</span> under Apache-2.0 license for reproducibility, extensibility, and further research.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="earlyattestationbleed">
+<section id="section-6.3">
+        <h3 id="name-earlyattestationbleed">
+<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-earlyattestationbleed" class="section-name selfRef">EarlyAttestationBleed</a>
+        </h3>
+<p id="section-6.3-1"><span>[<a href="#EarlyAttestationBleed" class="cite xref">EarlyAttestationBleed</a>]</span> presents a formal analysis together with regression tests of the broader attestation ecosystem and discovered three critical-severity vulnerabilities in implementations of early attestation:<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.3-2.1">
+            <p id="section-6.3-2.1.1">Ultraviolet Cocos AI in TDX path resulting in <span>[<a href="#CVE-2026-92701" class="cite xref">CVE-2026-92701</a>]</span> of CVSS 9.1.<a href="#section-6.3-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.3-2.2">
+            <p id="section-6.3-2.2.1">Ultraviolet Cocos AI in AMD SEV-SNP path resulting in <span>[<a href="#CVE-2026-92702" class="cite xref">CVE-2026-92702</a>]</span> of CVSS 9.1.<a href="#section-6.3-2.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.3-2.3">
+            <p id="section-6.3-2.3.1">Edgeless Systems Contrast in policies resulting in <span>[<a href="#GHSA-Edgeless-Systems2" class="cite xref">GHSA-Edgeless-Systems2</a>]</span> of CVSS 9.0-10.0 and <span>[<a href="#CVE-2026-100833" class="cite xref">CVE-2026-100833</a>]</span> of CVSS v3.1 of 9.6.<a href="#section-6.3-2.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<div id="architectural-flaws-in-early-attestation">
+<section id="section-6.3.1">
+          <h4 id="name-architectural-flaws-in-earl">
+<a href="#section-6.3.1" class="section-number selfRef">6.3.1. </a><a href="#name-architectural-flaws-in-earl" class="section-name selfRef">Architectural Flaws in Early Attestation</a>
+          </h4>
+<p id="section-6.3.1-1">Sec. 7 of <span>[<a href="#EarlyAttestationBleed" class="cite xref">EarlyAttestationBleed</a>]</span> presents four architectural flaws in early attestation:<a href="#section-6.3.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.3.1-2.1">
+              <p id="section-6.3.1-2.1.1">Hardware-level Information of Server<a href="#section-6.3.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.3.1-2.2">
+              <p id="section-6.3.1-2.2.1">Only Boot-time Claims<a href="#section-6.3.1-2.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.3.1-2.3">
+              <p id="section-6.3.1-2.3.1">Re-attestation<a href="#section-6.3.1-2.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.3.1-2.4">
+              <p id="section-6.3.1-2.4.1">High Handshake Latency, Timeouts, and Failures<a href="#section-6.3.1-2.4.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+</section>
+</div>
+<div id="earlyattestationtschss-eat">
+<section id="section-6.4">
+        <h3 id="name-earlyattestationtschuss-eat">
+<a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-earlyattestationtschuss-eat" class="section-name selfRef">EarlyAttestationTschüss (EAT)</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="section-6.4-1.1">
+            <p id="section-6.4-1.1.1"><span>[<a href="#CVE-2026-100835" class="cite xref">CVE-2026-100835</a>]</span> of CVSS 9.1 against Edgeless Systems Contrast<a href="#section-6.4-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-1.2">
+            <p id="section-6.4-1.2.1"><span>[<a href="#CVE-2026-112377" class="cite xref">CVE-2026-112377</a>]</span> of CVSS 9.1 against CCC Attestation SIG<a href="#section-6.4-1.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-1.3">
+            <p id="section-6.4-1.3.1"><span>[<a href="#CVE-2026-108362" class="cite xref">CVE-2026-108362</a>]</span> of CVSS 9.1 against Privasys<a href="#section-6.4-1.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-1.4">
+            <p id="section-6.4-1.4.1"><span>[<a href="#CVE-2026-108265" class="cite xref">CVE-2026-108265</a>]</span> of CVSS 9.1 against Privasys<a href="#section-6.4-1.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-1.5">
+            <p id="section-6.4-1.5.1"><span>[<a href="#CVE-2026-108266" class="cite xref">CVE-2026-108266</a>]</span> of CVSS 9.1 against Privasys<a href="#section-6.4-1.5.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-1.6">
+            <p id="section-6.4-1.6.1"><span>[<a href="#CVE-2026-108267" class="cite xref">CVE-2026-108267</a>]</span> of CVSS 9.1 against Privasys<a href="#section-6.4-1.6.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-1.7">
+            <p id="section-6.4-1.7.1"><span>[<a href="#CVE-2026-108268" class="cite xref">CVE-2026-108268</a>]</span> of CVSS 9.1 against Privasys<a href="#section-6.4-1.7.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-1.8">
+            <p id="section-6.4-1.8.1"><span>[<a href="#CVE-2026-108269" class="cite xref">CVE-2026-108269</a>]</span> of CVSS 9.1 against Privasys<a href="#section-6.4-1.8.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+</section>
+</div>
+<div id="potential-mitigations">
+<section id="section-7">
+      <h2 id="name-potential-mitigations">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-potential-mitigations" class="section-name selfRef">Potential Mitigations</a>
+      </h2>
+<p id="section-7-1">This section describes the countermeasures and their evaluation.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">To mitigate the above attacks, we propose post-handshake attestation.
 We are not aware of any attacks on post-handshake attestation. Post-handshake attestation
 avoids replay attacks by using a fresh attestation nonce. Moreover, considering TLS as the transport protocol, it avoids diversion and relay attacks
 by binding the Evidence to the underlying TLS connection, such as using Exported Keying Material (EKM)
 <span>[<a href="#I-D.ietf-tls-rfc8446bis" class="cite xref">I-D.ietf-tls-rfc8446bis</a>]</span>, as proposed in Section 9.2 of <span>[<a href="#ID-Crisis" class="cite xref">ID-Crisis</a>]</span>. <span>[<a href="#RFC9261" class="cite xref">RFC9261</a>]</span> and <span>[<a href="#RFC9266" class="cite xref">RFC9266</a>]</span> provide mechanisms for such bindings. Efforts for a formal proof
-of security of post-handshake attestation are ongoing.<a href="#section-6-2" class="pilcrow">¶</a></p>
+of security of post-handshake attestation are ongoing.<a href="#section-7-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
-<section id="section-7">
+<section id="section-8">
       <h2 id="name-security-considerations">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-7-1">All of this document is about security considerations.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-8-1">All of this document is about security considerations.<a href="#section-8-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
-<section id="section-8">
+<section id="section-9">
       <h2 id="name-iana-considerations">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-8-1">This document has no IANA actions.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-9-1">This document has no IANA actions.<a href="#section-9-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-combined-references">
-<section id="section-9">
+<section id="section-10">
       <h2 id="name-references">
-<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-references" class="section-name selfRef">References</a>
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
 <div id="sec-normative-references">
-<section id="section-9.1">
+<section id="section-10.1">
         <h3 id="name-normative-references">
-<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
 <dt id="RFC2119">[RFC2119]</dt>
@@ -1536,18 +1660,126 @@ of security of post-handshake attestation are ongoing.<a href="#section-6-2" cla
 </section>
 </div>
 <div id="sec-informative-references">
-<section id="section-9.2">
+<section id="section-10.2">
         <h3 id="name-informative-references">
-<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+<a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
+<dt id="CSA-eBPF">[CSA-eBPF]</dt>
+        <dd>
+<span class="refAuthor">Cloud Security Alliance</span>, <span class="refTitle">"MITRE's New Framework: Securing the eBPF Layer Your AI Depends On"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://cloudsecurityalliance.org/blog/2026/09/09/mitre-s-new-framework-securing-the-ebpf-layer-your-ai-depends-on">https://cloudsecurityalliance.org/blog/2026/09/09/mitre-s-new-framework-securing-the-ebpf-layer-your-ai-depends-on</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="CVE-2026-33697">[CVE-2026-33697]</dt>
         <dd>
 <span class="refAuthor">CVE</span>, <span class="refTitle">"CoCoS attested TLS is vulnerable to relay attacks via extracted ephemeral TLS keys"</span>, <time datetime="2026-03" class="refDate">March 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-33697">https://www.cve.org/CVERecord?id=CVE-2026-33697</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="CVE-2026-92701">[CVE-2026-92701]</dt>
+        <dd>
+<span class="refAuthor">CVE</span>, <span class="refTitle">"Cocos AI Intra-handshake attested TLS implementation is vulnerable to session-misbinding attacks for Intel TDX verifier path"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-92701">https://www.cve.org/CVERecord?id=CVE-2026-92701</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CVE-2026-92702">[CVE-2026-92702]</dt>
+        <dd>
+<span class="refAuthor">CVE</span>, <span class="refTitle">"Cocos AI Intra-handshake attested TLS implementation can accept Evidence with nil, empty, or omitted reportData in the AMD SEV-SNP path"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-92702">https://www.cve.org/CVERecord?id=CVE-2026-92702</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CVE-2026-100833">[CVE-2026-100833]</dt>
+        <dd>
+<span class="refAuthor">CVE</span>, <span class="refTitle">"Contrast before 1.23.1 Image Substitution via Policy Generation"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-100833">https://www.cve.org/CVERecord?id=CVE-2026-100833</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CVE-2026-100835">[CVE-2026-100835]</dt>
+        <dd>
+<span class="refAuthor">CVE</span>, <span class="refTitle">"Contrast before 1.16.0 Remote Attestation Relay Attack"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-100835">https://www.cve.org/CVERecord?id=CVE-2026-100835</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CVE-2026-108265">[CVE-2026-108265]</dt>
+        <dd>
+<span class="refAuthor">CVE</span>, <span class="refTitle">"CVE-2026-108265"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-108265">https://www.cve.org/CVERecord?id=CVE-2026-108265</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CVE-2026-108266">[CVE-2026-108266]</dt>
+        <dd>
+<span class="refAuthor">CVE</span>, <span class="refTitle">"CVE-2026-108266"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-108266">https://www.cve.org/CVERecord?id=CVE-2026-108266</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CVE-2026-108267">[CVE-2026-108267]</dt>
+        <dd>
+<span class="refAuthor">CVE</span>, <span class="refTitle">"CVE-2026-108267"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-108267">https://www.cve.org/CVERecord?id=CVE-2026-108267</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CVE-2026-108268">[CVE-2026-108268]</dt>
+        <dd>
+<span class="refAuthor">CVE</span>, <span class="refTitle">"CVE-2026-108268"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-108268">https://www.cve.org/CVERecord?id=CVE-2026-108268</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CVE-2026-108269">[CVE-2026-108269]</dt>
+        <dd>
+<span class="refAuthor">CVE</span>, <span class="refTitle">"CVE-2026-108269"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-108269">https://www.cve.org/CVERecord?id=CVE-2026-108269</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CVE-2026-108361">[CVE-2026-108361]</dt>
+        <dd>
+<span class="refAuthor">CVE</span>, <span class="refTitle">"CVE-2026-108361"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-108361">https://www.cve.org/CVERecord?id=CVE-2026-108361</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CVE-2026-108362">[CVE-2026-108362]</dt>
+        <dd>
+<span class="refAuthor">CVE</span>, <span class="refTitle">"CVE-2026-108362"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-108362">https://www.cve.org/CVERecord?id=CVE-2026-108362</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CVE-2026-112377">[CVE-2026-112377]</dt>
+        <dd>
+<span class="refAuthor">CVE</span>, <span class="refTitle">"CVE-2026-112377"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-112377">https://www.cve.org/CVERecord?id=CVE-2026-112377</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="Dolev-Yao">[Dolev-Yao]</dt>
         <dd>
 <span class="refAuthor">Dolev, D.</span> and <span class="refAuthor">A. Yao</span>, <span class="refTitle">"On the security of public key protocols"</span>, <time datetime="1983-03" class="refDate">March 1983</time>. </dd>
+<dd class="break"></dd>
+<dt id="EarlyAttestationBleed">[EarlyAttestationBleed]</dt>
+        <dd>
+<span class="refAuthor">Sardar, M. U.</span> and <span class="refAuthor">Songbo Bu</span>, <span class="refTitle">"EarlyAttestationBleed: Three Critical-severity Vulnerabilities of CVSS ≥ 9.0 in Confidential Computing"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://www.researchgate.net/publication/414529199_EarlyAttestationBleed_Three_Critical-severity_Vulnerabilities_of_CVSS_90_in_Confidential_Computing">https://www.researchgate.net/publication/414529199_EarlyAttestationBleed_Three_Critical-severity_Vulnerabilities_of_CVSS_90_in_Confidential_Computing</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EUVD-2026-16488">[EUVD-2026-16488]</dt>
+        <dd>
+<span class="refAuthor">ENISA</span>, <span class="refTitle">"CoCoS attested TLS is vulnerable to relay attacks via extracted ephemeral TLS keys"</span>, <time datetime="2026-03" class="refDate">March 2026</time>, <span>&lt;<a href="https://euvd.enisa.europa.eu/enisa/EUVD-2026-16488">https://euvd.enisa.europa.eu/enisa/EUVD-2026-16488</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EUVD-2026-83192">[EUVD-2026-83192]</dt>
+        <dd>
+<span class="refAuthor">ENISA</span>, <span class="refTitle">"EUVD-2026-83192"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://euvd.enisa.europa.eu/enisa/EUVD-2026-83192">https://euvd.enisa.europa.eu/enisa/EUVD-2026-83192</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EUVD-2026-83194">[EUVD-2026-83194]</dt>
+        <dd>
+<span class="refAuthor">ENISA</span>, <span class="refTitle">"EUVD-2026-83194"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://euvd.enisa.europa.eu/enisa/EUVD-2026-83194">https://euvd.enisa.europa.eu/enisa/EUVD-2026-83194</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EUVD-2026-87851">[EUVD-2026-87851]</dt>
+        <dd>
+<span class="refAuthor">ENISA</span>, <span class="refTitle">"EUVD-2026-87851"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://euvd.enisa.europa.eu/enisa/EUVD-2026-87851">https://euvd.enisa.europa.eu/enisa/EUVD-2026-87851</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EUVD-2026-87853">[EUVD-2026-87853]</dt>
+        <dd>
+<span class="refAuthor">ENISA</span>, <span class="refTitle">"EUVD-2026-87853"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://euvd.enisa.europa.eu/enisa/EUVD-2026-87853">https://euvd.enisa.europa.eu/enisa/EUVD-2026-87853</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EUVD-2026-95996">[EUVD-2026-95996]</dt>
+        <dd>
+<span class="refAuthor">ENISA</span>, <span class="refTitle">"EUVD-2026-95996"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://euvd.enisa.europa.eu/enisa/EUVD-2026-95996">https://euvd.enisa.europa.eu/enisa/EUVD-2026-95996</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EUVD-2026-95997">[EUVD-2026-95997]</dt>
+        <dd>
+<span class="refAuthor">ENISA</span>, <span class="refTitle">"EUVD-2026-95997"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://euvd.enisa.europa.eu/enisa/EUVD-2026-95997">https://euvd.enisa.europa.eu/enisa/EUVD-2026-95997</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EUVD-2026-96017">[EUVD-2026-96017]</dt>
+        <dd>
+<span class="refAuthor">ENISA</span>, <span class="refTitle">"EUVD-2026-96017"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://euvd.enisa.europa.eu/enisa/EUVD-2026-96017">https://euvd.enisa.europa.eu/enisa/EUVD-2026-96017</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EUVD-2026-96018">[EUVD-2026-96018]</dt>
+        <dd>
+<span class="refAuthor">ENISA</span>, <span class="refTitle">"EUVD-2026-96018"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://euvd.enisa.europa.eu/enisa/EUVD-2026-96018">https://euvd.enisa.europa.eu/enisa/EUVD-2026-96018</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EUVD-2026-96019">[EUVD-2026-96019]</dt>
+        <dd>
+<span class="refAuthor">ENISA</span>, <span class="refTitle">"EUVD-2026-96019"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://euvd.enisa.europa.eu/enisa/EUVD-2026-96019">https://euvd.enisa.europa.eu/enisa/EUVD-2026-96019</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EUVD-2026-97781">[EUVD-2026-97781]</dt>
+        <dd>
+<span class="refAuthor">ENISA</span>, <span class="refTitle">"EUVD-2026-97781"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://euvd.enisa.europa.eu/enisa/EUVD-2026-97781">https://euvd.enisa.europa.eu/enisa/EUVD-2026-97781</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EUVD-2026-97782">[EUVD-2026-97782]</dt>
+        <dd>
+<span class="refAuthor">ENISA</span>, <span class="refTitle">"EUVD-2026-97782"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://euvd.enisa.europa.eu/enisa/EUVD-2026-97782">https://euvd.enisa.europa.eu/enisa/EUVD-2026-97782</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EUVD-2026-104535">[EUVD-2026-104535]</dt>
+        <dd>
+<span class="refAuthor">ENISA</span>, <span class="refTitle">"EUVD-2026-104535"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://euvd.enisa.europa.eu/enisa/EUVD-2026-104535">https://euvd.enisa.europa.eu/enisa/EUVD-2026-104535</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="Foreshadow">[Foreshadow]</dt>
         <dd>
@@ -1557,9 +1789,77 @@ of security of post-handshake attestation are ongoing.<a href="#section-6-2" cla
         <dd>
 <span class="refAuthor">European Commission</span>, <span class="refTitle">"Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 on the protection of natural persons with regard to the processing of personal data and on the free movement of such data, and repealing Directive 95/46/EC (General Data Protection Regulation) (Text with EEA relevance)"</span>, <time datetime="2016-05" class="refDate">May 2016</time>, <span>&lt;<a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj">https://eur-lex.europa.eu/eli/reg/2016/679/oj</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="I-D.deshpande-rats-multi-verifier">[I-D.deshpande-rats-multi-verifier]</dt>
+<dt id="GHSA-Cocos-AI">[GHSA-Cocos-AI]</dt>
         <dd>
-<span class="refAuthor">Deshpande, Y.</span>, <span class="refAuthor">jun, Z.</span>, <span class="refAuthor">Labiod, H.</span>, and <span class="refAuthor">H. Birkholz</span>, <span class="refTitle">"Remote Attestation with Multiple Verifiers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-deshpande-rats-multi-verifier-04</span>, <time datetime="2026-02-07" class="refDate">7 February 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-deshpande-rats-multi-verifier-04">https://datatracker.ietf.org/doc/html/draft-deshpande-rats-multi-verifier-04</a>&gt;</span>. </dd>
+<span class="refAuthor">Ultraviolet Cocos AI</span>, <span class="refTitle">"CoCoS attested TLS is vulnerable to relay attacks via extracted ephemeral TLS keys"</span>, <time datetime="2026-03" class="refDate">March 2026</time>, <span>&lt;<a href="https://github.com/ultravioletrs/cocos/security/advisories/GHSA-vfgg-mvxx-mgg7">https://github.com/ultravioletrs/cocos/security/advisories/GHSA-vfgg-mvxx-mgg7</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Cocos-AI2">[GHSA-Cocos-AI2]</dt>
+        <dd>
+<span class="refAuthor">Ultraviolet Cocos AI</span>, <span class="refTitle">"Cocos AI intra-handshake attested TLS implementation is vulnerable to session-misbinding attacks for Intel TDX verifier path"</span>, <time datetime="2026-08" class="refDate">August 2026</time>, <span>&lt;<a href="https://github.com/ultravioletrs/cocos/security/advisories/GHSA-4px3-wj2x-xx47">https://github.com/ultravioletrs/cocos/security/advisories/GHSA-4px3-wj2x-xx47</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Cocos-AI3">[GHSA-Cocos-AI3]</dt>
+        <dd>
+<span class="refAuthor">Ultraviolet Cocos AI</span>, <span class="refTitle">"Cocos AI intra-handshake attested TLS implementation can accept Evidence with nil, empty, or omitted reportData in the AMD SEV-SNP path"</span>, <time datetime="2026-08" class="refDate">August 2026</time>, <span>&lt;<a href="https://github.com/ultravioletrs/cocos/security/advisories/GHSA-4r6g-mp48-j2rw">https://github.com/ultravioletrs/cocos/security/advisories/GHSA-4r6g-mp48-j2rw</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Cocos-AI4">[GHSA-Cocos-AI4]</dt>
+        <dd>
+<span class="refAuthor">Ultraviolet Cocos AI</span>, <span class="refTitle">"Cocos Intra-handshake attested TLS implementation is vulnerable to Diversion Attacks"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://github.com/ultravioletrs/cocos/security/advisories/GHSA-v5m8-5wxc-vjgp">https://github.com/ultravioletrs/cocos/security/advisories/GHSA-v5m8-5wxc-vjgp</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Cocos-AI5">[GHSA-Cocos-AI5]</dt>
+        <dd>
+<span class="refAuthor">Ultraviolet Cocos AI</span>, <span class="refTitle">"Cocos AI Intra-handshake attested TLS implementation is vulnerable to TOCTOU Attacks"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://github.com/ultravioletrs/cocos/security/advisories/GHSA-ghwv-vrp2-2975">https://github.com/ultravioletrs/cocos/security/advisories/GHSA-ghwv-vrp2-2975</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Edgeless-Systems">[GHSA-Edgeless-Systems]</dt>
+        <dd>
+<span class="refAuthor">Edgeless Systems</span>, <span class="refTitle">"Remote attestation is susceptible to relay attacks"</span>, <time datetime="2026-08" class="refDate">August 2026</time>, <span>&lt;<a href="https://github.com/edgelesssys/contrast/security/advisories/GHSA-hjgc-jc5v-fw7h">https://github.com/edgelesssys/contrast/security/advisories/GHSA-hjgc-jc5v-fw7h</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Edgeless-Systems2">[GHSA-Edgeless-Systems2]</dt>
+        <dd>
+<span class="refAuthor">Edgeless Systems</span>, <span class="refTitle">"Generated policies don't detect all image substitutions"</span>, <time datetime="2026-08" class="refDate">August 2026</time>, <span>&lt;<a href="https://github.com/edgelesssys/contrast/security/advisories/GHSA-m2qg-wrxv-h898">https://github.com/edgelesssys/contrast/security/advisories/GHSA-m2qg-wrxv-h898</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Edgeless-Systems3">[GHSA-Edgeless-Systems3]</dt>
+        <dd>
+<span class="refAuthor">Edgeless Systems</span>, <span class="refTitle">"Existing Mesh CA key can cross manifest boundaries during Contrast peer recovery"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://github.com/edgelesssys/contrast/security/advisories/GHSA-rxcv-p3px-m3c3">https://github.com/edgelesssys/contrast/security/advisories/GHSA-rxcv-p3px-m3c3</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Edgeless-Systems4">[GHSA-Edgeless-Systems4]</dt>
+        <dd>
+<span class="refAuthor">Edgeless Systems</span>, <span class="refTitle">"Node installer leaves the host containerd configuration world-writable (0666), allowing local privilege escalation"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://github.com/edgelesssys/contrast/security/advisories/GHSA-376m-h37w-4rvq">https://github.com/edgelesssys/contrast/security/advisories/GHSA-376m-h37w-4rvq</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Edgeless-Systems5">[GHSA-Edgeless-Systems5]</dt>
+        <dd>
+<span class="refAuthor">Edgeless Systems</span>, <span class="refTitle">"Contrast before 1.16.0 is susceptible to remote attestation relay attacks"</span>, <time datetime="2026-08" class="refDate">August 2026</time>, <span>&lt;<a href="https://github.com/advisories/GHSA-jw33-f4wc-8736">https://github.com/advisories/GHSA-jw33-f4wc-8736</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Edgeless-Systems6">[GHSA-Edgeless-Systems6]</dt>
+        <dd>
+<span class="refAuthor">Edgeless Systems</span>, <span class="refTitle">"Contrast (edgelesssys/contrast) versions 1.14.0 before 1.23.1 generate runtime policies that fail to detect all container image substitutions."</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://github.com/advisories/GHSA-MJJ6-PX65-JQ92">https://github.com/advisories/GHSA-MJJ6-PX65-JQ92</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Privasys-eom">[GHSA-Privasys-eom]</dt>
+        <dd>
+<span class="refAuthor">Privasys</span>, <span class="refTitle">"enclave-os-mini: RA-TLS challenge certificates were not bound to the TLS session"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://github.com/Privasys/enclave-os-mini/security/advisories/GHSA-49qm-4pj3-w2c6">https://github.com/Privasys/enclave-os-mini/security/advisories/GHSA-49qm-4pj3-w2c6</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Privasys-eov">[GHSA-Privasys-eov]</dt>
+        <dd>
+<span class="refAuthor">Privasys</span>, <span class="refTitle">"enclave-os-virtual: RA-TLS challenge certificates were not bound to the TLS session"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://github.com/Privasys/enclave-os-virtual/security/advisories/GHSA-p5fp-g94g-g9m9">https://github.com/Privasys/enclave-os-virtual/security/advisories/GHSA-p5fp-g94g-g9m9</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Privasys-go">[GHSA-Privasys-go]</dt>
+        <dd>
+<span class="refAuthor">Privasys</span>, <span class="refTitle">"Privasys Go fork: RA-TLS challenge mode did not bind attestation evidence to the TLS session"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://github.com/Privasys/go/security/advisories/GHSA-7jfw-53rm-phh2">https://github.com/Privasys/go/security/advisories/GHSA-7jfw-53rm-phh2</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Privasys-rtc">[GHSA-Privasys-rtc]</dt>
+        <dd>
+<span class="refAuthor">Privasys</span>, <span class="refTitle">"ra-tls-clients: RA-TLS challenge verifier accepted quotes not bound to the TLS session"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://github.com/Privasys/ra-tls-clients/security/advisories/GHSA-5qrc-v874-mxvx">https://github.com/Privasys/ra-tls-clients/security/advisories/GHSA-5qrc-v874-mxvx</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Privasys-rtc-da">[GHSA-Privasys-rtc-da]</dt>
+        <dd>
+<span class="refAuthor">Privasys</span>, <span class="refTitle">"Privasys Intra-handshake attested TLS implementation is vulnerable to Diversion Attacks"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://github.com/Privasys/ra-tls-clients/security/advisories/GHSA-pj2x-5wqv-fh57">https://github.com/Privasys/ra-tls-clients/security/advisories/GHSA-pj2x-5wqv-fh57</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Privasys-rtc-tcu">[GHSA-Privasys-rtc-tcu]</dt>
+        <dd>
+<span class="refAuthor">Privasys</span>, <span class="refTitle">"Privasys Intra-handshake attested TLS implementation is vulnerable to TOCTOU Attacks"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://github.com/Privasys/ra-tls-clients/security/advisories/GHSA-gg8q-mfhh-wrrc">https://github.com/Privasys/ra-tls-clients/security/advisories/GHSA-gg8q-mfhh-wrrc</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Privasys-rustls">[GHSA-Privasys-rustls]</dt>
+        <dd>
+<span class="refAuthor">Privasys</span>, <span class="refTitle">"Privasys RA-TLS challenge mode did not bind attestation evidence to the TLS session"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://github.com/Privasys/rustls/security/advisories/GHSA-j6qv-435v-r492">https://github.com/Privasys/rustls/security/advisories/GHSA-j6qv-435v-r492</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-tls-rfc8446bis">[I-D.ietf-tls-rfc8446bis]</dt>
         <dd>
@@ -1583,11 +1883,19 @@ of security of post-handshake attestation are ongoing.<a href="#section-6-2" cla
 <dd class="break"></dd>
 <dt id="Intra-handshake.fail-repo">[Intra-handshake.fail-repo]</dt>
         <dd>
-<span class="refAuthor">Sardar, M. U.</span>, <span class="refAuthor">Dubeyko, V.</span>, and <span class="refAuthor">J.-M. Jacquet</span>, <span class="refTitle">"Intra-handshake.fail (CVE-2026-33697): High-severity CVE in Attested TLS"</span>, <time datetime="2026-06" class="refDate">June 2026</time>, <span>&lt;<a href="https://github.com/CCC-Attestation/formal-spec-KBS">https://github.com/CCC-Attestation/formal-spec-KBS</a>&gt;</span>. </dd>
+<span class="refAuthor">Sardar, M. U.</span>, <span class="refAuthor">Dubeyko, V.</span>, and <span class="refAuthor">J.-M. Jacquet</span>, <span class="refTitle">"Intra-handshake.fail (CVE-2026-33697): High-severity CVE in Attested TLS"</span>, <time datetime="2026-07" class="refDate">July 2026</time>, <span>&lt;<a href="https://github.com/muhammad-usama-sardar/intra-handshake.fail">https://github.com/muhammad-usama-sardar/intra-handshake.fail</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="MITRE-Continuous-Attestation">[MITRE-Continuous-Attestation]</dt>
+        <dd>
+<span class="refAuthor">MITRE's Confidential Computing Layered Attestation Working Group</span>, <span class="refTitle">"Framework for Continuous Remote Attestation"</span>, <time datetime="2026-07" class="refDate">July 2026</time>, <span>&lt;<a href="https://www.mitre.org/news-insights/publication/framework-continuous-remote-attestation">https://www.mitre.org/news-insights/publication/framework-continuous-remote-attestation</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RA-TLS">[RA-TLS]</dt>
         <dd>
 <span class="refAuthor">Sardar, M.</span>, <span class="refAuthor">Niemi, A.</span>, <span class="refAuthor">Tschofenig, H.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"Towards Validation of TLS 1.3 Formal Model and Vulnerabilities in Intel’s RA-TLS Protocol"</span>, <span class="refContent">Institute of Electrical and Electronics Engineers (IEEE)</span>, <span class="seriesInfo">IEEE Access vol. 12, pp. 173670-173685</span>, <span class="seriesInfo">DOI 10.1109/access.2024.3497184</span>, <time datetime="2024" class="refDate">2024</time>, <span>&lt;<a href="https://doi.org/10.1109/access.2024.3497184">https://doi.org/10.1109/access.2024.3497184</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="refTLS">[refTLS]</dt>
+        <dd>
+<span class="refAuthor">Bhargavan, K.</span>, <span class="refAuthor">Blanchet, B.</span>, and <span class="refAuthor">N. Kobeissi</span>, <span class="refTitle">"Verified Models and Reference Implementations for the TLS 1.3 Standard Candidate"</span>, <span class="refContent">IEEE</span>, <span class="seriesInfo">2017 IEEE Symposium on Security and Privacy (SP) pp. 483-502</span>, <span class="seriesInfo">DOI 10.1109/sp.2017.26</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://doi.org/10.1109/sp.2017.26">https://doi.org/10.1109/sp.2017.26</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC3552">[RFC3552]</dt>
         <dd>
@@ -1600,6 +1908,14 @@ of security of post-handshake attestation are ongoing.<a href="#section-6-2" cla
 <dt id="RFC9266">[RFC9266]</dt>
         <dd>
 <span class="refAuthor">Whited, S.</span>, <span class="refTitle">"Channel Bindings for TLS 1.3"</span>, <span class="seriesInfo">RFC 9266</span>, <span class="seriesInfo">DOI 10.17487/RFC9266</span>, <time datetime="2022-07" class="refDate">July 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9266">https://www.rfc-editor.org/rfc/rfc9266</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="SEAT-vulnerability-report">[SEAT-vulnerability-report]</dt>
+        <dd>
+<span class="refAuthor">Sardar, M. U.</span>, <span class="refTitle">"Relay Attacks in Intra-handshake Attestation for Confidential Agentic AI Systems"</span>, <time datetime="2026-01" class="refDate">January 2026</time>, <span>&lt;<a href="https://mailarchive.ietf.org/arch/msg/seat/x3eQxFjQFJLceae6l4_NgXnmsDY/">https://mailarchive.ietf.org/arch/msg/seat/x3eQxFjQFJLceae6l4_NgXnmsDY/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="TLS-RA">[TLS-RA]</dt>
+        <dd>
+<span class="refAuthor">Carsten Weinhold</span>, <span class="refAuthor">Sardar, M. U.</span>, <span class="refAuthor">Ionuț Mihalcea</span>, <span class="refAuthor">Yogesh Deshpande</span>, <span class="refAuthor">Hannes Tschofenig</span>, <span class="refAuthor">Yaron Sheffer</span>, <span class="refAuthor">Thomas Fossati</span>, and <span class="refAuthor">Michael Roitzsch</span>, <span class="refTitle">"Separate but together: integrating remote attestation into TLS"</span>, <time datetime="2025-07" class="refDate">July 2025</time>, <span>&lt;<a href="https://www.usenix.org/conference/atc25/presentation/weinhold">https://www.usenix.org/conference/atc25/presentation/weinhold</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="Usama-TLS-26Feb25">[Usama-TLS-26Feb25]</dt>
       <dd>
@@ -1626,7 +1942,7 @@ of security of post-handshake attestation are ongoing.<a href="#section-6-2" cla
 <p id="appendix-B-1">-01<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-B-2.1">
-          <p id="appendix-B-2.1.1">Concrete text proposal for security and privacy considerations of multi-verifiers <span>[<a href="#I-D.deshpande-rats-multi-verifier" class="cite xref">I-D.deshpande-rats-multi-verifier</a>]</span><a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.1.1">Concrete text proposal for security and privacy considerations of multi-verifiers<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-B-3">-02<a href="#appendix-B-3" class="pilcrow">¶</a></p>
@@ -1650,7 +1966,9 @@ of security of post-handshake attestation are ongoing.<a href="#section-6-2" cla
       </h2>
 <address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Muhammad Usama Sardar</span></div>
-<div dir="auto" class="left"><span class="org">TU Dresden</span></div>
+<div dir="auto" class="left"><span class="org">Technical University of Dresden</span></div>
+<div dir="auto" class="left"><span class="locality">Dresden</span></div>
+<div dir="auto" class="left"><span class="country-name">Germany</span></div>
 <div class="email">
 <span>Email:</span>
 <a href="mailto:muhammad_usama.sardar@tu-dresden.de" class="email">muhammad_usama.sardar@tu-dresden.de</a>
