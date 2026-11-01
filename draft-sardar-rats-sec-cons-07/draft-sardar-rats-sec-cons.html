@@ -1,0 +1,2016 @@
+<!DOCTYPE html>
+<html lang="en" class="Internet-Draft">
+<head>
+<meta charset="utf-8">
+<meta content="Common,Latin" name="scripts">
+<meta content="initial-scale=1.0" name="viewport">
+<title>Guidelines for Security Considerations of RATS</title>
+<meta content="Muhammad Usama Sardar" name="author">
+<meta content="Songbo Bu" name="author">
+<meta content="Chengxin Huang" name="author">
+<meta content="Haowen Song" name="author">
+<meta content="
+       This document aims to provide guidelines and best practices for writing
+   security considerations for technical specifications for RATS
+   targeting the needs of implementers, researchers, and protocol
+   designers. In particular, it discusses some of the 'bottom turtle' issues. This is a work-in-progress, and the current version mainly presents an outline of the general security guidelines, baseline, or template for RATS that future versions
+   will cover in more detail. 
+    " name="description">
+<meta content="xml2rfc 3.34.1" name="generator">
+<meta content="security considerations" name="keyword">
+<meta content="remote attestation" name="keyword">
+<meta content="draft-sardar-rats-sec-cons-latest" name="ietf.draft">
+<!-- Generator version information:
+  xml2rfc 3.34.1
+    Python 3.14.8
+    ConfigArgParse 1.8.0
+    google-i18n-address 3.1.1
+    intervaltree 3.2.1
+    Jinja2 3.1.6
+    lxml 6.1.1
+    natsort 8.4.0
+    platformdirs 4.13.4
+    pycountry 24.6.1
+    PyYAML 6.0.3
+    requests 2.33.1
+    wcwidth 0.9.2
+-->
+<link href="draft-sardar-rats-sec-cons.xml" rel="alternate" type="application/rfc+xml">
+<link href="#copyright" rel="license">
+<style type="text/css">@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Lora SemiBold'), local('Lora-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-greek.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-greek.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: light dark;
+  --background-color: #fff;
+  --text-color: #222;
+  --title-color: #191919;
+  --link-color: #2a6496;
+  --highlight-color: #f9f9f9;
+  --line-color: #eee;
+  --pilcrow-weak: #ddd;
+  --pilcrow-strong: #bbb;
+  --small-font-size: 14.5px;
+  --font-mono: 'Oxygen Mono', monospace;
+  --font-title: "Sofia Sans Semi Condensed", sans-serif;
+  scrollbar-color: #bbb #eee;
+}
+body {
+  max-width: 600px;
+  margin: 75px auto;
+  padding: 0 5px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  font: 16px/22px "Lora", serif;
+  scroll-behavior: smooth;
+}
+
+.ears {
+  display: none;
+}
+
+/* headings */
+section {
+  clear: both;
+}
+.section-number {
+  padding-right: 0.5em;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-title);
+  font-weight: 680;
+  margin: 0.8em 0 0.3em;
+  font-size-adjust: 0.5;
+  color: var(--title-color);
+}
+h1 {
+  &#title {
+    font-size: 32px;
+    line-height: 40px;
+    clear: both;
+    margin: 1.5em 0 0.2em;
+  }
+  &#rfcnum {
+    margin: 1.5em 0 0.2em;
+    & + h1#title {
+      margin: 0.2em 0;
+    }
+  }
+}
+
+h1, h2, h3 {
+  font-size: 22px;
+  line-height: 27px;
+}
+h4, h5, h6 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+/* general structure */
+.author {
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+#abstract+p {
+  font-size: 18px;
+  line-height: 24px;
+  & code, & samp, & tt {
+    font-size: 16px;
+    line-height: 0;
+  }
+}
+
+p {
+  padding: 0;
+  margin: 0.5em 0;
+  text-align: left;
+}
+div {
+  margin: 0;
+}
+.alignRight {
+  margin: 1em 0;
+  &.art-text {
+    background-color: var(--highlight-color);
+    border: 1px solid var(--line-color);
+    border-radius: 3px;
+    padding: 0.5em 1em 0;
+    margin-bottom: 0.5em;
+    & pre {
+      padding: 0;
+      width: auto;
+    }
+  }
+  & > *:first-child {
+    border: none;
+    margin: 0;
+    float: right;
+    clear: both;
+  }
+  & > *:nth-child(2) {
+    clear: both;
+    display: block;
+    border: none;
+  }
+}
+svg {
+  display: block;
+  /* font-family isn't space-separated, but =~ will have to do */
+  &[font-family~="monospace" i], & [font-family~="monospace" i] {
+    font-family: var(--font-mono);
+  }
+}
+.alignCenter {
+  margin: 1em 0;
+  &.art-text {
+    background-color: var(--highlight-color);
+    border: 1px solid var(--line-color);
+    border-radius: 3px;
+    padding: 0.5em 1em 0;
+    margin-bottom: 0.5em;
+    & pre {
+      padding: 0;
+      width: auto;
+    }
+  }
+  & > *:first-child {
+    border: none;
+    /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+       support flexbox yet.
+    */
+    display: table;
+    margin: 0 auto;
+  }
+}
+
+/* lists */
+ol, ul {
+  padding: 0;
+  margin: 0 0 0.5em 2em;
+  & :is(ol, ul) {
+    margin-left: 1em;
+  }
+}
+li {
+  margin: 0 0 0.25em 0;
+}
+ul.empty, .ulEmpty {
+  list-style-type: none;
+  & li {
+    margin-top: 0.5em;
+  }
+}
+:is(ul, ol).compact, .ulCompact, .olCompact {
+  margin: 0 0 0 2em;
+  & li {
+    margin: 0;
+    & :first-child { margin-top: 0; }
+    & :last-child { margin-bottom: 0; }
+  }
+}
+
+/* definition lists */
+dl {
+  clear: left;
+  --indent: 3ch;
+  /* --indent: attr(indent ch); not supported in any browser, but we can dream */
+  &.olPercent {
+    --indent: 5ch;
+    & > dt {
+      min-width: calc(var(--indent) - 2ch);
+      float: none;
+    }
+  }
+
+  dl > dd > & {
+    margin-top: 0.5em;
+    margin-bottom: 0;
+  }
+
+  &:not(.dlNewline) > dt {
+    float: left;
+    margin-right: 2ch;
+    min-width: 8ch;
+  }
+  & > dd {
+    margin-bottom: .8em;
+    margin-left: var(--indent) !important; /* stupid element overrides */
+    min-height: 2ex;
+  }
+}
+:is(dl.compact, .dlCompact) > dd {
+  margin-bottom: 0;
+  & > :is(:first-child, .break:first-child + *) {
+    margin-top: 0;
+  }
+  & > :is(:last-child) {
+    margin-bottom: 0;
+  }
+}
+:is(dd, span).break {
+  display: none;
+}
+
+/* links */
+a {
+  text-decoration: none;
+  &[href] {
+    color: var(--link-color);
+    &:hover { text-decoration: underline; }
+    &.selfRef {
+      color: var(--text-color);
+      &:hover {
+        text-decoration: none;
+        background-color: var(--highlight-color);
+      }
+    }
+  }
+}
+.iref + a[href].internal {
+  color: var(--text-color);
+}
+a.xref:is(.cite, .auto), :is(#status-of-memo, #copyright) a {
+  white-space: nowrap;
+}
+
+/* Figures */
+tt, code, pre {
+  background-color: var(--highlight-color);
+  font: 14px/22px var(--font-mono);
+}
+tt, code {
+  /* changing the font for inline elements leads to different ascender
+     and descender heights; as we want to retain baseline alignment,
+     remove leading to avoid altering the final height of lines
+     note: this fails if these blocks take an entire line,
+     a different solution would be great */
+  line-height: 0;
+}
+:is(h1, h2, h3, h4, h5, h6) :is(tt, code) {
+  font-size: 84%;
+}
+pre {
+  border: 1px solid var(--line-color);
+  font-size: 13.5px;
+  line-height: 16px;
+  letter-spacing: -0.2px;
+  margin: 5px;
+  padding: 5px;
+}
+img {
+  max-width: 100%;
+}
+figure {
+  margin: 0.5em 0;
+  padding: 0;
+  & blockquote {
+    margin: 0.8em 0.4em 0.4em;
+  }
+}
+figcaption, caption {
+  font-style: italic;
+  margin: 0.5em 1.5em;
+  text-align: left;
+  caption-side: bottom;
+}
+@media screen {
+  /* Auto-collapse boilerplate. */
+  :is(#status-of-memo, #copyright) {
+    & p {
+      margin: -2px 0;
+      max-height: 0;
+      transition: max-height 2s ease, margin 0.5s ease 0.5s;
+      overflow: hidden;
+    }
+    &:hover p,
+    & h2:target ~ p {
+      margin: 0.5em 0;
+      max-height: 500px;
+      overflow: auto;
+    }
+  }
+  pre, svg {
+    display: inline-block;
+    /* In the horizontal direction, sometimes people make over-sized figures.
+       Scrollbars for those is therefore necessary: auto adds them as necessary..
+       In the vertical direction, the line-height can combine with the font
+       asender/descender height to produce scrollbars: hidden avoids that. */
+    overflow: auto hidden;
+  }
+  pre {
+    max-width: 100%;
+    width: calc(100% - 22px - 1em);
+  }
+  svg {
+    max-width: calc(100% - 22px - 1em);
+  }
+  figure pre {
+    display: block;
+    width: calc(100% - 25px);
+  }
+  :is(pre, svg) + .pilcrow {
+    display: inline-block;
+    vertical-align: text-bottom;
+    padding-bottom: 8px;
+  }
+}
+
+/* aside, blockquote */
+aside, blockquote {
+  margin-left: 0;
+  padding: 0 2em;
+  font-style: italic;
+}
+blockquote {
+  margin: 1em 0;
+  border-left: 2px var(--pilcrow-strong) solid;
+}
+cite {
+  display: block;
+  text-align: right;
+  font-style: italic;
+}
+
+/* tables */
+table {
+  width: auto;
+  max-width: 100%;
+  margin: 0 0 1em;
+  border-collapse: collapse;
+  &.right { margin-left: auto; }
+  &.center { margin-left: auto; margin-right: auto; }
+  &.left { margin-right: auto; }
+  & .text-left { text-align: left; }
+  & .text-center { text-align: center; }
+  & .text-right { text-align: right; }
+  & caption {
+    margin: 0;
+    padding: 3px 0 3px 1em;
+  }
+  & p { margin: 0; }
+}
+
+thead, tbody {
+  border: 1px solid var(--line-color);
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 5px 10px;
+}
+th {
+  background-color: var(--line-color);
+}
+:is(tr:nth-child(2n), thead+tbody > tr:nth-child(2n+1)) > td {
+  background-color: var(--background-color);
+}
+:is(tr:nth-child(2n+1), thead+tbody > tr:nth-child(2n)) > td {
+  background-color: var(--highlight-color);
+}
+
+/* pilcrow */
+a.pilcrow {
+  margin-left: 3px;
+  opacity: 0.2;
+  user-select: none;
+  &[href] {
+    color: var(--pilcrow-weak);
+    &:hover { text-decoration: none; }
+  }
+  @media not print {
+    :hover > &, &:focus {
+      opacity: 1;
+    }
+    &[href]:hover {
+      color: var(--pilcrow-strong);
+      background-color: transparent;
+    }
+  }
+  @media print {
+    display: none;
+  }
+}
+
+/* misc */
+hr {
+  border: 0;
+  border-top: 1px solid var(--line-color);
+}
+.bcp14 {
+  font-variant: small-caps;
+  font-weight: 600;
+  font-size: var(--small-font-size);
+}
+.role {
+  font-variant: all-small-caps;
+}
+sub, sup {
+  line-height: 1;
+  font-size: 80%;
+}
+
+/* info block */
+#identifiers {
+  margin: 0;
+  font-size: var(--small-font-size);
+  line-height: 18px;
+  --identifier-width: 15ch;
+  & dt {
+    width: var(--identifier-width);
+    min-width: var(--identifier-width);
+    clear: left;
+    float: left;
+    text-align: right;
+    margin-right: 1ch;
+  }
+  & dd {
+    margin: 0;
+    margin-left: calc(1em + var(--identifier-width)) !important;
+    min-width: 5em;
+  }
+  & .authors {
+    & .author {
+      display: inline-block;
+      margin-right: 1.5em;
+    }
+    & .org {
+      font-style: italic;
+    }
+  }
+}
+
+/* The prepared/rendered info at the very bottom of the page */
+.docInfo {
+  color: #999;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2em;
+  & .prepared {
+    float: right;
+  }
+}
+
+/* table of contents */
+#toc {
+  padding: 0.75em 0 2em 0;
+  margin-bottom: 1em;
+
+  & nav {
+    & ul {
+      margin: 0 0.5em 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    & li {
+      line-height: 1.3em;
+      margin: 2px 0;
+      padding-left: 1.2em;
+      text-indent: -1.2em;
+    }
+  }
+  & a.xref {
+    white-space: normal;
+  }
+}
+
+.references {
+  & > dt {
+    text-align: right;
+    font-weight: bold;
+    min-width: 10ch;
+    margin-right: 1.5ch;
+    &:target::before {
+      content: "⇒";
+      margin: 0 10px 0 -25px;
+    }
+  }
+  & > dd {
+    margin-left: 12ch !important;
+    overflow: visible;
+    & .refInstance {
+      margin-bottom: 0.8em;
+    }
+    & .ascii {
+      margin-bottom: 0.25em;
+    }
+  }
+}
+
+#rfc\.index\.index + ul {
+  margin-left: 0;
+}
+
+/* authors */
+address.vcard {
+  font-style: normal;
+  max-width: 20em;
+  margin: 1em auto 1em 0;
+
+  & .nameRole {
+    font-weight: 700;
+    margin-left: 0;
+  }
+  & .label {
+    margin: 0.5em 0;
+  }
+  & .type {
+    display: none;
+  }
+  & .alternative-contact {
+    margin: 0.5em 0 0.25em 0;
+  }
+  & .non-ascii {
+    margin: 0 0 0 2em;
+  }
+  & div.left {
+    text-align: left;
+  }
+  & div.right {
+    text-align: right;
+  }
+}
+
+hr.addr {
+  border-top: 1px dashed;
+  margin: 0;
+  color: #ddd;
+  max-width: calc(100% - 16px);
+}
+@media (min-width: 500px) {
+  #authors-addresses {
+    & > section {
+      column-count: 2;
+      column-gap: 20px;
+    }
+    & > section > h2 {
+      column-span: all;
+    }
+    /* hack for break-inside: avoid-column */
+    & address {
+      display: inline-block;
+      break-inside: avoid-column;
+    }
+  }
+}
+
+/* Comments */
+.rfcEditorRemove {
+  & p:first-of-type {
+    font-style: italic;
+  }
+}
+.cref {
+  background-color: rgba(249, 232, 105, 0.3);
+  padding: 2px 4px;
+}
+.crefSource {
+  font-style: italic;
+}
+
+@media screen {
+  #toc {
+    & nav {
+      font-family: var(--font-title);
+      font-weight: 360;
+      & > ul { margin-bottom: 2em; }
+      & ul {
+        margin: 0 0 0 4px;
+        & :is(p, li) {
+          margin: 2px 0;
+        }
+      }
+    }
+    & a.toplink {
+      float: right;
+    }
+  }
+}
+@media not screen {
+  #toc a.toplink {
+    display: none;
+  }
+}
+
+
+/* TOC layout for smaller screens */
+@media screen and (max-width: 929px) {
+  #toc {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    padding: 1px 0 0 0;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    opacity: 0.6;
+    & h2 {
+      margin: 0;
+      padding: 2px 0 2px 6px;
+      padding-right: 1em;
+      font-size: 18px;
+      line-height: 24px;
+      min-width: 190px;
+      text-align: right;
+      background-color: #444;
+      color: white;
+      cursor: pointer;
+      &::before { /* css hamburger */
+        float: right;
+        position: relative;
+        width: 1em;
+        height: 1px;
+        left: -164px;
+        margin: 8px 0 0 0;
+        background: white none repeat scroll 0 0;
+        box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+        content: "";
+      }
+    }
+    & nav {
+      display: none;
+      background-color: var(--background-color);
+      padding: 0.5em 1em 1em;
+      overflow: auto;
+      overscroll-behavior: contain;
+      height: calc(100vh - 48px);
+      border-left: 1px solid #ddd;
+    }
+    &.active {
+      opacity: 1;
+      & nav { display: block; }
+    }
+    /* Make the collapsed ToC header render white on gray also when it's a link */
+    & h2 a,
+    & h2 a:is(:link, :focus, :hover),
+    & a.toplink,
+    & a.toplink:hover {
+      color: white;
+      background-color: #444;
+      text-decoration: none;
+    }
+    & a.toplink {
+      margin: 2px 0.5em 0;
+    }
+  }
+}
+
+/* TOC layout for wide screens */
+@media screen and (min-width: 930px) {
+  body {
+    padding-right: 360px;
+    padding-right: calc(min(180px + 20%, 500px));
+  }
+  #toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 480px);
+    width: 312px;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+    & h2 {
+      margin: 0;
+      padding: 0.25em 1em 1em 0;
+    }
+    & nav {
+      display: block;
+      height: calc(90vh - 84px);
+      bottom: 0;
+      padding: 0.5em 0 2em;
+      overflow: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+    }
+    & a.toplink {
+      margin: 8px 0.5em 0;
+    }
+  }
+  img { /* future proofing */
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* pagination */
+@media print {
+  body {
+    width: 100%;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  #n-copyright-notice {
+    border-bottom: none;
+  }
+  #toc {
+    page-break-before: always;
+    border-top: none;
+    padding-top: 0;
+  }
+  #n-introduction {
+    page-break-before: always;
+  }
+  figure, pre, .vcard {
+    page-break-inside: avoid;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  :is(h2, h3, h4, h5, h6)+*, dd {
+    page-break-before: avoid;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 10pt;
+  }
+  table {
+    border: 1px solid #ddd;
+  }
+  td {
+    border-top: 1px solid #ddd;
+  }
+}
+
+@page :first {
+  padding-top: 0;
+  @top-left {
+    content: normal;
+    border: none;
+  }
+  @top-center {
+    content: normal;
+    border: none;
+  }
+  @top-right {
+    content: normal;
+    border: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin-bottom: 45mm;
+  padding-top: 20px;
+}
+
+/* Dark mode. */
+@media (prefers-color-scheme: dark) {
+:root {
+  --background-color: #121212;
+  --text-color: #f0f0f0;
+  --title-color: #fff;
+  --link-color: #4da4f0;
+  --highlight-color: #282828;
+  --line-color: #444;
+  --pilcrow-weak: #444;
+  --pilcrow-strong: #666;
+  scrollbar-color: #777 #333;
+}
+}
+
+/* SVG Trick: a prefix match works because only black and white are allowed */
+svg {
+  & :is([stroke="black"], [stroke^="#000"]) {
+    stroke: var(--text-color);
+  }
+  & :is([stroke="white"], [stroke^="#fff"]) {
+    stroke: var(--background-color);
+  }
+  & :is([fill="black"], [fill^="#000"], :not([fill])) {
+    fill: var(--text-color);
+  }
+  & :is([fill="white"], [fill^="#fff"]) {
+    fill: var(--background-color);
+  }
+}
+</style>
+
+</head>
+<body class="xml2rfc">
+<table class="ears">
+<thead><tr>
+<td class="left">Internet-Draft</td>
+<td class="center">RATS Security Considerations</td>
+<td class="right">November 2026</td>
+</tr></thead>
+<tfoot><tr>
+<td class="left">Sardar, et al.</td>
+<td class="center">Expires 5 May 2027</td>
+<td class="right">[Page]</td>
+</tr></tfoot>
+</table>
+<div id="external-metadata" class="document-information"></div>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">RATS Working Group</dd>
+<dt class="label-internet-draft">Internet-Draft:</dt>
+<dd class="internet-draft">draft-sardar-rats-sec-cons-latest</dd>
+<dt class="label-updates">Updates:</dt>
+<dd class="updates">
+<a href="https://www.rfc-editor.org/rfc/rfc9334" class="eref">9334</a> (if approved)</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2026-11-01" class="published">1 November 2026</time>
+    </dd>
+<dt class="label-intended-status">Intended Status:</dt>
+<dd class="intended-status">Informational</dd>
+<dt class="label-expires">Expires:</dt>
+<dd class="expires"><time datetime="2027-05-05">5 May 2027</time></dd>
+<dt class="label-authors">Authors:</dt>
+<dd class="authors">
+<div class="author">
+      <div class="author-name">M. U. Sardar</div>
+<div class="org">TU Dresden</div>
+</div>
+<div class="author">
+      <div class="author-name">S. Bu</div>
+<div class="org">Stevens Institute of Technology</div>
+</div>
+<div class="author">
+      <div class="author-name">C. Huang</div>
+<div class="org">Independent</div>
+</div>
+<div class="author">
+      <div class="author-name">H. Song</div>
+<div class="org">Shanghai Guan An Information Technology Co., Ltd.</div>
+</div>
+</dd>
+</dl>
+</div>
+<h1 id="title">Guidelines for Security Considerations of RATS</h1>
+<section id="section-abstract">
+      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
+<p id="section-abstract-1">This document aims to provide guidelines and best practices for writing
+   security considerations for technical specifications for RATS
+   targeting the needs of implementers, researchers, and protocol
+   designers. In particular, it discusses some of the 'bottom turtle' issues. This is a work-in-progress, and the current version mainly presents an outline of the general security guidelines, baseline, or template for RATS that future versions
+   will cover in more detail.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+</section>
+<section class="note rfcEditorRemove" id="section-note.1">
+      <h2 id="name-about-this-document">
+<a href="#name-about-this-document" class="section-name selfRef">About This Document</a>
+      </h2>
+<p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
+<p id="section-note.1-2">
+        The latest revision of this draft can be found at <span><a href="https://muhammad-usama-sardar.github.io/rats-sec-cons/draft-sardar-rats-sec-cons.html">https://muhammad-usama-sardar.github.io/rats-sec-cons/draft-sardar-rats-sec-cons.html</a></span>.
+        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-sardar-rats-sec-cons/">https://datatracker.ietf.org/doc/draft-sardar-rats-sec-cons/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+<p id="section-note.1-3">Source for this draft and an issue tracker can be found at
+        <span><a href="https://github.com/muhammad-usama-sardar/rats-sec-cons">https://github.com/muhammad-usama-sardar/rats-sec-cons</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
+        </h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 5 May 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice">
+<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
+        </h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2026 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="toc">
+<section id="section-toc.1">
+        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        </h2>
+<nav class="toc"><ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-need-for-specialized-guidan" class="internal xref">Need for Specialized Guidance in RATS</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
+                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.  <a href="#name-needs-of-the-target-audienc" class="internal xref">Needs of the Target Audience of RATS</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.3">
+                <p id="section-toc.1-1.1.2.3.1"><a href="#section-1.3" class="auto internal xref">1.3</a>.  <a href="#name-motivation" class="internal xref">Motivation</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.3.2.1">
+                    <p id="section-toc.1-1.1.2.3.2.1.1" class="keepWithNext"><a href="#section-1.3.1" class="auto internal xref">1.3.1</a>.  <a href="#name-concrete-motivational-examp" class="internal xref">Concrete Motivational Example: Practical Exploits in Production Systems</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.4">
+                <p id="section-toc.1-1.1.2.4.1"><a href="#section-1.4" class="auto internal xref">1.4</a>.  <a href="#name-scope" class="internal xref">Scope</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-general-hierarchy-of-authen" class="internal xref">General Hierarchy of Authentication</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-threat-modeling" class="internal xref">Threat Modeling</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
+                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-system-model" class="internal xref">System Model</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
+                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-actors" class="internal xref">Actors</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.1">
+                    <p id="section-toc.1-1.4.2.2.2.1.1"><a href="#section-4.2.1" class="auto internal xref">4.2.1</a>.  <a href="#name-legal-perspective" class="internal xref">Legal perspective</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.2">
+                    <p id="section-toc.1-1.4.2.2.2.2.1"><a href="#section-4.2.2" class="auto internal xref">4.2.2</a>.  <a href="#name-technical-perspective" class="internal xref">Technical perspective</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3">
+                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-threat-model" class="internal xref">Threat Model</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4">
+                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-typical-security-goals" class="internal xref">Typical Security Goals</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-attacks" class="internal xref">Attacks</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-evidence-replay-attacks" class="internal xref">(Evidence) Replay Attacks</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-diversion-attacks" class="internal xref">Diversion Attacks</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
+                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-relay-attacks" class="internal xref">Relay Attacks</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-concrete-cves" class="internal xref">Concrete CVEs</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-intra-handshakefail" class="internal xref">Intra-handshake.fail</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-id-crisis" class="internal xref">ID-Crisis</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
+                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-earlyattestationbleed" class="internal xref">EarlyAttestationBleed</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.1">
+                    <p id="section-toc.1-1.6.2.3.2.1.1"><a href="#section-6.3.1" class="auto internal xref">6.3.1</a>.  <a href="#name-architectural-flaws-in-earl" class="internal xref">Architectural Flaws in Early Attestation</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.4">
+                <p id="section-toc.1-1.6.2.4.1"><a href="#section-6.4" class="auto internal xref">6.4</a>.  <a href="#name-earlyattestationtschuss-eat" class="internal xref">EarlyAttestationTschüss (EAT)</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-potential-mitigations" class="internal xref">Potential Mitigations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
+                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="auto internal xref">10.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
+                <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="auto internal xref">10.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-history" class="internal xref">History</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+</li>
+        </ul>
+</nav>
+</section>
+</div>
+<div id="introduction">
+<section id="section-1">
+      <h2 id="name-introduction">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+      </h2>
+<div id="need-for-specialized-guidance-in-rats">
+<section id="section-1.1">
+        <h3 id="name-need-for-specialized-guidan">
+<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-need-for-specialized-guidan" class="section-name selfRef">Need for Specialized Guidance in RATS</a>
+        </h3>
+<p id="section-1.1-1">Every Internet Draft needs to have a "Security Considerations" section.
+While general guidelines such as <span>[<a href="#RFC3552" class="cite xref">RFC3552</a>]</span> exist, the underlying threat model is that
+the endpoint is fully trusted (i.e., all software and hardware components in the device may access the keys).
+RATS <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> has a primarily different threat model in the sense that only parts of the endpoint (called Attester) are trusted (i.e., only specific software and hardware components in the device may access the keys), and the goal is to establish the trustworthiness of the endpoint.
+In other words, <span>[<a href="#RFC3552" class="cite xref">RFC3552</a>]</span> deals with a network adversary, whereas RATS deals with an endpoint adversary, which may have root access or physical control over the device with which it can extract keys from software or hardware.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-2">Moreover, remote attestation has several distinguishing features that necessitate a separate document.
+One specific example of such a feature is the architectural complexity of the endpoint.
+While network protocols typically have 2 roles, RATS has additional roles, which complicates
+the picture.
+Unfortunately, no guidelines currently exist for remote attestation <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> in RATS.
+This document aims to fill this gap.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="needs-of-the-target-audience-of-rats">
+<section id="section-1.2">
+        <h3 id="name-needs-of-the-target-audienc">
+<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-needs-of-the-target-audienc" class="section-name selfRef">Needs of the Target Audience of RATS</a>
+        </h3>
+<p id="section-1.2-1">Moreover, while the target audience of Internet Drafts is implementers, researchers, and protocol designers <span>[<a href="#I-D.irtf-cfrg-cryptography-specification" class="cite xref">I-D.irtf-cfrg-cryptography-specification</a>]</span>, RATS drafts generally do not fulfill these needs, in particular the needs of researchers and protocol designers.
+On the other hand, in our observation, implementers generally find it hard to relate the abstract concepts of RATS to the real-world systems. In general, implementers and protocol designers of RATS are thus left with little or no guidance.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="motivation">
+<section id="section-1.3">
+        <h3 id="name-motivation">
+<a href="#section-1.3" class="section-number selfRef">1.3. </a><a href="#name-motivation" class="section-name selfRef">Motivation</a>
+        </h3>
+<p id="section-1.3-1">Unverified protocol designs, imprecisely stated threat model and security goals have led to high and critical severity vulnerabilities related to remote attestation.<a href="#section-1.3-1" class="pilcrow">¶</a></p>
+<div id="sec-mot-example">
+<section id="section-1.3.1">
+          <h4 id="name-concrete-motivational-examp">
+<a href="#section-1.3.1" class="section-number selfRef">1.3.1. </a><a href="#name-concrete-motivational-examp" class="section-name selfRef">Concrete Motivational Example: Practical Exploits in Production Systems</a>
+          </h4>
+<p id="section-1.3.1-1">The formal analysis led to three orthogonal issues:<a href="#section-1.3.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-1.3.1-2.1">
+              <p id="section-1.3.1-2.1.1">Formal analysis <span>[<a href="#ID-Crisis-repo" class="cite xref">ID-Crisis-repo</a>]</span> found <strong>diversion</strong> attacks when unique hardware identifier is not included in Evidence. For technical details, please see the corresponding paper <span>[<a href="#ID-Crisis" class="cite xref">ID-Crisis</a>]</span>.<a href="#section-1.3.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-1.3.1-2.2">
+              <p id="section-1.3.1-2.2.1">Formal analysis <span>[<a href="#Intra-handshake.fail-repo" class="cite xref">Intra-handshake.fail-repo</a>]</span> of several <strong>production</strong> implementations of remote attestation led to the discovery of <span>[<a href="#CVE-2026-33697" class="cite xref">CVE-2026-33697</a>]</span> of <strong>CVSS 7.5</strong> for <strong>relay</strong> attacks. For technical details, please see the corresponding paper <span>[<a href="#Intra-handshake.fail" class="cite xref">Intra-handshake.fail</a>]</span>.<a href="#section-1.3.1-2.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-1.3.1-2.3">
+              <p id="section-1.3.1-2.3.1">Further formal analysis of <strong>production</strong> implementation of remote attestation has led to discovery of another class of attacks and will potentially lead to three CVEs (currently under <em>responsible</em> disclosure) <em>each</em> with an expected <strong>CVSS 9.1</strong>.<a href="#section-1.3.1-2.3.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-1.3.1-3">This shows the value of precise threat model and formal analysis in the design of secure protocols to find subtle vulnerabilities, which could otherwise be missed. This draft aims to provide the baseline security considerations that other drafts can simply refer to.<a href="#section-1.3.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="scope">
+<section id="section-1.4">
+        <h3 id="name-scope">
+<a href="#section-1.4" class="section-number selfRef">1.4. </a><a href="#name-scope" class="section-name selfRef">Scope</a>
+        </h3>
+<p id="section-1.4-1">To improve the situation, this draft presents general security baseline that other drafts can simply point to, or guidelines or template that other drafts can use.<a href="#section-1.4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="conventions-and-definitions">
+<section id="section-2">
+      <h2 id="name-conventions-and-definitions">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-conventions-and-definitions" class="section-name selfRef">Conventions and Definitions</a>
+      </h2>
+<p id="section-2-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+"<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
+described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
+appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="general-hierarchy-of-authentication">
+<section id="section-3">
+      <h2 id="name-general-hierarchy-of-authen">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-general-hierarchy-of-authen" class="section-name selfRef">General Hierarchy of Authentication</a>
+      </h2>
+<p id="section-3-1">Authentication is a term which is often ambiguous in RATS specifications. We propose general hierarchy of one-way authentication, which can help precisely
+state the intended level of authentication (in decreasing order):<a href="#section-3-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3-2.1">
+          <p id="section-3-2.1.1">One-way injective agreement<a href="#section-3-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-3-2.2">
+          <p id="section-3-2.2.1">One-way non-injective agreement<a href="#section-3-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-3-2.3">
+          <p id="section-3-2.3.1">Aliveness<a href="#section-3-2.3.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-3-3">Recentness can be added to each of these levels of authentication.
+Details will be added in future versions.<a href="#section-3-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="threat-modeling">
+<section id="section-4">
+      <h2 id="name-threat-modeling">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-threat-modeling" class="section-name selfRef">Threat Modeling</a>
+      </h2>
+<p id="section-4-1">This section describes "What can go wrong?"<a href="#section-4-1" class="pilcrow">¶</a></p>
+<div id="system-model">
+<section id="section-4.1">
+        <h3 id="name-system-model">
+<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-system-model" class="section-name selfRef">System Model</a>
+        </h3>
+<p id="section-4.1-1">See Section 4 of <span>[<a href="#Intra-handshake.fail" class="cite xref">Intra-handshake.fail</a>]</span> as an example.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="actors">
+<section id="section-4.2">
+        <h3 id="name-actors">
+<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-actors" class="section-name selfRef">Actors</a>
+        </h3>
+<p id="section-4.2-1">It has both legal and technical perspective.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+<div id="legal-perspective">
+<section id="section-4.2.1">
+          <h4 id="name-legal-perspective">
+<a href="#section-4.2.1" class="section-number selfRef">4.2.1. </a><a href="#name-legal-perspective" class="section-name selfRef">Legal perspective</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-4.2.1-1.1">
+              <p id="section-4.2.1-1.1.1">Data subject is an identifiable natural person (as defined in Article 4 (1) of GDPR <span>[<a href="#GDPR" class="cite xref">GDPR</a>]</span>).<a href="#section-4.2.1-1.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-4.2.1-1.2">
+              <p id="section-4.2.1-1.2.1">(Data) Controller (as defined in Article 4 (7) of GDPR <span>[<a href="#GDPR" class="cite xref">GDPR</a>]</span>) manages and controls what happens with personal data of data subject.<a href="#section-4.2.1-1.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-4.2.1-1.3">
+              <p id="section-4.2.1-1.3.1">(Data) Processor (as defined in Article 4 (8) of GDPR <span>[<a href="#GDPR" class="cite xref">GDPR</a>]</span>) performs data processing on behalf of the data controller.<a href="#section-4.2.1-1.3.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+<div id="technical-perspective">
+<section id="section-4.2.2">
+          <h4 id="name-technical-perspective">
+<a href="#section-4.2.2" class="section-number selfRef">4.2.2. </a><a href="#name-technical-perspective" class="section-name selfRef">Technical perspective</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-4.2.2-1.1">
+              <p id="section-4.2.2-1.1.1">Infrastucture Provider is a role which refers to the Processor in GDPR. An example of this role is a cloud service provider (CSP).<a href="#section-4.2.2-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+</section>
+</div>
+<div id="threat-model">
+<section id="section-4.3">
+        <h3 id="name-threat-model">
+<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-threat-model" class="section-name selfRef">Threat Model</a>
+        </h3>
+<p id="section-4.3-1">See Section 6.1 of <span>[<a href="#Intra-handshake.fail" class="cite xref">Intra-handshake.fail</a>]</span> as an example.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="typical-security-goals">
+<section id="section-4.4">
+        <h3 id="name-typical-security-goals">
+<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-typical-security-goals" class="section-name selfRef">Typical Security Goals</a>
+        </h3>
+<p id="section-4.4-1">See <span>[<a href="#ID-Crisis" class="cite xref">ID-Crisis</a>]</span> as an example.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="attacks">
+<section id="section-5">
+      <h2 id="name-attacks">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-attacks" class="section-name selfRef">Attacks</a>
+      </h2>
+<p id="section-5-1">Security considerations in RATS specifications need to clarify how the following attacks are avoided or mitigated:<a href="#section-5-1" class="pilcrow">¶</a></p>
+<div id="evidence-replay-attacks">
+<section id="section-5.1">
+        <h3 id="name-evidence-replay-attacks">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-evidence-replay-attacks" class="section-name selfRef">(Evidence) Replay Attacks</a>
+        </h3>
+<p id="section-5.1-1">In this attack, a network or endpoint adversary -- with access to older Evidence -- can replay Evidence with stale Claims which no longer represent the actual state of the Attester, potentially resulting in exposure of confidential data <span>[<a href="#RA-TLS" class="cite xref">RA-TLS</a>]</span>.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-2">Replay of stale Evidence may be within the same connection or across multiple connections.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="diversion-attacks">
+<section id="section-5.2">
+        <h3 id="name-diversion-attacks">
+<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-diversion-attacks" class="section-name selfRef">Diversion Attacks</a>
+        </h3>
+<p id="section-5.2-1">In this attack, a network adversary -- with Dolev-Yao capabilities <span>[<a href="#Dolev-Yao" class="cite xref">Dolev-Yao</a>]</span> and access (e.g., via
+Foreshadow <span>[<a href="#Foreshadow" class="cite xref">Foreshadow</a>]</span>) to the attestation key of any machine in the world -- can redirect a connection intended
+for a specific Infrastructure Provider to the compromised machine, potentially resulting in exposure of
+confidential data <span>[<a href="#ID-Crisis" class="cite xref">ID-Crisis</a>]</span>.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-2">In the context of confidential computing and TLS as a transport protocol, we reported these attacks to the TLS WG in February 2025 <span>[<a href="#Usama-TLS-26Feb25" class="cite xref">Usama-TLS-26Feb25</a>]</span>. A formal proof is available
+<span>[<a href="#ID-Crisis-repo" class="cite xref">ID-Crisis-repo</a>]</span> for further research and
+development. Since reporting to TLS WG, these attacks have been practically
+exploited in <a href="https://tee.fail/">TEE.fail</a>, <a href="https://wiretap.fail/">Wiretap.fail</a>, and <a href="https://badram.eu/">BadRAM</a>.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="relay-attacks">
+<section id="section-5.3">
+        <h3 id="name-relay-attacks">
+<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-relay-attacks" class="section-name selfRef">Relay Attacks</a>
+        </h3>
+<p id="section-5.3-1">In this attack, a network or endpoint adversary -- with access to suitable binding material -- can relay an attestation request to a genuine Attester and present the genuine Evidence as its own,
+potentially resulting in impersonation of genuine Attester <span>[<a href="#Intra-handshake.fail" class="cite xref">Intra-handshake.fail</a>]</span>.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.3-2">Note that <em>replay</em> is about <em>same</em> Attester while <em>relay</em> attack is about <em>different</em> Attesters.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="concrete-cves">
+<section id="section-6">
+      <h2 id="name-concrete-cves">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-concrete-cves" class="section-name selfRef">Concrete CVEs</a>
+      </h2>
+<div id="intra-handshakefail">
+<section id="section-6.1">
+        <h3 id="name-intra-handshakefail">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-intra-handshakefail" class="section-name selfRef">Intra-handshake.fail</a>
+        </h3>
+<p id="section-6.1-1"><span>[<a href="#Intra-handshake.fail" class="cite xref">Intra-handshake.fail</a>]</span> presents a general approach to analyze the intra-handshake (aka early) attestation proposals, regardless of whether they are within the scope of SEAT charter or not. From a security perspective, one of the key decision factors is the candidate binding mechanism. Some binding mechanisms are within scope of SEAT charter and others are not. The artifacts are available in <span>[<a href="#Intra-handshake.fail-repo" class="cite xref">Intra-handshake.fail-repo</a>]</span> under Apache-2.0 license for reproducibility, extensibility, and further research.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.1-2.1">
+            <p id="section-6.1-2.1.1">This work resulted in <span>[<a href="#CVE-2026-33697" class="cite xref">CVE-2026-33697</a>]</span> of CVSS 7.5.<a href="#section-6.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="id-crisis">
+<section id="section-6.2">
+        <h3 id="name-id-crisis">
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-id-crisis" class="section-name selfRef">ID-Crisis</a>
+        </h3>
+<p id="section-6.2-1">A <em>complementary</em> paper <span>[<a href="#ID-Crisis" class="cite xref">ID-Crisis</a>]</span> presents the identity crisis in pre- and intra-handshake attestation. The formal analysis is available in <span>[<a href="#ID-Crisis-repo" class="cite xref">ID-Crisis-repo</a>]</span> under Apache-2.0 license for reproducibility, extensibility, and further research.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="earlyattestationbleed">
+<section id="section-6.3">
+        <h3 id="name-earlyattestationbleed">
+<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-earlyattestationbleed" class="section-name selfRef">EarlyAttestationBleed</a>
+        </h3>
+<p id="section-6.3-1"><span>[<a href="#EarlyAttestationBleed" class="cite xref">EarlyAttestationBleed</a>]</span> presents a formal analysis together with regression tests of the broader attestation ecosystem and discovered three critical-severity vulnerabilities in implementations of early attestation:<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.3-2.1">
+            <p id="section-6.3-2.1.1">Ultraviolet Cocos AI in TDX path resulting in <span>[<a href="#CVE-2026-92701" class="cite xref">CVE-2026-92701</a>]</span> of CVSS 9.1.<a href="#section-6.3-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.3-2.2">
+            <p id="section-6.3-2.2.1">Ultraviolet Cocos AI in AMD SEV-SNP path resulting in <span>[<a href="#CVE-2026-92702" class="cite xref">CVE-2026-92702</a>]</span> of CVSS 9.1.<a href="#section-6.3-2.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.3-2.3">
+            <p id="section-6.3-2.3.1">Edgeless Systems Contrast in policies resulting in <span>[<a href="#GHSA-Edgeless-Systems2" class="cite xref">GHSA-Edgeless-Systems2</a>]</span> of CVSS 9.0-10.0 and <span>[<a href="#CVE-2026-100833" class="cite xref">CVE-2026-100833</a>]</span> of CVSS v3.1 of 9.6.<a href="#section-6.3-2.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<div id="architectural-flaws-in-early-attestation">
+<section id="section-6.3.1">
+          <h4 id="name-architectural-flaws-in-earl">
+<a href="#section-6.3.1" class="section-number selfRef">6.3.1. </a><a href="#name-architectural-flaws-in-earl" class="section-name selfRef">Architectural Flaws in Early Attestation</a>
+          </h4>
+<p id="section-6.3.1-1">Sec. 7 of <span>[<a href="#EarlyAttestationBleed" class="cite xref">EarlyAttestationBleed</a>]</span> presents four architectural flaws in early attestation:<a href="#section-6.3.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.3.1-2.1">
+              <p id="section-6.3.1-2.1.1">Hardware-level Information of Server<a href="#section-6.3.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.3.1-2.2">
+              <p id="section-6.3.1-2.2.1">Only Boot-time Claims<a href="#section-6.3.1-2.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.3.1-2.3">
+              <p id="section-6.3.1-2.3.1">Re-attestation<a href="#section-6.3.1-2.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.3.1-2.4">
+              <p id="section-6.3.1-2.4.1">High Handshake Latency, Timeouts, and Failures<a href="#section-6.3.1-2.4.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+</section>
+</div>
+<div id="earlyattestationtschss-eat">
+<section id="section-6.4">
+        <h3 id="name-earlyattestationtschuss-eat">
+<a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-earlyattestationtschuss-eat" class="section-name selfRef">EarlyAttestationTschüss (EAT)</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="section-6.4-1.1">
+            <p id="section-6.4-1.1.1"><span>[<a href="#CVE-2026-100835" class="cite xref">CVE-2026-100835</a>]</span> of CVSS 9.1 against Edgeless Systems Contrast<a href="#section-6.4-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-1.2">
+            <p id="section-6.4-1.2.1"><span>[<a href="#CVE-2026-112377" class="cite xref">CVE-2026-112377</a>]</span> of CVSS 9.1 against CCC Attestation SIG<a href="#section-6.4-1.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-1.3">
+            <p id="section-6.4-1.3.1"><span>[<a href="#CVE-2026-108362" class="cite xref">CVE-2026-108362</a>]</span> of CVSS 9.1 against Privasys<a href="#section-6.4-1.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-1.4">
+            <p id="section-6.4-1.4.1"><span>[<a href="#CVE-2026-108265" class="cite xref">CVE-2026-108265</a>]</span> of CVSS 9.1 against Privasys<a href="#section-6.4-1.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-1.5">
+            <p id="section-6.4-1.5.1"><span>[<a href="#CVE-2026-108266" class="cite xref">CVE-2026-108266</a>]</span> of CVSS 9.1 against Privasys<a href="#section-6.4-1.5.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-1.6">
+            <p id="section-6.4-1.6.1"><span>[<a href="#CVE-2026-108267" class="cite xref">CVE-2026-108267</a>]</span> of CVSS 9.1 against Privasys<a href="#section-6.4-1.6.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-1.7">
+            <p id="section-6.4-1.7.1"><span>[<a href="#CVE-2026-108268" class="cite xref">CVE-2026-108268</a>]</span> of CVSS 9.1 against Privasys<a href="#section-6.4-1.7.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-1.8">
+            <p id="section-6.4-1.8.1"><span>[<a href="#CVE-2026-108269" class="cite xref">CVE-2026-108269</a>]</span> of CVSS 9.1 against Privasys<a href="#section-6.4-1.8.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+</section>
+</div>
+<div id="potential-mitigations">
+<section id="section-7">
+      <h2 id="name-potential-mitigations">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-potential-mitigations" class="section-name selfRef">Potential Mitigations</a>
+      </h2>
+<p id="section-7-1">This section describes the countermeasures and their evaluation.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">To mitigate the above attacks, we propose post-handshake attestation.
+We are not aware of any attacks on post-handshake attestation. Post-handshake attestation
+avoids replay attacks by using a fresh attestation nonce. Moreover, considering TLS as the transport protocol, it avoids diversion and relay attacks
+by binding the Evidence to the underlying TLS connection, such as using Exported Keying Material (EKM)
+<span>[<a href="#I-D.ietf-tls-rfc8446bis" class="cite xref">I-D.ietf-tls-rfc8446bis</a>]</span>, as proposed in Section 9.2 of <span>[<a href="#ID-Crisis" class="cite xref">ID-Crisis</a>]</span>. <span>[<a href="#RFC9261" class="cite xref">RFC9261</a>]</span> and <span>[<a href="#RFC9266" class="cite xref">RFC9266</a>]</span> provide mechanisms for such bindings. Efforts for a formal proof
+of security of post-handshake attestation are ongoing.<a href="#section-7-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-8">
+      <h2 id="name-security-considerations">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-8-1">All of this document is about security considerations.<a href="#section-8-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="iana-considerations">
+<section id="section-9">
+      <h2 id="name-iana-considerations">
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      </h2>
+<p id="section-9-1">This document has no IANA actions.<a href="#section-9-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="sec-combined-references">
+<section id="section-10">
+      <h2 id="name-references">
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-references" class="section-name selfRef">References</a>
+      </h2>
+<div id="sec-normative-references">
+<section id="section-10.1">
+        <h3 id="name-normative-references">
+<a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+        </h3>
+<dl class="references">
+<dt id="RFC2119">[RFC2119]</dt>
+        <dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8174">[RFC8174]</dt>
+        <dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9334">[RFC9334]</dt>
+      <dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Thaler, D.</span>, <span class="refAuthor">Richardson, M.</span>, <span class="refAuthor">Smith, N.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Remote ATtestation procedureS (RATS) Architecture"</span>, <span class="seriesInfo">RFC 9334</span>, <span class="seriesInfo">DOI 10.17487/RFC9334</span>, <time datetime="2023-01" class="refDate">January 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9334">https://www.rfc-editor.org/rfc/rfc9334</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="sec-informative-references">
+<section id="section-10.2">
+        <h3 id="name-informative-references">
+<a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+        </h3>
+<dl class="references">
+<dt id="CSA-eBPF">[CSA-eBPF]</dt>
+        <dd>
+<span class="refAuthor">Cloud Security Alliance</span>, <span class="refTitle">"MITRE's New Framework: Securing the eBPF Layer Your AI Depends On"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://cloudsecurityalliance.org/blog/2026/09/09/mitre-s-new-framework-securing-the-ebpf-layer-your-ai-depends-on">https://cloudsecurityalliance.org/blog/2026/09/09/mitre-s-new-framework-securing-the-ebpf-layer-your-ai-depends-on</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CVE-2026-33697">[CVE-2026-33697]</dt>
+        <dd>
+<span class="refAuthor">CVE</span>, <span class="refTitle">"CoCoS attested TLS is vulnerable to relay attacks via extracted ephemeral TLS keys"</span>, <time datetime="2026-03" class="refDate">March 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-33697">https://www.cve.org/CVERecord?id=CVE-2026-33697</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CVE-2026-92701">[CVE-2026-92701]</dt>
+        <dd>
+<span class="refAuthor">CVE</span>, <span class="refTitle">"Cocos AI Intra-handshake attested TLS implementation is vulnerable to session-misbinding attacks for Intel TDX verifier path"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-92701">https://www.cve.org/CVERecord?id=CVE-2026-92701</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CVE-2026-92702">[CVE-2026-92702]</dt>
+        <dd>
+<span class="refAuthor">CVE</span>, <span class="refTitle">"Cocos AI Intra-handshake attested TLS implementation can accept Evidence with nil, empty, or omitted reportData in the AMD SEV-SNP path"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-92702">https://www.cve.org/CVERecord?id=CVE-2026-92702</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CVE-2026-100833">[CVE-2026-100833]</dt>
+        <dd>
+<span class="refAuthor">CVE</span>, <span class="refTitle">"Contrast before 1.23.1 Image Substitution via Policy Generation"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-100833">https://www.cve.org/CVERecord?id=CVE-2026-100833</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CVE-2026-100835">[CVE-2026-100835]</dt>
+        <dd>
+<span class="refAuthor">CVE</span>, <span class="refTitle">"Contrast before 1.16.0 Remote Attestation Relay Attack"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-100835">https://www.cve.org/CVERecord?id=CVE-2026-100835</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CVE-2026-108265">[CVE-2026-108265]</dt>
+        <dd>
+<span class="refAuthor">CVE</span>, <span class="refTitle">"CVE-2026-108265"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-108265">https://www.cve.org/CVERecord?id=CVE-2026-108265</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CVE-2026-108266">[CVE-2026-108266]</dt>
+        <dd>
+<span class="refAuthor">CVE</span>, <span class="refTitle">"CVE-2026-108266"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-108266">https://www.cve.org/CVERecord?id=CVE-2026-108266</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CVE-2026-108267">[CVE-2026-108267]</dt>
+        <dd>
+<span class="refAuthor">CVE</span>, <span class="refTitle">"CVE-2026-108267"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-108267">https://www.cve.org/CVERecord?id=CVE-2026-108267</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CVE-2026-108268">[CVE-2026-108268]</dt>
+        <dd>
+<span class="refAuthor">CVE</span>, <span class="refTitle">"CVE-2026-108268"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-108268">https://www.cve.org/CVERecord?id=CVE-2026-108268</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CVE-2026-108269">[CVE-2026-108269]</dt>
+        <dd>
+<span class="refAuthor">CVE</span>, <span class="refTitle">"CVE-2026-108269"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-108269">https://www.cve.org/CVERecord?id=CVE-2026-108269</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CVE-2026-108361">[CVE-2026-108361]</dt>
+        <dd>
+<span class="refAuthor">CVE</span>, <span class="refTitle">"CVE-2026-108361"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-108361">https://www.cve.org/CVERecord?id=CVE-2026-108361</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CVE-2026-108362">[CVE-2026-108362]</dt>
+        <dd>
+<span class="refAuthor">CVE</span>, <span class="refTitle">"CVE-2026-108362"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-108362">https://www.cve.org/CVERecord?id=CVE-2026-108362</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CVE-2026-112377">[CVE-2026-112377]</dt>
+        <dd>
+<span class="refAuthor">CVE</span>, <span class="refTitle">"CVE-2026-112377"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://www.cve.org/CVERecord?id=CVE-2026-112377">https://www.cve.org/CVERecord?id=CVE-2026-112377</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="Dolev-Yao">[Dolev-Yao]</dt>
+        <dd>
+<span class="refAuthor">Dolev, D.</span> and <span class="refAuthor">A. Yao</span>, <span class="refTitle">"On the security of public key protocols"</span>, <time datetime="1983-03" class="refDate">March 1983</time>. </dd>
+<dd class="break"></dd>
+<dt id="EarlyAttestationBleed">[EarlyAttestationBleed]</dt>
+        <dd>
+<span class="refAuthor">Sardar, M. U.</span> and <span class="refAuthor">Songbo Bu</span>, <span class="refTitle">"EarlyAttestationBleed: Three Critical-severity Vulnerabilities of CVSS ≥ 9.0 in Confidential Computing"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://www.researchgate.net/publication/414529199_EarlyAttestationBleed_Three_Critical-severity_Vulnerabilities_of_CVSS_90_in_Confidential_Computing">https://www.researchgate.net/publication/414529199_EarlyAttestationBleed_Three_Critical-severity_Vulnerabilities_of_CVSS_90_in_Confidential_Computing</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EUVD-2026-16488">[EUVD-2026-16488]</dt>
+        <dd>
+<span class="refAuthor">ENISA</span>, <span class="refTitle">"CoCoS attested TLS is vulnerable to relay attacks via extracted ephemeral TLS keys"</span>, <time datetime="2026-03" class="refDate">March 2026</time>, <span>&lt;<a href="https://euvd.enisa.europa.eu/enisa/EUVD-2026-16488">https://euvd.enisa.europa.eu/enisa/EUVD-2026-16488</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EUVD-2026-83192">[EUVD-2026-83192]</dt>
+        <dd>
+<span class="refAuthor">ENISA</span>, <span class="refTitle">"EUVD-2026-83192"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://euvd.enisa.europa.eu/enisa/EUVD-2026-83192">https://euvd.enisa.europa.eu/enisa/EUVD-2026-83192</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EUVD-2026-83194">[EUVD-2026-83194]</dt>
+        <dd>
+<span class="refAuthor">ENISA</span>, <span class="refTitle">"EUVD-2026-83194"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://euvd.enisa.europa.eu/enisa/EUVD-2026-83194">https://euvd.enisa.europa.eu/enisa/EUVD-2026-83194</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EUVD-2026-87851">[EUVD-2026-87851]</dt>
+        <dd>
+<span class="refAuthor">ENISA</span>, <span class="refTitle">"EUVD-2026-87851"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://euvd.enisa.europa.eu/enisa/EUVD-2026-87851">https://euvd.enisa.europa.eu/enisa/EUVD-2026-87851</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EUVD-2026-87853">[EUVD-2026-87853]</dt>
+        <dd>
+<span class="refAuthor">ENISA</span>, <span class="refTitle">"EUVD-2026-87853"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://euvd.enisa.europa.eu/enisa/EUVD-2026-87853">https://euvd.enisa.europa.eu/enisa/EUVD-2026-87853</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EUVD-2026-95996">[EUVD-2026-95996]</dt>
+        <dd>
+<span class="refAuthor">ENISA</span>, <span class="refTitle">"EUVD-2026-95996"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://euvd.enisa.europa.eu/enisa/EUVD-2026-95996">https://euvd.enisa.europa.eu/enisa/EUVD-2026-95996</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EUVD-2026-95997">[EUVD-2026-95997]</dt>
+        <dd>
+<span class="refAuthor">ENISA</span>, <span class="refTitle">"EUVD-2026-95997"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://euvd.enisa.europa.eu/enisa/EUVD-2026-95997">https://euvd.enisa.europa.eu/enisa/EUVD-2026-95997</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EUVD-2026-96017">[EUVD-2026-96017]</dt>
+        <dd>
+<span class="refAuthor">ENISA</span>, <span class="refTitle">"EUVD-2026-96017"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://euvd.enisa.europa.eu/enisa/EUVD-2026-96017">https://euvd.enisa.europa.eu/enisa/EUVD-2026-96017</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EUVD-2026-96018">[EUVD-2026-96018]</dt>
+        <dd>
+<span class="refAuthor">ENISA</span>, <span class="refTitle">"EUVD-2026-96018"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://euvd.enisa.europa.eu/enisa/EUVD-2026-96018">https://euvd.enisa.europa.eu/enisa/EUVD-2026-96018</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EUVD-2026-96019">[EUVD-2026-96019]</dt>
+        <dd>
+<span class="refAuthor">ENISA</span>, <span class="refTitle">"EUVD-2026-96019"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://euvd.enisa.europa.eu/enisa/EUVD-2026-96019">https://euvd.enisa.europa.eu/enisa/EUVD-2026-96019</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EUVD-2026-97781">[EUVD-2026-97781]</dt>
+        <dd>
+<span class="refAuthor">ENISA</span>, <span class="refTitle">"EUVD-2026-97781"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://euvd.enisa.europa.eu/enisa/EUVD-2026-97781">https://euvd.enisa.europa.eu/enisa/EUVD-2026-97781</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EUVD-2026-97782">[EUVD-2026-97782]</dt>
+        <dd>
+<span class="refAuthor">ENISA</span>, <span class="refTitle">"EUVD-2026-97782"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://euvd.enisa.europa.eu/enisa/EUVD-2026-97782">https://euvd.enisa.europa.eu/enisa/EUVD-2026-97782</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EUVD-2026-104535">[EUVD-2026-104535]</dt>
+        <dd>
+<span class="refAuthor">ENISA</span>, <span class="refTitle">"EUVD-2026-104535"</span>, <time datetime="2026-10" class="refDate">October 2026</time>, <span>&lt;<a href="https://euvd.enisa.europa.eu/enisa/EUVD-2026-104535">https://euvd.enisa.europa.eu/enisa/EUVD-2026-104535</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="Foreshadow">[Foreshadow]</dt>
+        <dd>
+<span class="refAuthor">Jo Van Bulck</span>, <span class="refAuthor">Marina Minkin</span>, <span class="refAuthor">Ofir Weisse</span>, <span class="refAuthor">Daniel Genkin</span>, <span class="refAuthor">Baris Kasikci</span>, <span class="refAuthor">Frank Piessens</span>, <span class="refAuthor">Mark Silberstein</span>, <span class="refAuthor">Thomas F Wenisch</span>, <span class="refAuthor">Yuval Yarom</span>, and <span class="refAuthor">Raoul Strackx</span>, <span class="refTitle">"Foreshadow"</span>, <time datetime="2025-10" class="refDate">October 2025</time>, <span>&lt;<a href="https://foreshadowattack.eu/">https://foreshadowattack.eu/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GDPR">[GDPR]</dt>
+        <dd>
+<span class="refAuthor">European Commission</span>, <span class="refTitle">"Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 on the protection of natural persons with regard to the processing of personal data and on the free movement of such data, and repealing Directive 95/46/EC (General Data Protection Regulation) (Text with EEA relevance)"</span>, <time datetime="2016-05" class="refDate">May 2016</time>, <span>&lt;<a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj">https://eur-lex.europa.eu/eli/reg/2016/679/oj</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Cocos-AI">[GHSA-Cocos-AI]</dt>
+        <dd>
+<span class="refAuthor">Ultraviolet Cocos AI</span>, <span class="refTitle">"CoCoS attested TLS is vulnerable to relay attacks via extracted ephemeral TLS keys"</span>, <time datetime="2026-03" class="refDate">March 2026</time>, <span>&lt;<a href="https://github.com/ultravioletrs/cocos/security/advisories/GHSA-vfgg-mvxx-mgg7">https://github.com/ultravioletrs/cocos/security/advisories/GHSA-vfgg-mvxx-mgg7</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Cocos-AI2">[GHSA-Cocos-AI2]</dt>
+        <dd>
+<span class="refAuthor">Ultraviolet Cocos AI</span>, <span class="refTitle">"Cocos AI intra-handshake attested TLS implementation is vulnerable to session-misbinding attacks for Intel TDX verifier path"</span>, <time datetime="2026-08" class="refDate">August 2026</time>, <span>&lt;<a href="https://github.com/ultravioletrs/cocos/security/advisories/GHSA-4px3-wj2x-xx47">https://github.com/ultravioletrs/cocos/security/advisories/GHSA-4px3-wj2x-xx47</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Cocos-AI3">[GHSA-Cocos-AI3]</dt>
+        <dd>
+<span class="refAuthor">Ultraviolet Cocos AI</span>, <span class="refTitle">"Cocos AI intra-handshake attested TLS implementation can accept Evidence with nil, empty, or omitted reportData in the AMD SEV-SNP path"</span>, <time datetime="2026-08" class="refDate">August 2026</time>, <span>&lt;<a href="https://github.com/ultravioletrs/cocos/security/advisories/GHSA-4r6g-mp48-j2rw">https://github.com/ultravioletrs/cocos/security/advisories/GHSA-4r6g-mp48-j2rw</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Cocos-AI4">[GHSA-Cocos-AI4]</dt>
+        <dd>
+<span class="refAuthor">Ultraviolet Cocos AI</span>, <span class="refTitle">"Cocos Intra-handshake attested TLS implementation is vulnerable to Diversion Attacks"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://github.com/ultravioletrs/cocos/security/advisories/GHSA-v5m8-5wxc-vjgp">https://github.com/ultravioletrs/cocos/security/advisories/GHSA-v5m8-5wxc-vjgp</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Cocos-AI5">[GHSA-Cocos-AI5]</dt>
+        <dd>
+<span class="refAuthor">Ultraviolet Cocos AI</span>, <span class="refTitle">"Cocos AI Intra-handshake attested TLS implementation is vulnerable to TOCTOU Attacks"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://github.com/ultravioletrs/cocos/security/advisories/GHSA-ghwv-vrp2-2975">https://github.com/ultravioletrs/cocos/security/advisories/GHSA-ghwv-vrp2-2975</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Edgeless-Systems">[GHSA-Edgeless-Systems]</dt>
+        <dd>
+<span class="refAuthor">Edgeless Systems</span>, <span class="refTitle">"Remote attestation is susceptible to relay attacks"</span>, <time datetime="2026-08" class="refDate">August 2026</time>, <span>&lt;<a href="https://github.com/edgelesssys/contrast/security/advisories/GHSA-hjgc-jc5v-fw7h">https://github.com/edgelesssys/contrast/security/advisories/GHSA-hjgc-jc5v-fw7h</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Edgeless-Systems2">[GHSA-Edgeless-Systems2]</dt>
+        <dd>
+<span class="refAuthor">Edgeless Systems</span>, <span class="refTitle">"Generated policies don't detect all image substitutions"</span>, <time datetime="2026-08" class="refDate">August 2026</time>, <span>&lt;<a href="https://github.com/edgelesssys/contrast/security/advisories/GHSA-m2qg-wrxv-h898">https://github.com/edgelesssys/contrast/security/advisories/GHSA-m2qg-wrxv-h898</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Edgeless-Systems3">[GHSA-Edgeless-Systems3]</dt>
+        <dd>
+<span class="refAuthor">Edgeless Systems</span>, <span class="refTitle">"Existing Mesh CA key can cross manifest boundaries during Contrast peer recovery"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://github.com/edgelesssys/contrast/security/advisories/GHSA-rxcv-p3px-m3c3">https://github.com/edgelesssys/contrast/security/advisories/GHSA-rxcv-p3px-m3c3</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Edgeless-Systems4">[GHSA-Edgeless-Systems4]</dt>
+        <dd>
+<span class="refAuthor">Edgeless Systems</span>, <span class="refTitle">"Node installer leaves the host containerd configuration world-writable (0666), allowing local privilege escalation"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://github.com/edgelesssys/contrast/security/advisories/GHSA-376m-h37w-4rvq">https://github.com/edgelesssys/contrast/security/advisories/GHSA-376m-h37w-4rvq</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Edgeless-Systems5">[GHSA-Edgeless-Systems5]</dt>
+        <dd>
+<span class="refAuthor">Edgeless Systems</span>, <span class="refTitle">"Contrast before 1.16.0 is susceptible to remote attestation relay attacks"</span>, <time datetime="2026-08" class="refDate">August 2026</time>, <span>&lt;<a href="https://github.com/advisories/GHSA-jw33-f4wc-8736">https://github.com/advisories/GHSA-jw33-f4wc-8736</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Edgeless-Systems6">[GHSA-Edgeless-Systems6]</dt>
+        <dd>
+<span class="refAuthor">Edgeless Systems</span>, <span class="refTitle">"Contrast (edgelesssys/contrast) versions 1.14.0 before 1.23.1 generate runtime policies that fail to detect all container image substitutions."</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://github.com/advisories/GHSA-MJJ6-PX65-JQ92">https://github.com/advisories/GHSA-MJJ6-PX65-JQ92</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Privasys-eom">[GHSA-Privasys-eom]</dt>
+        <dd>
+<span class="refAuthor">Privasys</span>, <span class="refTitle">"enclave-os-mini: RA-TLS challenge certificates were not bound to the TLS session"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://github.com/Privasys/enclave-os-mini/security/advisories/GHSA-49qm-4pj3-w2c6">https://github.com/Privasys/enclave-os-mini/security/advisories/GHSA-49qm-4pj3-w2c6</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Privasys-eov">[GHSA-Privasys-eov]</dt>
+        <dd>
+<span class="refAuthor">Privasys</span>, <span class="refTitle">"enclave-os-virtual: RA-TLS challenge certificates were not bound to the TLS session"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://github.com/Privasys/enclave-os-virtual/security/advisories/GHSA-p5fp-g94g-g9m9">https://github.com/Privasys/enclave-os-virtual/security/advisories/GHSA-p5fp-g94g-g9m9</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Privasys-go">[GHSA-Privasys-go]</dt>
+        <dd>
+<span class="refAuthor">Privasys</span>, <span class="refTitle">"Privasys Go fork: RA-TLS challenge mode did not bind attestation evidence to the TLS session"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://github.com/Privasys/go/security/advisories/GHSA-7jfw-53rm-phh2">https://github.com/Privasys/go/security/advisories/GHSA-7jfw-53rm-phh2</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Privasys-rtc">[GHSA-Privasys-rtc]</dt>
+        <dd>
+<span class="refAuthor">Privasys</span>, <span class="refTitle">"ra-tls-clients: RA-TLS challenge verifier accepted quotes not bound to the TLS session"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://github.com/Privasys/ra-tls-clients/security/advisories/GHSA-5qrc-v874-mxvx">https://github.com/Privasys/ra-tls-clients/security/advisories/GHSA-5qrc-v874-mxvx</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Privasys-rtc-da">[GHSA-Privasys-rtc-da]</dt>
+        <dd>
+<span class="refAuthor">Privasys</span>, <span class="refTitle">"Privasys Intra-handshake attested TLS implementation is vulnerable to Diversion Attacks"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://github.com/Privasys/ra-tls-clients/security/advisories/GHSA-pj2x-5wqv-fh57">https://github.com/Privasys/ra-tls-clients/security/advisories/GHSA-pj2x-5wqv-fh57</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Privasys-rtc-tcu">[GHSA-Privasys-rtc-tcu]</dt>
+        <dd>
+<span class="refAuthor">Privasys</span>, <span class="refTitle">"Privasys Intra-handshake attested TLS implementation is vulnerable to TOCTOU Attacks"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://github.com/Privasys/ra-tls-clients/security/advisories/GHSA-gg8q-mfhh-wrrc">https://github.com/Privasys/ra-tls-clients/security/advisories/GHSA-gg8q-mfhh-wrrc</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GHSA-Privasys-rustls">[GHSA-Privasys-rustls]</dt>
+        <dd>
+<span class="refAuthor">Privasys</span>, <span class="refTitle">"Privasys RA-TLS challenge mode did not bind attestation evidence to the TLS session"</span>, <time datetime="2026-09" class="refDate">September 2026</time>, <span>&lt;<a href="https://github.com/Privasys/rustls/security/advisories/GHSA-j6qv-435v-r492">https://github.com/Privasys/rustls/security/advisories/GHSA-j6qv-435v-r492</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-tls-rfc8446bis">[I-D.ietf-tls-rfc8446bis]</dt>
+        <dd>
+<span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tls-rfc8446bis-14</span>, <time datetime="2025-09-13" class="refDate">13 September 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tls-rfc8446bis-14">https://datatracker.ietf.org/doc/html/draft-ietf-tls-rfc8446bis-14</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.irtf-cfrg-cryptography-specification">[I-D.irtf-cfrg-cryptography-specification]</dt>
+        <dd>
+<span class="refAuthor">Sullivan, N.</span> and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"Guidelines for Writing Cryptography Specifications"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-cryptography-specification-03</span>, <time datetime="2026-07-06" class="refDate">6 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-cryptography-specification-03">https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-cryptography-specification-03</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="ID-Crisis">[ID-Crisis]</dt>
+        <dd>
+<span class="refAuthor">Sardar, M.</span>, <span class="refAuthor">Moustafa, M.</span>, and <span class="refAuthor">T. Aura</span>, <span class="refTitle">"Identity Crisis in Confidential Computing: Formal Analysis of Attested TLS"</span>, <span class="refContent">ACM</span>, <span class="seriesInfo">Proceedings of the ACM Asia Conference on Computer and Communications Security pp. 547-560</span>, <span class="seriesInfo">DOI 10.1145/3779208.3785387</span>, <time datetime="2026-06" class="refDate">June 2026</time>, <span>&lt;<a href="https://doi.org/10.1145/3779208.3785387">https://doi.org/10.1145/3779208.3785387</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="ID-Crisis-repo">[ID-Crisis-repo]</dt>
+        <dd>
+<span class="refAuthor">Sardar, M. U.</span>, <span class="refAuthor">Moustafa, M.</span>, and <span class="refAuthor">T. Aura</span>, <span class="refTitle">"Identity Crisis in Confidential Computing: Formal Analysis of Attested TLS"</span>, <time datetime="2025-11" class="refDate">November 2025</time>, <span>&lt;<a href="https://github.com/CCC-Attestation/formal-spec-id-crisis">https://github.com/CCC-Attestation/formal-spec-id-crisis</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="Intra-handshake.fail">[Intra-handshake.fail]</dt>
+        <dd>
+<span class="refAuthor">Sardar, M. U.</span>, <span class="refAuthor">Dubeyko, V.</span>, and <span class="refAuthor">J.-M. Jacquet</span>, <span class="refTitle">"Intra-handshake.fail (CVE-2026-33697): High-severity CVE in Attested TLS"</span>, <time datetime="2026-06" class="refDate">June 2026</time>, <span>&lt;<a href="https://www.researchgate.net/publication/408219182_Intra-handshakefail_CVE-2026-33697_High-severity_CVE_in_Attested_TLS">https://www.researchgate.net/publication/408219182_Intra-handshakefail_CVE-2026-33697_High-severity_CVE_in_Attested_TLS</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="Intra-handshake.fail-repo">[Intra-handshake.fail-repo]</dt>
+        <dd>
+<span class="refAuthor">Sardar, M. U.</span>, <span class="refAuthor">Dubeyko, V.</span>, and <span class="refAuthor">J.-M. Jacquet</span>, <span class="refTitle">"Intra-handshake.fail (CVE-2026-33697): High-severity CVE in Attested TLS"</span>, <time datetime="2026-07" class="refDate">July 2026</time>, <span>&lt;<a href="https://github.com/muhammad-usama-sardar/intra-handshake.fail">https://github.com/muhammad-usama-sardar/intra-handshake.fail</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="MITRE-Continuous-Attestation">[MITRE-Continuous-Attestation]</dt>
+        <dd>
+<span class="refAuthor">MITRE's Confidential Computing Layered Attestation Working Group</span>, <span class="refTitle">"Framework for Continuous Remote Attestation"</span>, <time datetime="2026-07" class="refDate">July 2026</time>, <span>&lt;<a href="https://www.mitre.org/news-insights/publication/framework-continuous-remote-attestation">https://www.mitre.org/news-insights/publication/framework-continuous-remote-attestation</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RA-TLS">[RA-TLS]</dt>
+        <dd>
+<span class="refAuthor">Sardar, M.</span>, <span class="refAuthor">Niemi, A.</span>, <span class="refAuthor">Tschofenig, H.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"Towards Validation of TLS 1.3 Formal Model and Vulnerabilities in Intel’s RA-TLS Protocol"</span>, <span class="refContent">Institute of Electrical and Electronics Engineers (IEEE)</span>, <span class="seriesInfo">IEEE Access vol. 12, pp. 173670-173685</span>, <span class="seriesInfo">DOI 10.1109/access.2024.3497184</span>, <time datetime="2024" class="refDate">2024</time>, <span>&lt;<a href="https://doi.org/10.1109/access.2024.3497184">https://doi.org/10.1109/access.2024.3497184</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="refTLS">[refTLS]</dt>
+        <dd>
+<span class="refAuthor">Bhargavan, K.</span>, <span class="refAuthor">Blanchet, B.</span>, and <span class="refAuthor">N. Kobeissi</span>, <span class="refTitle">"Verified Models and Reference Implementations for the TLS 1.3 Standard Candidate"</span>, <span class="refContent">IEEE</span>, <span class="seriesInfo">2017 IEEE Symposium on Security and Privacy (SP) pp. 483-502</span>, <span class="seriesInfo">DOI 10.1109/sp.2017.26</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://doi.org/10.1109/sp.2017.26">https://doi.org/10.1109/sp.2017.26</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC3552">[RFC3552]</dt>
+        <dd>
+<span class="refAuthor">Rescorla, E.</span> and <span class="refAuthor">B. Korver</span>, <span class="refTitle">"Guidelines for Writing RFC Text on Security Considerations"</span>, <span class="seriesInfo">BCP 72</span>, <span class="seriesInfo">RFC 3552</span>, <span class="seriesInfo">DOI 10.17487/RFC3552</span>, <time datetime="2003-07" class="refDate">July 2003</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3552">https://www.rfc-editor.org/rfc/rfc3552</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9261">[RFC9261]</dt>
+        <dd>
+<span class="refAuthor">Sullivan, N.</span>, <span class="refTitle">"Exported Authenticators in TLS"</span>, <span class="seriesInfo">RFC 9261</span>, <span class="seriesInfo">DOI 10.17487/RFC9261</span>, <time datetime="2022-07" class="refDate">July 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9261">https://www.rfc-editor.org/rfc/rfc9261</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9266">[RFC9266]</dt>
+        <dd>
+<span class="refAuthor">Whited, S.</span>, <span class="refTitle">"Channel Bindings for TLS 1.3"</span>, <span class="seriesInfo">RFC 9266</span>, <span class="seriesInfo">DOI 10.17487/RFC9266</span>, <time datetime="2022-07" class="refDate">July 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9266">https://www.rfc-editor.org/rfc/rfc9266</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="SEAT-vulnerability-report">[SEAT-vulnerability-report]</dt>
+        <dd>
+<span class="refAuthor">Sardar, M. U.</span>, <span class="refTitle">"Relay Attacks in Intra-handshake Attestation for Confidential Agentic AI Systems"</span>, <time datetime="2026-01" class="refDate">January 2026</time>, <span>&lt;<a href="https://mailarchive.ietf.org/arch/msg/seat/x3eQxFjQFJLceae6l4_NgXnmsDY/">https://mailarchive.ietf.org/arch/msg/seat/x3eQxFjQFJLceae6l4_NgXnmsDY/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="TLS-RA">[TLS-RA]</dt>
+        <dd>
+<span class="refAuthor">Carsten Weinhold</span>, <span class="refAuthor">Sardar, M. U.</span>, <span class="refAuthor">Ionuț Mihalcea</span>, <span class="refAuthor">Yogesh Deshpande</span>, <span class="refAuthor">Hannes Tschofenig</span>, <span class="refAuthor">Yaron Sheffer</span>, <span class="refAuthor">Thomas Fossati</span>, and <span class="refAuthor">Michael Roitzsch</span>, <span class="refTitle">"Separate but together: integrating remote attestation into TLS"</span>, <time datetime="2025-07" class="refDate">July 2025</time>, <span>&lt;<a href="https://www.usenix.org/conference/atc25/presentation/weinhold">https://www.usenix.org/conference/atc25/presentation/weinhold</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="Usama-TLS-26Feb25">[Usama-TLS-26Feb25]</dt>
+      <dd>
+<span class="refAuthor">Muhammad Usama Sardar</span>, <span class="refTitle">"Impersonation attacks on protocol in draft-fossati-tls-attestation (Identity crisis in Attested TLS) for Confidential Computing"</span>, <time datetime="2025-02" class="refDate">February 2025</time>, <span>&lt;<a href="https://mailarchive.ietf.org/arch/msg/tls/Jx_yPoYWMIKaqXmPsytKZBDq23o/">https://mailarchive.ietf.org/arch/msg/tls/Jx_yPoYWMIKaqXmPsytKZBDq23o/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+</section>
+</div>
+<div id="acknowledgments">
+<section id="appendix-A">
+      <h2 id="name-acknowledgments">
+<a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
+      </h2>
+<p id="appendix-A-1">The author wishes to thank Ira McDonald and Ivan Gudymenko for insightful discussions.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="history">
+<section id="appendix-B">
+      <h2 id="name-history">
+<a href="#name-history" class="section-name selfRef">History</a>
+      </h2>
+<p id="appendix-B-1">-01<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B-2.1">
+          <p id="appendix-B-2.1.1">Concrete text proposal for security and privacy considerations of multi-verifiers<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="appendix-B-3">-02<a href="#appendix-B-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B-4.1">
+          <p id="appendix-B-4.1.1">Introduction and motivation<a href="#appendix-B-4.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-4.2">
+          <p id="appendix-B-4.2.1">Defined replay and relay attacks<a href="#appendix-B-4.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-4.3">
+          <p id="appendix-B-4.3.1">Added mitigations<a href="#appendix-B-4.3.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-C">
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Muhammad Usama Sardar</span></div>
+<div dir="auto" class="left"><span class="org">Technical University of Dresden</span></div>
+<div dir="auto" class="left"><span class="locality">Dresden</span></div>
+<div dir="auto" class="left"><span class="country-name">Germany</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:muhammad_usama.sardar@tu-dresden.de" class="email">muhammad_usama.sardar@tu-dresden.de</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Songbo Bu</span></div>
+<div dir="auto" class="left"><span class="org">Stevens Institute of Technology</span></div>
+<div dir="auto" class="left">
+<span class="locality">New York</span>,  </div>
+<div dir="auto" class="left"><span class="country-name">United States of America</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:bluedognull@gmail.com" class="email">bluedognull@gmail.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Chengxin Huang</span></div>
+<div dir="auto" class="left"><span class="org">Independent</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:aurestarnull@gmail.com" class="email">aurestarnull@gmail.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Haowen Song</span></div>
+<div dir="auto" class="left"><span class="org">Shanghai Guan An Information Technology Co., Ltd.</span></div>
+<div dir="auto" class="left"><span class="country-name">China</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:havan12050544@gmail.com" class="email">havan12050544@gmail.com</a>
+</div>
+</address>
+</section>
+</div>
+<script>const toc = document.getElementById("toc");
+toc.querySelector("h2").addEventListener("click", e => {
+  toc.classList.toggle("active");
+});
+toc.querySelector("nav").addEventListener("click", e => {
+  toc.classList.remove("active");
+});
+</script>
+</body>
+</html>
