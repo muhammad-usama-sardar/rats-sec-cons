@@ -464,6 +464,14 @@ informative:
      title: EUVD-2026-104535
      target: https://euvd.enisa.europa.eu/enisa/EUVD-2026-104535
      date: 19 Oct 2026
+  EarlyAttestationTschuess:
+    title: "EarlyAttestationTschüss (EAT): 8+ Critical-Severity Vulnerabilities of CVSS 9.1 Resulting in End of Life of Early Attestation"
+    date: November 2026,
+    target: https://www.researchgate.net/publication/417343302_EarlyAttestationTschuss_EAT
+    author:
+      - ins: M. U. Sardar
+      - ins: Songbo Bu
+  I-D.intra-handshake-fail:
 
 ...
 
@@ -614,7 +622,7 @@ most runtime Claims may not be available at the handshake time.
 
 ## EarlyAttestationTschüss (EAT)
 
-This work resulted in the following CVEs demonstrating relay and diversion attacks against early attestation implementations/deployments:
+{{EarlyAttestationTschuess}} resulted in the following CVEs demonstrating relay and diversion attacks against early attestation implementations/deployments:
 
 - {{CVE-2026-100835}} of CVSS 9.1 against Edgeless Systems Contrast
 - {{CVE-2026-112377}} of CVSS 9.1 against CCC Attestation SIG
@@ -625,12 +633,15 @@ This work resulted in the following CVEs demonstrating relay and diversion attac
 - {{CVE-2026-108268}} of CVSS 9.1 against Privasys
 - {{CVE-2026-108269}} of CVSS 9.1 against Privasys
 
+## More details
+
+Further examples of CVEs are in {{I-D.intra-handshake-fail}}.
 
 # Potential Mitigations
 This section describes the countermeasures and their evaluation.
 
 To mitigate the above attacks, we propose post-handshake attestation.
-We are not aware of any attacks on post-handshake attestation. Post-handshake attestation
+Post-handshake attestation
 avoids replay attacks by using a fresh attestation nonce. Moreover, considering TLS as the transport protocol, it avoids diversion and relay attacks
 by binding the Evidence to the underlying TLS connection, such as using Exported Keying Material (EKM)
 {{I-D.ietf-tls-rfc8446bis}}, as proposed in Section 9.2 of {{ID-Crisis}}. {{-rfc9261}} and {{-rfc9266}} provide mechanisms for such bindings. Efforts for a formal proof
