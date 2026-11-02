@@ -6,11 +6,11 @@ RATS Working Group                                          M. U. Sardar
 Internet-Draft                                                TU Dresden
 Updates: 9334 (if approved)                                        S. Bu
 Intended status: Informational           Stevens Institute of Technology
-Expires: 5 May 2027                                             C. Huang
+Expires: 6 May 2027                                             C. Huang
                                                              Independent
                                                                  H. Song
                        Shanghai Guan An Information Technology Co., Ltd.
-                                                         1 November 2026
+                                                         2 November 2026
 
 
              Guidelines for Security Considerations of RATS
@@ -53,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 May 2027.
+   This Internet-Draft will expire on 6 May 2027.
 
 Copyright Notice
 
@@ -288,12 +288,9 @@ Table of Contents
 
 6.1.  Intra-handshake.fail
 
-   [Intra-handshake.fail] presents a general approach to analyze the
-   intra-handshake (aka early) attestation proposals, regardless of
-   whether they are within the scope of SEAT charter or not.  From a
-   security perspective, one of the key decision factors is the
-   candidate binding mechanism.  Some binding mechanisms are within
-   scope of SEAT charter and others are not.  The artifacts are
+   [Intra-handshake.fail] presents relay attacks in early attestation.
+   From a security perspective, one of the key decision factors is the
+   candidate binding mechanism.  The formal analysis artifacts are
    available in [Intra-handshake.fail-repo] under Apache-2.0 license for
    reproducibility, extensibility, and further research.
 
@@ -302,9 +299,9 @@ Table of Contents
 6.2.  ID-Crisis
 
    A _complementary_ paper [ID-Crisis] presents the identity crisis in
-   pre- and intra-handshake attestation.  The formal analysis is
-   available in [ID-Crisis-repo] under Apache-2.0 license for
-   reproducibility, extensibility, and further research.
+   pre- and intra-handshake (aka early) attestation.  The formal
+   analysis is available in [ID-Crisis-repo] under Apache-2.0 license
+   for reproducibility, extensibility, and further research.
 
 6.3.  EarlyAttestationBleed
 
@@ -328,15 +325,25 @@ Table of Contents
    Sec. 7 of [EarlyAttestationBleed] presents four architectural flaws
    in early attestation:
 
-   *  Hardware-level Information of Server
+   *  A malicious TLS client retrieves sensitive hardware-level and
+      firmware-level information from the server’s Evidence before the
+      server has authenticated the client.
 
-   *  Only Boot-time Claims
+   *  Early attestation can typically provide information about only
+      boot-time Claims, since most runtime Claims may not be available
+      at the handshake time.
 
-   *  Re-attestation
+   *  Re-attestation requires post-handshake attestation.  Early
+      attestation thus adds unnecessary complexity.
 
-   *  High Handshake Latency, Timeouts, and Failures
+   *  Early attestation results in high handshake latency, timeouts, and
+      even failures.
 
 6.4.  EarlyAttestationTschüss (EAT)
+
+   This work resulted in the following CVEs demonstrating relay and
+   diversion attacks against early attestation implementations/
+   deployments:
 
    *  [CVE-2026-100835] of CVSS 9.1 against Edgeless Systems Contrast
 
@@ -750,7 +757,7 @@ Table of Contents
 
 Acknowledgments
 
-   The author wishes to thank Ira McDonald and Ivan Gudymenko for
+   The authors wish to thank Ira McDonald and Ivan Gudymenko for
    insightful discussions.
 
 History
@@ -767,6 +774,14 @@ History
    *  Defined replay and relay attacks
 
    *  Added mitigations
+
+   -07
+
+   *  Added CVEs
+
+   -08
+
+   *  Explained architectural flaws
 
 Authors' Addresses
 
