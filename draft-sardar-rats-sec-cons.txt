@@ -97,6 +97,7 @@ Table of Contents
      6.3.  EarlyAttestationBleed
        6.3.1.  Architectural Flaws in Early Attestation
      6.4.  EarlyAttestationTschüss (EAT)
+     6.5.  More details
    7.  Potential Mitigations
    8.  Security Considerations
    9.  IANA Considerations
@@ -341,9 +342,9 @@ Table of Contents
 
 6.4.  EarlyAttestationTschüss (EAT)
 
-   This work resulted in the following CVEs demonstrating relay and
-   diversion attacks against early attestation implementations/
-   deployments:
+   [EarlyAttestationTschuess] resulted in the following CVEs
+   demonstrating relay and diversion attacks against early attestation
+   implementations/deployments:
 
    *  [CVE-2026-100835] of CVSS 9.1 against Edgeless Systems Contrast
 
@@ -361,13 +362,16 @@ Table of Contents
 
    *  [CVE-2026-108269] of CVSS 9.1 against Privasys
 
+6.5.  More details
+
+   Further examples of CVEs are in [I-D.intra-handshake-fail].
+
 7.  Potential Mitigations
 
    This section describes the countermeasures and their evaluation.
 
    To mitigate the above attacks, we propose post-handshake attestation.
-   We are not aware of any attacks on post-handshake attestation.  Post-
-   handshake attestation avoids replay attacks by using a fresh
+   Post-handshake attestation avoids replay attacks by using a fresh
    attestation nonce.  Moreover, considering TLS as the transport
    protocol, it avoids diversion and relay attacks by binding the
    Evidence to the underlying TLS connection, such as using Exported
@@ -480,6 +484,13 @@ Table of Contents
               <https://www.researchgate.net/
               publication/414529199_EarlyAttestationBleed_Three_Critical-
               severity_Vulnerabilities_of_CVSS_90_in_Confidential_Computing>.
+
+   [EarlyAttestationTschuess]
+              Sardar, M. U. and Songbo Bu, "EarlyAttestationTschüss
+              (EAT): 8+ Critical-Severity Vulnerabilities of CVSS 9.1
+              Resulting in End of Life of Early Attestation", November
+              2026, <https://www.researchgate.net/
+              publication/417343302_EarlyAttestationTschuss_EAT>.
 
    [EUVD-2026-16488]
               ENISA, "CoCoS attested TLS is vulnerable to relay attacks
@@ -667,6 +678,21 @@ Table of Contents
               ietf-tls-rfc8446bis-14, 13 September 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-tls-
               rfc8446bis-14>.
+
+   [I-D.intra-handshake-fail]
+              Sardar, M. U., Dubeyko, V., Jacquet, J., Bu, S., Huang,
+              C., Song, H., Ercihan, K., Küçük, K. A., Bellemare, S.,
+              Willems, E., SAINTEN, J. D., Brighindi, M., Quintyne-
+              Collins, M., Schrock, I., Aboubakarov, I., Gul, A., and V.
+              Malladi, "Early Attestation Considered Very Harmful (CVE-
+              2026-100833, CVE-2026-100835,CVE-2026-108265, CVE-
+              2026-108266, CVE-2026-108267, CVE-2026-108268, CVE-
+              2026-108269, CVE-2026-92701, CVE-2026-92702, CVE-
+              2026-108362, CVE-2026-33697, CVE-2026-108361 and others)",
+              Work in Progress, Internet-Draft, draft-intra-handshake-
+              fail-61, 2 November 2026,
+              <https://datatracker.ietf.org/doc/html/draft-intra-
+              handshake-fail-61>.
 
    [I-D.irtf-cfrg-cryptography-specification]
               Sullivan, N. and C. A. Wood, "Guidelines for Writing
